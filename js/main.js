@@ -39,7 +39,7 @@ const initialProfessionals = [
         calificacion: 4.8,
         totalReseñas: 156,
         tarifaPorHora: 32000,
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/12.jpg",
         certificado: "Técnico en Instalaciones Sanitarias DUOC UC, Certificación SEC",
         biografia: "Técnico especializado en sistemas hidráulicos residenciales e industriales con 8 años de experiencia. Experto en reparaciones complejas, instalaciones nuevas y sistemas de alta presión.",
         servicios: ["Reparación filtraciones", "Cambio de cañerías", "Instalación sanitarios", "Sistemas de riego"],
@@ -63,7 +63,7 @@ const initialProfessionals = [
         calificacion: 4.9,
         totalReseñas: 203,
         tarifaPorHora: 38000,
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/25.jpg",
         certificado: "Maestro Plomero Certificado SEC, Especialista en Calefacción",
         biografia: "Maestro plomero con más de 12 años de experiencia en proyectos residenciales y comerciales. Especialista en sistemas de calefacción central y emergencias 24/7.",
         servicios: ["Sistemas calefacción", "Agua caliente", "Emergencias 24/7", "Proyectos comerciales"],
@@ -87,7 +87,7 @@ const initialProfessionals = [
         calificacion: 4.6,
         totalReseñas: 89,
         tarifaPorHora: 28000,
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/44.jpg",
         certificado: "Técnico en Gasfitería CFT, Curso SENCE Actualizado",
         biografia: "Técnico joven y dinámico, especializado en reparaciones rápidas y eficientes. Excelente atención al cliente y precios competitivos.",
         servicios: ["Destapes", "Llaves de paso", "Mantención general", "Instalaciones menores"],
@@ -111,7 +111,7 @@ const initialProfessionals = [
         calificacion: 4.9,
         totalReseñas: 287,
         tarifaPorHora: 42000,
-        avatar: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/55.jpg",
         certificado: "Maestro Mayor Plomero, Instructor DUOC UC, Certificación Internacional",
         biografia: "Maestro plomero con 15 años de experiencia y más de 500 proyectos completados. Instructor en DUOC UC y consultor técnico.",
         servicios: ["Proyectos complejos", "Edificios", "Consultorías técnicas", "Supervisión obras"],
@@ -135,7 +135,7 @@ const initialProfessionals = [
         calificacion: 4.7,
         totalReseñas: 134,
         tarifaPorHora: 35000,
-        avatar: "https://images.unsplash.com/photo-1494790108755-2616c6e19067?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/women/23.jpg",
         certificado: "Técnico Plomero Especialista, Certificación en Piscinas y Spas",
         biografia: "Especialista en sistemas de piscinas, spas y sistemas de agua especializados. 9 años de experiencia en proyectos residenciales exclusivos.",
         servicios: ["Piscinas y spas", "Sistemas de bombeo", "Automatización", "Equipos importados"],
@@ -159,7 +159,7 @@ const initialProfessionals = [
         calificacion: 4.5,
         totalReseñas: 98,
         tarifaPorHora: 30000,
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/women/37.jpg",
         certificado: "Plomero Residencial, Especialista Cocinas y Baños",
         biografia: "Plomero especializado en remodelaciones de cocinas y baños. Experiencia en proyectos residenciales con enfoque en diseño y funcionalidad.",
         servicios: ["Remodelación baños", "Cocinas", "Grifería premium", "Instalaciones modernas"],
@@ -281,7 +281,7 @@ const initialProfessionals = [
         calificacion: 4.8,
         totalReseñas: 178,
         tarifaPorHora: 35000,
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/71.jpg",
         certificado: "Electricista Autorizado SEC Clase A, Especialista Domiciliaria",
         biografia: "Electricista certificado con 10 años de experiencia en instalaciones domiciliarias y comerciales. Especialista en automatización del hogar e iluminación LED.",
         servicios: ["Instalaciones domiciliarias", "Automatización hogar", "Iluminación LED", "Sistemas inteligentes"],
@@ -354,7 +354,7 @@ const initialProfessionals = [
         calificacion: 4.7,
         totalReseñas: 134,
         tarifaPorHora: 35000,
-        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
         certificado: "Técnico en Refrigeración y Climatización, Certificación HVAC",
         biografia: "Especialista en sistemas HVAC con experiencia en instalación, mantenimiento y reparación de equipos de climatización residencial y comercial.",
         servicios: ["Aire acondicionado", "Calefacción central", "Mantención HVAC", "Split residencial"],
@@ -378,7 +378,7 @@ const initialProfessionals = [
         calificacion: 4.8,
         totalReseñas: 189,
         tarifaPorHora: 38000,
-        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/women/45.jpg",
         certificado: "Ingeniera en Refrigeración, Especialista Sistemas Industriales",
         biografia: "Ingeniera especializada en sistemas de climatización industrial y comercial. Experta en eficiencia energética y sistemas automatizados.",
         servicios: ["HVAC industrial", "Automatización", "Eficiencia energética", "Proyectos comerciales"],
@@ -402,7 +402,7 @@ const initialProfessionals = [
         calificacion: 4.5,
         totalReseñas: 98,
         tarifaPorHora: 32000,
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        avatar: "https://randomuser.me/api/portraits/men/67.jpg",
         certificado: "Técnico Climatización Residencial, Curso Splits Inverter",
         biografia: "Técnico especializado en climatización residencial, con gran experiencia en instalación y reparación de equipos split y sistemas de calefacción.",
         servicios: ["Split inverter", "Calefacción gas", "Mantención residencial", "Reparaciones urgentes"],
@@ -2184,6 +2184,44 @@ function loginSuccess(userData, redirectUrl) {
 // Inicializar aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM cargado, iniciando aplicación');
+    
+    // Actualizar avatares problemáticos con URLs más confiables
+    updateProfessionalAvatars();
+    
     initApp();
     updateUserInterface(); // Actualizar interfaz de usuario al cargar la página
 });
+
+// Función para actualizar avatares problemáticos
+function updateProfessionalAvatars() {
+    console.log('Actualizando avatares de profesionales...');
+    
+    // Mapeo de IDs a nuevos avatares confiables
+    const avatarUpdates = {
+        1: "https://randomuser.me/api/portraits/men/12.jpg",
+        2: "https://randomuser.me/api/portraits/men/25.jpg", 
+        3: "https://randomuser.me/api/portraits/men/44.jpg",
+        4: "https://randomuser.me/api/portraits/men/55.jpg",
+        5: "https://randomuser.me/api/portraits/women/23.jpg",
+        6: "https://randomuser.me/api/portraits/women/37.jpg",
+        7: "https://randomuser.me/api/portraits/men/63.jpg",
+        8: "https://randomuser.me/api/portraits/men/18.jpg",
+        9: "https://randomuser.me/api/portraits/men/29.jpg",
+        10: "https://randomuser.me/api/portraits/women/41.jpg",
+        11: "https://randomuser.me/api/portraits/men/71.jpg",
+        12: "https://randomuser.me/api/portraits/women/52.jpg",
+        13: "https://randomuser.me/api/portraits/men/83.jpg",
+        14: "https://randomuser.me/api/portraits/men/32.jpg",
+        15: "https://randomuser.me/api/portraits/women/45.jpg",
+        16: "https://randomuser.me/api/portraits/men/67.jpg"
+    };
+    
+    // Actualizar avatares en el array de profesionales
+    professionals.forEach(professional => {
+        if (avatarUpdates[professional.id]) {
+            professional.avatar = avatarUpdates[professional.id];
+        }
+    });
+    
+    console.log('Avatares actualizados correctamente');
+}
