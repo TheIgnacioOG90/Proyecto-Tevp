@@ -1,0 +1,195 @@
+/* ===== TEVP - CSS OPTIMIZADO ===== */
+:root {
+  /* Colores principales */
+  --tevp-primary: #2c3e50;
+  --tevp-secondary: #3498db;
+  --tevp-accent: #e74c3c;
+  --tevp-success: #27ae60;
+  --tevp-warning: #f39c12;
+  
+  /* Espaciado consistente */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 3rem;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* ===== BASE OPTIMIZADA ===== */
+body { 
+  background: #f8f9fa; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-content { flex: 1; }
+
+/* ===== UTILIDADES PERSONALIZADAS ===== */
+.text-tevp-primary { color: var(--tevp-primary) !important; }
+.text-tevp-secondary { color: var(--tevp-secondary) !important; }
+.bg-tevp-primary { background-color: var(--tevp-primary) !important; }
+.bg-tevp-secondary { background-color: var(--tevp-secondary) !important; }
+
+/* ===== NAVEGACIÓN OPTIMIZADA ===== */
+.navbar-dark { background: linear-gradient(135deg, var(--tevp-primary) 0%, var(--tevp-secondary) 100%); }
+.navbar-brand { font-size: 1.75rem; font-weight: 700; }
+.nav-link { transition: var(--transition-fast); }
+.nav-link:hover { transform: translateY(-2px); }
+
+/* ===== COMPONENTES REUTILIZABLES ===== */
+.card-hover { 
+  transition: var(--transition-normal);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+.card-hover:hover { 
+  transform: translateY(-5px); 
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-tevp { 
+  border-radius: 25px; 
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+.btn-tevp:hover { transform: scale(1.05); }
+
+.form-container { 
+  background: white;
+  border-radius: 15px;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--tevp-primary);
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: var(--tevp-accent);
+}
+
+/* ===== PROFESIONALES CARDS ===== */
+.professional-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+.professional-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card {
+  transition: var(--transition-normal);
+  border-radius: 15px;
+  border: 2px solid transparent;
+}
+.service-card:hover {
+  border-color: var(--tevp-secondary);
+  transform: scale(1.02);
+}
+
+/* ===== RATING STARS ===== */
+.rating-stars { color: #ffc107; }
+.price-highlight { 
+  color: var(--tevp-success);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* ===== CART ICON ===== */
+.cart-icon {
+  position: relative;
+  color: white;
+  font-size: 1.5rem;
+  transition: var(--transition-fast);
+}
+.cart-icon:hover {
+  color: var(--tevp-warning);
+  transform: scale(1.1);
+}
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--tevp-accent);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== LOADING SPINNER ===== */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--tevp-primary);
+  color: white;
+  margin-top: auto;
+}
+footer a { 
+  color: #bdc3c7; 
+  transition: var(--transition-fast);
+}
+footer a:hover { color: white; }
+
+/* ===== RESPONSIVE OPTIMIZADO ===== */
+@media (max-width: 768px) {
+  .section-title { font-size: 2rem; }
+  .form-container { padding: var(--space-lg); }
+  .navbar-brand { font-size: 1.5rem; }
+  .professional-card { margin-bottom: var(--space-md); }
+}
+
+@media (max-width: 576px) {
+  .section-title { font-size: 1.75rem; }
+  .btn-tevp { padding: 0.4rem 1rem; font-size: 0.9rem; }
+}
+
+/* ===== ANIMACIONES ADICIONALES ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.6s ease-out; }
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tevp-primary: #34495e;
+    --bs-body-bg: #1a1a1a;
+    --bs-body-color: #e9ecef;
+  }
+}

@@ -547,7 +547,7 @@
     <div id="services-section" class="content-section" style="display: none;">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2><i class="fas fa-briefcase me-2"></i>Mis Servicios</h2>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" onclick="showNewServiceModal()">
                 <i class="fas fa-plus me-2"></i>Nuevo Servicio
             </button>
         </div>
@@ -568,7 +568,7 @@
                         </div>
                         <div class="col-md-4 text-end">
                             <h5 class="text-success mb-2">$45.000</h5>
-                            <button class="btn btn-outline-primary btn-sm">
+                            <button class="btn btn-outline-primary btn-sm" onclick="contactClient('María González', '+56 9 1234 5678')">
                                 <i class="fas fa-phone me-1"></i>Contactar
                             </button>
                         </div>
@@ -586,10 +586,10 @@
                         <div class="col-md-4 text-end">
                             <h5 class="text-success mb-2">$80.000</h5>
                             <div class="btn-group">
-                                <button class="btn btn-success btn-sm">
+                                <button class="btn btn-success btn-sm" onclick="confirmService(this, 'Ana López')">
                                     <i class="fas fa-check me-1"></i>Confirmar
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm">
+                                <button class="btn btn-outline-danger btn-sm" onclick="rejectService(this, 'Ana López')">
                                     <i class="fas fa-times me-1"></i>Rechazar
                                 </button>
                             </div>
@@ -656,7 +656,7 @@
     <div id="profile-section" class="content-section" style="display: none;">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2><i class="fas fa-user me-2"></i>Mi Perfil</h2>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" onclick="showEditProfileModal()">
                 <i class="fas fa-edit me-2"></i>Editar Perfil
             </button>
         </div>
@@ -956,6 +956,368 @@
         // Edit publication function
         function editPublication(button) {
             alert('Función de edición - Se abrirá el modal de edición de publicación');
+        }
+
+        // Función para mostrar modal de nuevo servicio
+        function showNewServiceModal() {
+            const modalHTML = `
+                <div class="modal fade" id="newServiceModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-plus me-2"></i>Nuevo Servicio
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="newServiceForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Título del Servicio *</label>
+                                                <input type="text" class="form-control" id="serviceTitle" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Categoría *</label>
+                                                <select class="form-select" id="serviceCategory" required>
+                                                    <option value="">Seleccionar categoría</option>
+                                                    <option value="climatizacion">Climatización</option>
+                                                    <option value="plomeria">Plomería</option>
+                                                    <option value="electricidad">Electricidad</option>
+                                                    <option value="jardineria">Jardinería</option>
+                                                    <option value="limpieza">Limpieza</option>
+                                                    <option value="electrodomesticos">Electrodomésticos</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Precio (CLP) *</label>
+                                                <input type="number" class="form-control" id="servicePrice" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Duración Estimada</label>
+                                                <input type="text" class="form-control" id="serviceDuration" placeholder="ej: 2 horas">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Descripción *</label>
+                                        <textarea class="form-control" id="serviceDescription" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Imagen del Servicio</label>
+                                        <input type="file" class="form-control" id="serviceImage" accept="image/*">
+                                        <small class="text-muted">Formatos: JPG, PNG. Máximo 2MB</small>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Disponibilidad</label>
+                                                <select class="form-select" id="serviceAvailability">
+                                                    <option value="disponible">Disponible</option>
+                                                    <option value="ocupado">Ocupado</option>
+                                                    <option value="vacaciones">En vacaciones</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Ubicación de Servicio</label>
+                                                <input type="text" class="form-control" id="serviceLocation" placeholder="ej: Santiago, Providencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="fas fa-times me-1"></i>Cancelar
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="saveNewService()">
+                                    <i class="fas fa-save me-1"></i>Guardar Servicio
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remover modal anterior si existe
+            const existingModal = document.getElementById('newServiceModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Agregar modal al body
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('newServiceModal'));
+            modal.show();
+        }
+
+        // Función para guardar nuevo servicio
+        function saveNewService() {
+            const form = document.getElementById('newServiceForm');
+            const formData = new FormData(form);
+            
+            // Validar campos requeridos
+            const title = document.getElementById('serviceTitle').value;
+            const category = document.getElementById('serviceCategory').value;
+            const price = document.getElementById('servicePrice').value;
+            const description = document.getElementById('serviceDescription').value;
+            
+            if (!title || !category || !price || !description) {
+                alert('Por favor complete todos los campos requeridos (*)');
+                return;
+            }
+            
+            // Simular guardado
+            alert('¡Servicio creado exitosamente!\\n\\nTítulo: ' + title + '\\nCategoría: ' + category + '\\nPrecio: $' + parseInt(price).toLocaleString('es-CL'));
+            
+            // Cerrar modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('newServiceModal'));
+            modal.hide();
+            
+            // Limpiar formulario
+            form.reset();
+        }
+
+        // Función para mostrar modal de editar perfil
+        function showEditProfileModal() {
+            const modalHTML = `
+                <div class="modal fade" id="editProfileModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-edit me-2"></i>Editar Perfil
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editProfileForm">
+                                    <div class="text-center mb-4">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
+                                             class="rounded-circle mb-3" style="width: 120px; height: 120px;" id="previewImage">
+                                        <div>
+                                            <input type="file" class="d-none" id="profileImage" accept="image/*" onchange="previewProfileImage()">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('profileImage').click()">
+                                                <i class="fas fa-camera me-1"></i>Cambiar Foto
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Nombre Completo *</label>
+                                                <input type="text" class="form-control" id="editFullName" value="Juan Carlos Pérez" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email *</label>
+                                                <input type="email" class="form-control" id="editEmail" value="juan.perez@email.com" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Teléfono *</label>
+                                                <input type="tel" class="form-control" id="editPhone" value="+56 9 8765 4321" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Ciudad *</label>
+                                                <input type="text" class="form-control" id="editCity" value="Santiago, Chile" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Especialidad *</label>
+                                        <input type="text" class="form-control" id="editSpecialty" value="Reparación de Electrodomésticos" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Descripción Profesional</label>
+                                        <textarea class="form-control" id="editDescription" rows="3" placeholder="Describe tu experiencia y servicios...">Técnico especializado en reparación de electrodomésticos con más de 8 años de experiencia. Atención a domicilio en Santiago y comunas aledañas.</textarea>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Años de Experiencia</label>
+                                                <select class="form-select" id="editExperience">
+                                                    <option value="1-2">1-2 años</option>
+                                                    <option value="3-5">3-5 años</option>
+                                                    <option value="6-10" selected>6-10 años</option>
+                                                    <option value="10+">Más de 10 años</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Tarifa por Hora (CLP)</label>
+                                                <input type="number" class="form-control" id="editRate" value="25000">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="fas fa-times me-1"></i>Cancelar
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="saveProfileChanges()">
+                                    <i class="fas fa-save me-1"></i>Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remover modal anterior si existe
+            const existingModal = document.getElementById('editProfileModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Agregar modal al body
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+            modal.show();
+        }
+
+        // Función para previsualizar imagen de perfil
+        function previewProfileImage() {
+            const input = document.getElementById('profileImage');
+            const preview = document.getElementById('previewImage');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Función para guardar cambios de perfil
+        function saveProfileChanges() {
+            const form = document.getElementById('editProfileForm');
+            
+            // Validar campos requeridos
+            const fullName = document.getElementById('editFullName').value;
+            const email = document.getElementById('editEmail').value;
+            const phone = document.getElementById('editPhone').value;
+            const city = document.getElementById('editCity').value;
+            const specialty = document.getElementById('editSpecialty').value;
+            
+            if (!fullName || !email || !phone || !city || !specialty) {
+                alert('Por favor complete todos los campos requeridos (*)');
+                return;
+            }
+            
+            // Simular guardado
+            alert('¡Perfil actualizado exitosamente!\\n\\nNombre: ' + fullName + '\\nEmail: ' + email + '\\nEspecialidad: ' + specialty);
+            
+            // Cerrar modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+            modal.hide();
+            
+            // Actualizar información en la página (opcional)
+            updateProfileDisplay(fullName, email, phone, city, specialty);
+        }
+
+        // Función para actualizar la visualización del perfil
+        function updateProfileDisplay(name, email, phone, city, specialty) {
+            // Actualizar los campos readonly en la sección de perfil
+            const profileSection = document.getElementById('profile-section');
+            if (profileSection) {
+                const nameInput = profileSection.querySelector('input[value*="Juan Carlos"]');
+                const emailInput = profileSection.querySelector('input[value*="juan.perez"]');
+                const phoneInput = profileSection.querySelector('input[value*="+56"]');
+                const cityInput = profileSection.querySelector('input[value*="Santiago"]');
+                const specialtyInput = profileSection.querySelector('input[value*="Reparación"]');
+                
+                if (nameInput) nameInput.value = name;
+                if (emailInput) emailInput.value = email;
+                if (phoneInput) phoneInput.value = phone;
+                if (cityInput) cityInput.value = city;
+                if (specialtyInput) specialtyInput.value = specialty;
+            }
+        }
+
+        // Función para contactar cliente
+        function contactClient(clientName, phoneNumber) {
+            const message = `¡Hola ${clientName}! Soy Juan Carlos, su técnico asignado de TEVP. Me estaré contactando con usted para coordinar el servicio. ¡Gracias por confiar en nosotros!`;
+            const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+            
+            if (confirm(`¿Desea contactar a ${clientName} vía WhatsApp?\\n\\nSe abrirá WhatsApp con un mensaje predeterminado.`)) {
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+
+        // Función para confirmar servicio
+        function confirmService(button, clientName) {
+            if (confirm(`¿Confirmar el servicio para ${clientName}?\\n\\nEsto notificará al cliente que el servicio está confirmado.`)) {
+                const serviceItem = button.closest('.service-item');
+                const badge = serviceItem.querySelector('.badge');
+                const btnGroup = button.closest('.btn-group');
+                
+                // Actualizar badge
+                badge.className = 'badge bg-success';
+                badge.textContent = 'Confirmado';
+                
+                // Reemplazar botones
+                btnGroup.innerHTML = `
+                    <button class="btn btn-outline-primary btn-sm" onclick="contactClient('${clientName}', '+56 9 8765 4321')">
+                        <i class="fas fa-phone me-1"></i>Contactar
+                    </button>
+                `;
+                
+                alert(`¡Servicio confirmado para ${clientName}!\\nSe ha enviado una notificación al cliente.`);
+            }
+        }
+
+        // Función para rechazar servicio
+        function rejectService(button, clientName) {
+            const reason = prompt(`¿Por qué rechaza el servicio para ${clientName}?\\n\\nPor favor ingrese la razón:`, '');
+            
+            if (reason !== null && reason.trim() !== '') {
+                if (confirm(`¿Está seguro de rechazar el servicio para ${clientName}?\\n\\nRazón: ${reason}`)) {
+                    const serviceItem = button.closest('.service-item');
+                    serviceItem.style.opacity = '0.5';
+                    serviceItem.style.pointerEvents = 'none';
+                    
+                    const badge = serviceItem.querySelector('.badge');
+                    badge.className = 'badge bg-danger';
+                    badge.textContent = 'Rechazado';
+                    
+                    alert(`Servicio rechazado para ${clientName}.\\nSe ha notificado al cliente y se buscará otro profesional.`);
+                    
+                    // Remover después de 3 segundos
+                    setTimeout(() => {
+                        serviceItem.remove();
+                    }, 3000);
+                }
+            }
         }
 
         function logout() {
