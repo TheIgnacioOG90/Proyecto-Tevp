@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - TEVP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tools me-2"></i>TEVP
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productos.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blogs.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="login.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5 main-content">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="form-container text-center">
+                    <!-- Logo y Título -->
+                    <div class="mb-4">
+                        <i class="fas fa-tools fa-3x text-primary mb-3"></i>
+                        <h2>TEVP</h2>
+                        <p class="text-muted">Iniciar Sesión</p>
+                    </div>
+
+                    <!-- Formulario de Login -->
+                    <form id="login-form" novalidate>
+                        <div class="mb-3 text-start">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       placeholder="tu@email.com" maxlength="100" required autocomplete="email">
+                            </div>
+                            <div class="form-text">Solo dominios: @duoc.cl, @profesor.duoc.cl, @gmail.com, @tevp.cl</div>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password" name="password" 
+                                       placeholder="Tu contraseña" minlength="4" maxlength="10" required autocomplete="current-password">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                                    <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">Entre 4 y 10 caracteres</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Recordarme en este dispositivo
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Enlaces adicionales -->
+                    <div class="mt-4">
+                        <div class="mb-2">
+                            <a href="#" class="text-decoration-none" onclick="showPasswordRecovery()">
+                                <i class="fas fa-key me-1"></i>¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                        <div>
+                            <span>¿No tienes una cuenta? </span>
+                            <a href="registro.html" class="text-decoration-none fw-bold">
+                                <i class="fas fa-user-plus me-1"></i>Regístrate aquí
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Usuarios de prueba -->
+                    <div class="mt-4 p-3 bg-light rounded border">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-info-circle text-info me-2"></i>
+                            <h6 class="text-muted mb-0">Usuarios de Prueba:</h6>
+                        </div>
+                        <div class="row text-start">
+                            <div class="col-12">
+                                <small class="d-block mb-1">
+                                    <span class="badge bg-danger me-2">Admin</span>
+                                    <code>admin@tevp.cl</code> / <code>admin123</code>
+                                </small>
+                                <small class="d-block mb-1">
+                                    <span class="badge bg-warning me-2">Vendedor</span>
+                                    <code>vendedor@tevp.cl</code> / <code>vend123</code>
+                                </small>
+                                <small class="d-block mb-1">
+                                    <span class="badge bg-success me-2">Cliente</span>
+                                    Cualquier email válido / mín. 4 caracteres
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-tools me-2"></i>TEVP</h5>
+                    <p>Tu solución en servicios profesionales técnicos</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="productos.html" class="text-light">Servicios</a></li>
+                        <li><a href="nosotros.html" class="text-light">Nosotros</a></li>
+                        <li><a href="contacto.html" class="text-light">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-envelope me-2"></i>contacto@tevp.cl</p>
+                    <p><i class="fas fa-phone me-2"></i>+56 2 2345 6789</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 TEVP. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Función para mostrar/ocultar contraseña
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePasswordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Crear usuarios de prueba si no existen
+        document.addEventListener('DOMContentLoaded', function() {
+            let users = JSON.parse(localStorage.getItem('tevp-users')) || [];
+            
+            const testUsers = [
+                {
+                    id: 1,
+                    run: '12345678K',
+                    nombre: 'Administrador',
+                    apellidos: 'Sistema',
+                    email: 'admin@duoc.cl',
+                    tipoUsuario: 'Administrador',
+                    region: 'Región Metropolitana',
+                    comuna: 'Santiago',
+                    direccion: 'Av. Providencia 123',
+                    password: '1234'
+                },
+                {
+                    id: 2,
+                    run: '87654321K',
+                    nombre: 'Vendedor',
+                    apellidos: 'Prueba',
+                    email: 'vendedor@duoc.cl',
+                    tipoUsuario: 'Vendedor',
+                    region: 'Región Metropolitana',
+                    comuna: 'Providencia',
+                    direccion: 'Av. Las Condes 456',
+                    password: '1234'
+                },
+                {
+                    id: 3,
+                    run: '11223344K',
+                    nombre: 'Cliente',
+                    apellidos: 'Demo',
+                    email: 'cliente@gmail.com',
+                    tipoUsuario: 'Cliente',
+                    region: 'Región Metropolitana',
+                    comuna: 'Las Condes',
+                    direccion: 'Av. Kennedy 789',
+                    password: '1234'
+                }
+            ];
+
+            // Agregar usuarios de prueba si no existen
+            testUsers.forEach(testUser => {
+                if (!users.find(u => u.email === testUser.email)) {
+                    users.push(testUser);
+                }
+            });
+
+            localStorage.setItem('tevp-users', JSON.stringify(users));
+        });
+    </script>
+</body>
+</html>

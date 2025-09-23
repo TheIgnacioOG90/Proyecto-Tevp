@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - TEVP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tools me-2"></i>TEVP
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blogs.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5 main-content">
+        <!-- Sección Hero -->
+        <section class="text-center mb-5">
+            <h1 class="section-title">Conoce TEVP</h1>
+            <p class="lead">
+                Somos la plataforma digital líder en Chile que conecta clientes con profesionales técnicos certificados
+            </p>
+        </section>
+
+        <!-- Nuestra Historia -->
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2><i class="fas fa-history me-2 text-primary"></i>Nuestra Historia</h2>
+                    <p>
+                        <strong>TEVP (Técnicos Especializados y Verificados Profesionales)</strong> nació en 2023 como un 
+                        proyecto académico en DUOC UC, con la visión de revolucionar la forma en que las personas 
+                        encuentran y contratan servicios técnicos profesionales de calidad.
+                    </p>
+                    <p>
+                        Lo que comenzó como una idea de estudiantes para facilitar el acceso a técnicos confiables, 
+                        se ha convertido en una plataforma integral que conecta hogares y empresas con más de 
+                        <strong>200+ profesionales certificados</strong> en toda la región metropolitana.
+                    </p>
+                    <p>
+                        Desde nuestro lanzamiento, hemos facilitado más de <strong>5,000 servicios técnicos</strong>, 
+                        manteniendo una calificación promedio de <strong>4.8/5 estrellas</strong> de satisfacción del cliente.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop" 
+                         class="img-fluid rounded shadow" alt="Historia TEVP">
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestro Modelo -->
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <h2><i class="fas fa-cogs me-2 text-success"></i>¿Cómo Funcionamos?</h2>
+                    <p>
+                        TEVP es una <strong>plataforma digital</strong> que funciona como intermediario entre clientes 
+                        que necesitan servicios técnicos y profesionales certificados que buscan oportunidades de trabajo.
+                    </p>
+                    <div class="mb-3">
+                        <h6><i class="fas fa-shield-alt me-2 text-primary"></i>Verificación Rigurosa</h6>
+                        <p class="small">Todos nuestros profesionales pasan por un proceso de verificación que incluye 
+                        validación de certificados, experiencia laboral y antecedentes.</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="fas fa-star me-2 text-warning"></i>Sistema de Calificaciones</h6>
+                        <p class="small">Cada servicio es calificado por los clientes, garantizando 
+                        transparencia y calidad constante.</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="fas fa-mobile-alt me-2 text-info"></i>Tecnología Moderna</h6>
+                        <p class="small">Plataforma web responsive, optimizada para escritorio y dispositivos móviles 
+                        con interfaz intuitiva.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1 text-center">
+                    <img src="https://images.unsplash.com/photo-1556155092-8707de31f9c4?w=500&h=300&fit=crop" 
+                         class="img-fluid rounded shadow" alt="Cómo funciona TEVP">
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestras Especialidades -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-tools me-2 text-primary"></i>Nuestras Especialidades
+            </h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="service-card text-center p-4 border rounded shadow-sm">
+                        <i class="fas fa-wrench service-icon text-primary mb-3" style="font-size: 2.5rem;"></i>
+                        <h5>Plomería</h5>
+                        <p class="small">Instalaciones, reparaciones y mantención de sistemas hidráulicos</p>
+                        <span class="badge bg-primary">5 Profesionales</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="service-card text-center p-4 border rounded shadow-sm">
+                        <i class="fas fa-bolt service-icon text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <h5>Electricidad</h5>
+                        <p class="small">Instalaciones eléctricas, automación y sistemas de seguridad</p>
+                        <span class="badge bg-warning">3 Profesionales</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="service-card text-center p-4 border rounded shadow-sm">
+                        <i class="fas fa-snowflake service-icon text-info mb-3" style="font-size: 2.5rem;"></i>
+                        <h5>Climatización</h5>
+                        <p class="small">Aire acondicionado, calefacción y ventilación</p>
+                        <span class="badge bg-info">2 Profesionales</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="service-card text-center p-4 border rounded shadow-sm">
+                        <i class="fas fa-tv service-icon text-success mb-3" style="font-size: 2.5rem;"></i>
+                        <h5>Electrodomésticos</h5>
+                        <p class="small">Reparación y mantención de equipos del hogar</p>
+                        <span class="badge bg-success">2 Profesionales</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Misión y Visión -->
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-container h-100">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-bullseye fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="text-center">Misión</h3>
+                        <p class="text-center">
+                            Conectar eficientemente a profesionales técnicos certificados con clientes que buscan 
+                            servicios de calidad, creando un ecosistema digital confiable que beneficie a ambas partes 
+                            a través de transparencia, tecnología y excelencia en el servicio.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-container h-100">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-eye fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="text-center">Visión</h3>
+                        <p class="text-center">
+                            Ser la plataforma digital líder en América Latina para servicios técnicos profesionales, 
+                            transformando la forma en que las personas acceden a estos servicios mediante tecnología 
+                            innovadora, profesionales verificados y una experiencia excepcional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valores -->
+        <section class="mb-5">
+            <h2 class="section-title">Nuestros Valores</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                            <h5>Verificación</h5>
+                            <p class="card-text">
+                                Riguroso proceso de validación de certificaciones y experiencia profesional
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                            <h5>Transparencia</h5>
+                            <p class="card-text">
+                                Sistema de calificaciones y reseñas para garantizar servicios de calidad
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-clock fa-3x text-info mb-3"></i>
+                            <h5>Eficiencia</h5>
+                            <p class="card-text">
+                                Conexión rápida entre clientes y profesionales disponibles
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                            <h5>Innovación</h5>
+                            <p class="card-text">
+                                Tecnología moderna para mejorar continuamente la experiencia del usuario
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipo de Desarrollo -->
+        <section class="mb-5">
+            <h2 class="section-title">Equipo de Desarrollo</h2>
+            <p class="text-center mb-4">
+                Conoce a los desarrolladores que hicieron posible esta plataforma
+            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="rounded-circle bg-primary mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                            <h5>Ignacio [Apellido]</h5>
+                            <p class="text-muted">Desarrollador Full Stack</p>
+                            <p class="card-text">
+                                Estudiante de Duoc UC, especializado en desarrollo web con HTML, CSS y JavaScript.
+                            </p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-dark btn-sm">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estadísticas -->
+        <section class="mb-5">
+            <h2 class="section-title">TEVP en Números</h2>
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                            <h3 class="text-primary">2,500+</h3>
+                            <p>Clientes Satisfechos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-tools fa-2x text-success mb-2"></i>
+                            <h3 class="text-success">10,000+</h3>
+                            <p>Servicios Completados</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-user-tie fa-2x text-warning mb-2"></i>
+                            <h3 class="text-warning">500+</h3>
+                            <p>Profesionales Certificados</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-map-marker-alt fa-2x text-info mb-2"></i>
+                            <h3 class="text-info">15</h3>
+                            <p>Regiones de Chile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shopping-cart me-2"></i>Carrito de Compras
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items">
+                        <!-- Items del carrito se cargarán aquí -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart-total me-auto">
+                        Total: <span id="cart-total">$0</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Proceder al Pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-tools me-2"></i>TEVP</h5>
+                    <p>Tu solución en servicios profesionales técnicos</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="productos.html" class="text-light">Servicios</a></li>
+                        <li><a href="nosotros.html" class="text-light">Nosotros</a></li>
+                        <li><a href="contacto.html" class="text-light">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-envelope me-2"></i>contacto@tevp.cl</p>
+                    <p><i class="fas fa-phone me-2"></i>+56 2 2345 6789</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 TEVP. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor - TEVP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            background-color: white;
+            min-height: calc(100vh - 80px);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .main-content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        .nav-link {
+            color: #666;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0d6efd;
+            background-color: #e7f1ff;
+            border-radius: 8px;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard-card {
+            transition: transform 0.2s;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="fas fa-tools me-2"></i>TEVP
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-1"></i><span>Juan Carlos Pérez</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="margin-top: 80px;">
+        <div class="row g-3">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar p-3 rounded">
+                    <!-- Perfil del Vendedor -->
+                    <div class="text-center mb-4 p-3 bg-light rounded">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" 
+                             alt="Perfil" class="rounded-circle mb-2" style="width: 60px; height: 60px; object-fit: cover;">
+                        <h6 class="mb-1">Juan Carlos Pérez</h6>
+                        <small class="text-muted">Vendedor TEVP</small>
+                        <div class="mt-2">
+                            <span class="badge bg-success">Verificado</span>
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-muted mb-3">PANEL DE CONTROL</h6>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active mb-1" href="#" onclick="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                        <a class="nav-link mb-1" href="#" onclick="showSection('earnings')">
+                            <i class="fas fa-dollar-sign me-2"></i>Mis Ganancias
+                        </a>
+                        <a class="nav-link mb-1 position-relative" href="#" onclick="showSection('messages')">
+                            <i class="fas fa-envelope me-2"></i>Mensajes
+                            <span class="notification-badge">3</span>
+                        </a>
+                        <a class="nav-link mb-1" href="#" onclick="showSection('services')">
+                            <i class="fas fa-briefcase me-2"></i>Mis Servicios
+                        </a>
+                        <a class="nav-link mb-1" href="#" onclick="showSection('publications')">
+                            <i class="fas fa-newspaper me-2"></i>Publicaciones
+                        </a>
+                        <a class="nav-link mb-1" href="#" onclick="showSection('profile')">
+                            <i class="fas fa-user me-2"></i>Mi Perfil
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9">
+                <div class="main-content p-4">
+                    <!-- Dashboard Content (Always Visible) -->
+                    <div id="dashboard-content">
+                        <!-- Bienvenida -->
+                        <div class="mb-4 p-4 rounded" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h2 class="mb-2">¡Bienvenido de nuevo, Juan Carlos! 👋</h2>
+                            <p class="mb-3 opacity-75">Es un gusto tenerte de vuelta. Aquí tienes un resumen de tu actividad reciente.</p>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-light text-dark me-3">
+                                    <i class="fas fa-calendar me-1"></i><span id="current-date">21-09-2025</span>
+                                </span>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>Cuenta Verificada
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Estadísticas -->
+                        <div class="row mb-4">
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="dashboard-card p-3 rounded text-center" style="background: linear-gradient(135deg, #28a745, #20c997);">
+                                    <div class="text-white">
+                                        <h4 class="mb-2">$485.750</h4>
+                                        <small>Ganancias Totales</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="dashboard-card p-3 rounded text-center" style="background: linear-gradient(135deg, #007bff, #6610f2);">
+                                    <div class="text-white">
+                                        <h4 class="mb-2">$125.500</h4>
+                                        <small>Disponible para retiro</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="dashboard-card p-3 rounded text-center" style="background: linear-gradient(135deg, #fd7e14, #e83e8c);">
+                                    <div class="text-white">
+                                        <h4 class="mb-2">27</h4>
+                                        <small>Servicios Completados</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="dashboard-card p-3 rounded text-center" style="background: linear-gradient(135deg, #17a2b8, #007bff);">
+                                    <div class="text-white">
+                                        <h4 class="mb-2">4.8⭐</h4>
+                                        <small>Calificación Promedio</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actividad Reciente -->
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="dashboard-card p-4 rounded">
+                                    <h5 class="mb-3"><i class="fas fa-clock me-2"></i>Actividad Reciente</h5>
+                                    <div class="d-flex align-items-center mb-3 p-2 rounded" style="background-color: #f8f9fa;">
+                                        <i class="fas fa-check-circle text-success me-3 fs-4"></i>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Servicio completado</h6>
+                                            <small class="text-muted">Reparación de lavadora - María González</small>
+                                        </div>
+                                        <span class="badge bg-success">+$45.000</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3 p-2 rounded" style="background-color: #f8f9fa;">
+                                        <i class="fas fa-envelope text-primary me-3 fs-4"></i>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Nuevo mensaje</h6>
+                                            <small class="text-muted">Consulta sobre refrigerador - Pedro Silva</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: #f8f9fa;">
+                                        <i class="fas fa-calendar text-warning me-3 fs-4"></i>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Servicio programado</h6>
+                                            <small class="text-muted">Mantención aire acondicionado - Ana López</small>
+                                        </div>
+                                        <small class="text-muted">Mañana 10:00 AM</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="dashboard-card p-4 rounded">
+                                    <h5 class="mb-3"><i class="fas fa-star me-2"></i>Últimas Reseñas</h5>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>María González</strong>
+                                            <div class="text-warning">⭐⭐⭐⭐⭐</div>
+                                        </div>
+                                        <p class="mb-1 small">"Excelente servicio, muy profesional y rápido. Recomendado 100%"</p>
+                                        <small class="text-muted">Reparación de lavadora</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>Carlos Mendoza</strong>
+                                            <div class="text-warning">⭐⭐⭐⭐</div>
+                                        </div>
+                                        <p class="mb-1 small">"Buen trabajo, llegó puntual y solucionó el problema"</p>
+                                        <small class="text-muted">Instalación aire acondicionado</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Content Area -->
+                    <div id="dynamic-content" style="display: none;">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Selecciona una opción del menú para ver el contenido aquí
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings Section (Hidden Template) -->
+    <div id="earnings-section" class="content-section" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-dollar-sign me-2"></i>Mis Ganancias</h2>
+        </div>
+
+        <!-- Balance Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-wallet text-primary fs-1 mb-3"></i>
+                        <h4 class="text-primary" id="available-balance">$125.500</h4>
+                        <p class="text-muted">Disponible para Retiro</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line text-success fs-1 mb-3"></i>
+                        <h4 class="text-success">$485.750</h4>
+                        <p class="text-muted">Ganancias Totales</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock text-warning fs-1 mb-3"></i>
+                        <h4 class="text-warning">$25.300</h4>
+                        <p class="text-muted">Pendiente de Procesamiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal Form -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-money-bill-wave me-2"></i>Solicitar Retiro</h5>
+            </div>
+            <div class="card-body">
+                <form id="withdrawal-form">
+                    <div class="mb-3">
+                        <label for="withdrawal-amount" class="form-label">Monto a retirar</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" id="withdrawal-amount" 
+                                   placeholder="100.000" required>
+                        </div>
+                        <small class="form-text text-muted">Monto mínimo: $100.000</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bank-account" class="form-label">Cuenta de Destino</label>
+                        <select class="form-select" id="bank-account" required>
+                            <option value="">Selecciona una cuenta</option>
+                            <option value="banco-chile">Banco de Chile - ***1234</option>
+                            <option value="banco-estado">BancoEstado - ***5678</option>
+                            <option value="santander">Santander - ***9012</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Summary -->
+                    <div id="withdrawal-summary" class="alert alert-info" style="display: none;">
+                        <h6>Resumen del Retiro:</h6>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>Monto solicitado:</strong><br>
+                                <span id="requested-amount">$0</span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Comisión (3%):</strong><br>
+                                <span id="commission-amount">$0</span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Monto final:</strong><br>
+                                <span id="final-amount" class="text-success fw-bold">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="withdraw-btn" disabled>
+                        <i class="fas fa-paper-plane me-2"></i>Solicitar Retiro
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Receipt Modal -->
+    <div class="modal fade" id="withdrawalReceiptModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-receipt me-2"></i>Comprobante de Retiro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        <h4 class="text-success mt-3">¡Retiro Procesado Exitosamente!</h4>
+                        <p class="text-muted">Tu solicitud ha sido enviada y será procesada en 1-2 días hábiles</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="border p-3 rounded">
+                                <h6 class="text-muted mb-3">DETALLES DEL RETIRO</h6>
+                                <div class="row mb-2">
+                                    <div class="col-5"><strong>Número:</strong></div>
+                                    <div class="col-7" id="receipt-number">#WD-2024-09-21-001</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-5"><strong>Fecha:</strong></div>
+                                    <div class="col-7" id="receipt-date">21 de septiembre de 2024</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-5"><strong>Hora:</strong></div>
+                                    <div class="col-7" id="receipt-time">14:30:25</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-5"><strong>Banco:</strong></div>
+                                    <div class="col-7" id="receipt-bank">Banco de Chile - ***1234</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border p-3 rounded">
+                                <h6 class="text-muted mb-3">MONTOS</h6>
+                                <div class="row mb-2">
+                                    <div class="col-6"><strong>Solicitado:</strong></div>
+                                    <div class="col-6 text-end" id="receipt-amount">$150.000</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6"><strong>Comisión:</strong></div>
+                                    <div class="col-6 text-end text-danger" id="receipt-commission">-$4.500</div>
+                                </div>
+                                <hr>
+                                <div class="row mb-2">
+                                    <div class="col-6"><strong>Total a recibir:</strong></div>
+                                    <div class="col-6 text-end">
+                                        <strong class="text-success fs-5" id="receipt-final">$145.500</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-light rounded">
+                        <h6><i class="fas fa-bell me-2"></i>Notificaciones</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="email-notification" class="mb-2">
+                                    <i class="fas fa-envelope me-2"></i>Enviar por Email
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="whatsapp-notification">
+                                    <i class="fab fa-whatsapp me-2"></i>Enviar por WhatsApp
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="send-notifications-btn">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Notificaciones
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-download me-2"></i>Descargar PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Publications Section (Hidden Template) -->
+    <div id="publications-section" class="content-section" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-newspaper me-2"></i>Gestionar Publicaciones</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPublicationModal">
+                <i class="fas fa-plus me-2"></i>Nueva Publicación
+            </button>
+        </div>
+
+        <!-- Publications List -->
+        <div id="publications-list">
+            <div class="publication-item border rounded p-4 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-start">
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=80&h=80&fit=crop" 
+                                 class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-2">Reparación Electrodomésticos</h5>
+                                <span class="badge bg-success mb-2">Activa</span>
+                                <p class="text-muted mb-2">Especialista en línea blanca con 5 años de experiencia</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Precio: <strong>$30.000 - $120.000</strong></small>
+                                        <small class="text-muted d-block">Calificación: <span class="text-warning">⭐ 4.8/5</span></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Servicios: <strong>15 este mes</strong></small>
+                                        <small class="text-muted d-block">Vistas: <strong>1,234</strong> <span class="text-success">+23% vs mes anterior</span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="btn-group-vertical">
+                            <button class="btn btn-outline-primary btn-sm mb-2" onclick="editPublication(this)">
+                                <i class="fas fa-edit me-1"></i>Editar
+                            </button>
+                            <button class="btn btn-outline-warning btn-sm mb-2">
+                                <i class="fas fa-pause me-1"></i>Pausar
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash me-1"></i>Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication-item border rounded p-4 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-start">
+                            <img src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?w=80&h=80&fit=crop" 
+                                 class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-2">Plomería de Emergencia</h5>
+                                <span class="badge bg-warning mb-2">En Revisión</span>
+                                <p class="text-muted mb-2">Servicio 24/7 para emergencias de plomería</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Precio: <strong>$40.000 - $150.000</strong></small>
+                                        <small class="text-muted d-block">Calificación: <span class="text-muted">N/A</span></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Servicios: <strong>0 (pendiente)</strong></small>
+                                        <small class="text-muted d-block">Vistas: <strong>0</strong></small>
+                                    </div>
+                                </div>
+                                <div class="alert alert-warning alert-sm mt-2">
+                                    <i class="fas fa-clock me-2"></i>En revisión por el equipo de TEVP. Tiempo estimado: 24-48 horas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="btn-group-vertical">
+                            <button class="btn btn-outline-secondary btn-sm mb-2" disabled>
+                                <i class="fas fa-edit me-1"></i>En Revisión
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-times me-1"></i>Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Resumen de Publicaciones</h6>
+                <div class="row text-center">
+                    <div class="col-3">
+                        <div class="text-primary">
+                            <h4>4</h4>
+                            <small>Total Publicaciones</small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-success">
+                            <h4>2</h4>
+                            <small>Activas</small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-warning">
+                            <h4>1</h4>
+                            <small>En Revisión</small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-secondary">
+                            <h4>1</h4>
+                            <small>Pausadas</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section (Hidden Template) -->
+    <div id="services-section" class="content-section" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-briefcase me-2"></i>Mis Servicios</h2>
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Nuevo Servicio
+            </button>
+        </div>
+
+        <!-- Active Services -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Servicios Activos</h5>
+            </div>
+            <div class="card-body">
+                <div class="service-item border rounded p-3 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="mb-2">Reparación Lavadora - María González</h6>
+                            <p class="text-muted mb-1">Dirección: Los Aromos 1234, Las Condes</p>
+                            <p class="text-muted mb-2">Programado: Mañana 10:00 AM</p>
+                            <span class="badge bg-warning">Confirmado</span>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <h5 class="text-success mb-2">$45.000</h5>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-phone me-1"></i>Contactar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item border rounded p-3 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="mb-2">Mantención Aire Acondicionado - Ana López</h6>
+                            <p class="text-muted mb-1">Dirección: Providencia 567, Providencia</p>
+                            <p class="text-muted mb-2">Programado: Pasado mañana 2:00 PM</p>
+                            <span class="badge bg-info">Pendiente confirmación</span>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <h5 class="text-success mb-2">$80.000</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-success btn-sm">
+                                    <i class="fas fa-check me-1"></i>Confirmar
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-times me-1"></i>Rechazar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Section (Hidden Template) -->
+    <div id="messages-section" class="content-section" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-envelope me-2"></i>Mensajes</h2>
+            <span class="badge bg-primary">3 nuevos</span>
+        </div>
+
+        <!-- Message List -->
+        <div class="message-list">
+            <div class="message-item border rounded p-3 mb-3 bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-1">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" 
+                             class="rounded-circle" style="width: 50px; height: 50px;">
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-1">María González</h6>
+                        <p class="mb-1">Consulta sobre reparación de refrigerador marca LG...</p>
+                        <small class="text-muted">Hace 2 horas</small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <span class="badge bg-success mb-2">Nuevo</span>
+                        <div>
+                            <button class="btn btn-primary btn-sm">
+                                <i class="fas fa-reply me-1"></i>Responder
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-item border rounded p-3 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-1">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" 
+                             class="rounded-circle" style="width: 50px; height: 50px;">
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-1">Carlos Mendoza</h6>
+                        <p class="mb-1">Gracias por el excelente servicio de ayer...</p>
+                        <small class="text-muted">Hace 1 día</small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-reply me-1"></i>Responder
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Section (Hidden Template) -->
+    <div id="profile-section" class="content-section" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-user me-2"></i>Mi Perfil</h2>
+            <button class="btn btn-primary">
+                <i class="fas fa-edit me-2"></i>Editar Perfil
+            </button>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
+                             class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                        <h5>Juan Carlos Pérez</h5>
+                        <p class="text-muted">Vendedor TEVP</p>
+                        <div class="mb-3">
+                            <span class="badge bg-success">Verificado</span>
+                            <span class="badge bg-primary">Premium</span>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-camera me-1"></i>Cambiar Foto
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Información Personal</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" value="Juan Carlos Pérez" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="juan.perez@email.com" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" value="+56 9 8765 4321" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Ciudad</label>
+                                    <input type="text" class="form-control" value="Santiago, Chile" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha de Registro</label>
+                                    <input type="text" class="form-control" value="15 Marzo 2023" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Especialidad</label>
+                                    <input type="text" class="form-control" value="Reparación de Electrodomésticos" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Publication Modal -->
+    <div class="modal fade" id="addPublicationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva Publicación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-publication-form">
+                        <div class="mb-3">
+                            <label for="new-pub-title" class="form-label">Título del Servicio</label>
+                            <input type="text" class="form-control" id="new-pub-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-pub-price" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="new-pub-price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-pub-description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="new-pub-description" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="addPublication()">Publicar Servicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Format numbers with dots
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function parseFormattedNumber(str) {
+            return parseFloat(str.replace(/\./g, '')) || 0;
+        }
+
+        function formatInput(input) {
+            let value = input.value.replace(/\./g, '');
+            let numericValue = parseFloat(value) || 0;
+            if (numericValue > 0) {
+                input.value = formatNumber(numericValue);
+            }
+        }
+
+        // Navigation function
+        function showSection(sectionName) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+            
+            if (sectionName === 'dashboard') {
+                document.getElementById('dashboard-content').style.display = 'block';
+                document.getElementById('dynamic-content').style.display = 'none';
+            } else {
+                document.getElementById('dashboard-content').style.display = 'none';
+                document.getElementById('dynamic-content').style.display = 'block';
+                
+                // Load section content
+                const section = document.getElementById(sectionName + '-section');
+                if (section) {
+                    const sectionContent = section.cloneNode(true);
+                    sectionContent.style.display = 'block';
+                    sectionContent.id = 'current-' + sectionName + '-section';
+                    
+                    document.getElementById('dynamic-content').innerHTML = '';
+                    document.getElementById('dynamic-content').appendChild(sectionContent);
+                    
+                    // Re-apply event listeners for specific sections
+                    if (sectionName === 'earnings') {
+                        setupEarningsEventListeners();
+                    }
+                }
+            }
+        }
+
+        // Setup earnings event listeners
+        function setupEarningsEventListeners() {
+            const withdrawalAmountInput = document.querySelector('#dynamic-content #withdrawal-amount');
+            if (withdrawalAmountInput) {
+                withdrawalAmountInput.addEventListener('input', function() {
+                    formatInput(this);
+                    calculateWithdrawal();
+                });
+            }
+
+            const withdrawalForm = document.querySelector('#dynamic-content #withdrawal-form');
+            if (withdrawalForm) {
+                withdrawalForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleWithdrawal();
+                });
+            }
+        }
+
+        // Calculate withdrawal
+        function calculateWithdrawal() {
+            const amountInput = document.querySelector('#dynamic-content #withdrawal-amount');
+            if (!amountInput) return;
+            
+            const amount = parseFormattedNumber(amountInput.value);
+            const minAmount = 100000;
+            const commission = 0.03;
+            
+            const summary = document.querySelector('#dynamic-content #withdrawal-summary');
+            const withdrawBtn = document.querySelector('#dynamic-content #withdraw-btn');
+            
+            if (amount >= minAmount) {
+                const commissionAmount = amount * commission;
+                const finalAmount = amount - commissionAmount;
+                
+                document.querySelector('#dynamic-content #requested-amount').textContent = `$${formatNumber(amount)}`;
+                document.querySelector('#dynamic-content #commission-amount').textContent = `$${formatNumber(Math.round(commissionAmount))}`;
+                document.querySelector('#dynamic-content #final-amount').textContent = `$${formatNumber(Math.round(finalAmount))}`;
+                
+                summary.style.display = 'block';
+                withdrawBtn.disabled = false;
+            } else {
+                summary.style.display = 'none';
+                withdrawBtn.disabled = true;
+            }
+        }
+
+        // Handle withdrawal
+        function handleWithdrawal() {
+            const amountStr = document.querySelector('#dynamic-content #withdrawal-amount').value;
+            const amount = parseFormattedNumber(amountStr);
+            const bankAccount = document.querySelector('#dynamic-content #bank-account').value;
+            
+            if (!amountStr || !bankAccount) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+            
+            if (amount < 100000) {
+                alert('El monto mínimo para retiro es $100.000');
+                return;
+            }
+            
+            // Calculate amounts
+            const commission = Math.round(amount * 0.03);
+            const finalAmount = amount - commission;
+            
+            // Show receipt modal
+            showWithdrawalReceipt(amount, commission, finalAmount, bankAccount);
+        }
+
+        // Show withdrawal receipt
+        function showWithdrawalReceipt(amount, commission, finalAmount, bankAccount) {
+            const now = new Date();
+            const receiptNumber = `#WD-${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+            const date = now.toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            const time = now.toLocaleTimeString('es-ES');
+            
+            // Update modal content
+            document.getElementById('receipt-number').textContent = receiptNumber;
+            document.getElementById('receipt-date').textContent = date;
+            document.getElementById('receipt-time').textContent = time;
+            document.getElementById('receipt-amount').textContent = `$${formatNumber(amount)}`;
+            document.getElementById('receipt-commission').textContent = `-$${formatNumber(commission)}`;
+            document.getElementById('receipt-final').textContent = `$${formatNumber(finalAmount)}`;
+            
+            const bankNames = {
+                'banco-chile': 'Banco de Chile - ***1234',
+                'banco-estado': 'BancoEstado - ***5678',
+                'santander': 'Santander - ***9012'
+            };
+            document.getElementById('receipt-bank').textContent = bankNames[bankAccount] || bankAccount;
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('withdrawalReceiptModal'));
+            modal.show();
+        }
+
+        // Send notifications
+        function sendNotifications() {
+            document.getElementById('email-notification').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            document.getElementById('whatsapp-notification').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            
+            setTimeout(() => {
+                document.getElementById('email-notification').innerHTML = '<i class="fas fa-check-circle text-success"></i> Email enviado exitosamente';
+                
+                setTimeout(() => {
+                    document.getElementById('whatsapp-notification').innerHTML = '<i class="fas fa-check-circle text-success"></i> WhatsApp enviado exitosamente';
+                }, 1500);
+            }, 2000);
+        }
+
+        // Add event listener to send notifications button
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendNotificationsBtn = document.getElementById('send-notifications-btn');
+            if (sendNotificationsBtn) {
+                sendNotificationsBtn.addEventListener('click', sendNotifications);
+            }
+        });
+
+        // Add publication function
+        function addPublication() {
+            const title = document.getElementById('new-pub-title').value;
+            const price = document.getElementById('new-pub-price').value;
+            const description = document.getElementById('new-pub-description').value;
+            
+            if (!title || !price || !description) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+            
+            alert('¡Publicación agregada exitosamente! Será revisada por nuestro equipo.');
+            
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addPublicationModal'));
+            modal.hide();
+            
+            // Reset form
+            document.getElementById('add-publication-form').reset();
+        }
+
+        // Edit publication function
+        function editPublication(button) {
+            alert('Función de edición - Se abrirá el modal de edición de publicación');
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('userEmail');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

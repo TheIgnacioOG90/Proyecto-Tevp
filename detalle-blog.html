@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Blog - TEVP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tools me-2"></i>TEVP
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blogs.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="blogs.html">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="blog-title">Cargando...</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5 main-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Artículo -->
+                <article class="form-container">
+                    <div id="blog-content">
+                        <!-- Contenido se cargará con JavaScript -->
+                        <div class="text-center py-5">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="mt-3">Cargando artículo...</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Comentarios -->
+                <div class="form-container mt-4">
+                    <h4><i class="fas fa-comments me-2"></i>Comentarios</h4>
+                    
+                    <!-- Formulario de Comentarios -->
+                    <div class="mb-4">
+                        <h6>Deja tu comentario</h6>
+                        <form id="comment-form">
+                            <div class="mb-3">
+                                <label for="comment-name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="comment-name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comment-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="comment-email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comment-text" class="form-label">Comentario</label>
+                                <textarea class="form-control" id="comment-text" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Comentario</button>
+                        </form>
+                    </div>
+
+                    <!-- Lista de Comentarios -->
+                    <div id="comments-list">
+                        <!-- Comentario de ejemplo -->
+                        <div class="comment mb-3 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between">
+                                <strong>María González</strong>
+                                <small class="text-muted">Hace 2 días</small>
+                            </div>
+                            <p class="mb-0">Excelente artículo, muy útil para entender mejor el mantenimiento eléctrico. ¡Gracias por los consejos!</p>
+                        </div>
+
+                        <div class="comment mb-3 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between">
+                                <strong>Carlos Rojas</strong>
+                                <small class="text-muted">Hace 5 días</small>
+                            </div>
+                            <p class="mb-0">Me sirvió mucho esta información. Definitivamente voy a revisar mi instalación eléctrica siguiendo estos consejos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Artículos Relacionados -->
+                <div class="form-container mb-4">
+                    <h5><i class="fas fa-newspaper me-2"></i>Artículos Relacionados</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="detalle-blog.html?id=2" class="list-group-item list-group-item-action">
+                            <small class="text-muted">12 Sep, 2025</small>
+                            <p class="mb-1">Cómo Prevenir Problemas de Plomería en Invierno</p>
+                        </a>
+                        <a href="detalle-blog.html?id=3" class="list-group-item list-group-item-action">
+                            <small class="text-muted">8 Sep, 2025</small>
+                            <p class="mb-1">Mantención de Aires Acondicionados: Guía Completa</p>
+                        </a>
+                        <a href="detalle-blog.html?id=4" class="list-group-item list-group-item-action">
+                            <small class="text-muted">5 Sep, 2025</small>
+                            <p class="mb-1">Señales de que tu Lavadora Necesita Reparación</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Categorías -->
+                <div class="form-container mb-4">
+                    <h5><i class="fas fa-tags me-2"></i>Categorías</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Electricidad
+                            <span class="badge bg-primary rounded-pill">12</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Plomería
+                            <span class="badge bg-primary rounded-pill">8</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Climatización
+                            <span class="badge bg-primary rounded-pill">6</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Electrodomésticos
+                            <span class="badge bg-primary rounded-pill">10</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Construcción
+                            <span class="badge bg-primary rounded-pill">5</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="form-container">
+                    <h5><i class="fas fa-envelope me-2"></i>Suscríbete</h5>
+                    <p>Recibe nuestras últimas noticias y consejos.</p>
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="tu@email.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shopping-cart me-2"></i>Carrito de Compras
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items">
+                        <!-- Items del carrito se cargarán aquí -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart-total me-auto">
+                        Total: <span id="cart-total">$0</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Proceder al Pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-tools me-2"></i>TEVP</h5>
+                    <p>Tu solución en servicios profesionales técnicos</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="productos.html" class="text-light">Servicios</a></li>
+                        <li><a href="nosotros.html" class="text-light">Nosotros</a></li>
+                        <li><a href="contacto.html" class="text-light">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-envelope me-2"></i>contacto@tevp.cl</p>
+                    <p><i class="fas fa-phone me-2"></i>+56 2 2345 6789</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 TEVP. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Datos de artículos del blog
+        const blogPosts = {
+            1: {
+                title: "5 Consejos Esenciales para el Mantenimiento Eléctrico en el Hogar",
+                date: "15 de Septiembre, 2025",
+                category: "Electricidad",
+                author: "Ing. Pedro Martínez",
+                image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=400&fit=crop",
+                content: `
+                    <p>El mantenimiento eléctrico preventivo es fundamental para la seguridad de tu hogar y la vida de tu familia. Un sistema eléctrico bien mantenido no solo previene accidentes, sino que también puede ahorrarte dinero en reparaciones costosas a largo plazo.</p>
+                    
+                    <h3>1. Inspección Visual Regular</h3>
+                    <p>Realiza una inspección visual de tus instalaciones eléctricas al menos una vez al mes. Busca:</p>
+                    <ul>
+                        <li>Cables expuestos o dañados</li>
+                        <li>Enchufes que generen calor</li>
+                        <li>Interruptores que no funcionen correctamente</li>
+                        <li>Luces que parpadeen sin motivo aparente</li>
+                    </ul>
+
+                    <h3>2. Prueba los Interruptores Diferenciales</h3>
+                    <p>Los interruptores diferenciales son tu primera línea de defensa contra electrocuciones. Pruébalos mensualmente presionando el botón de prueba. Si no se desactiva, llama a un electricista inmediatamente.</p>
+
+                    <h3>3. No Sobrecargues los Enchufes</h3>
+                    <p>Evita conectar múltiples aparatos de alto consumo en el mismo enchufe. Las alargadoras deben ser temporales, nunca una solución permanente. Si necesitas más enchufes, instala nuevos puntos de conexión.</p>
+
+                    <h3>4. Mantén Libres los Espacios de Equipos Eléctricos</h3>
+                    <p>Asegúrate de que haya suficiente espacio alrededor del tablero eléctrico y otros equipos. Mantén un metro libre de objetos inflamables.</p>
+
+                    <h3>5. Programa Revisiones Profesionales</h3>
+                    <p>Aunque puedes hacer inspecciones básicas, es recomendable que un electricista certificado revise tu instalación cada 2-3 años, especialmente en viviendas de más de 10 años.</p>
+
+                    <div class="alert alert-warning mt-4">
+                        <strong>Importante:</strong> Si detectas cualquier problema eléctrico, no intentes repararlo tú mismo. Siempre contacta a un profesional certificado.
+                    </div>
+                `
+            },
+            2: {
+                title: "Cómo Prevenir Problemas de Plomería en Invierno",
+                date: "12 de Septiembre, 2025",
+                category: "Plomería",
+                author: "Téc. Ana Silva",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=400&fit=crop",
+                content: `
+                    <p>El invierno puede ser especialmente duro para las instalaciones de plomería. Las bajas temperaturas pueden causar que las tuberías se congelen y exploten, resultando en daños costosos y inconvenientes significativos.</p>
+                    
+                    <h3>Aislamiento de Tuberías</h3>
+                    <p>El primer paso para proteger tus tuberías es asegurarte de que estén bien aisladas, especialmente aquellas en:</p>
+                    <ul>
+                        <li>Sótanos no calefaccionados</li>
+                        <li>Espacios de arrastre</li>
+                        <li>Paredes exteriores</li>
+                        <li>Áticos</li>
+                    </ul>
+
+                    <h3>Mantén la Temperatura Constante</h3>
+                    <p>Durante las olas de frío extremo, mantén la calefacción encendida incluso cuando no estés en casa. Un pequeño gasto en calefacción puede ahorrarte miles en reparaciones.</p>
+
+                    <h3>Deja Gotear los Grifos</h3>
+                    <p>En noches muy frías, deja que los grifos goteen ligeramente. El agua en movimiento es menos propensa a congelarse que el agua estancada.</p>
+                `
+            },
+            3: {
+                title: "Mantención de Aires Acondicionados: Guía Completa",
+                date: "8 de Septiembre, 2025",
+                category: "Climatización",
+                author: "Téc. Roberto López",
+                image: "https://images.unsplash.com/photo-1635274250950-fab8fb6d3bfb?w=800&h=400&fit=crop",
+                content: `
+                    <p>Un aire acondicionado bien mantenido no solo funciona de manera más eficiente, sino que también consume menos energía y tiene una vida útil más larga.</p>
+                    
+                    <h3>Limpieza de Filtros</h3>
+                    <p>Los filtros sucios son la causa más común de problemas en aires acondicionados. Límpielos mensualmente durante la temporada de uso intensivo.</p>
+
+                    <h3>Revisión de Refrigerante</h3>
+                    <p>Un nivel bajo de refrigerante puede dañar el compresor. Esta revisión debe ser realizada por un técnico certificado.</p>
+                `
+            }
+        };
+
+        // Función para cargar el contenido del blog
+        function loadBlogPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id') || '1';
+            const post = blogPosts[postId];
+
+            if (post) {
+                document.getElementById('blog-title').textContent = post.title;
+                document.title = `${post.title} - TEVP`;
+                
+                const blogContent = document.getElementById('blog-content');
+                blogContent.innerHTML = `
+                    <img src="${post.image}" class="img-fluid rounded mb-3" alt="${post.title}">
+                    <div class="d-flex justify-content-between text-muted mb-3">
+                        <div>
+                            <small><i class="fas fa-calendar me-1"></i>${post.date}</small>
+                            <small class="ms-3"><i class="fas fa-user me-1"></i>${post.author}</small>
+                        </div>
+                        <small><i class="fas fa-tag me-1"></i>${post.category}</small>
+                    </div>
+                    <h1 class="mb-4">${post.title}</h1>
+                    ${post.content}
+                `;
+            } else {
+                document.getElementById('blog-content').innerHTML = `
+                    <div class="alert alert-danger">
+                        <h4>Artículo no encontrado</h4>
+                        <p>El artículo solicitado no existe. <a href="blogs.html">Volver al blog</a></p>
+                    </div>
+                `;
+            }
+        }
+
+        // Manejar envío de comentarios
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('comment-name').value;
+            const email = document.getElementById('comment-email').value;
+            const text = document.getElementById('comment-text').value;
+
+            if (name && email && text) {
+                // Crear nuevo comentario
+                const newComment = document.createElement('div');
+                newComment.className = 'comment mb-3 p-3 bg-light rounded';
+                newComment.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <strong>${name}</strong>
+                        <small class="text-muted">Ahora mismo</small>
+                    </div>
+                    <p class="mb-0">${text}</p>
+                `;
+
+                // Añadir al principio de la lista
+                const commentsList = document.getElementById('comments-list');
+                commentsList.insertBefore(newComment, commentsList.firstChild);
+
+                // Limpiar formulario
+                this.reset();
+
+                // Mostrar mensaje de éxito
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-success alert-dismissible fade show';
+                alert.innerHTML = `
+                    ¡Comentario agregado exitosamente!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                this.insertBefore(alert, this.firstChild);
+
+                // Auto-ocultar alerta después de 3 segundos
+                setTimeout(() => {
+                    alert.remove();
+                }, 3000);
+            }
+        });
+
+        // Cargar contenido cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', loadBlogPost);
+    </script>
+</body>
+</html>

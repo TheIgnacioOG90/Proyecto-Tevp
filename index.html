@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Tienda de Servicios Profesionales</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tools me-2"></i>TEVP
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productos.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blogs.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+        <!-- Sección Hero -->
+        <section class="hero-section">
+        <div class="container text-center">
+            <h1>Bienvenido a TEVP</h1>
+            <p class="lead">Contrata los mejores profesionales en servicios técnicos y de reparación</p>
+            <p>Plomeros • Electricistas • Técnicos en Climatización • Reparación de Electrodomésticos • Construcción • Soldadura</p>
+            <div class="mt-4">
+                <a href="productos.html" class="btn btn-primary btn-lg me-3">Ver Servicios</a>
+                <a href="registro.html" class="btn btn-outline-light btn-lg">Registrarse</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <!-- Servicios Destacados -->
+        <section class="mb-5">
+            <h2 class="section-title">Servicios Destacados</h2>
+            <div class="row" id="servicios-lista">
+                <!-- Los servicios se cargarán aquí con JavaScript -->
+                <div class="col-12 text-center">
+                    <div class="loading">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="mt-2">Cargando servicios...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Información sobre TEVP -->
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="text-gradient">¿Por qué elegir TEVP?</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Profesionales certificados y con experiencia</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Atención rápida y confiable</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Precios justos y transparentes</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Garantía en todos nuestros servicios</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Disponibilidad en toda la región</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=400&fit=crop" 
+                         class="img-fluid rounded shadow" alt="Profesionales TEVP">
+                </div>
+            </div>
+        </section>
+
+        <!-- Categorías de Servicios -->
+        <section class="mb-5">
+            <h3 class="section-title">Nuestras Especialidades</h3>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-wrench fa-3x text-primary mb-3"></i>
+                            <h5>Plomería</h5>
+                            <p class="card-text">Reparación de filtraciones, instalaciones sanitarias</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-bolt fa-3x text-warning mb-3"></i>
+                            <h5>Electricidad</h5>
+                            <p class="card-text">Instalaciones eléctricas, reparación de cortocircuitos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-snowflake fa-3x text-info mb-3"></i>
+                            <h5>Climatización</h5>
+                            <p class="card-text">Mantención de aires acondicionados y calefacción</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-hammer fa-3x text-success mb-3"></i>
+                            <h5>Construcción</h5>
+                            <p class="card-text">Trabajos de albañilería, remodelaciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mejores Profesionales -->
+        <section class="mb-5">
+            <h3 class="section-title">Mejores Profesionales</h3>
+            <div class="row" id="top-professionals">
+                <!-- Los mejores profesionales se cargarán aquí con JavaScript -->
+                <div class="col-12 text-center">
+                    <div class="loading">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="mt-2">Cargando profesionales...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shopping-cart me-2"></i>Carrito de Compras
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items">
+                        <!-- Items del carrito se cargarán aquí -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart-total me-auto">
+                        Total: <span id="cart-total">$0</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Proceder al Pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-tools me-2"></i>TEVP</h5>
+                    <p>Tu solución en servicios profesionales técnicos</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="productos.html" class="text-light">Servicios</a></li>
+                        <li><a href="nosotros.html" class="text-light">Nosotros</a></li>
+                        <li><a href="contacto.html" class="text-light">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-envelope me-2"></i>contacto@tevp.cl</p>
+                    <p><i class="fas fa-phone me-2"></i>+56 2 2345 6789</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 TEVP. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html></script>

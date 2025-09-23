@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - TEVP Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4><i class="fas fa-tools me-2"></i>TEVP Admin</h4>
+                        <small class="text-muted">Panel de Control</small>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="productos.html">
+                                <i class="fas fa-box me-2"></i>Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">
+                                <i class="fas fa-users me-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedidos.html">
+                                <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reportes.html">
+                                <i class="fas fa-chart-line me-2"></i>Reportes
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-globe me-2"></i>Ver Sitio Web
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login.html">
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content-wrapper">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Gestión de Productos</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                    <i class="fas fa-plus me-1"></i>Agregar Producto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros y Búsqueda -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" placeholder="Buscar productos..." id="searchInput">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="categoryFilter">
+                                <option value="">Todas las categorías</option>
+                                <option value="Electricidad">Electricidad</option>
+                                <option value="Plomería">Plomería</option>
+                                <option value="Climatización">Climatización</option>
+                                <option value="Construcción">Construcción</option>
+                                <option value="Electrodomésticos">Electrodomésticos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="statusFilter">
+                                <option value="">Todos los estados</option>
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Productos -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="productsTable">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Precio</th>
+                                            <th>Estado</th>
+                                            <th>Fecha Creación</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productsTableBody">
+                                        <!-- Los productos se cargarán aquí dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paginación -->
+                    <nav aria-label="Paginación de productos" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Agregar/Editar Producto -->
+    <div class="modal fade" id="addProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalTitle">Agregar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="productForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label">Nombre del Producto</label>
+                                    <input type="text" class="form-control" id="productName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productCategory" class="form-label">Categoría</label>
+                                    <select class="form-select" id="productCategory" required>
+                                        <option value="">Seleccionar categoría</option>
+                                        <option value="Electricidad">Electricidad</option>
+                                        <option value="Plomería">Plomería</option>
+                                        <option value="Climatización">Climatización</option>
+                                        <option value="Construcción">Construcción</option>
+                                        <option value="Electrodomésticos">Electrodomésticos</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label">Precio</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="productPrice" required min="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productImage" class="form-label">URL de Imagen</label>
+                                    <input type="url" class="form-control" id="productImage" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="productDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="productDescription" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productDuration" class="form-label">Duración (horas)</label>
+                                    <input type="number" class="form-control" id="productDuration" required min="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="productActive" checked>
+                                    <label class="form-check-label" for="productActive">
+                                        Producto Activo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Producto -->
+    <div class="modal fade" id="deleteProductModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                    <p class="text-muted">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentEditingId = null;
+        let deleteProductId = null;
+
+        // Datos de productos (simulados - en una aplicación real vendrían de una API)
+        let products = [
+            {
+                id: 1,
+                name: "Instalación Eléctrica Residencial",
+                category: "Electricidad",
+                price: 85000,
+                description: "Instalación completa de sistema eléctrico para viviendas",
+                duration: 8,
+                image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&h=200&fit=crop",
+                active: true,
+                createdAt: "2025-01-15"
+            },
+            {
+                id: 2,
+                name: "Reparación de Electrodomésticos",
+                category: "Electrodomésticos",
+                price: 45000,
+                description: "Diagnóstico y reparación de electrodomésticos de línea blanca",
+                duration: 3,
+                image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=300&h=200&fit=crop",
+                active: true,
+                createdAt: "2025-01-14"
+            },
+            {
+                id: 3,
+                name: "Mantención Sistema de Climatización",
+                category: "Climatización",
+                price: 65000,
+                description: "Mantención preventiva y correctiva de sistemas de climatización",
+                duration: 4,
+                image: "https://images.unsplash.com/photo-1635274250950-fab8fb6d3bfb?w=300&h=200&fit=crop",
+                active: true,
+                createdAt: "2025-01-13"
+            }
+        ];
+
+        // Función para renderizar la tabla
+        function renderProductsTable(productsToShow = products) {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = '';
+
+            productsToShow.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"></td>
+                    <td>${product.name}</td>
+                    <td><span class="badge bg-info">${product.category}</span></td>
+                    <td>$${product.price.toLocaleString()}</td>
+                    <td>
+                        <span class="badge ${product.active ? 'bg-success' : 'bg-secondary'}">
+                            ${product.active ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td>${new Date(product.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="editProduct(${product.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="showDeleteModal(${product.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Función para filtrar productos
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            const filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                    product.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || product.category === categoryFilter;
+                const matchesStatus = statusFilter === '' || product.active.toString() === statusFilter;
+
+                return matchesSearch && matchesCategory && matchesStatus;
+            });
+
+            renderProductsTable(filtered);
+        }
+
+        // Event listeners para filtros
+        document.getElementById('searchInput').addEventListener('input', filterProducts);
+        document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+        document.getElementById('statusFilter').addEventListener('change', filterProducts);
+
+        // Función para editar producto
+        function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                currentEditingId = id;
+                document.getElementById('productModalTitle').textContent = 'Editar Producto';
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productCategory').value = product.category;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productImage').value = product.image;
+                document.getElementById('productDescription').value = product.description;
+                document.getElementById('productDuration').value = product.duration;
+                document.getElementById('productActive').checked = product.active;
+
+                const modal = new bootstrap.Modal(document.getElementById('addProductModal'));
+                modal.show();
+            }
+        }
+
+        // Función para mostrar modal de eliminación
+        function showDeleteModal(id) {
+            deleteProductId = id;
+            const modal = new bootstrap.Modal(document.getElementById('deleteProductModal'));
+            modal.show();
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const productData = {
+                name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                price: parseInt(document.getElementById('productPrice').value),
+                image: document.getElementById('productImage').value,
+                description: document.getElementById('productDescription').value,
+                duration: parseInt(document.getElementById('productDuration').value),
+                active: document.getElementById('productActive').checked
+            };
+
+            if (currentEditingId) {
+                // Editar producto existente
+                const productIndex = products.findIndex(p => p.id === currentEditingId);
+                if (productIndex !== -1) {
+                    products[productIndex] = { ...products[productIndex], ...productData };
+                }
+                currentEditingId = null;
+            } else {
+                // Crear nuevo producto
+                const newProduct = {
+                    id: Math.max(...products.map(p => p.id)) + 1,
+                    ...productData,
+                    createdAt: new Date().toISOString().split('T')[0]
+                };
+                products.push(newProduct);
+            }
+
+            // Limpiar formulario y cerrar modal
+            document.getElementById('productForm').reset();
+            document.getElementById('productModalTitle').textContent = 'Agregar Producto';
+            bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide();
+
+            // Actualizar tabla
+            renderProductsTable();
+
+            // Mostrar mensaje de éxito
+            showSuccessMessage(currentEditingId ? 'Producto actualizado exitosamente' : 'Producto creado exitosamente');
+        });
+
+        // Confirmar eliminación
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            if (deleteProductId) {
+                products = products.filter(p => p.id !== deleteProductId);
+                renderProductsTable();
+                bootstrap.Modal.getInstance(document.getElementById('deleteProductModal')).hide();
+                showSuccessMessage('Producto eliminado exitosamente');
+                deleteProductId = null;
+            }
+        });
+
+        // Limpiar modal cuando se abre para agregar nuevo producto
+        document.getElementById('addProductModal').addEventListener('show.bs.modal', function() {
+            if (!currentEditingId) {
+                document.getElementById('productForm').reset();
+                document.getElementById('productModalTitle').textContent = 'Agregar Producto';
+                document.getElementById('productActive').checked = true;
+            }
+        });
+
+        // Función para mostrar mensajes de éxito
+        function showSuccessMessage(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Verificar autenticación
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            
+            if (!isLoggedIn || userRole !== 'admin') {
+                alert('Acceso denegado. Redirigiendo al login...');
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // Renderizar tabla inicial
+            renderProductsTable();
+        });
+    </script>
+</body>
+</html>

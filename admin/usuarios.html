@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - TEVP Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4><i class="fas fa-tools me-2"></i>TEVP Admin</h4>
+                        <small class="text-muted">Panel de Control</small>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">
+                                <i class="fas fa-box me-2"></i>Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="usuarios.html">
+                                <i class="fas fa-users me-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedidos.html">
+                                <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reportes.html">
+                                <i class="fas fa-chart-line me-2"></i>Reportes
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-globe me-2"></i>Ver Sitio Web
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login.html">
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content-wrapper">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Gestión de Usuarios</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                    <i class="fas fa-user-plus me-1"></i>Agregar Usuario
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fas fa-download me-1"></i>Exportar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3>152</h3>
+                                            <p class="mb-0">Total Usuarios</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-users fa-2x opacity-75"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3>134</h3>
+                                            <p class="mb-0">Usuarios Activos</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-user-check fa-2x opacity-75"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3>18</h3>
+                                            <p class="mb-0">Registros Hoy</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-user-plus fa-2x opacity-75"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3>3</h3>
+                                            <p class="mb-0">Administradores</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-user-shield fa-2x opacity-75"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros y Búsqueda -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" placeholder="Buscar usuarios..." id="searchInput">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="roleFilter">
+                                <option value="">Todos los roles</option>
+                                <option value="cliente">Cliente</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="statusFilter">
+                                <option value="">Todos los estados</option>
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Usuarios -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="usersTable">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Avatar</th>
+                                            <th>Nombre</th>
+                                            <th>Email</th>
+                                            <th>Teléfono</th>
+                                            <th>Región</th>
+                                            <th>Rol</th>
+                                            <th>Estado</th>
+                                            <th>Registro</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersTableBody">
+                                        <!-- Los usuarios se cargarán aquí dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paginación -->
+                    <nav aria-label="Paginación de usuarios" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Agregar/Editar Usuario -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalTitle">Agregar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="userForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userName" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="userName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="userEmail" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userPhone" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="userPhone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userRun" class="form-label">RUN</label>
+                                    <input type="text" class="form-control" id="userRun" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userRegion" class="form-label">Región</label>
+                                    <select class="form-select" id="userRegion" required>
+                                        <option value="">Seleccionar región</option>
+                                        <option value="Metropolitana">Metropolitana</option>
+                                        <option value="Valparaíso">Valparaíso</option>
+                                        <option value="Biobío">Biobío</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userCommune" class="form-label">Comuna</label>
+                                    <select class="form-select" id="userCommune" required>
+                                        <option value="">Seleccionar comuna</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="userRole" class="form-label">Rol</label>
+                                    <select class="form-select" id="userRole" required>
+                                        <option value="cliente">Cliente</option>
+                                        <option value="admin">Administrador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="userActive" checked>
+                                    <label class="form-check-label" for="userActive">
+                                        Usuario Activo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="userAddress" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="userAddress" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ver Detalles Usuario -->
+    <div class="modal fade" id="viewUserModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalles del Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="userDetailsContent">
+                    <!-- Contenido se cargará dinámicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Usuario -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                    <p class="text-muted">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteUser">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentEditingId = null;
+        let deleteUserId = null;
+
+        // Datos de usuarios (simulados)
+        let users = [
+            {
+                id: 1,
+                name: "María González",
+                email: "maria.gonzalez@email.com",
+                phone: "+56987654321",
+                run: "12.345.678-9",
+                region: "Metropolitana",
+                commune: "Santiago",
+                role: "cliente",
+                active: true,
+                address: "Av. Providencia 1234",
+                createdAt: "2025-01-10"
+            },
+            {
+                id: 2,
+                name: "Carlos Rojas",
+                email: "carlos.rojas@email.com",
+                phone: "+56976543210",
+                run: "11.222.333-4",
+                region: "Valparaíso",
+                commune: "Viña del Mar",
+                role: "cliente",
+                active: true,
+                address: "Calle Valparaíso 567",
+                createdAt: "2025-01-08"
+            },
+            {
+                id: 3,
+                name: "Ana Silva",
+                email: "ana.silva@email.com",
+                phone: "+56965432109",
+                run: "10.111.222-3",
+                region: "Biobío",
+                commune: "Concepción",
+                role: "admin",
+                active: true,
+                address: "Av. Libertad 890",
+                createdAt: "2025-01-05"
+            }
+        ];
+
+        // Datos de comunas por región
+        const communesByRegion = {
+            'Metropolitana': ['Santiago', 'Las Condes', 'Providencia', 'Ñuñoa', 'La Florida', 'Maipú', 'Puente Alto'],
+            'Valparaíso': ['Valparaíso', 'Viña del Mar', 'Quilpué', 'Villa Alemana', 'San Antonio', 'Quillota'],
+            'Biobío': ['Concepción', 'Talcahuano', 'Chillán', 'Los Ángeles', 'Coronel', 'San Pedro de la Paz']
+        };
+
+        // Función para generar avatar basado en el nombre
+        function generateAvatar(name) {
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+            const colors = ['bg-primary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger', 'bg-secondary'];
+            const color = colors[name.length % colors.length];
+            return `<div class="d-flex align-items-center justify-content-center ${color} text-white rounded-circle" style="width: 40px; height: 40px; font-size: 14px; font-weight: bold;">${initials}</div>`;
+        }
+
+        // Función para renderizar la tabla
+        function renderUsersTable(usersToShow = users) {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+
+            usersToShow.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${generateAvatar(user.name)}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.region}</td>
+                    <td>
+                        <span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-info'}">
+                            ${user.role === 'admin' ? 'Administrador' : 'Cliente'}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge ${user.active ? 'bg-success' : 'bg-secondary'}">
+                            ${user.active ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-info" onclick="viewUser(${user.id})" title="Ver detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="editUser(${user.id})" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="showDeleteUserModal(${user.id})" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Función para filtrar usuarios
+        function filterUsers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const roleFilter = document.getElementById('roleFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            const filtered = users.filter(user => {
+                const matchesSearch = user.name.toLowerCase().includes(searchTerm) || 
+                                    user.email.toLowerCase().includes(searchTerm) ||
+                                    user.run.includes(searchTerm);
+                const matchesRole = !roleFilter || user.role === roleFilter;
+                const matchesStatus = statusFilter === '' || user.active.toString() === statusFilter;
+
+                return matchesSearch && matchesRole && matchesStatus;
+            });
+
+            renderUsersTable(filtered);
+        }
+
+        // Event listeners para filtros
+        document.getElementById('searchInput').addEventListener('input', filterUsers);
+        document.getElementById('roleFilter').addEventListener('change', filterUsers);
+        document.getElementById('statusFilter').addEventListener('change', filterUsers);
+
+        // Actualizar comunas cuando cambia la región
+        document.getElementById('userRegion').addEventListener('change', function() {
+            const region = this.value;
+            const communeSelect = document.getElementById('userCommune');
+            
+            communeSelect.innerHTML = '<option value="">Seleccionar comuna</option>';
+            
+            if (region && communesByRegion[region]) {
+                communesByRegion[region].forEach(commune => {
+                    const option = document.createElement('option');
+                    option.value = commune;
+                    option.textContent = commune;
+                    communeSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Función para ver detalles del usuario
+        function viewUser(id) {
+            const user = users.find(u => u.id === id);
+            if (user) {
+                const content = `
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="mb-3">${generateAvatar(user.name)}</div>
+                            <h5>${user.name}</h5>
+                            <p class="text-muted">${user.role === 'admin' ? 'Administrador' : 'Cliente'}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <table class="table table-bordered">
+                                <tr><td><strong>Email:</strong></td><td>${user.email}</td></tr>
+                                <tr><td><strong>Teléfono:</strong></td><td>${user.phone}</td></tr>
+                                <tr><td><strong>RUN:</strong></td><td>${user.run}</td></tr>
+                                <tr><td><strong>Región:</strong></td><td>${user.region}</td></tr>
+                                <tr><td><strong>Comuna:</strong></td><td>${user.commune}</td></tr>
+                                <tr><td><strong>Dirección:</strong></td><td>${user.address || 'No especificada'}</td></tr>
+                                <tr><td><strong>Estado:</strong></td><td><span class="badge ${user.active ? 'bg-success' : 'bg-secondary'}">${user.active ? 'Activo' : 'Inactivo'}</span></td></tr>
+                                <tr><td><strong>Fecha de registro:</strong></td><td>${new Date(user.createdAt).toLocaleDateString()}</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('userDetailsContent').innerHTML = content;
+                const modal = new bootstrap.Modal(document.getElementById('viewUserModal'));
+                modal.show();
+            }
+        }
+
+        // Función para editar usuario
+        function editUser(id) {
+            const user = users.find(u => u.id === id);
+            if (user) {
+                currentEditingId = id;
+                document.getElementById('userModalTitle').textContent = 'Editar Usuario';
+                document.getElementById('userName').value = user.name;
+                document.getElementById('userEmail').value = user.email;
+                document.getElementById('userPhone').value = user.phone;
+                document.getElementById('userRun').value = user.run;
+                document.getElementById('userRegion').value = user.region;
+                document.getElementById('userRole').value = user.role;
+                document.getElementById('userActive').checked = user.active;
+                document.getElementById('userAddress').value = user.address || '';
+
+                // Actualizar comunas y seleccionar la correcta
+                const event = new Event('change');
+                document.getElementById('userRegion').dispatchEvent(event);
+                setTimeout(() => {
+                    document.getElementById('userCommune').value = user.commune;
+                }, 100);
+
+                const modal = new bootstrap.Modal(document.getElementById('addUserModal'));
+                modal.show();
+            }
+        }
+
+        // Función para mostrar modal de eliminación
+        function showDeleteUserModal(id) {
+            deleteUserId = id;
+            const modal = new bootstrap.Modal(document.getElementById('deleteUserModal'));
+            modal.show();
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const userData = {
+                name: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                phone: document.getElementById('userPhone').value,
+                run: document.getElementById('userRun').value,
+                region: document.getElementById('userRegion').value,
+                commune: document.getElementById('userCommune').value,
+                role: document.getElementById('userRole').value,
+                active: document.getElementById('userActive').checked,
+                address: document.getElementById('userAddress').value
+            };
+
+            if (currentEditingId) {
+                // Editar usuario existente
+                const userIndex = users.findIndex(u => u.id === currentEditingId);
+                if (userIndex !== -1) {
+                    users[userIndex] = { ...users[userIndex], ...userData };
+                }
+                currentEditingId = null;
+            } else {
+                // Crear nuevo usuario
+                const newUser = {
+                    id: Math.max(...users.map(u => u.id)) + 1,
+                    ...userData,
+                    createdAt: new Date().toISOString().split('T')[0]
+                };
+                users.push(newUser);
+            }
+
+            // Limpiar formulario y cerrar modal
+            document.getElementById('userForm').reset();
+            document.getElementById('userModalTitle').textContent = 'Agregar Usuario';
+            bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+
+            // Actualizar tabla
+            renderUsersTable();
+
+            // Mostrar mensaje de éxito
+            showSuccessMessage(currentEditingId ? 'Usuario actualizado exitosamente' : 'Usuario creado exitosamente');
+        });
+
+        // Confirmar eliminación
+        document.getElementById('confirmDeleteUser').addEventListener('click', function() {
+            if (deleteUserId) {
+                users = users.filter(u => u.id !== deleteUserId);
+                renderUsersTable();
+                bootstrap.Modal.getInstance(document.getElementById('deleteUserModal')).hide();
+                showSuccessMessage('Usuario eliminado exitosamente');
+                deleteUserId = null;
+            }
+        });
+
+        // Limpiar modal cuando se abre para agregar nuevo usuario
+        document.getElementById('addUserModal').addEventListener('show.bs.modal', function() {
+            if (!currentEditingId) {
+                document.getElementById('userForm').reset();
+                document.getElementById('userModalTitle').textContent = 'Agregar Usuario';
+                document.getElementById('userActive').checked = true;
+                document.getElementById('userCommune').innerHTML = '<option value="">Seleccionar comuna</option>';
+            }
+        });
+
+        // Función para mostrar mensajes de éxito
+        function showSuccessMessage(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Verificar autenticación
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            
+            if (!isLoggedIn || userRole !== 'admin') {
+                alert('Acceso denegado. Redirigiendo al login...');
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // Renderizar tabla inicial
+            renderUsersTable();
+        });
+    </script>
+</body>
+</html>
