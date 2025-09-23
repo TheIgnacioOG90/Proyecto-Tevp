@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -261,38 +261,73 @@
     <script>
         // Script específico para la página de profesionales
         document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const categoria = urlParams.get('categoria');
+            console.log('Página de profesionales cargada');
             
-            if (categoria) {
-                // Actualizar título y filtro
-                document.getElementById('page-title').textContent = `Profesionales de ${categoria}`;
-                document.getElementById('category-description').textContent = `Encuentra al mejor especialista en ${categoria}`;
-                document.getElementById('filter-category').value = categoria;
+            // Esperar a que main.js haya cargado los datos
+            setTimeout(() => {
+                console.log('Intentando cargar profesionales...');
+                const urlParams = new URLSearchParams(window.location.search);
+                const categoria = urlParams.get('categoria');
                 
-                // Cargar profesionales de esa categoría
-                loadProfessionalsByCategory(categoria);
-            } else {
-                // Cargar todos los profesionales
-                displayProfessionals(professionals);
-            }
+                console.log('Categoría desde URL:', categoria);
+                console.log('Profesionales disponibles:', window.professionals ? window.professionals.length : 'No disponibles');
+                
+                if (categoria) {
+                    // Actualizar título y filtro
+                    document.getElementById('page-title').textContent = `Profesionales de ${categoria}`;
+                    document.getElementById('category-description').textContent = `Encuentra al mejor especialista en ${categoria}`;
+                    const categorySelect = document.getElementById('filter-category');
+                    if (categorySelect) {
+                        categorySelect.value = categoria;
+                    }
+                    
+                    // Cargar profesionales de esa categoría usando las funciones de main.js
+                    if (window.displayProfessionalsByCategory) {
+                        window.displayProfessionalsByCategory(categoria);
+                    } else {
+                        console.error('Función displayProfessionalsByCategory no encontrada');
+                    }
+                } else {
+                    // Cargar todos los profesionales usando las funciones de main.js
+                    if (window.displayAllProfessionals) {
+                        window.displayAllProfessionals();
+                    } else {
+                        console.error('Función displayAllProfessionals no encontrada');
+                    }
+                }
+            }, 500); // Dar tiempo a que main.js se cargue
         });
         
         // Función para filtrar profesionales
         function filterProfessionals() {
             const categoryFilter = document.getElementById('filter-category').value;
-            const ratingFilter = parseFloat(document.getElementById('filter-rating').value);
-            const priceFilter = parseInt(document.getElementById('filter-price').value);
-            const experienceFilter = parseInt(document.getElementById('filter-experience').value);
+            const ratingFilter = parseFloat(document.getElementById('filter-rating').value) || 0;
+            const priceFilter = parseInt(document.getElementById('filter-price').value) || 999999;
+            const experienceFilter = parseInt(document.getElementById('filter-experience').value) || 0;
             
-            let filteredProfessionals = professionals.filter(p => {
+            console.log('Aplicando filtros:', { categoryFilter, ratingFilter, priceFilter, experienceFilter });
+            
+            if (!window.professionals) {
+                console.error('Array de profesionales no disponible');
+                return;
+            }
+            
+            let filteredProfessionals = window.professionals.filter(p => {
                 return (!categoryFilter || p.especialidad === categoryFilter) &&
                        (p.calificacion >= ratingFilter) &&
                        (p.tarifaPorHora <= priceFilter) &&
                        (p.experiencia >= experienceFilter);
             });
             
-            displayProfessionals(filteredProfessionals);
+            console.log('Profesionales filtrados:', filteredProfessionals.length);
+            
+            // Usar la función de main.js para mostrar profesionales
+            const container = document.getElementById('productos-lista');
+            if (container && window.createDetailedProfessionalCard) {
+                container.innerHTML = filteredProfessionals.map(professional => 
+                    window.createDetailedProfessionalCard(professional)
+                ).join('');
+            }
             
             // Mostrar mensaje si no hay resultados
             if (filteredProfessionals.length === 0) {

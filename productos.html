@@ -161,36 +161,98 @@
         // Función de búsqueda de productos
         function searchProducts() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const filteredProducts = products.filter(product => 
-                product.nombre.toLowerCase().includes(searchTerm) ||
-                product.descripcion.toLowerCase().includes(searchTerm) ||
-                product.categoria.toLowerCase().includes(searchTerm)
+            
+            if (!window.services) {
+                console.error('Servicios no disponibles');
+                return;
+            }
+            
+            const filteredProducts = window.services.filter(service => 
+                service.nombre.toLowerCase().includes(searchTerm) ||
+                service.descripcion.toLowerCase().includes(searchTerm) ||
+                service.categoria.toLowerCase().includes(searchTerm)
             );
             
             displayProducts(filteredProducts);
         }
 
-        function displayProducts(productsToShow) {
-            const container = document.getElementById('productos-grid');
+        function displayProducts(servicesToShow) {
+            const container = document.getElementById('services-grid');
+            if (!container) {
+                console.error('Container services-grid no encontrado');
+                return;
+            }
+            
             container.innerHTML = '';
             
-            if (productsToShow.length === 0) {
+            if (servicesToShow.length === 0) {
                 container.innerHTML = '<div class="col-12 text-center"><p>No se encontraron servicios.</p></div>';
                 return;
             }
             
-            productsToShow.forEach(product => {
-                const productCard = createProductCard(product, true);
-                container.appendChild(productCard);
-            });
+            // Usar la función de main.js para mostrar servicios
+            if (window.displayAllServices) {
+                // Temporal: actualizar los servicios filtrados
+                const originalServices = window.services;
+                window.services = servicesToShow;
+                window.displayAllServices();
+                window.services = originalServices;
+            } else {
+                // Fallback: crear cards básicas
+                container.innerHTML = servicesToShow.map(service => `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 service-card">
+                            <img src="${service.imagen}" class="card-img-top" alt="${service.nombre}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">${service.nombre}</h5>
+                                <p class="card-text">${service.descripcion}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge bg-primary">${service.categoria}</span>
+                                    <small class="text-muted">${service.profesionalesDisponibles} profesionales</small>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>$${service.precioDesde.toLocaleString()} - $${service.precioHasta.toLocaleString()}</strong>
+                                    <small class="text-muted d-block">Tiempo: ${service.tiempoRespuesta}</small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary w-100" onclick="viewServiceDetails(${service.id})">
+                                    Ver Profesionales
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function viewServiceDetails(serviceId) {
+            console.log('Redirigiendo a profesionales para servicio:', serviceId);
+            if (window.services) {
+                const service = window.services.find(s => s.id === serviceId);
+                if (service) {
+                    window.location.href = `profesionales.html?categoria=${encodeURIComponent(service.categoria)}`;
+                }
+            }
         }
 
         // Configurar búsqueda en tiempo real
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página de productos cargada');
+            
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
                 searchInput.addEventListener('input', searchProducts);
             }
+            
+            // Esperar a que main.js cargue los datos y luego mostrar todos los servicios
+            setTimeout(() => {
+                if (window.services && window.services.length > 0) {
+                    displayProducts(window.services);
+                } else {
+                    console.error('Servicios no disponibles en productos.html');
+                }
+            }, 300);
         });
     </script>
 </body>

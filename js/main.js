@@ -4,6 +4,11 @@ let professionals = [];
 let cart = JSON.parse(localStorage.getItem('tevp-cart')) || [];
 let currentUser = JSON.parse(localStorage.getItem('tevp-currentUser')) || null;
 
+// Hacer las variables accesibles globalmente
+window.services = services;
+window.professionals = professionals;
+window.cart = cart;
+
 // ===== DATOS INICIALES =====
 
 // Categorías de servicios disponibles
@@ -532,6 +537,11 @@ function loadInitialData() {
     professionals = JSON.parse(localStorage.getItem('tevp-professionals')) || initialProfessionals;
     services = JSON.parse(localStorage.getItem('tevp-services')) || initialServices;
     
+    // Actualizar variables globales
+    window.professionals = professionals;
+    window.services = services;
+    window.cart = cart;
+    
     console.log('Datos cargados:', { professionals: professionals.length, services: services.length });
 }
 
@@ -853,6 +863,9 @@ function viewServiceDetails(serviceId) {
         window.location.href = `profesionales.html?categoria=${encodeURIComponent(service.categoria)}`;
     }
 }
+
+// Hacer función global
+window.viewServiceDetails = viewServiceDetails;
 
 // Ver detalle del profesional
 function viewProfessionalDetail(professionalId) {
@@ -1214,6 +1227,9 @@ function displayAllProfessionals() {
     container.innerHTML = professionals.map(professional => createDetailedProfessionalCard(professional)).join('');
 }
 
+// Hacer función global
+window.displayAllProfessionals = displayAllProfessionals;
+
 // Mostrar profesionales por categoría
 function displayProfessionalsByCategory(categoria) {
     const container = document.getElementById('professionals-container') || 
@@ -1253,6 +1269,9 @@ function displayProfessionalsByCategory(categoria) {
     
     container.innerHTML = filteredProfessionals.map(professional => createDetailedProfessionalCard(professional)).join('');
 }
+
+// Hacer función global
+window.displayProfessionalsByCategory = displayProfessionalsByCategory;
 
 // Crear tarjeta detallada de profesional (para página de profesionales)
 function createDetailedProfessionalCard(professional) {
@@ -1330,6 +1349,9 @@ function createDetailedProfessionalCard(professional) {
     `;
 }
 
+// Hacer función global
+window.createDetailedProfessionalCard = createDetailedProfessionalCard;
+
 // Contratar profesional (agregar al carrito)
 function hireProfessional(professionalId) {
     const professional = professionals.find(p => p.id === professionalId);
@@ -1360,6 +1382,7 @@ function hireProfessional(professionalId) {
     };
     
     cart.push(cartItem);
+    window.cart = cart; // Actualizar variable global
     localStorage.setItem('tevp-cart', JSON.stringify(cart));
     
     console.log('Profesional agregado al carrito:', cartItem);
@@ -1368,6 +1391,9 @@ function hireProfessional(professionalId) {
     // Actualizar contador del carrito
     updateCartCounter();
 }
+
+// Hacer función global
+window.hireProfessional = hireProfessional;
 
 // Actualizar contador del carrito
 function updateCartCounter() {
