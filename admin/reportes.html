@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes y Estadísticas - TEVP Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+        .report-card {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #007bff;
+        }
+        .trend-up { color: #28a745; }
+        .trend-down { color: #dc3545; }
+        .filter-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4><i class="fas fa-tools me-2"></i>TEVP Admin</h4>
+                        <small class="text-muted">Panel de Control</small>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">
+                                <i class="fas fa-users me-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">
+                                <i class="fas fa-box me-2"></i>Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedidos.html">
+                                <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="reportes.html">
+                                <i class="fas fa-chart-line me-2"></i>Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-home me-2"></i>Sitio Web
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link text-danger" href="../login.html">
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenido Principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content-wrapper">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2"><i class="fas fa-chart-line me-2"></i>Reportes y Estadísticas</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-primary me-2" onclick="exportReport()">
+                                <i class="fas fa-download me-1"></i>Exportar PDF
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="refreshData()">
+                                <i class="fas fa-sync me-1"></i>Actualizar Datos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filtros de Fecha -->
+                    <div class="filter-section">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="report-period" class="form-label">Período</label>
+                                <select class="form-select" id="report-period" onchange="updatePeriod()">
+                                    <option value="week">Última Semana</option>
+                                    <option value="month" selected>Último Mes</option>
+                                    <option value="quarter">Último Trimestre</option>
+                                    <option value="year">Último Año</option>
+                                    <option value="custom">Personalizado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3" id="custom-dates" style="display: none;">
+                                <label for="date-from" class="form-label">Desde</label>
+                                <input type="date" class="form-control" id="date-from">
+                            </div>
+                            <div class="col-md-3" id="custom-dates-to" style="display: none;">
+                                <label for="date-to" class="form-label">Hasta</label>
+                                <input type="date" class="form-control" id="date-to">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">&nbsp;</label>
+                                <div>
+                                    <button type="button" class="btn btn-primary" onclick="generateReport()">
+                                        <i class="fas fa-chart-bar me-1"></i>Generar Reporte
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas Principales -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <h3 id="revenue-total" class="mb-1">$2,450,000</h3>
+                                <p class="mb-1">Ingresos Totales</p>
+                                <small class="trend-up">
+                                    <i class="fas fa-arrow-up"></i> +12.5% vs mes anterior
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <h3 id="orders-total" class="mb-1">156</h3>
+                                <p class="mb-1">Pedidos Completados</p>
+                                <small class="trend-up">
+                                    <i class="fas fa-arrow-up"></i> +8.3% vs mes anterior
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <h3 id="avg-order" class="mb-1">$157,051</h3>
+                                <p class="mb-1">Promedio por Pedido</p>
+                                <small class="trend-up">
+                                    <i class="fas fa-arrow-up"></i> +3.8% vs mes anterior
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <h3 id="customers-new" class="mb-1">42</h3>
+                                <p class="mb-1">Nuevos Clientes</p>
+                                <small class="trend-down">
+                                    <i class="fas fa-arrow-down"></i> -2.1% vs mes anterior
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos Principal -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-line me-2"></i>Evolución de Ventas
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="salesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-pie me-2"></i>Servicios Más Solicitados
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="servicesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos Secundarios -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-users me-2"></i>Crecimiento de Clientes
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="customersChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-clock me-2"></i>Estados de Pedidos
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="statusChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Top Servicios -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-trophy me-2"></i>Top 10 Servicios del Período
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Servicio</th>
+                                            <th>Cantidad</th>
+                                            <th>Ingresos</th>
+                                            <th>Promedio</th>
+                                            <th>Tendencia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="top-services-table">
+                                        <!-- Datos se cargarán dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alertas y Recomendaciones -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card border-warning">
+                                <div class="card-header bg-warning text-dark">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>Alertas
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0" id="alerts-list">
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-warning me-2"></i>
+                                            Disminución del 15% en servicios de plomería este mes
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-info me-2"></i>
+                                            Aumento significativo en instalaciones eléctricas
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-circle text-danger me-2"></i>
+                                            3 pedidos cancelados en la última semana
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-header bg-success text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-lightbulb me-2"></i>Recomendaciones
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0" id="recommendations-list">
+                                        <li class="mb-2">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Promocionar servicios de mantención en otoño
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Expandir equipo de electricistas por alta demanda
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Implementar programa de fidelización de clientes
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // ===== VARIABLES GLOBALES =====
+        let salesChart, servicesChart, customersChart, statusChart;
+
+        // ===== DATOS DE EJEMPLO =====
+        const reportData = {
+            sales: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+                datasets: [{
+                    label: 'Ingresos (CLP)',
+                    data: [1800000, 2100000, 1950000, 2300000, 2150000, 2450000, 2600000, 2350000, 2450000],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            services: {
+                labels: ['Instalación Eléctrica', 'Plomería', 'Mantención HVAC', 'Pintura', 'Carpintería'],
+                datasets: [{
+                    data: [35, 25, 20, 12, 8],
+                    backgroundColor: [
+                        '#007bff',
+                        '#28a745',
+                        '#ffc107',
+                        '#dc3545',
+                        '#6f42c1'
+                    ]
+                }]
+            },
+            customers: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+                datasets: [{
+                    label: 'Nuevos Clientes',
+                    data: [25, 32, 28, 45, 38, 42, 48, 44, 42],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            status: {
+                labels: ['Completados', 'En Proceso', 'Pendientes', 'Cancelados'],
+                datasets: [{
+                    data: [156, 24, 12, 8],
+                    backgroundColor: [
+                        '#28a745',
+                        '#007bff',
+                        '#ffc107',
+                        '#dc3545'
+                    ]
+                }]
+            }
+        };
+
+        const topServices = [
+            { name: 'Instalación Eléctrica', quantity: 45, revenue: 6750000, average: 150000, trend: 'up' },
+            { name: 'Mantención HVAC', quantity: 32, revenue: 3840000, average: 120000, trend: 'up' },
+            { name: 'Reparación Plomería', quantity: 28, revenue: 2380000, average: 85000, trend: 'down' },
+            { name: 'Instalación Termo', quantity: 25, revenue: 4500000, average: 180000, trend: 'up' },
+            { name: 'Pintura Interior', quantity: 18, revenue: 1710000, average: 95000, trend: 'stable' },
+            { name: 'Carpintería', quantity: 15, revenue: 2250000, average: 150000, trend: 'up' },
+            { name: 'Limpieza Profunda', quantity: 12, revenue: 720000, average: 60000, trend: 'down' },
+            { name: 'Jardinería', quantity: 10, revenue: 800000, average: 80000, trend: 'stable' },
+            { name: 'Cerrajería', quantity: 8, revenue: 560000, average: 70000, trend: 'up' },
+            { name: 'Soldadura', quantity: 6, revenue: 900000, average: 150000, trend: 'stable' }
+        ];
+
+        // ===== INICIALIZACIÓN =====
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            loadTopServicesTable();
+            setupEventListeners();
+        });
+
+        // ===== INICIALIZAR GRÁFICOS =====
+        function initializeCharts() {
+            // Gráfico de Ventas
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            salesChart = new Chart(salesCtx, {
+                type: 'line',
+                data: reportData.sales,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString('es-CL');
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Ingresos: $' + context.parsed.y.toLocaleString('es-CL');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Servicios
+            const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+            servicesChart = new Chart(servicesCtx, {
+                type: 'doughnut',
+                data: reportData.services,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Clientes
+            const customersCtx = document.getElementById('customersChart').getContext('2d');
+            customersChart = new Chart(customersCtx, {
+                type: 'bar',
+                data: reportData.customers,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Estados
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            statusChart = new Chart(statusCtx, {
+                type: 'pie',
+                data: reportData.status,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===== CARGAR TABLA DE TOP SERVICIOS =====
+        function loadTopServicesTable() {
+            const tbody = document.getElementById('top-services-table');
+            tbody.innerHTML = '';
+
+            topServices.forEach((service, index) => {
+                const row = document.createElement('tr');
+                
+                const trendIcon = {
+                    'up': '<i class="fas fa-arrow-up text-success"></i>',
+                    'down': '<i class="fas fa-arrow-down text-danger"></i>',
+                    'stable': '<i class="fas fa-minus text-warning"></i>'
+                }[service.trend];
+
+                row.innerHTML = `
+                    <td><strong>#${index + 1}</strong></td>
+                    <td>${service.name}</td>
+                    <td>${service.quantity}</td>
+                    <td>$${service.revenue.toLocaleString('es-CL')}</td>
+                    <td>$${service.average.toLocaleString('es-CL')}</td>
+                    <td>${trendIcon}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // ===== CONFIGURACIÓN DE EVENTOS =====
+        function setupEventListeners() {
+            document.getElementById('report-period').addEventListener('change', updatePeriod);
+        }
+
+        function updatePeriod() {
+            const period = document.getElementById('report-period').value;
+            const customDates = document.getElementById('custom-dates');
+            const customDatesTo = document.getElementById('custom-dates-to');
+            
+            if (period === 'custom') {
+                customDates.style.display = 'block';
+                customDatesTo.style.display = 'block';
+            } else {
+                customDates.style.display = 'none';
+                customDatesTo.style.display = 'none';
+            }
+        }
+
+        // ===== FUNCIONES DE REPORTE =====
+        function generateReport() {
+            const period = document.getElementById('report-period').value;
+            
+            showAlert('Generando reporte...', 'info');
+            
+            // Simular carga de datos
+            setTimeout(() => {
+                refreshCharts();
+                showAlert(`Reporte generado para el período: ${getPeriodText(period)}`, 'success');
+            }, 1500);
+        }
+
+        function refreshData() {
+            showAlert('Actualizando datos...', 'info');
+            
+            setTimeout(() => {
+                refreshCharts();
+                loadTopServicesTable();
+                showAlert('Datos actualizados correctamente', 'success');
+            }, 1000);
+        }
+
+        function refreshCharts() {
+            // Simular nuevos datos (en la práctica vendrían del servidor)
+            salesChart.update();
+            servicesChart.update();
+            customersChart.update();
+            statusChart.update();
+        }
+
+        function exportReport() {
+            showAlert('Exportando reporte a PDF...', 'info');
+            
+            setTimeout(() => {
+                showAlert('Reporte exportado correctamente', 'success');
+                // Aquí implementarías la lógica real de exportación
+            }, 2000);
+        }
+
+        // ===== FUNCIONES AUXILIARES =====
+        function getPeriodText(period) {
+            const periods = {
+                'week': 'Última Semana',
+                'month': 'Último Mes',
+                'quarter': 'Último Trimestre',
+                'year': 'Último Año',
+                'custom': 'Período Personalizado'
+            };
+            return periods[period] || period;
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-info-circle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

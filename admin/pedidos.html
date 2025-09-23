@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos - TEVP Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+        .order-status {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .status-pending { background-color: #fff3cd; color: #856404; }
+        .status-processing { background-color: #cce7ff; color: #0066cc; }
+        .status-shipped { background-color: #d4edda; color: #155724; }
+        .status-delivered { background-color: #d1ecf1; color: #0c5460; }
+        .status-cancelled { background-color: #f8d7da; color: #721c24; }
+        
+        .filter-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .table-actions .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4><i class="fas fa-tools me-2"></i>TEVP Admin</h4>
+                        <small class="text-muted">Panel de Control</small>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">
+                                <i class="fas fa-users me-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">
+                                <i class="fas fa-box me-2"></i>Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="pedidos.html">
+                                <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reportes.html">
+                                <i class="fas fa-chart-line me-2"></i>Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-home me-2"></i>Sitio Web
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link text-danger" href="../login.html">
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenido Principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content-wrapper">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2"><i class="fas fa-shopping-cart me-2"></i>Gestión de Pedidos</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-primary me-2" onclick="exportOrders()">
+                                <i class="fas fa-download me-1"></i>Exportar
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="refreshOrders()">
+                                <i class="fas fa-sync me-1"></i>Actualizar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas Rápidas -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card text-white bg-warning">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title mb-0">Pendientes</h5>
+                                            <h2 id="pending-count">12</h2>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-clock fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-info">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title mb-0">En Proceso</h5>
+                                            <h2 id="processing-count">8</h2>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-cog fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title mb-0">Enviados</h5>
+                                            <h2 id="shipped-count">24</h2>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-shipping-fast fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title mb-0">Total Mes</h5>
+                                            <h2 id="total-count">156</h2>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-chart-bar fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="filter-card">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="status-filter" class="form-label">Estado</label>
+                                <select class="form-select" id="status-filter">
+                                    <option value="">Todos los estados</option>
+                                    <option value="pending">Pendiente</option>
+                                    <option value="processing">En Proceso</option>
+                                    <option value="shipped">Enviado</option>
+                                    <option value="delivered">Entregado</option>
+                                    <option value="cancelled">Cancelado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="date-from" class="form-label">Desde</label>
+                                <input type="date" class="form-control" id="date-from">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="date-to" class="form-label">Hasta</label>
+                                <input type="date" class="form-control" id="date-to">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="search-order" class="form-label">Buscar Pedido</label>
+                                <input type="text" class="form-control" id="search-order" placeholder="ID o cliente...">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary me-2" onclick="applyFilters()">
+                                    <i class="fas fa-search me-1"></i>Filtrar
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="clearFilters()">
+                                    <i class="fas fa-times me-1"></i>Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Pedidos -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Lista de Pedidos</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0" id="orders-table">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Fecha</th>
+                                            <th>Productos</th>
+                                            <th>Total</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orders-tbody">
+                                        <!-- Los pedidos se cargarán aquí dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <nav aria-label="Paginación de pedidos">
+                                <ul class="pagination justify-content-center mb-0" id="pagination">
+                                    <!-- Paginación se generará dinámicamente -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Detalle Pedido -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-info-circle me-2"></i>Detalle del Pedido
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="order-detail-content">
+                    <!-- Contenido del detalle se cargará aquí -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="printOrder()">
+                        <i class="fas fa-print me-1"></i>Imprimir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // ===== DATOS DE EJEMPLO =====
+        const sampleOrders = [
+            {
+                id: 'PED-001',
+                customer: 'Juan Pérez',
+                email: 'juan.perez@duoc.cl',
+                date: '2025-09-20',
+                products: [
+                    { name: 'Instalación Eléctrica', quantity: 1, price: 150000 },
+                    { name: 'Mantención Grifería', quantity: 2, price: 45000 }
+                ],
+                total: 240000,
+                status: 'pending',
+                address: 'Av. Providencia 1234, Santiago'
+            },
+            {
+                id: 'PED-002',
+                customer: 'María González',
+                email: 'maria.gonzalez@gmail.com',
+                date: '2025-09-19',
+                products: [
+                    { name: 'Reparación Plomería', quantity: 1, price: 85000 }
+                ],
+                total: 85000,
+                status: 'processing',
+                address: 'Los Leones 456, Las Condes'
+            },
+            {
+                id: 'PED-003',
+                customer: 'Carlos Silva',
+                email: 'carlos.silva@duoc.cl',
+                date: '2025-09-18',
+                products: [
+                    { name: 'Instalación Termo', quantity: 1, price: 180000 },
+                    { name: 'Revisión Caldera', quantity: 1, price: 65000 }
+                ],
+                total: 245000,
+                status: 'shipped',
+                address: 'Santa Isabel 789, Ñuñoa'
+            },
+            {
+                id: 'PED-004',
+                customer: 'Ana Morales',
+                email: 'ana.morales@profesor.duoc.cl',
+                date: '2025-09-17',
+                products: [
+                    { name: 'Mantención Aires Acondicionados', quantity: 3, price: 120000 }
+                ],
+                total: 360000,
+                status: 'delivered',
+                address: 'Apoquindo 567, Las Condes'
+            },
+            {
+                id: 'PED-005',
+                customer: 'Roberto Díaz',
+                email: 'roberto.diaz@gmail.com',
+                date: '2025-09-16',
+                products: [
+                    { name: 'Pintura Interior', quantity: 1, price: 95000 }
+                ],
+                total: 95000,
+                status: 'cancelled',
+                address: 'Bandera 123, Santiago Centro'
+            }
+        ];
+
+        // ===== INICIALIZACIÓN =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrders();
+            updateStats();
+            setupEventListeners();
+        });
+
+        // ===== CARGAR PEDIDOS =====
+        function loadOrders(filteredOrders = null) {
+            const orders = filteredOrders || sampleOrders;
+            const tbody = document.getElementById('orders-tbody');
+            
+            tbody.innerHTML = '';
+            
+            orders.forEach(order => {
+                const row = createOrderRow(order);
+                tbody.appendChild(row);
+            });
+        }
+
+        function createOrderRow(order) {
+            const tr = document.createElement('tr');
+            
+            const statusClass = `status-${order.status}`;
+            const statusText = {
+                'pending': 'Pendiente',
+                'processing': 'En Proceso',
+                'shipped': 'Enviado',
+                'delivered': 'Entregado',
+                'cancelled': 'Cancelado'
+            }[order.status];
+
+            tr.innerHTML = `
+                <td><strong>${order.id}</strong></td>
+                <td>
+                    <div>${order.customer}</div>
+                    <small class="text-muted">${order.email}</small>
+                </td>
+                <td>${formatDate(order.date)}</td>
+                <td>
+                    <small>${order.products.length} producto(s)</small>
+                </td>
+                <td><strong>$${order.total.toLocaleString('es-CL')}</strong></td>
+                <td>
+                    <span class="order-status ${statusClass}">${statusText}</span>
+                </td>
+                <td class="table-actions">
+                    <button class="btn btn-sm btn-outline-primary me-1" onclick="viewOrder('${order.id}')" title="Ver Detalle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning me-1" onclick="editOrder('${order.id}')" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-success me-1" onclick="updateStatus('${order.id}')" title="Cambiar Estado">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteOrder('${order.id}')" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            
+            return tr;
+        }
+
+        // ===== FUNCIONES DE GESTIÓN =====
+        function viewOrder(orderId) {
+            const order = sampleOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const modal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+            const content = document.getElementById('order-detail-content');
+            
+            content.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-info me-2"></i>Información del Pedido</h6>
+                        <p><strong>ID:</strong> ${order.id}</p>
+                        <p><strong>Fecha:</strong> ${formatDate(order.date)}</p>
+                        <p><strong>Estado:</strong> <span class="order-status status-${order.status}">${getStatusText(order.status)}</span></p>
+                        <p><strong>Total:</strong> $${order.total.toLocaleString('es-CL')}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-user me-2"></i>Información del Cliente</h6>
+                        <p><strong>Nombre:</strong> ${order.customer}</p>
+                        <p><strong>Email:</strong> ${order.email}</p>
+                        <p><strong>Dirección:</strong> ${order.address}</p>
+                    </div>
+                </div>
+                <hr>
+                <h6><i class="fas fa-box me-2"></i>Productos</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${order.products.map(product => `
+                                <tr>
+                                    <td>${product.name}</td>
+                                    <td>${product.quantity}</td>
+                                    <td>$${product.price.toLocaleString('es-CL')}</td>
+                                    <td>$${(product.price * product.quantity).toLocaleString('es-CL')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            modal.show();
+        }
+
+        function updateStatus(orderId) {
+            const order = sampleOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const statusOptions = {
+                'pending': 'processing',
+                'processing': 'shipped',
+                'shipped': 'delivered',
+                'delivered': 'delivered',
+                'cancelled': 'pending'
+            };
+
+            order.status = statusOptions[order.status];
+            loadOrders();
+            updateStats();
+            
+            showAlert(`Estado del pedido ${orderId} actualizado correctamente`, 'success');
+        }
+
+        function deleteOrder(orderId) {
+            if (confirm(`¿Está seguro de eliminar el pedido ${orderId}?`)) {
+                const index = sampleOrders.findIndex(o => o.id === orderId);
+                if (index !== -1) {
+                    sampleOrders.splice(index, 1);
+                    loadOrders();
+                    updateStats();
+                    showAlert(`Pedido ${orderId} eliminado correctamente`, 'success');
+                }
+            }
+        }
+
+        // ===== FILTROS =====
+        function applyFilters() {
+            const status = document.getElementById('status-filter').value;
+            const dateFrom = document.getElementById('date-from').value;
+            const dateTo = document.getElementById('date-to').value;
+            const search = document.getElementById('search-order').value.toLowerCase();
+
+            let filtered = sampleOrders.filter(order => {
+                const matchStatus = !status || order.status === status;
+                const matchDateFrom = !dateFrom || order.date >= dateFrom;
+                const matchDateTo = !dateTo || order.date <= dateTo;
+                const matchSearch = !search || 
+                    order.id.toLowerCase().includes(search) ||
+                    order.customer.toLowerCase().includes(search);
+
+                return matchStatus && matchDateFrom && matchDateTo && matchSearch;
+            });
+
+            loadOrders(filtered);
+        }
+
+        function clearFilters() {
+            document.getElementById('status-filter').value = '';
+            document.getElementById('date-from').value = '';
+            document.getElementById('date-to').value = '';
+            document.getElementById('search-order').value = '';
+            loadOrders();
+        }
+
+        // ===== FUNCIONES AUXILIARES =====
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-CL');
+        }
+
+        function getStatusText(status) {
+            const statusTexts = {
+                'pending': 'Pendiente',
+                'processing': 'En Proceso',
+                'shipped': 'Enviado',
+                'delivered': 'Entregado',
+                'cancelled': 'Cancelado'
+            };
+            return statusTexts[status] || status;
+        }
+
+        function updateStats() {
+            document.getElementById('pending-count').textContent = 
+                sampleOrders.filter(o => o.status === 'pending').length;
+            document.getElementById('processing-count').textContent = 
+                sampleOrders.filter(o => o.status === 'processing').length;
+            document.getElementById('shipped-count').textContent = 
+                sampleOrders.filter(o => o.status === 'shipped').length;
+            document.getElementById('total-count').textContent = sampleOrders.length;
+        }
+
+        function setupEventListeners() {
+            // Filtros en tiempo real
+            document.getElementById('search-order').addEventListener('input', applyFilters);
+            document.getElementById('status-filter').addEventListener('change', applyFilters);
+        }
+
+        // ===== FUNCIONES DE EXPORTACIÓN =====
+        function exportOrders() {
+            showAlert('Exportando pedidos...', 'info');
+            // Aquí implementarías la exportación real
+        }
+
+        function refreshOrders() {
+            loadOrders();
+            updateStats();
+            showAlert('Lista de pedidos actualizada', 'success');
+        }
+
+        function printOrder() {
+            window.print();
+        }
+
+        // ===== FUNCIÓN DE ALERTAS =====
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
