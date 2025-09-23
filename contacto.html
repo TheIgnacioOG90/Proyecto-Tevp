@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <!-- Header Principal -->
+    <header>
+        <!-- Navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-tools me-2"></i>TEVP
@@ -75,12 +77,14 @@
             </div>
         </div>
     </nav>
+    </header>
 
     <!-- Contenido Principal -->
-    <div class="container my-5 main-content">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="section-title">Contáctanos</h1>
+    <main>
+        <div class="container my-5 main-content">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="section-title">Contáctanos</h1>
                 <p class="text-center text-muted mb-5">
                     ¿Tienes alguna consulta o necesitas ayuda? Estamos aquí para ayudarte.
                 </p>
@@ -90,7 +94,7 @@
         <div class="row">
             <!-- Formulario de Contacto -->
             <div class="col-lg-8">
-                <div class="form-container">
+                <article class="form-container">
                     <h3><i class="fas fa-envelope me-2"></i>Envíanos un Mensaje</h3>
                     <p class="text-muted mb-4">Completa el formulario y te responderemos lo antes posible.</p>
 
@@ -99,14 +103,21 @@
                             <div class="col-md-6 mb-3">
                                 <label for="nombre" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" 
-                                       placeholder="Tu nombre completo" maxlength="100" required>
+                                       placeholder="Tu nombre completo" maxlength="100" required autocomplete="name">
+                                <div class="invalid-feedback"></div>
                             </div>
                             
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" 
-                                       placeholder="tu@email.com (opcional)" maxlength="100">
+                                       placeholder="tu@email.com (opcional)" maxlength="100" autocomplete="email" list="emailSuggestions">
                                 <div class="form-text">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com</div>
+                                <div class="invalid-feedback"></div>
+                                <datalist id="emailSuggestions">
+                                    <option value="@duoc.cl">
+                                    <option value="@profesor.duoc.cl">
+                                    <option value="@gmail.com">
+                                </datalist>
                             </div>
                         </div>
 
@@ -114,7 +125,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="tel" class="form-control" id="telefono" name="telefono" 
-                                       placeholder="+56 9 1234 5678 (opcional)">
+                                       placeholder="+56 9 1234 5678 (opcional)" autocomplete="tel">
+                                <div class="invalid-feedback"></div>
                             </div>
                             
                             <div class="col-md-6 mb-3">
@@ -128,6 +140,7 @@
                                     <option value="reclamo">Reclamo</option>
                                     <option value="otro">Otro</option>
                                 </select>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -135,7 +148,8 @@
                             <label for="comentario" class="form-label">Mensaje <span class="text-danger">*</span></label>
                             <textarea class="form-control" id="comentario" name="comentario" rows="5" 
                                      placeholder="Describe tu consulta o mensaje..." maxlength="500" required></textarea>
-                            <div class="form-text">Máximo 500 caracteres</div>
+                            <div class="form-text">Máximo 500 caracteres. <span id="char-count">0/500</span></div>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="mb-3">
@@ -156,7 +170,7 @@
                             </button>
                         </div>
                     </form>
-                </div>
+                </article>
             </div>
 
             <!-- Información de Contacto -->
@@ -225,6 +239,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- Modal del Carrito -->
     <div class="modal fade" id="cartModal" tabindex="-1">
@@ -286,136 +301,306 @@
     <script src="js/main.js"></script>
     
     <script>
-        // Funcionalidad del formulario de contacto
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // ===== VALIDACIONES COMPLETAS FORMULARIO CONTACTO =====
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const comentarioTextarea = document.getElementById('comentario');
+            const charCount = document.getElementById('char-count');
             
-            // Obtener datos del formulario
-            const formData = new FormData(this);
-            const nombre = formData.get('nombre').trim();
-            const email = formData.get('email').trim();
-            const telefono = formData.get('telefono').trim();
-            const asunto = formData.get('asunto');
-            const comentario = formData.get('comentario').trim();
-            const newsletter = formData.get('newsletter') ? true : false;
+            // Contador de caracteres en tiempo real
+            comentarioTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                const maxLength = this.getAttribute('maxlength');
+                charCount.textContent = `${currentLength}/${maxLength}`;
+                
+                if (currentLength > maxLength * 0.9) {
+                    charCount.className = 'text-warning fw-bold';
+                } else if (currentLength > maxLength * 0.8) {
+                    charCount.className = 'text-info';
+                } else {
+                    charCount.className = '';
+                }
+            });
             
-            // Validaciones
-            if (!nombre) {
-                showError('El nombre es obligatorio');
-                document.getElementById('nombre').focus();
-                return;
-            }
+            // Auto-format teléfono
+            document.getElementById('telefono').addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length >= 8) {
+                    if (value.startsWith('56')) {
+                        value = '+56 ' + value.substring(2, 3) + ' ' + 
+                               value.substring(3, 7) + ' ' + value.substring(7, 11);
+                    } else if (value.length === 9 && value.startsWith('9')) {
+                        value = '+56 ' + value.substring(0, 1) + ' ' + 
+                               value.substring(1, 5) + ' ' + value.substring(5, 9);
+                    }
+                }
+                this.value = value.substring(0, 18);
+            });
             
-            if (!comentario) {
-                showError('El mensaje es obligatorio');
-                document.getElementById('comentario').focus();
-                return;
-            }
-            
-            if (email && !isValidEmail(email)) {
-                showError('El formato del email no es válido');
-                document.getElementById('email').focus();
-                return;
-            }
-            
-            if (telefono && !isValidPhone(telefono)) {
-                showError('El formato del teléfono no es válido');
-                document.getElementById('telefono').focus();
-                return;
-            }
-            
-            // Simular envío exitoso
-            showSuccess('¡Mensaje enviado correctamente! Te responderemos pronto.');
-            
-            // Limpiar formulario
-            this.reset();
-            
-            // Opcional: enviar datos a servidor
-            console.log('Datos del formulario:', {
-                nombre, email, telefono, asunto, comentario, newsletter
+            // Validación del formulario al enviar
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Limpiar errores previos
+                clearAllErrors();
+                
+                // Obtener datos del formulario
+                const formData = new FormData(this);
+                const contactData = {
+                    nombre: formData.get('nombre')?.trim() || '',
+                    email: formData.get('email')?.trim() || '',
+                    telefono: formData.get('telefono')?.trim() || '',
+                    asunto: formData.get('asunto') || '',
+                    comentario: formData.get('comentario')?.trim() || '',
+                    newsletter: formData.get('newsletter') === 'on'
+                };
+                
+                // Ejecutar validaciones
+                const validation = validateContactForm(contactData);
+                
+                if (!validation.isValid) {
+                    showFieldError(validation.field, validation.message);
+                    document.getElementById(validation.field).focus();
+                    return;
+                }
+                
+                // Si todas las validaciones pasan, simular envío
+                showSuccessMessage();
+                
+                // Guardar mensaje (simulación)
+                saveContactMessage(contactData);
+                
+                // Limpiar formulario después de 2 segundos
+                setTimeout(() => {
+                    form.reset();
+                    charCount.textContent = '0/500';
+                }, 2000);
             });
         });
         
-        // Funciones de validación
+        // ===== FUNCIÓN DE VALIDACIÓN PRINCIPAL =====
+        function validateContactForm(data) {
+            // 1. Validar nombre (obligatorio)
+            if (!data.nombre) {
+                return { isValid: false, field: 'nombre', message: 'El nombre es obligatorio' };
+            }
+            if (data.nombre.length < 2) {
+                return { isValid: false, field: 'nombre', message: 'El nombre debe tener al menos 2 caracteres' };
+            }
+            if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(data.nombre)) {
+                return { isValid: false, field: 'nombre', message: 'El nombre solo puede contener letras y espacios' };
+            }
+            
+            // 2. Validar email (opcional pero si se llena debe ser válido)
+            if (data.email) {
+                if (!isValidEmail(data.email)) {
+                    return { isValid: false, field: 'email', message: 'El email debe ser de @duoc.cl, @profesor.duoc.cl o @gmail.com' };
+                }
+            }
+            
+            // 3. Validar teléfono (opcional pero si se llena debe ser válido)
+            if (data.telefono) {
+                if (!isValidChileanPhone(data.telefono)) {
+                    return { isValid: false, field: 'telefono', message: 'Ingrese un teléfono chileno válido (+56 9 XXXX XXXX)' };
+                }
+            }
+            
+            // 4. Validar que haya email O teléfono
+            if (!data.email && !data.telefono) {
+                return { isValid: false, field: 'email', message: 'Debe proporcionar al menos un email o teléfono para contactarlo' };
+            }
+            
+            // 5. Validar mensaje (obligatorio)
+            if (!data.comentario) {
+                return { isValid: false, field: 'comentario', message: 'El mensaje es obligatorio' };
+            }
+            if (data.comentario.length < 10) {
+                return { isValid: false, field: 'comentario', message: 'El mensaje debe tener al menos 10 caracteres' };
+            }
+            if (data.comentario.length > 500) {
+                return { isValid: false, field: 'comentario', message: 'El mensaje no puede exceder 500 caracteres' };
+            }
+            
+            return { isValid: true };
+        }
+        
+        // ===== FUNCIONES DE VALIDACIÓN ESPECÍFICAS =====
+        
         function isValidEmail(email) {
+            // Validar formato básico de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) return false;
+            
+            // Validar dominios permitidos
             const allowedDomains = ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'];
-            return allowedDomains.some(domain => email.endsWith(domain));
+            return allowedDomains.some(domain => email.toLowerCase().endsWith(domain.toLowerCase()));
         }
         
-        function isValidPhone(phone) {
-            // Formato chileno: +56 9 XXXX XXXX
-            const phoneRegex = /^\+56\s?9\s?\d{4}\s?\d{4}$/;
-            return phoneRegex.test(phone);
+        function isValidChileanPhone(phone) {
+            // Remover todos los caracteres no numéricos
+            const cleanPhone = phone.replace(/\D/g, '');
+            
+            // Validar formatos chilenos
+            // +56 9 XXXX XXXX = 11 dígitos (56 + 9 + 8)
+            // 9 XXXX XXXX = 9 dígitos
+            if (cleanPhone.length === 11 && cleanPhone.startsWith('569')) {
+                return true;
+            }
+            if (cleanPhone.length === 9 && cleanPhone.startsWith('9')) {
+                return true;
+            }
+            
+            return false;
         }
         
-        // Funciones de mensajes
-        function showSuccess(message) {
+        // ===== FUNCIONES DE MANEJO DE ERRORES =====
+        
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const feedback = field.nextElementSibling;
+            
+            // Si el siguiente elemento no es invalid-feedback, buscarlo
+            let invalidFeedback = feedback;
+            if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+            }
+            
+            if (invalidFeedback) {
+                invalidFeedback.textContent = message;
+            }
+            
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+        }
+        
+        function clearFieldError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+            
+            if (invalidFeedback) {
+                invalidFeedback.textContent = '';
+            }
+            
+            field.classList.remove('is-invalid');
+        }
+        
+        function clearAllErrors() {
+            const fields = ['nombre', 'email', 'telefono', 'asunto', 'comentario'];
+            fields.forEach(fieldId => {
+                clearFieldError(fieldId);
+            });
+            
+            // Remover alertas existentes
+            const existingAlerts = document.querySelectorAll('.alert');
+            existingAlerts.forEach(alert => alert.remove());
+        }
+        
+        // ===== FUNCIÓN DE ÉXITO =====
+        
+        function showSuccessMessage() {
             const alertDiv = document.createElement('div');
             alertDiv.className = 'alert alert-success alert-dismissible fade show';
             alertDiv.innerHTML = `
-                <i class="fas fa-check-circle me-2"></i>${message}
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>¡Mensaje enviado exitosamente!</strong> 
+                Te responderemos lo antes posible.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
             
             const form = document.getElementById('contact-form');
             form.parentNode.insertBefore(alertDiv, form);
-            
-            // Scroll al mensaje
             alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
             // Auto-dismiss después de 5 segundos
             setTimeout(() => {
-                alertDiv.remove();
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
             }, 5000);
         }
         
-        function showError(message) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'alert alert-danger alert-dismissible fade show';
-            alertDiv.innerHTML = `
-                <i class="fas fa-exclamation-triangle me-2"></i>${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
+        // ===== FUNCIÓN DE GUARDADO (SIMULACIÓN) =====
+        
+        function saveContactMessage(data) {
+            // En un entorno real, esto se enviaría al servidor
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
             
-            const form = document.getElementById('contact-form');
-            form.parentNode.insertBefore(alertDiv, form);
+            const newMessage = {
+                id: Date.now(),
+                ...data,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
             
-            // Scroll al mensaje
-            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            messages.push(newMessage);
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
             
-            // Auto-dismiss después de 4 segundos
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 4000);
+            console.log('Mensaje de contacto guardado:', newMessage);
         }
         
-        // Contador de caracteres para textarea
-        const comentarioTextarea = document.getElementById('comentario');
-        comentarioTextarea.addEventListener('input', function() {
-            const currentLength = this.value.length;
-            const maxLength = this.getAttribute('maxlength');
-            const formText = this.nextElementSibling;
-            
-            formText.textContent = `${currentLength}/${maxLength} caracteres`;
-            
-            if (currentLength > maxLength * 0.9) {
-                formText.className = 'form-text text-warning';
-            } else {
-                formText.className = 'form-text';
-            }
-        });
+        // ===== VALIDACIÓN EN TIEMPO REAL =====
         
-        // Auto-format teléfono
-        document.getElementById('telefono').addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, ''); // Solo números
+        // Validar campos mientras el usuario escribe
+        document.addEventListener('DOMContentLoaded', function() {
+            const nombreField = document.getElementById('nombre');
+            const emailField = document.getElementById('email');
+            const telefonoField = document.getElementById('telefono');
+            const comentarioField = document.getElementById('comentario');
             
-            if (value.startsWith('569')) {
-                value = value.substring(3);
-                this.value = '+56 9 ' + value.replace(/(\d{4})(\d{4})/, '$1 $2');
-            } else if (value.startsWith('9') && value.length >= 9) {
-                value = value.substring(1);
-                this.value = '+56 9 ' + value.replace(/(\d{4})(\d{4})/, '$1 $2');
-            }
+            // Validación en tiempo real para nombre
+            nombreField.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value) {
+                    if (value.length < 2) {
+                        showFieldError('nombre', 'El nombre debe tener al menos 2 caracteres');
+                    } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
+                        showFieldError('nombre', 'El nombre solo puede contener letras y espacios');
+                    } else {
+                        clearFieldError('nombre');
+                        this.classList.add('is-valid');
+                    }
+                }
+            });
+            
+            // Validación en tiempo real para email
+            emailField.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value) {
+                    if (!isValidEmail(value)) {
+                        showFieldError('email', 'El email debe ser de @duoc.cl, @profesor.duoc.cl o @gmail.com');
+                    } else {
+                        clearFieldError('email');
+                        this.classList.add('is-valid');
+                    }
+                }
+            });
+            
+            // Validación en tiempo real para teléfono
+            telefonoField.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value) {
+                    if (!isValidChileanPhone(value)) {
+                        showFieldError('telefono', 'Ingrese un teléfono chileno válido');
+                    } else {
+                        clearFieldError('telefono');
+                        this.classList.add('is-valid');
+                    }
+                }
+            });
+            
+            // Validación en tiempo real para comentario
+            comentarioField.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value) {
+                    if (value.length < 10) {
+                        showFieldError('comentario', 'El mensaje debe tener al menos 10 caracteres');
+                    } else {
+                        clearFieldError('comentario');
+                        this.classList.add('is-valid');
+                    }
+                }
+            });
         });
     </script>
 </body>

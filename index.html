@@ -15,84 +15,88 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-tools me-2"></i>TEVP
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blogs.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                </ul>
+    <!-- Header Principal -->
+    <header>
+        <!-- Navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-tools me-2"></i>TEVP
+                </a>
                 
-                <ul class="navbar-nav">
-                    <li class="nav-item me-3">
-                        <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
-                        </a>
-                    </li>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="servicios.html">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blogs.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
                     
-                    <!-- Información del usuario logueado -->
-                    <li class="nav-item dropdown d-none" id="user-info">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle me-2"></i>
-                            <span id="user-name">Usuario</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
-                        </ul>
-                    </li>
-                    
-                    <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
-                    <li class="nav-item" id="auth-link-register">
-                        <a class="nav-link" href="registro.html">Registro</a>
-                    </li>
-                    <li class="nav-item" id="auth-link-login">
-                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item me-3">
+                            <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                        
+                        <!-- Información del usuario logueado -->
+                        <li class="nav-item dropdown d-none" id="user-info">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle me-2"></i>
+                                <span id="user-name">Usuario</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
+                        <li class="nav-item" id="auth-link-register">
+                            <a class="nav-link" href="registro.html">Registro</a>
+                        </li>
+                        <li class="nav-item" id="auth-link-login">
+                            <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Contenido Principal -->
-    <div class="main-content">
-        <!-- Sección Hero -->
-        <section class="hero-section">
-        <div class="container text-center">
-            <h1>Bienvenido a TEVP</h1>
-            <p class="lead">Contrata los mejores profesionales en servicios técnicos y de reparación</p>
-            <p>Plomeros • Electricistas • Técnicos en Climatización • Reparación de Electrodomésticos • Construcción • Soldadura</p>
-            <div class="mt-4">
-                <a href="servicios.html" class="btn btn-primary btn-lg me-3">Ver Servicios</a>
-                <a href="registro.html" class="btn btn-outline-light btn-lg">Registrarse</a>
+    <main>
+        <div class="main-content">
+            <!-- Sección Hero -->
+            <section class="hero-section">
+            <div class="container text-center">
+                <h1>Bienvenido a TEVP</h1>
+                <p class="lead">Contrata los mejores profesionales en servicios técnicos y de reparación</p>
+                <p>Plomeros • Electricistas • Técnicos en Climatización • Reparación de Electrodomésticos • Construcción • Soldadura</p>
+                <div class="mt-4">
+                    <a href="servicios.html" class="btn btn-primary btn-lg me-3">Ver Servicios</a>
+                    <a href="registro.html" class="btn btn-outline-light btn-lg">Registrarse</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- Contenido Principal -->
     <div class="container my-5">
@@ -113,7 +117,7 @@
         </section>
 
         <!-- Información sobre TEVP -->
-        <section class="mb-5">
+        <article class="mb-5">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h3 class="text-gradient">¿Por qué elegir TEVP?</h3>
@@ -130,7 +134,7 @@
                          class="img-fluid rounded shadow" alt="Profesionales TEVP">
                 </div>
             </div>
-        </section>
+        </article>
 
         <!-- Categorías de Servicios -->
         <section class="mb-5">
@@ -217,6 +221,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer class="mt-5">

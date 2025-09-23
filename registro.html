@@ -12,57 +12,61 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-tools me-2"></i>TEVP
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blogs.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                </ul>
+    <!-- Header Principal -->
+    <header>
+        <!-- Navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-tools me-2"></i>TEVP
+                </a>
                 
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="registro.html">Registro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
-                    </li>
-                </ul>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="servicios.html">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blogs.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                    
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="registro.html">Registro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Contenido Principal -->
-    <div class="container my-5 main-content">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="form-container">
-                    <div class="text-center mb-4">
-                        <h2><i class="fas fa-user-plus me-2"></i>Registro de Usuario</h2>
-                        <p class="text-muted">Crea tu cuenta para acceder a todos nuestros servicios</p>
-                    </div>
+    <main>
+        <div class="container my-5 main-content">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <article class="form-container">
+                        <div class="text-center mb-4">
+                            <h2><i class="fas fa-user-plus me-2"></i>Registro de Usuario</h2>
+                            <p class="text-muted">Crea tu cuenta para acceder a todos nuestros servicios</p>
+                        </div>
 
                     <form id="register-form" novalidate>
                         <div class="row">
@@ -70,30 +74,39 @@
                             <div class="col-md-6 mb-3">
                                 <label for="run" class="form-label">RUN <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="run" name="run" 
-                                       placeholder="Ej: 12345678K" maxlength="9" required>
+                                       placeholder="Ej: 12345678K" maxlength="9" required autocomplete="off">
                                 <div class="form-text">Sin puntos ni guión</div>
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <!-- Nombre -->
                             <div class="col-md-6 mb-3">
                                 <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" 
-                                       placeholder="Tu nombre" maxlength="50" required>
+                                       placeholder="Tu nombre" maxlength="50" required autocomplete="given-name">
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <!-- Apellidos -->
                             <div class="col-12 mb-3">
                                 <label for="apellidos" class="form-label">Apellidos <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="apellidos" name="apellidos" 
-                                       placeholder="Tus apellidos" maxlength="100" required>
+                                       placeholder="Tus apellidos" maxlength="100" required autocomplete="family-name">
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <!-- Email -->
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" id="email" name="email" 
-                                       placeholder="tu@email.com" maxlength="100" required>
+                                       placeholder="tu@email.com" maxlength="100" required autocomplete="email" list="emailSuggestions">
                                 <div class="form-text">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com</div>
+                                <div class="invalid-feedback"></div>
+                                <datalist id="emailSuggestions">
+                                    <option value="@duoc.cl">
+                                    <option value="@profesor.duoc.cl">
+                                    <option value="@gmail.com">
+                                </datalist>
                             </div>
 
                             <!-- Fecha de Nacimiento -->
@@ -162,10 +175,11 @@
                     <div class="text-center mt-4">
                         <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
                     </div>
+                    </article>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Modal Términos y Condiciones -->
     <div class="modal fade" id="termsModal" tabindex="-1">
