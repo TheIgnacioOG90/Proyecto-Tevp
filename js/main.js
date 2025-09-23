@@ -2883,7 +2883,7 @@ function initApp() {
         case '':
             initHomePage();
             break;
-        case 'productos.html':
+        case 'servicios.html':
             initProductsPage();
             break;
         case 'profesionales.html':
@@ -3767,9 +3767,14 @@ function createDetailedProfessionalCard(professional) {
                     ` : '<p class="text-muted small">Sin reseñas aún</p>'}
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-success w-100" onclick="hireProfessional(${professional.id})">
-                        <i class="fas fa-handshake me-2"></i>Contratar Servicio
-                    </button>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-sm" onclick="showProfessionalDetails(${professional.id})">
+                            <i class="fas fa-info-circle me-2"></i>Ver Detalles Completos
+                        </button>
+                        <button class="btn btn-success" onclick="hireProfessional(${professional.id})">
+                            <i class="fas fa-handshake me-2"></i>Solicitar Servicio
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3878,7 +3883,7 @@ function loadCartModal() {
                 <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted">Tu carrito está vacío</h5>
                 <p class="text-muted">Explora nuestros servicios y contrata profesionales</p>
-                <a href="productos.html" class="btn btn-primary">Ver Servicios</a>
+                <a href="servicios.html" class="btn btn-primary">Ver Servicios</a>
             </div>
         `;
         
@@ -4730,3 +4735,108 @@ function updateProfessionalAvatars() {
     
     console.log('Avatares actualizados correctamente para', Object.keys(avatarUpdates).length, 'profesionales');
 }
+
+// ===== FUNCIÓN PARA MOSTRAR DETALLES COMPLETOS DEL PROFESIONAL =====
+function showProfessionalDetails(professionalId) {
+    const professional = professionals.find(p => p.id === professionalId);
+    if (!professional) return;
+
+    // Crear modal con información detallada
+    const modalHTML = `
+        <div class="modal fade" id="professionalDetailsModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">
+                            <img src="${professional.avatar}" alt="${professional.nombre}" 
+                                 class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                            ${professional.nombre}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-user-graduate me-2 text-primary"></i>Información Profesional</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item"><strong>Especialidad:</strong> ${professional.especialidad}</li>
+                                    <li class="list-group-item"><strong>Experiencia:</strong> ${professional.experiencia} años</li>
+                                    <li class="list-group-item"><strong>Trabajos realizados:</strong> ${professional.tareasRealizadas}</li>
+                                    <li class="list-group-item"><strong>Calificación:</strong> ${generateStarRating(professional.calificacion)} ${professional.calificacion}/5</li>
+                                    <li class="list-group-item"><strong>Certificación:</strong> ${professional.certificado}</li>
+                                </ul>
+                                
+                                <h6><i class="fas fa-clock me-2 text-success"></i>Disponibilidad</h6>
+                                <p class="alert alert-info">${professional.disponibilidad}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-dollar-sign me-2 text-warning"></i>Tarifas Aproximadas</h6>
+                                <div class="mb-3">
+                                    <p><strong>Tarifa por hora:</strong> <span class="price-highlight">$${professional.tarifaPorHora.toLocaleString()}</span></p>
+                                    ${Object.entries(professional.preciosAprox || {}).map(([servicio, precio]) => 
+                                        `<p><strong>${servicio}:</strong> ${precio}</p>`
+                                    ).join('')}
+                                </div>
+                                
+                                <h6><i class="fas fa-tools me-2 text-info"></i>Servicios que ofrece</h6>
+                                <div class="mb-3">
+                                    ${professional.servicios.map(servicio => 
+                                        `<span class="badge bg-primary me-1 mb-1">${servicio}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h6><i class="fas fa-user me-2 text-secondary"></i>Biografía</h6>
+                                <p class="text-muted">${professional.biografia}</p>
+                            </div>
+                        </div>
+                        
+                        ${professional.reseñas && professional.reseñas.length > 0 ? `
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6><i class="fas fa-comments me-2 text-primary"></i>Reseñas de Clientes</h6>
+                                    ${professional.reseñas.map(review => `
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <strong>${review.cliente}</strong>
+                                                    ${generateStarRating(review.calificacion)}
+                                                </div>
+                                                <p class="mb-0 fst-italic">"${review.comentario}"</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-success" onclick="hireProfessional(${professional.id})" data-bs-dismiss="modal">
+                            <i class="fas fa-handshake me-2"></i>Solicitar Servicio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remover modal anterior si existe
+    const existingModal = document.getElementById('professionalDetailsModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Agregar modal al DOM
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('professionalDetailsModal'));
+    modal.show();
+}
+
+// Hacer función global
+window.showProfessionalDetails = showProfessionalDetails;
