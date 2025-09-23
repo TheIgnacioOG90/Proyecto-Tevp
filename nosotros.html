@@ -29,7 +29,7 @@
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Productos</a>
+                        <a class="nav-link" href="productos.html">Servicios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="nosotros.html">Nosotros</a>
@@ -49,12 +49,30 @@
                             <span class="cart-count">0</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="registro.html">Registro</a>
+                    
+                    <!-- Información del usuario logueado (solo visible cuando esté logueado) -->
+                    <li class="nav-item dropdown d-none" id="user-info">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="user-name">Usuario</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
-                    </li>
+                    
+                    <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
+                    <div id="auth-links">
+                        <li class="nav-item">
+                            <a class="nav-link" href="registro.html">Registro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>

@@ -17,15 +17,21 @@ window.cart = cart;
 // Categorías de servicios disponibles
 const serviceCategories = [
     { id: 1, nombre: "Plomería", icono: "fas fa-wrench", color: "primary" },
-    { id: 2, nombre: "Gasfitería", icono: "fas fa-faucet", color: "info" },
-    { id: 3, nombre: "Electricidad", icono: "fas fa-bolt", color: "warning" },
-    { id: 4, nombre: "Climatización", icono: "fas fa-snowflake", color: "info" },
-    { id: 5, nombre: "Refrigeración", icono: "fas fa-thermometer-empty", color: "primary" },
-    { id: 6, nombre: "Electrodomésticos", icono: "fas fa-tv", color: "success" },
-    { id: 7, nombre: "Calefón y Calderas", icono: "fas fa-fire", color: "danger" },
-    { id: 8, nombre: "Carpintería", icono: "fas fa-hammer", color: "dark" },
-    { id: 9, nombre: "Construcción", icono: "fas fa-hard-hat", color: "secondary" },
-    { id: 10, nombre: "Contadores", icono: "fas fa-calculator", color: "info" }
+    { id: 2, nombre: "Electricidad", icono: "fas fa-bolt", color: "warning" },
+    { id: 3, nombre: "Climatización", icono: "fas fa-snowflake", color: "info" },
+    { id: 4, nombre: "Construcción", icono: "fas fa-hard-hat", color: "secondary" },
+    { id: 5, nombre: "Soldadura", icono: "fas fa-fire-flame-curved", color: "danger" },
+    { id: 6, nombre: "Pintura", icono: "fas fa-paint-roller", color: "success" },
+    { id: 7, nombre: "Jardinería", icono: "fas fa-seedling", color: "success" },
+    { id: 8, nombre: "Limpieza", icono: "fas fa-broom", color: "info" },
+    { id: 9, nombre: "Seguridad", icono: "fas fa-shield-alt", color: "dark" },
+    { id: 10, nombre: "Electrodomésticos", icono: "fas fa-tv", color: "primary" },
+    { id: 11, nombre: "Carpintería", icono: "fas fa-hammer", color: "dark" },
+    { id: 12, nombre: "Cerrajería", icono: "fas fa-key", color: "warning" },
+    { id: 13, nombre: "Gasfitería", icono: "fas fa-fire", color: "danger" },
+    { id: 14, nombre: "Refrigeración", icono: "fas fa-temperature-low", color: "primary" },
+    { id: 15, nombre: "Calefón y Calderas", icono: "fas fa-water", color: "info" },
+    { id: 16, nombre: "Contadores", icono: "fas fa-tachometer-alt", color: "secondary" }
 ];
 
 // Profesionales expandidos (10+ por categoría)
@@ -417,8 +423,2317 @@ const initialProfessionals = [
             { cliente: "Departamento Providencia", comentario: "Rápido y eficiente", calificacion: 4 },
             { cliente: "Casa Ñuñoa", comentario: "Buen precio y calidad", calificacion: 5 }
         ]
+    },
+
+    // ===== CONSTRUCCIÓN (6 profesionales) =====
+    {
+        id: 17,
+        nombre: "Ricardo Silva Morales",
+        especialidad: "Construcción",
+        experiencia: 15,
+        calificacion: 4.9,
+        totalReseñas: 134,
+        tarifaPorHora: 45000,
+        avatar: "https://randomuser.me/api/portraits/men/20.jpg",
+        certificado: "Maestro Constructor, Prevención de Riesgos",
+        biografia: "Maestro constructor con 15 años construyendo proyectos residenciales y comerciales.",
+        servicios: ["Obra gruesa", "Albañilería", "Fundaciones", "Proyectos complejos"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Vie 7:00-17:00",
+        preciosAprox: {
+            "Obra gruesa": "$2.500.000+",
+            "Albañilería": "$15.000/m²",
+            "Fundaciones": "$1.200.000+"
+        },
+        reseñas: [
+            { cliente: "Casa Maipú", comentario: "Excelente calidad de construcción", calificacion: 5 },
+            { cliente: "Pedro M.", comentario: "Muy profesional y cumplidor", calificacion: 5 }
+        ]
+    },
+    {
+        id: 18,
+        nombre: "Manuel Rodríguez Pérez",
+        especialidad: "Construcción",
+        experiencia: 12,
+        calificacion: 4.7,
+        totalReseñas: 98,
+        tarifaPorHora: 42000,
+        avatar: "https://randomuser.me/api/portraits/men/33.jpg",
+        certificado: "Constructor Civil, Especialista en Remodelaciones",
+        biografia: "Constructor especializado en remodelaciones y ampliaciones de viviendas.",
+        servicios: ["Remodelaciones", "Ampliaciones", "Terminaciones", "Restauraciones"],
+        tareasRealizadas: 156,
+        disponibilidad: "Lun-Sáb 8:00-18:00",
+        preciosAprox: {
+            "Remodelación": "$800.000 - $3.000.000",
+            "Ampliación": "$1.500.000+",
+            "Terminaciones": "$500.000+"
+        },
+        reseñas: [
+            { cliente: "Remodelación Providencia", comentario: "Transformó nuestra casa", calificacion: 5 },
+            { cliente: "Ana G.", comentario: "Muy buena terminación", calificacion: 4 }
+        ]
+    },
+    {
+        id: 19,
+        nombre: "Jorge Hernández Castro",
+        especialidad: "Construcción",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 67,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/54.jpg",
+        certificado: "Técnico Constructor, Especialista Estructuras",
+        biografia: "Técnico constructor especializado en estructuras metálicas y hormigón.",
+        servicios: ["Estructuras metálicas", "Hormigón armado", "Techos", "Escaleras"],
+        tareasRealizadas: 124,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Estructura metálica": "$800.000+",
+            "Losa hormigón": "$1.200.000+",
+            "Escalera": "$600.000+"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Excelente trabajo en estructura", calificacion: 5 },
+            { cliente: "Bodega Industrial", comentario: "Muy técnico y preciso", calificacion: 4 }
+        ]
+    },
+    {
+        id: 20,
+        nombre: "Carlos Muñoz Vargas",
+        especialidad: "Construcción",
+        experiencia: 10,
+        calificacion: 4.8,
+        totalReseñas: 112,
+        tarifaPorHora: 40000,
+        avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+        certificado: "Constructor, Especialista Viviendas Sociales",
+        biografia: "Constructor con experiencia en viviendas sociales y proyectos habitacionales.",
+        servicios: ["Viviendas sociales", "Proyectos habitacionales", "Obra nueva", "Supervisión"],
+        tareasRealizadas: 78,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Casa completa": "$15.000.000+",
+            "Supervisión": "$200.000/mes",
+            "Proyecto habitacional": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Inmobiliaria Norte", comentario: "Maneja bien proyectos grandes", calificacion: 5 },
+            { cliente: "Familia Rodriguez", comentario: "Construyó nuestra casa perfecta", calificacion: 5 }
+        ]
+    },
+    {
+        id: 21,
+        nombre: "Roberto Torres Fuentes",
+        especialidad: "Construcción",
+        experiencia: 6,
+        calificacion: 4.5,
+        totalReseñas: 45,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/28.jpg",
+        certificado: "Técnico Construcción, Especialista Tabiquería",
+        biografia: "Técnico joven especializado en tabiquería y construcción en seco.",
+        servicios: ["Tabiquería seca", "Cielos falsos", "Construcción en seco", "Aislación"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Tabique m²": "$8.000 - $12.000",
+            "Cielo falso m²": "$6.000 - $10.000",
+            "Aislación m²": "$4.000 - $8.000"
+        },
+        reseñas: [
+            { cliente: "Oficina Centro", comentario: "Rápido en tabiquería", calificacion: 4 },
+            { cliente: "Departamento Nuevo", comentario: "Muy prolijo", calificacion: 5 }
+        ]
+    },
+    {
+        id: 22,
+        nombre: "Patricio Herrera Lagos",
+        especialidad: "Construcción",
+        experiencia: 14,
+        calificacion: 4.9,
+        totalReseñas: 187,
+        tarifaPorHora: 48000,
+        avatar: "https://randomuser.me/api/portraits/men/47.jpg",
+        certificado: "Maestro Mayor Constructor, Especialista Patrimonio",
+        biografia: "Maestro constructor especializado en restauración de patrimonio y construcciones históricas.",
+        servicios: ["Restauración patrimonio", "Construcciones históricas", "Adobe", "Técnicas tradicionales"],
+        tareasRealizadas: 45,
+        disponibilidad: "Lun-Vie 9:00-16:00",
+        preciosAprox: {
+            "Restauración": "$50.000/m²+",
+            "Adobe": "$25.000/m²",
+            "Patrimonio": "Cotización especializada"
+        },
+        reseñas: [
+            { cliente: "Casa Patrimonio", comentario: "Experto en construcción histórica", calificacion: 5 },
+            { cliente: "Municipalidad", comentario: "Trabajo muy especializado", calificacion: 5 }
+        ]
+    },
+
+    // ===== SOLDADURA (5 profesionales) =====
+    {
+        id: 23,
+        nombre: "Eduardo Ramírez Soto",
+        especialidad: "Soldadura",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 156,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/31.jpg",
+        certificado: "Soldador Calificado AWS, Especialista MIG/TIG",
+        biografia: "Soldador profesional con 12 años de experiencia en soldadura industrial y artística.",
+        servicios: ["Soldadura MIG", "Soldadura TIG", "Estructuras metálicas", "Reparaciones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Soldadura básica": "$25.000 - $40.000",
+            "Estructura metálica": "$200.000+",
+            "Reparación": "$30.000 - $60.000"
+        },
+        reseñas: [
+            { cliente: "Taller Mecánico", comentario: "Excelente calidad de soldadura", calificacion: 5 },
+            { cliente: "Casa Particular", comentario: "Reparó mi portón perfectamente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 24,
+        nombre: "Fernando Castro Muñoz",
+        especialidad: "Soldadura",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 89,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/42.jpg",
+        certificado: "Soldador Industrial, Especialista Acero Inoxidable",
+        biografia: "Soldador especializado en acero inoxidable para industria alimentaria y médica.",
+        servicios: ["Acero inoxidable", "Soldadura sanitaria", "Equipos industriales", "Mantención"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 7:00-16:00",
+        preciosAprox: {
+            "Acero inoxidable": "$40.000 - $80.000",
+            "Equipo industrial": "$150.000+",
+            "Soldadura sanitaria": "$50.000+"
+        },
+        reseñas: [
+            { cliente: "Restaurant", comentario: "Profesional en cocinas industriales", calificacion: 5 },
+            { cliente: "Clínica", comentario: "Trabajo muy limpio y preciso", calificacion: 4 }
+        ]
+    },
+    {
+        id: 25,
+        nombre: "Miguel Vargas Rojas",
+        especialidad: "Soldadura",
+        experiencia: 15,
+        calificacion: 4.9,
+        totalReseñas: 203,
+        tarifaPorHora: 42000,
+        avatar: "https://randomuser.me/api/portraits/men/58.jpg",
+        certificado: "Maestro Soldador, Instructor DUOC UC",
+        biografia: "Maestro soldador con 15 años de experiencia e instructor en DUOC UC.",
+        servicios: ["Soldadura submarina", "Proyectos especiales", "Capacitación", "Supervisión"],
+        tareasRealizadas: 98,
+        disponibilidad: "Proyectos especiales",
+        preciosAprox: {
+            "Soldadura submarina": "$200.000+",
+            "Proyecto especial": "Cotización",
+            "Capacitación": "$80.000/jornada"
+        },
+        reseñas: [
+            { cliente: "Puerto", comentario: "Excelente soldadura submarina", calificacion: 5 },
+            { cliente: "Empresa Minera", comentario: "Muy profesional y capacitado", calificacion: 5 }
+        ]
+    },
+    {
+        id: 26,
+        nombre: "Andrés López Herrera",
+        especialidad: "Soldadura",
+        experiencia: 7,
+        calificacion: 4.4,
+        totalReseñas: 67,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/36.jpg",
+        certificado: "Soldador Básico, Especialista Portones",
+        biografia: "Soldador especializado en portones, rejas y trabajos residenciales.",
+        servicios: ["Portones", "Rejas de seguridad", "Escaleras", "Trabajos decorativos"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Portón": "$180.000 - $350.000",
+            "Reja m²": "$25.000 - $40.000",
+            "Escalera": "$200.000+"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Hermoso portón de fierro", calificacion: 4 },
+            { cliente: "Villa", comentario: "Rejas muy bien hechas", calificacion: 5 }
+        ]
+    },
+    {
+        id: 27,
+        nombre: "Raúl Moreno Silva",
+        especialidad: "Soldadura",
+        experiencia: 11,
+        calificacion: 4.7,
+        totalReseñas: 134,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/49.jpg",
+        certificado: "Soldador Calificado, Especialista Aluminio",
+        biografia: "Soldador especializado en aluminio y metales no ferrosos para ventanas y estructuras.",
+        servicios: ["Soldadura aluminio", "Ventanas", "Estructuras livianas", "Reparaciones especializadas"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Vie 8:30-17:30",
+        preciosAprox: {
+            "Soldadura aluminio": "$35.000 - $60.000",
+            "Ventana": "$120.000 - $250.000",
+            "Estructura liviana": "$150.000+"
+        },
+        reseñas: [
+            { cliente: "Oficina Centro", comentario: "Excelente trabajo en ventanas", calificacion: 5 },
+            { cliente: "Casa Moderna", comentario: "Muy profesional", calificacion: 4 }
+        ]
+    },
+
+    // ===== PINTURA (6 profesionales) =====
+    {
+        id: 28,
+        nombre: "Antonio Morales Jiménez",
+        especialidad: "Pintura",
+        experiencia: 10,
+        calificacion: 4.8,
+        totalReseñas: 145,
+        tarifaPorHora: 25000,
+        avatar: "https://randomuser.me/api/portraits/men/21.jpg",
+        certificado: "Maestro Pintor, Especialista Decorativo",
+        biografia: "Maestro pintor con 10 años de experiencia en pintura decorativa y residencial.",
+        servicios: ["Pintura decorativa", "Latex", "Esmalte", "Empapelado"],
+        tareasRealizadas: 267,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Pintura interior m²": "$3.500 - $6.000",
+            "Pintura exterior m²": "$4.500 - $8.000",
+            "Empapelado m²": "$8.000 - $15.000"
+        },
+        reseñas: [
+            { cliente: "Casa Ñuñoa", comentario: "Excelente terminación", calificacion: 5 },
+            { cliente: "Oficina", comentario: "Muy limpio y prolijo", calificacion: 5 }
+        ]
+    },
+    {
+        id: 29,
+        nombre: "Luis González Vega",
+        especialidad: "Pintura",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 98,
+        tarifaPorHora: 22000,
+        avatar: "https://randomuser.me/api/portraits/men/34.jpg",
+        certificado: "Pintor Profesional, Especialista Fachadas",
+        biografia: "Pintor especializado en fachadas y trabajos en altura.",
+        servicios: ["Fachadas", "Trabajos en altura", "Pintura industrial", "Hidrolavado"],
+        tareasRealizadas: 178,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Fachada m²": "$5.000 - $10.000",
+            "Trabajo altura": "$8.000 - $12.000",
+            "Hidrolavado m²": "$2.000 - $4.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Centro", comentario: "Excelente trabajo en fachada", calificacion: 5 },
+            { cliente: "Casa 3 pisos", comentario: "No teme a las alturas", calificacion: 4 }
+        ]
+    },
+    {
+        id: 30,
+        nombre: "Pedro Ramirez Torres",
+        especialidad: "Pintura",
+        experiencia: 12,
+        calificacion: 4.9,
+        totalReseñas: 189,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+        certificado: "Maestro Pintor Artístico, Restaurador",
+        biografia: "Maestro pintor especializado en restauración y técnicas artísticas.",
+        servicios: ["Restauración", "Pintura artística", "Murales", "Técnicas especiales"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Vie 9:00-16:00",
+        preciosAprox: {
+            "Restauración m²": "$15.000 - $30.000",
+            "Mural m²": "$25.000 - $50.000",
+            "Técnica especial": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Casa Patrimonio", comentario: "Restauró bellamente nuestra casa", calificacion: 5 },
+            { cliente: "Restaurant", comentario: "Hermoso mural", calificacion: 5 }
+        ]
+    },
+    {
+        id: 31,
+        nombre: "Javier Silva Campos",
+        especialidad: "Pintura",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 67,
+        tarifaPorHora: 20000,
+        avatar: "https://randomuser.me/api/portraits/men/29.jpg",
+        certificado: "Pintor Residencial, Curso SENCE",
+        biografia: "Pintor joven especializado en viviendas y departamentos.",
+        servicios: ["Pintura residencial", "Departamentos", "Oficinas", "Empaste"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Departamento": "$350.000 - $800.000",
+            "Casa": "$800.000 - $1.500.000",
+            "Empaste m²": "$2.500 - $4.000"
+        },
+        reseñas: [
+            { cliente: "Depto Providencia", comentario: "Buen precio y calidad", calificacion: 4 },
+            { cliente: "Casa Maipú", comentario: "Rápido y eficiente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 32,
+        nombre: "Mario Herrera Soto",
+        especialidad: "Pintura",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 123,
+        tarifaPorHora: 24000,
+        avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+        certificado: "Pintor Industrial, Especialista Anticorrosivo",
+        biografia: "Pintor especializado en pintura industrial y anticorrosiva.",
+        servicios: ["Pintura anticorrosiva", "Industrial", "Estructuras metálicas", "Protección"],
+        tareasRealizadas: 156,
+        disponibilidad: "Lun-Vie 7:00-16:00",
+        preciosAprox: {
+            "Anticorrosivo m²": "$6.000 - $12.000",
+            "Estructura metálica": "$8.000 - $15.000",
+            "Industrial": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Fábrica", comentario: "Excelente protección anticorrosiva", calificacion: 5 },
+            { cliente: "Galpón", comentario: "Trabajo muy técnico", calificacion: 4 }
+        ]
+    },
+    {
+        id: 33,
+        nombre: "Ricardo Castro López",
+        especialidad: "Pintura",
+        experiencia: 11,
+        calificacion: 4.8,
+        totalReseñas: 167,
+        tarifaPorHora: 26000,
+        avatar: "https://randomuser.me/api/portraits/men/38.jpg",
+        certificado: "Maestro Pintor, Especialista Texturas",
+        biografia: "Maestro pintor especializado en texturas y acabados especiales.",
+        servicios: ["Texturas decorativas", "Estuco", "Acabados especiales", "Consultoría color"],
+        tareasRealizadas: 198,
+        disponibilidad: "Lun-Vie 9:00-17:00",
+        preciosAprox: {
+            "Textura m²": "$8.000 - $15.000",
+            "Estuco m²": "$12.000 - $20.000",
+            "Acabado especial": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Hotel", comentario: "Texturas hermosas", calificacion: 5 },
+            { cliente: "Casa exclusiva", comentario: "Acabados de primera", calificacion: 5 }
+        ]
+    },
+
+    // ===== JARDINERÍA (5 profesionales) =====
+    {
+        id: 34,
+        nombre: "Fernando Valdés Moreno",
+        especialidad: "Jardinería",
+        experiencia: 7,
+        calificacion: 4.6,
+        totalReseñas: 89,
+        tarifaPorHora: 18000,
+        avatar: "https://randomuser.me/api/portraits/men/26.jpg",
+        certificado: "Técnico Agrícola, Paisajista",
+        biografia: "Técnico agrícola especializado en diseño de jardines y paisajismo.",
+        servicios: ["Diseño jardines", "Paisajismo", "Riego automático", "Mantención"],
+        tareasRealizadas: 134,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Diseño jardín": "$200.000 - $500.000",
+            "Riego automático": "$300.000+",
+            "Mantención mes": "$50.000 - $120.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Hermoso diseño de jardín", calificacion: 5 },
+            { cliente: "Villa", comentario: "Muy creativo", calificacion: 4 }
+        ]
+    },
+    {
+        id: 35,
+        nombre: "Gabriel Torres Ruiz",
+        especialidad: "Jardinería",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 156,
+        tarifaPorHora: 22000,
+        avatar: "https://randomuser.me/api/portraits/men/43.jpg",
+        certificado: "Ingeniero Agrónomo, Especialista Césped",
+        biografia: "Ingeniero agrónomo especializado en césped y mantención de jardines.",
+        servicios: ["Césped profesional", "Mantención jardines", "Fertilización", "Control plagas"],
+        tareasRealizadas: 267,
+        disponibilidad: "Lun-Vie 8:00-16:00",
+        preciosAprox: {
+            "Césped m²": "$3.000 - $8.000",
+            "Mantención": "$80.000 - $200.000",
+            "Control plagas": "$50.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Club de Golf", comentario: "Excelente manejo de césped", calificacion: 5 },
+            { cliente: "Condominio", comentario: "Jardines siempre perfectos", calificacion: 5 }
+        ]
+    },
+    {
+        id: 36,
+        nombre: "Andrés López Castro",
+        especialidad: "Jardinería",
+        experiencia: 5,
+        calificacion: 4.4,
+        totalReseñas: 67,
+        tarifaPorHora: 16000,
+        avatar: "https://randomuser.me/api/portraits/men/37.jpg",
+        certificado: "Jardinero Profesional, Especialista Poda",
+        biografia: "Jardinero especializado en poda de árboles y arbustos ornamentales.",
+        servicios: ["Poda árboles", "Poda ornamental", "Limpieza jardín", "Plantación"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Poda árbol": "$25.000 - $80.000",
+            "Limpieza jardín": "$30.000 - $60.000",
+            "Plantación": "$15.000 - $40.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Excelente poda", calificacion: 4 },
+            { cliente: "Edificio", comentario: "Muy cuidadoso", calificacion: 5 }
+        ]
+    },
+    {
+        id: 37,
+        nombre: "Roberto Silva Vega",
+        especialidad: "Jardinería",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 123,
+        tarifaPorHora: 20000,
+        avatar: "https://randomuser.me/api/portraits/men/50.jpg",
+        certificado: "Paisajista, Especialista Jardines Verticales",
+        biografia: "Paisajista especializado en jardines verticales y espacios reducidos.",
+        servicios: ["Jardines verticales", "Terrazas", "Balcones", "Jardines interiores"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 9:00-17:00",
+        preciosAprox: {
+            "Jardín vertical m²": "$25.000 - $50.000",
+            "Terraza": "$150.000 - $400.000",
+            "Jardín interior": "$100.000 - $300.000"
+        },
+        reseñas: [
+            { cliente: "Departamento Centro", comentario: "Transformó mi terraza", calificacion: 5 },
+            { cliente: "Oficina", comentario: "Hermoso jardín interior", calificacion: 5 }
+        ]
+    },
+    {
+        id: 38,
+        nombre: "Carlos Moreno Herrera",
+        especialidad: "Jardinería",
+        experiencia: 6,
+        calificacion: 4.5,
+        totalReseñas: 78,
+        tarifaPorHora: 17000,
+        avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+        certificado: "Jardinero, Especialista Huertos Urbanos",
+        biografia: "Jardinero especializado en huertos urbanos y cultivos orgánicos.",
+        servicios: ["Huertos urbanos", "Cultivos orgánicos", "Compostaje", "Hidroponía"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Sáb 8:30-16:30",
+        preciosAprox: {
+            "Huerto urbano": "$80.000 - $200.000",
+            "Sistema hidropónico": "$150.000+",
+            "Compostaje": "$50.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Familia eco", comentario: "Excelente huerto orgánico", calificacion: 5 },
+            { cliente: "Colegio", comentario: "Enseñó a los niños sobre plantas", calificacion: 4 }
+        ]
+    },
+    {
+        id: 74,
+        nombre: "Esteban Morales Silva",
+        especialidad: "Jardinería", 
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 123,
+        tarifaPorHora: 19000,
+        avatar: "https://randomuser.me/api/portraits/men/58.jpg",
+        certificado: "Jardinero Deportivo, Especialista Canchas",
+        biografia: "Jardinero especializado en mantención de canchas deportivas y césped especializado.",
+        servicios: ["Canchas deportivas", "Césped deportivo", "Mantención estadios", "Riego deportivo"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Dom según temporada",
+        preciosAprox: {
+            "Cancha fútbol": "$200.000 - $500.000",
+            "Césped deportivo m²": "$5.000 - $12.000",
+            "Mantención estadio": "$300.000+/mes"
+        },
+        reseñas: [
+            { cliente: "Club Deportivo", comentario: "Cancha siempre en perfectas condiciones", calificacion: 5 },
+            { cliente: "Estadio Municipal", comentario: "Experto en césped deportivo", calificacion: 4 }
+        ]
+    },
+    {
+        id: 75,
+        nombre: "Claudio Torres Herrera", 
+        especialidad: "Jardinería",
+        experiencia: 4,
+        calificacion: 4.3,
+        totalReseñas: 67,
+        tarifaPorHora: 15000,
+        avatar: "https://randomuser.me/api/portraits/men/27.jpg",
+        certificado: "Jardinero Básico, Especialista Mantención",
+        biografia: "Jardinero joven especializado en mantención básica y trabajos menores.",
+        servicios: ["Mantención básica", "Poda simple", "Limpieza jardín", "Riego manual"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 8:00-18:00",
+        preciosAprox: {
+            "Mantención básica": "$30.000 - $60.000",
+            "Poda simple": "$15.000 - $35.000",
+            "Limpieza": "$20.000 - $40.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Buen precio para mantención", calificacion: 4 },
+            { cliente: "Jardín pequeño", comentario: "Puntual y responsable", calificacion: 4 }
+        ]
+    },
+
+    // ===== LIMPIEZA (7 profesionales) =====
+    {
+        id: 39,
+        nombre: "María González López",
+        especialidad: "Limpieza",
+        experiencia: 8,
+        calificacion: 4.7,
+        totalReseñas: 134,
+        tarifaPorHora: 15000,
+        avatar: "https://randomuser.me/api/portraits/women/24.jpg",
+        certificado: "Técnico en Limpieza Profesional, Certificación Desinfección",
+        biografia: "Técnico en limpieza con 8 años de experiencia en limpieza residencial y comercial.",
+        servicios: ["Limpieza profunda", "Desinfección", "Limpieza post construcción", "Mantención"],
+        tareasRealizadas: 287,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Limpieza casa": "$25.000 - $60.000",
+            "Limpieza oficina": "$30.000 - $80.000",
+            "Post construcción": "$50.000 - $120.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Dejó todo impecable", calificacion: 5 },
+            { cliente: "Oficina Centro", comentario: "Muy profesional y confiable", calificacion: 5 }
+        ]
+    },
+    {
+        id: 40,
+        nombre: "Carmen Silva Morales",
+        especialidad: "Limpieza",
+        experiencia: 12,
+        calificacion: 4.9,
+        totalReseñas: 198,
+        tarifaPorHora: 18000,
+        avatar: "https://randomuser.me/api/portraits/women/35.jpg",
+        certificado: "Supervisora de Limpieza, Especialista Hospitalaria",
+        biografia: "Supervisora con 12 años de experiencia en limpieza hospitalaria y especializada.",
+        servicios: ["Limpieza hospitalaria", "Desinfección médica", "Protocolos especiales", "Supervisión"],
+        tareasRealizadas: 156,
+        disponibilidad: "Lun-Vie 7:00-16:00",
+        preciosAprox: {
+            "Limpieza hospitalaria": "$40.000 - $100.000",
+            "Desinfección médica": "$50.000 - $80.000",
+            "Protocolo especial": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Clínica", comentario: "Excelente protocolo de desinfección", calificacion: 5 },
+            { cliente: "Consultorio", comentario: "Muy rigurosa y profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 41,
+        nombre: "Rosa Herrera Castro",
+        especialidad: "Limpieza",
+        experiencia: 6,
+        calificacion: 4.5,
+        totalReseñas: 89,
+        tarifaPorHora: 14000,
+        avatar: "https://randomuser.me/api/portraits/women/42.jpg",
+        certificado: "Limpieza Residencial, Especialista Alfombras",
+        biografia: "Especialista en limpieza de alfombras y tapicería con técnicas especializadas.",
+        servicios: ["Limpieza alfombras", "Tapicería", "Cortinas", "Limpieza domiciliaria"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Alfombra m²": "$3.000 - $8.000",
+            "Tapicería": "$25.000 - $60.000",
+            "Cortinas": "$15.000 - $40.000"
+        },
+        reseñas: [
+            { cliente: "Casa Providencia", comentario: "Dejó las alfombras como nuevas", calificacion: 5 },
+            { cliente: "Hotel", comentario: "Excelente trabajo en tapicería", calificacion: 4 }
+        ]
+    },
+    {
+        id: 42,
+        nombre: "Patricia Moreno Silva",
+        especialidad: "Limpieza",
+        experiencia: 10,
+        calificacion: 4.8,
+        totalReseñas: 167,
+        tarifaPorHora: 16000,
+        avatar: "https://randomuser.me/api/portraits/women/28.jpg",
+        certificado: "Especialista Limpieza Industrial, Certificación OHSAS",
+        biografia: "Especialista en limpieza industrial con certificación en seguridad ocupacional.",
+        servicios: ["Limpieza industrial", "Galpones", "Fábricas", "Protocolos seguridad"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Limpieza industrial": "$80.000 - $200.000",
+            "Galpón": "$60.000 - $150.000",
+            "Fábrica": "Cotización especializada"
+        },
+        reseñas: [
+            { cliente: "Fábrica Norte", comentario: "Maneja bien protocolos industriales", calificacion: 5 },
+            { cliente: "Bodega", comentario: "Muy responsable y cuidadosa", calificacion: 5 }
+        ]
+    },
+    {
+        id: 43,
+        nombre: "Ana Torres Vega",
+        especialidad: "Limpieza",
+        experiencia: 5,
+        calificacion: 4.4,
+        totalReseñas: 78,
+        tarifaPorHora: 13000,
+        avatar: "https://randomuser.me/api/portraits/women/31.jpg",
+        certificado: "Limpieza Comercial, Especialista Vidrios",
+        biografia: "Joven especialista en limpieza de vidrios y fachadas comerciales.",
+        servicios: ["Limpieza vidrios", "Fachadas", "Edificios comerciales", "Trabajos altura"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Vidrios m²": "$2.000 - $5.000",
+            "Fachada": "$40.000 - $100.000",
+            "Edificio comercial": "$80.000 - $200.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Centro", comentario: "Vidrios siempre perfectos", calificacion: 4 },
+            { cliente: "Mall", comentario: "Muy ágil en trabajos de altura", calificacion: 5 }
+        ]
+    },
+    {
+        id: 44,
+        nombre: "Elena Ramírez López",
+        especialidad: "Limpieza",
+        experiencia: 7,
+        calificacion: 4.6,
+        totalReseñas: 112,
+        tarifaPorHora: 15000,
+        avatar: "https://randomuser.me/api/portraits/women/39.jpg",
+        certificado: "Limpieza Ecológica, Productos Biodegradables",
+        biografia: "Especialista en limpieza ecológica con productos biodegradables y no tóxicos.",
+        servicios: ["Limpieza ecológica", "Productos naturales", "Espacios sensibles", "Niños y mascotas"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Vie 9:00-17:00",
+        preciosAprox: {
+            "Limpieza ecológica": "$30.000 - $70.000",
+            "Casa con niños": "$25.000 - $50.000",
+            "Espacios sensibles": "$35.000 - $80.000"
+        },
+        reseñas: [
+            { cliente: "Familia Verde", comentario: "Perfecto para casa con bebés", calificacion: 5 },
+            { cliente: "Guardería", comentario: "Productos seguros para niños", calificacion: 5 }
+        ]
+    },
+    {
+        id: 45,
+        nombre: "Gloria Castro Muñoz",
+        especialidad: "Limpieza",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 156,
+        tarifaPorHora: 17000,
+        avatar: "https://randomuser.me/api/portraits/women/46.jpg",
+        certificado: "Supervisora Limpieza, Especialista Eventos",
+        biografia: "Supervisora especializada en limpieza de eventos y espacios de gran escala.",
+        servicios: ["Limpieza eventos", "Salones", "Matrimonios", "Coordinación equipos"],
+        tareasRealizadas: 87,
+        disponibilidad: "Eventos y fines de semana",
+        preciosAprox: {
+            "Evento pequeño": "$50.000 - $100.000",
+            "Matrimonio": "$120.000 - $250.000",
+            "Salón grande": "$80.000 - $180.000"
+        },
+        reseñas: [
+            { cliente: "Centro Eventos", comentario: "Organiza equipos perfectamente", calificacion: 5 },
+            { cliente: "Hotel", comentario: "Excelente para eventos grandes", calificacion: 4 }
+        ]
+    },
+
+    // ===== SEGURIDAD (7 profesionales) =====
+    {
+        id: 46,
+        nombre: "Roberto Sánchez Torres",
+        especialidad: "Seguridad",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 145,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+        certificado: "Guardia de Seguridad OS-10, Especialista Electrónica",
+        biografia: "Guardia profesional con 12 años de experiencia en seguridad electrónica y vigilancia.",
+        servicios: ["Sistemas alarmas", "Cámaras seguridad", "Control acceso", "Monitoreo"],
+        tareasRealizadas: 98,
+        disponibilidad: "24/7 Disponible",
+        preciosAprox: {
+            "Sistema alarmas": "$200.000 - $500.000",
+            "Cámaras": "$150.000 - $400.000",
+            "Control acceso": "$300.000 - $800.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Sistema de seguridad perfecto", calificacion: 5 },
+            { cliente: "Oficina", comentario: "Muy profesional y confiable", calificacion: 5 }
+        ]
+    },
+    {
+        id: 47,
+        nombre: "Carlos Vargas Herrera",
+        especialidad: "Seguridad",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 87,
+        tarifaPorHora: 30000,
+        avatar: "https://randomuser.me/api/portraits/men/53.jpg",
+        certificado: "Técnico Cerrajería, Especialista Cajas Fuertes",
+        biografia: "Técnico especializado en cerraduras de alta seguridad y cajas fuertes.",
+        servicios: ["Cerraduras seguridad", "Cajas fuertes", "Llaves especiales", "Emergencias"],
+        tareasRealizadas: 156,
+        disponibilidad: "Lun-Sáb 8:00-20:00",
+        preciosAprox: {
+            "Cerradura alta seguridad": "$80.000 - $200.000",
+            "Caja fuerte": "$300.000 - $1.000.000",
+            "Servicio emergencia": "$50.000 - $80.000"
+        },
+        reseñas: [
+            { cliente: "Banco", comentario: "Experto en sistemas de alta seguridad", calificacion: 5 },
+            { cliente: "Joyería", comentario: "Instaló caja fuerte perfecta", calificacion: 4 }
+        ]
+    },
+    {
+        id: 48,
+        nombre: "Manuel López Castro",
+        especialidad: "Seguridad",
+        experiencia: 15,
+        calificacion: 4.9,
+        totalReseñas: 234,
+        tarifaPorHora: 45000,
+        avatar: "https://randomuser.me/api/portraits/men/61.jpg",
+        certificado: "Jefe Seguridad, Ex Carabineros, Instructor",
+        biografia: "Ex Carabinero con 15 años de experiencia en seguridad corporativa y personal.",
+        servicios: ["Seguridad personal", "Corporativa", "Análisis riesgos", "Capacitación"],
+        tareasRealizadas: 67,
+        disponibilidad: "Proyectos especiales",
+        preciosAprox: {
+            "Seguridad personal": "$200.000/día",
+            "Análisis riesgos": "$150.000 - $300.000",
+            "Capacitación": "$100.000/jornada"
+        },
+        reseñas: [
+            { cliente: "Ejecutivo", comentario: "Profesional serio y competente", calificacion: 5 },
+            { cliente: "Empresa", comentario: "Excelente análisis de seguridad", calificacion: 5 }
+        ]
+    },
+    {
+        id: 49,
+        nombre: "Diego Moreno Silva",
+        especialidad: "Seguridad",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 78,
+        tarifaPorHora: 25000,
+        avatar: "https://randomuser.me/api/portraits/men/35.jpg",
+        certificado: "Guardia Seguridad, Especialista Eventos",
+        biografia: "Guardia especializado en seguridad de eventos y espacios públicos.",
+        servicios: ["Seguridad eventos", "Control multitudes", "Fiestas privadas", "Vigilancia"],
+        tareasRealizadas: 189,
+        disponibilidad: "Fines de semana y eventos",
+        preciosAprox: {
+            "Evento privado": "$80.000 - $150.000",
+            "Fiesta": "$60.000 - $120.000",
+            "Vigilancia nocturna": "$40.000 - $80.000"
+        },
+        reseñas: [
+            { cliente: "Centro Eventos", comentario: "Maneja bien las multitudes", calificacion: 4 },
+            { cliente: "Fiesta Privada", comentario: "Discreto y profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 50,
+        nombre: "Andrés Torres López",
+        especialidad: "Seguridad",
+        experiencia: 10,
+        calificacion: 4.7,
+        totalReseñas: 123,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/44.jpg",
+        certificado: "Especialista CCTV, Monitoreo Remoto",
+        biografia: "Especialista en sistemas CCTV y monitoreo remoto 24/7.",
+        servicios: ["Sistemas CCTV", "Monitoreo remoto", "Análisis video", "Mantenimiento"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Vie 8:00-18:00",
+        preciosAprox: {
+            "Sistema CCTV": "$250.000 - $600.000",
+            "Monitoreo 24/7": "$150.000/mes",
+            "Mantenimiento": "$50.000/visita"
+        },
+        reseñas: [
+            { cliente: "Condominio", comentario: "Sistema CCTV funcionando perfecto", calificacion: 5 },
+            { cliente: "Bodega", comentario: "Monitoreo muy confiable", calificacion: 4 }
+        ]
+    },
+    {
+        id: 51,
+        nombre: "Jorge Silva Ramírez",
+        especialidad: "Seguridad",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 98,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/48.jpg",
+        certificado: "Guardia Industrial, Especialista Prevención",
+        biografia: "Guardia especializado en seguridad industrial y prevención de riesgos.",
+        servicios: ["Seguridad industrial", "Prevención riesgos", "Control acceso", "Rondas"],
+        tareasRealizadas: 167,
+        disponibilidad: "Turnos rotativos 24/7",
+        preciosAprox: {
+            "Guardia industrial": "$35.000 - $50.000/turno",
+            "Control acceso": "$30.000 - $45.000/turno",
+            "Rondas": "$25.000 - $40.000/turno"
+        },
+        reseñas: [
+            { cliente: "Fábrica", comentario: "Muy responsable en sus rondas", calificacion: 4 },
+            { cliente: "Planta", comentario: "Conoce bien prevención de riesgos", calificacion: 5 }
+        ]
+    },
+    {
+        id: 52,
+        nombre: "Ricardo Herrera Vega",
+        especialidad: "Seguridad",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 134,
+        tarifaPorHora: 33000,
+        avatar: "https://randomuser.me/api/portraits/men/57.jpg",
+        certificado: "Especialista Portería, Control Vehicular",
+        biografia: "Especialista en control de portería y seguridad vehicular en condominios.",
+        servicios: ["Control portería", "Registro vehicular", "Correspondencia", "Atención visitas"],
+        tareasRealizadas: 234,
+        disponibilidad: "Turnos día y noche",
+        preciosAprox: {
+            "Portería día": "$40.000 - $60.000/turno",
+            "Portería noche": "$50.000 - $70.000/turno",
+            "Fin de semana": "$55.000 - $75.000/turno"
+        },
+        reseñas: [
+            { cliente: "Condominio Norte", comentario: "Excelente trato con residentes", calificacion: 5 },
+            { cliente: "Edificio Centro", comentario: "Muy ordenado con registros", calificacion: 4 }
+        ]
+    },
+
+    // ===== ELECTRODOMÉSTICOS (7 profesionales) =====
+    {
+        id: 53,
+        nombre: "Fernando Castro Morales",
+        especialidad: "Electrodomésticos",
+        experiencia: 11,
+        calificacion: 4.8,
+        totalReseñas: 156,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/23.jpg",
+        certificado: "Técnico Electrodomésticos, Especialista Línea Blanca",
+        biografia: "Técnico con 11 años reparando electrodomésticos de línea blanca y cocina.",
+        servicios: ["Refrigeradores", "Lavadoras", "Secadoras", "Lavavajillas"],
+        tareasRealizadas: 287,
+        disponibilidad: "Lun-Sáb 8:00-18:00",
+        preciosAprox: {
+            "Reparación refrigerador": "$35.000 - $80.000",
+            "Reparación lavadora": "$25.000 - $60.000",
+            "Mantención": "$20.000 - $40.000"
+        },
+        reseñas: [
+            { cliente: "Casa Ñuñoa", comentario: "Reparó mi refrigerador perfectamente", calificacion: 5 },
+            { cliente: "Depto Centro", comentario: "Muy rápido y eficiente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 54,
+        nombre: "Miguel Torres Sánchez",
+        especialidad: "Electrodomésticos",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 123,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/39.jpg",
+        certificado: "Reparador Cocinas, Especialista Gas y Eléctrico",
+        biografia: "Especialista en reparación de cocinas, hornos y equipos de cocina.",
+        servicios: ["Cocinas gas", "Hornos eléctricos", "Microondas", "Campanas"],
+        tareasRealizadas: 198,
+        disponibilidad: "Lun-Vie 9:00-17:00",
+        preciosAprox: {
+            "Reparación cocina": "$30.000 - $70.000",
+            "Reparación horno": "$25.000 - $55.000",
+            "Microondas": "$20.000 - $45.000"
+        },
+        reseñas: [
+            { cliente: "Restaurant", comentario: "Arregló toda la cocina industrial", calificacion: 5 },
+            { cliente: "Casa", comentario: "Sabe mucho de cocinas a gas", calificacion: 4 }
+        ]
+    },
+    {
+        id: 55,
+        nombre: "Roberto Silva López",
+        especialidad: "Electrodomésticos",
+        experiencia: 13,
+        calificacion: 4.9,
+        totalReseñas: 234,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/51.jpg",
+        certificado: "Maestro Técnico, Especialista Aire Acondicionado",
+        biografia: "Maestro técnico especializado en aire acondicionado y climatización.",
+        servicios: ["Aire acondicionado", "Split", "Centrales", "Mantención"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Sáb 7:30-17:30",
+        preciosAprox: {
+            "Reparación split": "$40.000 - $90.000",
+            "Instalación": "$60.000 - $120.000",
+            "Mantención": "$25.000 - $50.000"
+        },
+        reseñas: [
+            { cliente: "Oficina", comentario: "Experto en aire acondicionado", calificacion: 5 },
+            { cliente: "Casa Las Condes", comentario: "Servicio de primera calidad", calificacion: 5 }
+        ]
+    },
+    {
+        id: 56,
+        nombre: "Andrés Moreno Castro",
+        especialidad: "Electrodomésticos",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 89,
+        tarifaPorHora: 25000,
+        avatar: "https://randomuser.me/api/portraits/men/33.jpg",
+        certificado: "Técnico Pequeños Electrodomésticos",
+        biografia: "Técnico especializado en reparación de pequeños electrodomésticos del hogar.",
+        servicios: ["Aspiradoras", "Planchas", "Licuadoras", "Cafeteras"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Reparación aspiradora": "$15.000 - $35.000",
+            "Reparación cafetera": "$12.000 - $30.000",
+            "Pequeños aparatos": "$10.000 - $25.000"
+        },
+        reseñas: [
+            { cliente: "Hogar", comentario: "Reparó mi aspiradora como nueva", calificacion: 4 },
+            { cliente: "Cafetería", comentario: "Experto en máquinas de café", calificacion: 5 }
+        ]
+    },
+    {
+        id: 57,
+        nombre: "Pedro Herrera Vega",
+        especialidad: "Electrodomésticos",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 167,
+        tarifaPorHora: 30000,
+        avatar: "https://randomuser.me/api/portraits/men/46.jpg",
+        certificado: "Técnico Audio y Video, Especialista Televisores",
+        biografia: "Técnico especializado en reparación de televisores y equipos de audio.",
+        servicios: ["Televisores", "Equipos de música", "Home theater", "Proyectores"],
+        tareasRealizadas: 178,
+        disponibilidad: "Lun-Vie 8:30-17:30",
+        preciosAprox: {
+            "Reparación TV": "$30.000 - $80.000",
+            "Equipo de música": "$25.000 - $60.000",
+            "Home theater": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Casa Moderna", comentario: "Arregló mi TV 4K perfectamente", calificacion: 5 },
+            { cliente: "Bar", comentario: "Experto en equipos de sonido", calificacion: 4 }
+        ]
+    },
+    {
+        id: 58,
+        nombre: "Luis González Torres",
+        especialidad: "Electrodomésticos",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 112,
+        tarifaPorHora: 27000,
+        avatar: "https://randomuser.me/api/portraits/men/42.jpg",
+        certificado: "Técnico Calefacción, Especialista Estufas",
+        biografia: "Técnico especializado en sistemas de calefacción y estufas eléctricas.",
+        servicios: ["Estufas eléctricas", "Calefactores", "Radiadores", "Sistemas calefacción"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Reparación estufa": "$20.000 - $50.000",
+            "Calefactor": "$15.000 - $40.000",
+            "Sistema calefacción": "$50.000 - $120.000"
+        },
+        reseñas: [
+            { cliente: "Casa", comentario: "Reparó mi calefacción central", calificacion: 5 },
+            { cliente: "Oficina", comentario: "Buen servicio y precio justo", calificacion: 4 }
+        ]
+    },
+    {
+        id: 59,
+        nombre: "Mario López Silva",
+        especialidad: "Electrodomésticos",
+        experiencia: 10,
+        calificacion: 4.8,
+        totalReseñas: 189,
+        tarifaPorHora: 34000,
+        avatar: "https://randomuser.me/api/portraits/men/55.jpg",
+        certificado: "Especialista Importados, Marcas Premium",
+        biografia: "Especialista en reparación de electrodomésticos importados y marcas premium.",
+        servicios: ["Marcas premium", "Importados", "Garantías", "Repuestos originales"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 9:00-16:00",
+        preciosAprox: {
+            "Marca premium": "$50.000 - $150.000",
+            "Importado": "$60.000 - $180.000",
+            "Repuesto original": "Según cotización"
+        },
+        reseñas: [
+            { cliente: "Casa exclusiva", comentario: "Experto en marcas europeas", calificacion: 5 },
+            { cliente: "Depto alto estándar", comentario: "Consigue repuestos difíciles", calificacion: 5 }
+        ]
+    },
+
+    // ===== CARPINTERÍA (7 profesionales) =====
+    {
+        id: 60,
+        nombre: "Juan Carlos Morales",
+        especialidad: "Carpintería",
+        experiencia: 14,
+        calificacion: 4.9,
+        totalReseñas: 198,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/24.jpg",
+        certificado: "Maestro Carpintero, Especialista Muebles Finos",
+        biografia: "Maestro carpintero con 14 años creando muebles finos y trabajos personalizados.",
+        servicios: ["Muebles a medida", "Restauración", "Ebanistería", "Diseño personalizado"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Mueble a medida": "$200.000 - $800.000",
+            "Restauración": "$80.000 - $300.000",
+            "Ebanistería": "$150.000 - $500.000"
+        },
+        reseñas: [
+            { cliente: "Casa Patrimonial", comentario: "Restauró muebles antiguos perfectamente", calificacion: 5 },
+            { cliente: "Oficina Ejecutiva", comentario: "Muebles de excelente calidad", calificacion: 5 }
+        ]
+    },
+    {
+        id: 61,
+        nombre: "Antonio Silva Herrera",
+        especialidad: "Carpintería",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 134,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/37.jpg",
+        certificado: "Carpintero Construcción, Especialista Techos",
+        biografia: "Carpintero especializado en techos, estructuras y carpintería de construcción.",
+        servicios: ["Techos madera", "Estructuras", "Vigas", "Terrazas"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 7:00-16:00",
+        preciosAprox: {
+            "Techo madera m²": "$12.000 - $25.000",
+            "Estructura": "$300.000 - $800.000",
+            "Terraza": "$200.000 - $600.000"
+        },
+        reseñas: [
+            { cliente: "Casa Campo", comentario: "Hermoso techo de madera", calificacion: 5 },
+            { cliente: "Cabaña", comentario: "Trabajo sólido y duradero", calificacion: 4 }
+        ]
+    },
+    {
+        id: 62,
+        nombre: "Francisco Torres López",
+        especialidad: "Carpintería",
+        experiencia: 11,
+        calificacion: 4.8,
+        totalReseñas: 167,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/49.jpg",
+        certificado: "Especialista Closets, Muebles Modulares",
+        biografia: "Especialista en closets y sistemas de almacenamiento modulares personalizados.",
+        servicios: ["Closets", "Walk-in closets", "Muebles modulares", "Organización"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Vie 8:30-17:30",
+        preciosAprox: {
+            "Closet estándar": "$150.000 - $400.000",
+            "Walk-in closet": "$300.000 - $800.000",
+            "Modular": "$100.000 - $350.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Walk-in closet de ensueño", calificacion: 5 },
+            { cliente: "Depto Providencia", comentario: "Optimizó perfectamente el espacio", calificacion: 5 }
+        ]
+    },
+    {
+        id: 63,
+        nombre: "Gabriel Moreno Vega",
+        especialidad: "Carpintería",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 98,
+        tarifaPorHora: 25000,
+        avatar: "https://randomuser.me/api/portraits/men/34.jpg",
+        certificado: "Carpintero Puertas y Ventanas",
+        biografia: "Carpintero especializado en fabricación e instalación de puertas y ventanas.",
+        servicios: ["Puertas madera", "Ventanas", "Marcos", "Reparaciones"],
+        tareasRealizadas: 156,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Puerta estándar": "$80.000 - $200.000",
+            "Puerta premium": "$150.000 - $400.000",
+            "Ventana": "$60.000 - $180.000"
+        },
+        reseñas: [
+            { cliente: "Remodelación", comentario: "Puertas de excelente calidad", calificacion: 4 },
+            { cliente: "Casa Nueva", comentario: "Muy prolijo en instalaciones", calificacion: 5 }
+        ]
+    },
+    {
+        id: 64,
+        nombre: "Ricardo Castro Torres",
+        especialidad: "Carpintería",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 178,
+        tarifaPorHora: 33000,
+        avatar: "https://randomuser.me/api/portraits/men/56.jpg",
+        certificado: "Carpintero Cocinas, Especialista Muebles Cocina",
+        biografia: "Especialista en diseño y fabricación de muebles de cocina personalizados.",
+        servicios: ["Muebles cocina", "Islas", "Despensas", "Remodelación cocinas"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 8:00-16:30",
+        preciosAprox: {
+            "Cocina completa": "$800.000 - $2.500.000",
+            "Isla cocina": "$200.000 - $600.000",
+            "Despensa": "$150.000 - $400.000"
+        },
+        reseñas: [
+            { cliente: "Casa Moderna", comentario: "Cocina de revista, hermosa", calificacion: 5 },
+            { cliente: "Depto Alto Estándar", comentario: "Terminaciones impecables", calificacion: 5 }
+        ]
+    },
+    {
+        id: 65,
+        nombre: "Patricio Silva Morales",
+        especialidad: "Carpintería",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 87,
+        tarifaPorHora: 23000,
+        avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+        certificado: "Carpintero Jardín, Especialista Exterior",
+        biografia: "Carpintero especializado en estructuras de madera para exterior y jardín.",
+        servicios: ["Decks", "Pérgolas", "Quinchos", "Mobiliario jardín"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Deck m²": "$15.000 - $30.000",
+            "Pérgola": "$200.000 - $500.000",
+            "Quincho": "$300.000 - $800.000"
+        },
+        reseñas: [
+            { cliente: "Casa con Jardín", comentario: "Hermoso deck de madera", calificacion: 4 },
+            { cliente: "Quincho", comentario: "Trabajo resistente al clima", calificacion: 5 }
+        ]
+    },
+    {
+        id: 66,
+        nombre: "Rodrigo López Herrera",
+        especialidad: "Carpintería",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 145,
+        tarifaPorHora: 27000,
+        avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+        certificado: "Carpintero Industrial, Especialista Tarimas",
+        biografia: "Carpintero especializado en carpintería industrial y fabricación de tarimas.",
+        servicios: ["Tarimas", "Embalajes", "Estructuras industriales", "Pallets"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Tarima estándar": "$25.000 - $60.000",
+            "Embalaje": "$30.000 - $80.000",
+            "Estructura industrial": "Cotización"
+        },
+        reseñas: [
+            { cliente: "Exportadora", comentario: "Tarimas de excelente calidad", calificacion: 5 },
+            { cliente: "Bodega", comentario: "Trabajo rápido y eficiente", calificacion: 4 }
+        ]
+    },
+
+    // ===== CERRAJERÍA (7 profesionales) =====
+    {
+        id: 67,
+        nombre: "Eduardo Ramírez Castro",
+        especialidad: "Cerrajería",
+        experiencia: 13,
+        calificacion: 4.8,
+        totalReseñas: 189,
+        tarifaPorHora: 30000,
+        avatar: "https://randomuser.me/api/portraits/men/25.jpg",
+        certificado: "Maestro Cerrajero, Especialista Cerraduras Seguridad",
+        biografia: "Maestro cerrajero con 13 años especializándose en cerraduras de alta seguridad.",
+        servicios: ["Cerraduras seguridad", "Llaves codificadas", "Sistemas multipunto", "Emergencias"],
+        tareasRealizadas: 267,
+        disponibilidad: "24/7 Emergencias",
+        preciosAprox: {
+            "Cerradura seguridad": "$60.000 - $150.000",
+            "Sistema multipunto": "$120.000 - $250.000",
+            "Emergencia": "$35.000 - $60.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Instaló sistema de alta seguridad", calificacion: 5 },
+            { cliente: "Emergencia nocturna", comentario: "Llegó rápido, muy profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 68,
+        nombre: "Carlos Silva Torres",
+        especialidad: "Cerrajería",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 134,
+        tarifaPorHora: 25000,
+        avatar: "https://randomuser.me/api/portraits/men/38.jpg",
+        certificado: "Cerrajero Automotriz, Especialista Vehículos",
+        biografia: "Cerrajero especializado en cerrajería automotriz y llaves de vehículos.",
+        servicios: ["Llaves auto", "Cerraduras vehículos", "Controles remotos", "Transponders"],
+        tareasRealizadas: 198,
+        disponibilidad: "Lun-Sáb 8:00-20:00",
+        preciosAprox: {
+            "Llave auto": "$25.000 - $80.000",
+            "Control remoto": "$40.000 - $100.000",
+            "Transponder": "$60.000 - $150.000"
+        },
+        reseñas: [
+            { cliente: "Auto BMW", comentario: "Hizo llave nueva perfectamente", calificacion: 5 },
+            { cliente: "Camioneta", comentario: "Muy rápido con llaves de auto", calificacion: 4 }
+        ]
+    },
+    {
+        id: 69,
+        nombre: "Manuel Torres López",
+        especialidad: "Cerrajería",
+        experiencia: 11,
+        calificacion: 4.7,
+        totalReseñas: 156,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/43.jpg",
+        certificado: "Cerrajero Edificios, Especialista Maestras",
+        biografia: "Cerrajero especializado en sistemas de llaves maestras para edificios.",
+        servicios: ["Llaves maestras", "Sistemas edificios", "Control acceso", "Cilindros"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Vie 8:30-17:30",
+        preciosAprox: {
+            "Sistema maestro": "$200.000 - $500.000",
+            "Cilindro": "$30.000 - $80.000",
+            "Control acceso": "$150.000 - $400.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Centro", comentario: "Sistema maestro funcionando perfecto", calificacion: 5 },
+            { cliente: "Condominio", comentario: "Muy organizado con las llaves", calificacion: 4 }
+        ]
+    },
+    {
+        id: 70,
+        nombre: "Roberto Moreno Silva",
+        especialidad: "Cerrajería",
+        experiencia: 7,
+        calificacion: 4.4,
+        totalReseñas: 98,
+        tarifaPorHora: 22000,
+        avatar: "https://randomuser.me/api/portraits/men/31.jpg",
+        certificado: "Cerrajero Residencial, Especialista Manijas",
+        biografia: "Cerrajero especializado en cerrajería residencial y reparación de manijas.",
+        servicios: ["Manijas", "Picaportes", "Cerraduras simples", "Reparaciones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Manija": "$15.000 - $40.000",
+            "Picaporte": "$20.000 - $50.000",
+            "Cerradura simple": "$25.000 - $60.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Arregló todas las manijas", calificacion: 4 },
+            { cliente: "Departamento", comentario: "Buen precio y rápido", calificacion: 5 }
+        ]
+    },
+    {
+        id: 71,
+        nombre: "Andrés Castro López",
+        especialidad: "Cerrajería",
+        experiencia: 10,
+        calificacion: 4.7,
+        totalReseñas: 167,
+        tarifaPorHora: 27000,
+        avatar: "https://randomuser.me/api/portraits/men/47.jpg",
+        certificado: "Cerrajero Comercial, Especialista Cajas Registradoras",
+        biografia: "Cerrajero especializado en cerrajería comercial y cajas registradoras.",
+        servicios: ["Cajas registradoras", "Cerraduras comerciales", "Buzones", "Vitrinas"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Caja registradora": "$40.000 - $100.000",
+            "Cerradura comercial": "$30.000 - $80.000",
+            "Vitrina": "$35.000 - $90.000"
+        },
+        reseñas: [
+            { cliente: "Tienda", comentario: "Experto en cajas registradoras", calificacion: 5 },
+            { cliente: "Local Comercial", comentario: "Muy confiable para comercios", calificacion: 4 }
+        ]
+    },
+    {
+        id: 72,
+        nombre: "Francisco Herrera Torres",
+        especialidad: "Cerrajería",
+        experiencia: 8,
+        calificacion: 4.5,
+        totalReseñas: 112,
+        tarifaPorHora: 24000,
+        avatar: "https://randomuser.me/api/portraits/men/54.jpg",
+        certificado: "Cerrajero Industrial, Especialista Candados",
+        biografia: "Cerrajero especializado en cerrajería industrial y sistemas de candados.",
+        servicios: ["Candados industriales", "Cerraduras galpones", "Sistemas blindaje", "Seguridad perimetral"],
+        tareasRealizadas: 178,
+        disponibilidad: "Lun-Sáb 7:30-16:30",
+        preciosAprox: {
+            "Candado industrial": "$25.000 - $80.000",
+            "Cerradura galpón": "$40.000 - $120.000",
+            "Sistema blindaje": "$200.000+"
+        },
+        reseñas: [
+            { cliente: "Bodega Industrial", comentario: "Candados muy resistentes", calificacion: 4 },
+            { cliente: "Galpón", comentario: "Buen sistema de seguridad", calificacion: 5 }
+        ]
+    },
+    {
+        id: 73,
+        nombre: "Jorge López Morales",
+        especialidad: "Cerrajería",
+        experiencia: 6,
+        calificacion: 4.3,
+        totalReseñas: 89,
+        tarifaPorHora: 21000,
+        avatar: "https://randomuser.me/api/portraits/men/36.jpg",
+        certificado: "Cerrajero Básico, Especialista Duplicados",
+        biografia: "Cerrajero joven especializado en duplicado de llaves y servicios básicos.",
+        servicios: ["Duplicado llaves", "Llaves simples", "Servicios básicos", "Emergencias menores"],
+        tareasRealizadas: 267,
+        disponibilidad: "Lun-Sáb 9:30-18:30",
+        preciosAprox: {
+            "Duplicado llave": "$3.000 - $8.000",
+            "Llave simple": "$5.000 - $15.000",
+            "Servicio básico": "$15.000 - $35.000"
+        },
+        reseñas: [
+            { cliente: "Vecino", comentario: "Rápido para duplicar llaves", calificacion: 4 },
+            { cliente: "Emergencia menor", comentario: "Llegó pronto y solucionó", calificacion: 4 }
+        ]
+    },
+
+    // ===== GASFITERÍA (7 profesionales) =====
+    {
+        id: 76,
+        nombre: "Ramón Soto Morales",
+        especialidad: "Gasfitería",
+        experiencia: 12,
+        calificacion: 4.9,
+        totalReseñas: 178,
+        tarifaPorHora: 40000,
+        avatar: "https://randomuser.me/api/portraits/men/64.jpg",
+        certificado: "Gasfiter Autorizado SEC, Especialista Gas Licuado",
+        biografia: "Gasfiter certificado con 12 años de experiencia en instalaciones de gas seguras.",
+        servicios: ["Instalación gas", "Certificación SEC", "Reparación fugas", "Mantención"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Instalación gas": "$80.000 - $200.000",
+            "Certificación SEC": "$50.000 - $80.000",
+            "Reparación fuga": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Casa Nueva", comentario: "Instalación de gas impecable", calificacion: 5 },
+            { cliente: "Restaurant", comentario: "Muy seguro y profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 77,
+        nombre: "Jorge Peña Castro",
+        especialidad: "Gasfitería",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 145,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/71.jpg",
+        certificado: "Gasfiter Residencial, Especialista Calentadores",
+        biografia: "Gasfiter especializado en calentadores a gas y sistemas domiciliarios.",
+        servicios: ["Calentadores gas", "Estufas a gas", "Cocinas gas", "Mantención domiciliaria"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Calentador gas": "$60.000 - $150.000",
+            "Estufa gas": "$40.000 - $100.000",
+            "Mantención": "$25.000 - $50.000"
+        },
+        reseñas: [
+            { cliente: "Familia Torres", comentario: "Instaló calentador perfecto", calificacion: 5 },
+            { cliente: "Depto Centro", comentario: "Servicio rápido y confiable", calificacion: 4 }
+        ]
+    },
+    {
+        id: 78,
+        nombre: "Manuel Rivera López",
+        especialidad: "Gasfitería",
+        experiencia: 15,
+        calificacion: 4.8,
+        totalReseñas: 267,
+        tarifaPorHora: 45000,
+        avatar: "https://randomuser.me/api/portraits/men/66.jpg",
+        certificado: "Maestro Gasfiter, Instructor SEC",
+        biografia: "Maestro gasfiter con 15 años de experiencia e instructor autorizado SEC.",
+        servicios: ["Proyectos complejos", "Capacitación", "Supervisión", "Emergencias gas"],
+        tareasRealizadas: 156,
+        disponibilidad: "24/7 Emergencias",
+        preciosAprox: {
+            "Proyecto complejo": "$200.000+",
+            "Emergencia gas": "$80.000 - $150.000",
+            "Supervisión": "$100.000/día"
+        },
+        reseñas: [
+            { cliente: "Edificio", comentario: "Maneja proyectos grandes", calificacion: 5 },
+            { cliente: "Emergencia", comentario: "Solucionó fuga peligrosa", calificacion: 5 }
+        ]
+    },
+    {
+        id: 79,
+        nombre: "Carlos Vega Torres",
+        especialidad: "Gasfitería",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 98,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/73.jpg",
+        certificado: "Gasfiter Industrial, Especialista Gas Natural",
+        biografia: "Gasfiter especializado en instalaciones de gas natural para industrias.",
+        servicios: ["Gas natural", "Instalaciones industriales", "Redes gas", "Medidores"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Gas natural": "$150.000 - $400.000",
+            "Instalación industrial": "$300.000+",
+            "Red gas": "$200.000+"
+        },
+        reseñas: [
+            { cliente: "Fábrica", comentario: "Experto en gas natural", calificacion: 4 },
+            { cliente: "Industria", comentario: "Instalación muy técnica", calificacion: 5 }
+        ]
+    },
+    {
+        id: 80,
+        nombre: "Ricardo Herrera Silva",
+        especialidad: "Gasfitería",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 134,
+        tarifaPorHora: 33000,
+        avatar: "https://randomuser.me/api/portraits/men/68.jpg",
+        certificado: "Gasfiter Comercial, Especialista Hornos",
+        biografia: "Gasfiter especializado en hornos comerciales y equipos de panadería.",
+        servicios: ["Hornos comerciales", "Equipos panadería", "Gas comercial", "Mantención equipos"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 6:00-15:00",
+        preciosAprox: {
+            "Horno comercial": "$100.000 - $250.000",
+            "Equipo panadería": "$80.000 - $200.000",
+            "Mantención": "$40.000 - $80.000"
+        },
+        reseñas: [
+            { cliente: "Panadería", comentario: "Mantiene nuestros hornos perfectos", calificacion: 5 },
+            { cliente: "Restaurant", comentario: "Muy confiable para equipos", calificacion: 4 }
+        ]
+    },
+    {
+        id: 81,
+        nombre: "Andrés Morales Castro",
+        especialidad: "Gasfitería",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 89,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/75.jpg",
+        certificado: "Gasfiter Básico, Especialista Reparaciones",
+        biografia: "Gasfiter joven especializado en reparaciones menores y mantención básica.",
+        servicios: ["Reparaciones menores", "Mantención básica", "Válvulas", "Conexiones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Reparación menor": "$20.000 - $50.000",
+            "Mantención básica": "$25.000 - $45.000",
+            "Válvula": "$15.000 - $35.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Rápido y económico", calificacion: 4 },
+            { cliente: "Depto", comentario: "Solucionó problema rápido", calificacion: 4 }
+        ]
+    },
+    {
+        id: 82,
+        nombre: "Fernando López Ramírez",
+        especialidad: "Gasfitería",
+        experiencia: 10,
+        calificacion: 4.7,
+        totalReseñas: 156,
+        tarifaPorHora: 37000,
+        avatar: "https://randomuser.me/api/portraits/men/69.jpg",
+        certificado: "Gasfiter Especialista, Certificación Internacional",
+        biografia: "Gasfiter con certificación internacional en sistemas de gas avanzados.",
+        servicios: ["Sistemas avanzados", "Gas importado", "Equipos especiales", "Consultoría técnica"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 8:00-16:00",
+        preciosAprox: {
+            "Sistema avanzado": "$250.000+",
+            "Equipo especial": "$150.000 - $300.000",
+            "Consultoría": "$80.000 - $120.000"
+        },
+        reseñas: [
+            { cliente: "Casa Premium", comentario: "Sistemas de gas de alta gama", calificacion: 5 },
+            { cliente: "Proyecto Especial", comentario: "Muy técnico y actualizado", calificacion: 5 }
+        ]
+    },
+
+    // ===== REFRIGERACIÓN (7 profesionales) =====
+    {
+        id: 83,
+        nombre: "Pablo Santos Torres",
+        especialidad: "Refrigeración",
+        experiencia: 11,
+        calificacion: 4.8,
+        totalReseñas: 167,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/70.jpg",
+        certificado: "Técnico Refrigeración, Especialista Cámaras Frías",
+        biografia: "Técnico especializado en sistemas de refrigeración industrial y cámaras frías.",
+        servicios: ["Cámaras frías", "Refrigeración industrial", "Sistemas centrales", "Mantención"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Vie 7:00-16:00",
+        preciosAprox: {
+            "Cámara fría": "$800.000 - $2.000.000",
+            "Sistema central": "$500.000 - $1.500.000",
+            "Mantención": "$50.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Supermercado", comentario: "Cámaras frías funcionando perfecto", calificacion: 5 },
+            { cliente: "Restaurant", comentario: "Muy profesional y rápido", calificacion: 5 }
+        ]
+    },
+    {
+        id: 84,
+        nombre: "Diego Campos López",
+        especialidad: "Refrigeración",
+        experiencia: 8,
+        calificacion: 4.6,
+        totalReseñas: 123,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/72.jpg",
+        certificado: "Técnico Refrigeración Comercial",
+        biografia: "Técnico especializado en refrigeración comercial y equipos de supermercados.",
+        servicios: ["Vitrinas refrigeradas", "Congeladores", "Equipos comerciales", "Reparaciones"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Vitrina refrigerada": "$200.000 - $600.000",
+            "Congelador": "$150.000 - $400.000",
+            "Reparación": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Carnicería", comentario: "Vitrinas siempre frías", calificacion: 4 },
+            { cliente: "Minimarket", comentario: "Servicio técnico excelente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 85,
+        nombre: "Mauricio Silva Herrera",
+        especialidad: "Refrigeración",
+        experiencia: 13,
+        calificacion: 4.9,
+        totalReseñas: 234,
+        tarifaPorHora: 42000,
+        avatar: "https://randomuser.me/api/portraits/men/74.jpg",
+        certificado: "Maestro Refrigeración, Especialista Automático",
+        biografia: "Maestro en refrigeración especializado en sistemas automáticos y control inteligente.",
+        servicios: ["Sistemas automáticos", "Control inteligente", "Refrigeración médica", "Laboratorios"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 8:30-16:30",
+        preciosAprox: {
+            "Sistema automático": "$1.000.000+",
+            "Refrigeración médica": "$600.000 - $1.500.000",
+            "Control inteligente": "$400.000 - $800.000"
+        },
+        reseñas: [
+            { cliente: "Hospital", comentario: "Sistemas médicos perfectos", calificacion: 5 },
+            { cliente: "Laboratorio", comentario: "Muy técnico y preciso", calificacion: 5 }
+        ]
+    },
+    {
+        id: 86,
+        nombre: "Gonzalo Moreno Vega",
+        especialidad: "Refrigeración",
+        experiencia: 6,
+        calificacion: 4.4,
+        totalReseñas: 87,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+        certificado: "Técnico Refrigeración Doméstica",
+        biografia: "Técnico especializado en refrigeración doméstica y reparación de refrigeradores.",
+        servicios: ["Refrigeradores", "Freezers", "Reparaciones domésticas", "Mantención"],
+        tareasRealizadas: 267,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Reparación refrigerador": "$30.000 - $80.000",
+            "Freezer": "$25.000 - $60.000",
+            "Mantención": "$20.000 - $40.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Reparó mi refrigerador rápido", calificacion: 4 },
+            { cliente: "Depto", comentario: "Buen precio y servicio", calificacion: 4 }
+        ]
+    },
+    {
+        id: 87,
+        nombre: "Rodrigo Castro Torres",
+        especialidad: "Refrigeración",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 134,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/77.jpg",
+        certificado: "Técnico Refrigeración Automotriz",
+        biografia: "Técnico especializado en sistemas de aire acondicionado automotriz.",
+        servicios: ["Aire auto", "Sistemas automotrices", "Reparación A/C", "Recarga gas"],
+        tareasRealizadas: 178,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Aire acondicionado auto": "$40.000 - $120.000",
+            "Recarga gas": "$25.000 - $50.000",
+            "Reparación A/C": "$50.000 - $150.000"
+        },
+        reseñas: [
+            { cliente: "Auto Particular", comentario: "Aire funcionando perfecto", calificacion: 5 },
+            { cliente: "Taller", comentario: "Muy buen servicio automotriz", calificacion: 4 }
+        ]
+    },
+    {
+        id: 88,
+        nombre: "Víctor López Silva",
+        especialidad: "Refrigeración",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 112,
+        tarifaPorHora: 30000,
+        avatar: "https://randomuser.me/api/portraits/men/78.jpg",
+        certificado: "Técnico Refrigeración Transporte",
+        biografia: "Técnico especializado en refrigeración para transporte y vehículos comerciales.",
+        servicios: ["Transporte refrigerado", "Camiones frigoríficos", "Contenedores", "Logística fría"],
+        tareasRealizadas: 145,
+        disponibilidad: "Lun-Vie 6:00-15:00",
+        preciosAprox: {
+            "Camión frigorífico": "$200.000 - $500.000",
+            "Contenedor": "$150.000 - $400.000",
+            "Mantención transporte": "$80.000 - $200.000"
+        },
+        reseñas: [
+            { cliente: "Empresa Logística", comentario: "Mantiene flota refrigerada", calificacion: 5 },
+            { cliente: "Transportes", comentario: "Muy confiable para camiones", calificacion: 4 }
+        ]
+    },
+    {
+        id: 89,
+        nombre: "Esteban Torres Castro",
+        especialidad: "Refrigeración",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 189,
+        tarifaPorHora: 40000,
+        avatar: "https://randomuser.me/api/portraits/men/79.jpg",
+        certificado: "Especialista Refrigeración Marina",
+        biografia: "Especialista en sistemas de refrigeración para embarcaciones y industria pesquera.",
+        servicios: ["Refrigeración marina", "Barcos pesqueros", "Conservación pescado", "Sistemas marinos"],
+        tareasRealizadas: 67,
+        disponibilidad: "Según temporada marítima",
+        preciosAprox: {
+            "Sistema marino": "$500.000 - $1.200.000",
+            "Barco pesquero": "$300.000 - $800.000",
+            "Conservación": "$200.000 - $600.000"
+        },
+        reseñas: [
+            { cliente: "Pesquera", comentario: "Experto en refrigeración marina", calificacion: 5 },
+            { cliente: "Barco", comentario: "Sistemas funcionando en alta mar", calificacion: 5 }
+        ]
+    },
+
+    // ===== CALEFÓN Y CALDERAS (7 profesionales) =====
+    {
+        id: 90,
+        nombre: "Héctor Ramírez Silva",
+        especialidad: "Calefón y Calderas",
+        experiencia: 14,
+        calificacion: 4.9,
+        totalReseñas: 198,
+        tarifaPorHora: 45000,
+        avatar: "https://randomuser.me/api/portraits/men/80.jpg",
+        certificado: "Especialista Calderas, Certificación Internacional",
+        biografia: "Especialista en calderas industriales y sistemas de calefacción central con 14 años de experiencia.",
+        servicios: ["Calderas industriales", "Calefacción central", "Sistemas vapor", "Mantención preventiva"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 7:00-16:00",
+        preciosAprox: {
+            "Caldera industrial": "$2.000.000+",
+            "Calefacción central": "$800.000 - $2.500.000",
+            "Mantención preventiva": "$100.000 - $200.000"
+        },
+        reseñas: [
+            { cliente: "Fábrica Textil", comentario: "Mantiene nuestras calderas perfectas", calificacion: 5 },
+            { cliente: "Hospital", comentario: "Muy profesional y confiable", calificacion: 5 }
+        ]
+    },
+    {
+        id: 91,
+        nombre: "Luis González Castro",
+        especialidad: "Calefón y Calderas",
+        experiencia: 10,
+        calificacion: 4.7,
+        totalReseñas: 156,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/81.jpg",
+        certificado: "Técnico Calefones, Especialista Gas",
+        biografia: "Técnico especializado en calefones a gas y sistemas domiciliarios de agua caliente.",
+        servicios: ["Calefones a gas", "Agua caliente", "Instalación domiciliaria", "Reparaciones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 8:00-17:00",
+        preciosAprox: {
+            "Calefón gas": "$80.000 - $200.000",
+            "Instalación": "$60.000 - $150.000",
+            "Reparación": "$30.000 - $80.000"
+        },
+        reseñas: [
+            { cliente: "Casa Particular", comentario: "Instaló calefón perfecto", calificacion: 5 },
+            { cliente: "Depto", comentario: "Servicio rápido y confiable", calificacion: 4 }
+        ]
+    },
+    {
+        id: 92,
+        nombre: "Roberto Torres López",
+        especialidad: "Calefón y Calderas",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 178,
+        tarifaPorHora: 42000,
+        avatar: "https://randomuser.me/api/portraits/men/82.jpg",
+        certificado: "Especialista Calderas Comerciales",
+        biografia: "Especialista en calderas comerciales para hoteles, hospitales y edificios.",
+        servicios: ["Calderas comerciales", "Edificios", "Hoteles", "Sistemas complejos"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Vie 8:30-16:30",
+        preciosAprox: {
+            "Caldera comercial": "$1.200.000 - $3.000.000",
+            "Sistema edificio": "$800.000 - $2.000.000",
+            "Hotel": "$1.500.000+"
+        },
+        reseñas: [
+            { cliente: "Hotel Centro", comentario: "Sistema de agua caliente perfecto", calificacion: 5 },
+            { cliente: "Edificio Corporativo", comentario: "Muy técnico y profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 93,
+        nombre: "Mario Silva Herrera",
+        especialidad: "Calefón y Calderas",
+        experiencia: 8,
+        calificacion: 4.5,
+        totalReseñas: 134,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/83.jpg",
+        certificado: "Técnico Calefacción, Especialista Eléctrico",
+        biografia: "Técnico especializado en calefones eléctricos y sistemas híbridos.",
+        servicios: ["Calefones eléctricos", "Sistemas híbridos", "Termos eléctricos", "Eficiencia energética"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 9:00-17:00",
+        preciosAprox: {
+            "Calefón eléctrico": "$60.000 - $150.000",
+            "Sistema híbrido": "$150.000 - $400.000",
+            "Termo eléctrico": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Casa Ecológica", comentario: "Sistema eficiente y económico", calificacion: 4 },
+            { cliente: "Depto Moderno", comentario: "Excelente calefón eléctrico", calificacion: 5 }
+        ]
+    },
+    {
+        id: 94,
+        nombre: "Patricio Moreno Castro",
+        especialidad: "Calefón y Calderas",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 145,
+        tarifaPorHora: 36000,
+        avatar: "https://randomuser.me/api/portraits/men/84.jpg",
+        certificado: "Técnico Calderas Biomasa",
+        biografia: "Técnico especializado en calderas de biomasa y sistemas ecológicos.",
+        servicios: ["Calderas biomasa", "Sistemas ecológicos", "Energía renovable", "Pellets"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Vie 8:00-16:00",
+        preciosAprox: {
+            "Caldera biomasa": "$800.000 - $2.000.000",
+            "Sistema ecológico": "$600.000 - $1.500.000",
+            "Conversión pellets": "$400.000 - $1.000.000"
+        },
+        reseñas: [
+            { cliente: "Casa Sustentable", comentario: "Sistema biomasa funcionando perfecto", calificacion: 5 },
+            { cliente: "Proyecto Verde", comentario: "Muy actualizado en tecnologías", calificacion: 4 }
+        ]
+    },
+    {
+        id: 95,
+        nombre: "Fernando López Torres",
+        especialidad: "Calefón y Calderas",
+        experiencia: 11,
+        calificacion: 4.7,
+        totalReseñas: 167,
+        tarifaPorHora: 40000,
+        avatar: "https://randomuser.me/api/portraits/men/85.jpg",
+        certificado: "Especialista Calderas Condensación",
+        biografia: "Especialista en calderas de condensación y alta eficiencia energética.",
+        servicios: ["Calderas condensación", "Alta eficiencia", "Ahorro energético", "Tecnología avanzada"],
+        tareasRealizadas: 112,
+        disponibilidad: "Lun-Vie 8:30-16:30",
+        preciosAprox: {
+            "Caldera condensación": "$1.500.000 - $3.500.000",
+            "Sistema eficiente": "$1.000.000 - $2.500.000",
+            "Optimización": "$200.000 - $500.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Premium", comentario: "Ahorro energético increíble", calificacion: 5 },
+            { cliente: "Casa Inteligente", comentario: "Tecnología de punta", calificacion: 5 }
+        ]
+    },
+    {
+        id: 96,
+        nombre: "Andrés Castro Silva",
+        especialidad: "Calefón y Calderas",
+        experiencia: 6,
+        calificacion: 4.3,
+        totalReseñas: 98,
+        tarifaPorHora: 30000,
+        avatar: "https://randomuser.me/api/portraits/men/86.jpg",
+        certificado: "Técnico Básico, Especialista Mantención",
+        biografia: "Técnico joven especializado en mantención preventiva y reparaciones básicas.",
+        servicios: ["Mantención preventiva", "Reparaciones básicas", "Limpieza calderas", "Revisiones técnicas"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Mantención preventiva": "$40.000 - $80.000",
+            "Reparación básica": "$25.000 - $60.000",
+            "Limpieza": "$30.000 - $50.000"
+        },
+        reseñas: [
+            { cliente: "Mantención Regular", comentario: "Muy puntual y ordenado", calificacion: 4 },
+            { cliente: "Casa", comentario: "Buen precio para mantención", calificacion: 4 }
+        ]
+    },
+
+    // ===== CONTADORES (7 profesionales) =====
+    {
+        id: 97,
+        nombre: "Gabriel Santos López",
+        especialidad: "Contadores",
+        experiencia: 13,
+        calificacion: 4.8,
+        totalReseñas: 167,
+        tarifaPorHora: 40000,
+        avatar: "https://randomuser.me/api/portraits/men/87.jpg",
+        certificado: "Especialista Medidores, Certificación Eléctrica",
+        biografia: "Especialista en instalación y mantención de medidores eléctricos y sistemas de medición.",
+        servicios: ["Medidores eléctricos", "Sistemas medición", "Instalación contadores", "Certificaciones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Vie 8:00-16:00",
+        preciosAprox: {
+            "Medidor eléctrico": "$80.000 - $200.000",
+            "Sistema medición": "$150.000 - $400.000",
+            "Certificación": "$50.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Nuevo", comentario: "Instalación de medidores perfecta", calificacion: 5 },
+            { cliente: "Casa", comentario: "Muy profesional y rápido", calificacion: 5 }
+        ]
+    },
+    {
+        id: 98,
+        nombre: "José Morales Torres",
+        especialidad: "Contadores",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 134,
+        tarifaPorHora: 35000,
+        avatar: "https://randomuser.me/api/portraits/men/88.jpg",
+        certificado: "Técnico Medidores Agua, Especialista Redes",
+        biografia: "Técnico especializado en medidores de agua y sistemas de redes hídricas.",
+        servicios: ["Medidores agua", "Redes hídricas", "Instalación medidores", "Lectura medidores"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Medidor agua": "$60.000 - $150.000",
+            "Red hídrica": "$200.000 - $500.000",
+            "Instalación": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Condominio", comentario: "Medidores funcionando perfecto", calificacion: 4 },
+            { cliente: "Casa Nueva", comentario: "Instalación muy profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 99,
+        nombre: "Ricardo Herrera López",
+        especialidad: "Contadores",
+        experiencia: 11,
+        calificacion: 4.7,
+        totalReseñas: 156,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/89.jpg",
+        certificado: "Especialista Medidores Gas",
+        biografia: "Especialista en medidores de gas y sistemas de control de consumo.",
+        servicios: ["Medidores gas", "Control consumo", "Sistemas inteligentes", "Telemetría"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Medidor gas": "$100.000 - $250.000",
+            "Sistema inteligente": "$200.000 - $500.000",
+            "Telemetría": "$150.000 - $400.000"
+        },
+        reseñas: [
+            { cliente: "Edificio Moderno", comentario: "Sistema de gas inteligente", calificacion: 5 },
+            { cliente: "Complex Residencial", comentario: "Telemetría funcionando perfecto", calificacion: 4 }
+        ]
+    },
+    {
+        id: 100,
+        nombre: "Manuel Castro Vega",
+        especialidad: "Contadores",
+        experiencia: 7,
+        calificacion: 4.4,
+        totalReseñas: 98,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/90.jpg",
+        certificado: "Técnico Medidores Digitales",
+        biografia: "Técnico especializado en medidores digitales y sistemas de nueva generación.",
+        servicios: ["Medidores digitales", "Sistemas nuevos", "Actualización medidores", "Configuración"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 9:00-17:00",
+        preciosAprox: {
+            "Medidor digital": "$120.000 - $300.000",
+            "Actualización": "$80.000 - $200.000",
+            "Configuración": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Casa Inteligente", comentario: "Medidores digitales perfectos", calificacion: 4 },
+            { cliente: "Oficina", comentario: "Actualización muy exitosa", calificacion: 5 }
+        ]
+    },
+    {
+        id: 101,
+        nombre: "Diego Torres Silva",
+        especialidad: "Contadores",
+        experiencia: 8,
+        calificacion: 4.5,
+        totalReseñas: 112,
+        tarifaPorHora: 33000,
+        avatar: "https://randomuser.me/api/portraits/men/91.jpg",
+        certificado: "Técnico Medidores Industriales",
+        biografia: "Técnico especializado en medidores industriales y sistemas de gran escala.",
+        servicios: ["Medidores industriales", "Gran escala", "Fábricas", "Monitoreo continuo"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Medidor industrial": "$300.000 - $800.000",
+            "Sistema gran escala": "$500.000+",
+            "Monitoreo continuo": "$200.000 - $600.000"
+        },
+        reseñas: [
+            { cliente: "Fábrica", comentario: "Medidores industriales funcionando bien", calificacion: 4 },
+            { cliente: "Planta", comentario: "Monitoreo muy preciso", calificacion: 5 }
+        ]
+    },
+    {
+        id: 102,
+        nombre: "Claudio López Castro",
+        especialidad: "Contadores",
+        experiencia: 10,
+        calificacion: 4.6,
+        totalReseñas: 145,
+        tarifaPorHora: 36000,
+        avatar: "https://randomuser.me/api/portraits/men/92.jpg",
+        certificado: "Especialista Calibración Medidores",
+        biografia: "Especialista en calibración y certificación de medidores de precisión.",
+        servicios: ["Calibración medidores", "Certificación precisión", "Mantención técnica", "Verificaciones"],
+        tareasRealizadas: 178,
+        disponibilidad: "Lun-Vie 8:30-16:30",
+        preciosAprox: {
+            "Calibración": "$60.000 - $150.000",
+            "Certificación": "$80.000 - $200.000",
+            "Verificación": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Laboratorio", comentario: "Calibración muy precisa", calificacion: 5 },
+            { cliente: "Empresa", comentario: "Certificaciones en orden", calificacion: 4 }
+        ]
+    },
+    {
+        id: 103,
+        nombre: "Rodrigo Silva Torres",
+        especialidad: "Contadores",
+        experiencia: 6,
+        calificacion: 4.3,
+        totalReseñas: 87,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/93.jpg",
+        certificado: "Técnico Lectura Medidores",
+        biografia: "Técnico especializado en lectura de medidores y servicios básicos.",
+        servicios: ["Lectura medidores", "Servicios básicos", "Revisiones rutinarias", "Reportes"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 8:00-18:00",
+        preciosAprox: {
+            "Lectura medidores": "$15.000 - $30.000",
+            "Revisión rutinaria": "$20.000 - $40.000",
+            "Reporte": "$25.000 - $50.000"
+        },
+        reseñas: [
+            { cliente: "Condominio", comentario: "Lecturas siempre puntuales", calificacion: 4 },
+            { cliente: "Empresa", comentario: "Reportes muy ordenados", calificacion: 4 }
+        ]
+    },
+
+    // ===== ELECTRICIDAD ADICIONALES (4 profesionales más) =====
+    {
+        id: 104,
+        nombre: "Hugo Ramírez Silva",
+        especialidad: "Electricidad",
+        experiencia: 9,
+        calificacion: 4.6,
+        totalReseñas: 145,
+        tarifaPorHora: 36000,
+        avatar: "https://randomuser.me/api/portraits/men/94.jpg",
+        certificado: "Electricista Industrial, Especialista Motores",
+        biografia: "Electricista especializado en instalaciones industriales y sistemas de motores.",
+        servicios: ["Electricidad industrial", "Motores eléctricos", "Tableros control", "Mantenimiento"],
+        tareasRealizadas: 123,
+        disponibilidad: "Lun-Vie 7:30-16:30",
+        preciosAprox: {
+            "Instalación industrial": "$200.000 - $800.000",
+            "Motor eléctrico": "$150.000 - $500.000",
+            "Tablero control": "$300.000 - $1.200.000"
+        },
+        reseñas: [
+            { cliente: "Fábrica", comentario: "Instalación industrial perfecta", calificacion: 5 },
+            { cliente: "Taller", comentario: "Motores funcionando excelente", calificacion: 4 }
+        ]
+    },
+    {
+        id: 105,
+        nombre: "Pablo González Torres",
+        especialidad: "Electricidad",
+        experiencia: 7,
+        calificacion: 4.4,
+        totalReseñas: 98,
+        tarifaPorHora: 32000,
+        avatar: "https://randomuser.me/api/portraits/men/95.jpg",
+        certificado: "Electricista Domiciliario, Certificado SEC",
+        biografia: "Electricista domiciliario con amplia experiencia en casas y departamentos.",
+        servicios: ["Electricidad domiciliaria", "Enchufes", "Interruptores", "Ampliaciones"],
+        tareasRealizadas: 234,
+        disponibilidad: "Lun-Sáb 8:00-18:00",
+        preciosAprox: {
+            "Enchufe nuevo": "$15.000 - $30.000",
+            "Interruptor": "$12.000 - $25.000",
+            "Ampliación": "$80.000 - $200.000"
+        },
+        reseñas: [
+            { cliente: "Casa", comentario: "Instalaciones domiciliarias perfectas", calificacion: 4 },
+            { cliente: "Departamento", comentario: "Muy ordenado y limpio", calificacion: 5 }
+        ]
+    },
+    {
+        id: 106,
+        nombre: "Sebastián López Castro",
+        especialidad: "Electricidad",
+        experiencia: 11,
+        calificacion: 4.7,
+        totalReseñas: 167,
+        tarifaPorHora: 39000,
+        avatar: "https://randomuser.me/api/portraits/men/96.jpg",
+        certificado: "Especialista Automatización, PLC",
+        biografia: "Especialista en automatización industrial y programación de PLCs.",
+        servicios: ["Automatización", "PLC", "Sistemas control", "Robótica básica"],
+        tareasRealizadas: 89,
+        disponibilidad: "Lun-Vie 8:30-16:30",
+        preciosAprox: {
+            "Sistema automatización": "$500.000 - $2.000.000",
+            "Programación PLC": "$200.000 - $800.000",
+            "Control industrial": "$300.000 - $1.200.000"
+        },
+        reseñas: [
+            { cliente: "Fábrica Alimentos", comentario: "Automatización funcionando perfecto", calificacion: 5 },
+            { cliente: "Planta Industrial", comentario: "PLCs programados excelente", calificacion: 4 }
+        ]
+    },
+    {
+        id: 107,
+        nombre: "Cristián Torres López",
+        especialidad: "Electricidad",
+        experiencia: 6,
+        calificacion: 4.3,
+        totalReseñas: 87,
+        tarifaPorHora: 28000,
+        avatar: "https://randomuser.me/api/portraits/men/97.jpg",
+        certificado: "Electricista Automotriz",
+        biografia: "Electricista especializado en sistemas eléctricos automotrices.",
+        servicios: ["Electricidad automotriz", "Sistemas auto", "Baterías", "Alternadores"],
+        tareasRealizadas: 189,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Sistema automotriz": "$50.000 - $200.000",
+            "Batería": "$30.000 - $80.000",
+            "Alternador": "$80.000 - $300.000"
+        },
+        reseñas: [
+            { cliente: "Taller Mecánico", comentario: "Excelente con autos eléctricos", calificacion: 4 },
+            { cliente: "Particular", comentario: "Arregló sistema perfecto", calificacion: 4 }
+        ]
+    },
+
+    // ===== CLIMATIZACIÓN ADICIONALES (4 profesionales más) =====
+    {
+        id: 108,
+        nombre: "Marcelo Silva Torres",
+        especialidad: "Climatización",
+        experiencia: 10,
+        calificacion: 4.6,
+        totalReseñas: 156,
+        tarifaPorHora: 38000,
+        avatar: "https://randomuser.me/api/portraits/men/98.jpg",
+        certificado: "Técnico Refrigeración, Especialista R410A",
+        biografia: "Técnico en refrigeración especializado en aires acondicionados residenciales.",
+        servicios: ["Aires acondicionados", "Refrigeración", "Gas R410A", "Split"],
+        tareasRealizadas: 134,
+        disponibilidad: "Lun-Vie 8:00-17:00",
+        preciosAprox: {
+            "Aire split": "$300.000 - $800.000",
+            "Refrigeración": "$200.000 - $600.000",
+            "Mantención": "$40.000 - $100.000"
+        },
+        reseñas: [
+            { cliente: "Casa", comentario: "Aire funcionando perfecto", calificacion: 5 },
+            { cliente: "Oficina", comentario: "Instalación muy profesional", calificacion: 4 }
+        ]
+    },
+    {
+        id: 109,
+        nombre: "Gonzalo Castro López",
+        especialidad: "Climatización",
+        experiencia: 8,
+        calificacion: 4.4,
+        totalReseñas: 112,
+        tarifaPorHora: 34000,
+        avatar: "https://randomuser.me/api/portraits/men/99.jpg",
+        certificado: "Especialista Calefacción Central",
+        biografia: "Especialista en sistemas de calefacción central para edificios.",
+        servicios: ["Calefacción central", "Calderas", "Radiadores", "Ductos"],
+        tareasRealizadas: 98,
+        disponibilidad: "Lun-Sáb 8:30-17:30",
+        preciosAprox: {
+            "Calefacción central": "$800.000 - $3.000.000",
+            "Caldera": "$600.000 - $2.000.000",
+            "Radiadores": "$150.000 - $400.000"
+        },
+        reseñas: [
+            { cliente: "Edificio", comentario: "Calefacción funcionando excelente", calificacion: 4 },
+            { cliente: "Casa Grande", comentario: "Sistema muy eficiente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 110,
+        nombre: "Francisco López Silva",
+        especialidad: "Climatización",
+        experiencia: 12,
+        calificacion: 4.8,
+        totalReseñas: 189,
+        tarifaPorHora: 42000,
+        avatar: "https://randomuser.me/api/portraits/men/100.jpg",
+        certificado: "Especialista HVAC, Certificación Internacional",
+        biografia: "Especialista en sistemas HVAC completos para proyectos comerciales.",
+        servicios: ["HVAC completo", "Ventilación", "Climatización comercial", "Eficiencia energética"],
+        tareasRealizadas: 67,
+        disponibilidad: "Lun-Vie 8:00-16:00",
+        preciosAprox: {
+            "Sistema HVAC": "$2.000.000 - $8.000.000",
+            "Ventilación": "$500.000 - $2.000.000",
+            "Proyecto comercial": "$1.500.000+"
+        },
+        reseñas: [
+            { cliente: "Mall", comentario: "Sistema HVAC funcionando perfecto", calificacion: 5 },
+            { cliente: "Hotel", comentario: "Climatización muy eficiente", calificacion: 5 }
+        ]
+    },
+    {
+        id: 111,
+        nombre: "Álvaro Torres Castro",
+        especialidad: "Climatización",
+        experiencia: 5,
+        calificacion: 4.2,
+        totalReseñas: 76,
+        tarifaPorHora: 26000,
+        avatar: "https://randomuser.me/api/portraits/men/101.jpg",
+        certificado: "Técnico Ventilación, Especialista Extractores",
+        biografia: "Técnico especializado en ventilación y sistemas de extracción.",
+        servicios: ["Ventilación", "Extractores", "Campanas", "Purificadores"],
+        tareasRealizadas: 167,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Extractor": "$80.000 - $200.000",
+            "Campana": "$150.000 - $400.000",
+            "Sistema ventilación": "$200.000 - $800.000"
+        },
+        reseñas: [
+            { cliente: "Cocina", comentario: "Campana funcionando excelente", calificacion: 4 },
+            { cliente: "Baño", comentario: "Extractor muy silencioso", calificacion: 4 }
+        ]
     }
-    // Continuar con más profesionales para completar las 10 categorías...
 ];
 
 // Servicios disponibles
@@ -467,7 +2782,7 @@ const initialServices = [
         categoria: "Climatización",
         precioDesde: 35000,
         precioHasta: 800000,
-        imagen: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=400&h=300&fit=crop",
+        imagen: "https://images.unsplash.com/photo-1621905252472-e8ec1a12307c?w=400&h=300&fit=crop&crop=center",
         profesionalesDisponibles: 10,
         tiempoRespuesta: "1 - 4 hrs"
     },
@@ -602,17 +2917,18 @@ function getCurrentPage() {
 function loadInitialData() {
     console.log('Cargando datos iniciales...');
     
-    // Cargar profesionales si no existen en localStorage
-    if (!localStorage.getItem('tevp-professionals')) {
-        localStorage.setItem('tevp-professionals', JSON.stringify(initialProfessionals));
-        console.log('Profesionales guardados en localStorage');
-    }
+    // FORZAR ACTUALIZACIÓN - Limpiar datos anteriores
+    localStorage.removeItem('tevp-professionals');
+    localStorage.removeItem('tevp-services');
+    console.log('Datos anteriores limpiados para forzar actualización');
     
-    // Cargar servicios si no existen
-    if (!localStorage.getItem('tevp-services')) {
-        localStorage.setItem('tevp-services', JSON.stringify(initialServices));
-        console.log('Servicios guardados en localStorage');
-    }
+    // Cargar profesionales nuevos
+    localStorage.setItem('tevp-professionals', JSON.stringify(initialProfessionals));
+    console.log('Profesionales nuevos guardados en localStorage');
+    
+    // Cargar servicios nuevos
+    localStorage.setItem('tevp-services', JSON.stringify(initialServices));
+    console.log('Servicios nuevos guardados en localStorage');
     
     // Cargar desde localStorage
     professionals = JSON.parse(localStorage.getItem('tevp-professionals')) || initialProfessionals;
@@ -622,6 +2938,18 @@ function loadInitialData() {
     window.professionals = professionals;
     window.services = services;
     window.cart = cart;
+    
+    console.log('Datos cargados:', professionals.length + ' profesionales, ' + services.length + ' servicios');
+    
+    // Debug: Mostrar profesionales por especialidad
+    const profesionesPorEspecialidad = {};
+    professionals.forEach(prof => {
+        if (!profesionesPorEspecialidad[prof.especialidad]) {
+            profesionesPorEspecialidad[prof.especialidad] = 0;
+        }
+        profesionesPorEspecialidad[prof.especialidad]++;
+    });
+    console.log('Profesionales por especialidad:', profesionesPorEspecialidad);
     
     console.log('Datos cargados:', { professionals: professionals.length, services: services.length });
 }
@@ -694,7 +3022,11 @@ function displayFeaturedServices() {
     container.innerHTML = featuredServices.map(service => `
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 service-card">
-                <img src="${service.imagen}" class="card-img-top" alt="${service.nombre}" style="height: 200px; object-fit: cover;">
+                <img src="${service.imagen}" 
+                     class="card-img-top" 
+                     alt="${service.nombre}" 
+                     style="height: 200px; object-fit: cover;"
+                     onerror="this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop&crop=center'; console.log('Error loading image for ${service.nombre}');">
                 <div class="card-body">
                     <h5 class="card-title">${service.nombre}</h5>
                     <p class="card-text">${service.descripcion}</p>
@@ -849,7 +3181,11 @@ function displayAllServices() {
     container.innerHTML = services.map(service => `
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 service-card">
-                <img src="${service.imagen}" class="card-img-top" alt="${service.nombre}" style="height: 200px; object-fit: cover;">
+                <img src="${service.imagen}" 
+                     class="card-img-top" 
+                     alt="${service.nombre}" 
+                     style="height: 200px; object-fit: cover;"
+                     onerror="this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop&crop=center'; console.log('Error loading image for ${service.nombre}');">
                 <div class="card-body">
                     <h5 class="card-title">${service.nombre}</h5>
                     <p class="card-text">${service.descripcion}</p>
@@ -912,7 +3248,11 @@ function displayFilteredServices(filteredServices) {
     container.innerHTML = filteredServices.map(service => `
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 service-card">
-                <img src="${service.imagen}" class="card-img-top" alt="${service.nombre}" style="height: 200px; object-fit: cover;">
+                <img src="${service.imagen}" 
+                     class="card-img-top" 
+                     alt="${service.nombre}" 
+                     style="height: 200px; object-fit: cover;"
+                     onerror="this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop&crop=center'; console.log('Error loading image for ${service.nombre}');">
                 <div class="card-body">
                     <h5 class="card-title">${service.nombre}</h5>
                     <p class="card-text">${service.descripcion}</p>
@@ -2093,19 +4433,31 @@ function updateUserInterface() {
     const userNameElement = document.getElementById('user-name');
     
     console.log('Actualizando interfaz de usuario:', { isLoggedIn, userName });
+    console.log('Elementos encontrados:', { userInfo: !!userInfo, authLinks: !!authLinks, userNameElement: !!userNameElement });
     
-    if (isLoggedIn && userName && userInfo && authLinks) {
-        // Mostrar información del usuario
-        userInfo.classList.remove('d-none');
-        authLinks.style.display = 'none';
-        
+    if (isLoggedIn && userName) {
+        // Usuario logueado - mostrar perfil
+        if (userInfo) {
+            userInfo.classList.remove('d-none');
+            userInfo.style.display = 'block';
+        }
+        if (authLinks) {
+            authLinks.style.display = 'none';
+        }
         if (userNameElement) {
             userNameElement.textContent = userName;
         }
-    } else if (userInfo && authLinks) {
-        // Mostrar enlaces de login/registro
-        userInfo.classList.add('d-none');
-        authLinks.style.display = 'block';
+        console.log('Usuario logueado - mostrando perfil para:', userName);
+    } else {
+        // Usuario no logueado - mostrar enlaces de login/registro
+        if (userInfo) {
+            userInfo.classList.add('d-none');
+            userInfo.style.display = 'none';
+        }
+        if (authLinks) {
+            authLinks.style.display = 'block';
+        }
+        console.log('Usuario no logueado - mostrando enlaces de registro/login');
     }
 }
 
@@ -2198,6 +4550,7 @@ function updateProfessionalAvatars() {
     
     // Mapeo de IDs a nuevos avatares confiables
     const avatarUpdates = {
+        // Plomería
         1: "https://randomuser.me/api/portraits/men/12.jpg",
         2: "https://randomuser.me/api/portraits/men/25.jpg", 
         3: "https://randomuser.me/api/portraits/men/44.jpg",
@@ -2208,12 +4561,141 @@ function updateProfessionalAvatars() {
         8: "https://randomuser.me/api/portraits/men/18.jpg",
         9: "https://randomuser.me/api/portraits/men/29.jpg",
         10: "https://randomuser.me/api/portraits/women/41.jpg",
+        
+        // Electricidad
         11: "https://randomuser.me/api/portraits/men/71.jpg",
         12: "https://randomuser.me/api/portraits/women/52.jpg",
         13: "https://randomuser.me/api/portraits/men/83.jpg",
+        
+        // Climatización
         14: "https://randomuser.me/api/portraits/men/32.jpg",
         15: "https://randomuser.me/api/portraits/women/45.jpg",
-        16: "https://randomuser.me/api/portraits/men/67.jpg"
+        16: "https://randomuser.me/api/portraits/men/67.jpg",
+        
+        // Construcción
+        17: "https://randomuser.me/api/portraits/men/20.jpg",
+        18: "https://randomuser.me/api/portraits/men/33.jpg",
+        19: "https://randomuser.me/api/portraits/men/54.jpg",
+        20: "https://randomuser.me/api/portraits/men/41.jpg",
+        21: "https://randomuser.me/api/portraits/men/28.jpg",
+        22: "https://randomuser.me/api/portraits/men/47.jpg",
+        
+        // Soldadura
+        23: "https://randomuser.me/api/portraits/men/31.jpg",
+        24: "https://randomuser.me/api/portraits/men/42.jpg",
+        25: "https://randomuser.me/api/portraits/men/58.jpg",
+        26: "https://randomuser.me/api/portraits/men/36.jpg",
+        27: "https://randomuser.me/api/portraits/men/49.jpg",
+        
+        // Pintura
+        28: "https://randomuser.me/api/portraits/men/21.jpg",
+        29: "https://randomuser.me/api/portraits/men/34.jpg",
+        30: "https://randomuser.me/api/portraits/men/45.jpg",
+        31: "https://randomuser.me/api/portraits/men/29.jpg",
+        32: "https://randomuser.me/api/portraits/men/52.jpg",
+        33: "https://randomuser.me/api/portraits/men/38.jpg",
+        
+        // Jardinería
+        34: "https://randomuser.me/api/portraits/men/26.jpg",
+        35: "https://randomuser.me/api/portraits/men/43.jpg",
+        36: "https://randomuser.me/api/portraits/men/37.jpg",
+        37: "https://randomuser.me/api/portraits/men/50.jpg",
+        38: "https://randomuser.me/api/portraits/men/41.jpg",
+        74: "https://randomuser.me/api/portraits/men/58.jpg",
+        75: "https://randomuser.me/api/portraits/men/27.jpg",
+        
+        // Limpieza
+        39: "https://randomuser.me/api/portraits/women/24.jpg",
+        40: "https://randomuser.me/api/portraits/women/35.jpg",
+        41: "https://randomuser.me/api/portraits/women/42.jpg",
+        42: "https://randomuser.me/api/portraits/women/28.jpg",
+        43: "https://randomuser.me/api/portraits/women/31.jpg",
+        44: "https://randomuser.me/api/portraits/women/39.jpg",
+        45: "https://randomuser.me/api/portraits/women/46.jpg",
+        
+        // Seguridad
+        46: "https://randomuser.me/api/portraits/men/22.jpg",
+        47: "https://randomuser.me/api/portraits/men/53.jpg",
+        48: "https://randomuser.me/api/portraits/men/61.jpg",
+        49: "https://randomuser.me/api/portraits/men/35.jpg",
+        50: "https://randomuser.me/api/portraits/men/44.jpg",
+        51: "https://randomuser.me/api/portraits/men/48.jpg",
+        52: "https://randomuser.me/api/portraits/men/57.jpg",
+        
+        // Electrodomésticos
+        53: "https://randomuser.me/api/portraits/men/23.jpg",
+        54: "https://randomuser.me/api/portraits/men/39.jpg",
+        55: "https://randomuser.me/api/portraits/men/51.jpg",
+        56: "https://randomuser.me/api/portraits/men/33.jpg",
+        57: "https://randomuser.me/api/portraits/men/46.jpg",
+        58: "https://randomuser.me/api/portraits/men/42.jpg",
+        59: "https://randomuser.me/api/portraits/men/55.jpg",
+        
+        // Carpintería
+        60: "https://randomuser.me/api/portraits/men/24.jpg",
+        61: "https://randomuser.me/api/portraits/men/37.jpg",
+        62: "https://randomuser.me/api/portraits/men/49.jpg",
+        63: "https://randomuser.me/api/portraits/men/34.jpg",
+        64: "https://randomuser.me/api/portraits/men/56.jpg",
+        65: "https://randomuser.me/api/portraits/men/41.jpg",
+        66: "https://randomuser.me/api/portraits/men/52.jpg",
+        
+        // Cerrajería
+        67: "https://randomuser.me/api/portraits/men/25.jpg",
+        68: "https://randomuser.me/api/portraits/men/38.jpg",
+        69: "https://randomuser.me/api/portraits/men/43.jpg",
+        70: "https://randomuser.me/api/portraits/men/31.jpg",
+        71: "https://randomuser.me/api/portraits/men/47.jpg",
+        72: "https://randomuser.me/api/portraits/men/54.jpg",
+        73: "https://randomuser.me/api/portraits/men/36.jpg",
+        
+        // Gasfitería
+        76: "https://randomuser.me/api/portraits/men/60.jpg",
+        77: "https://randomuser.me/api/portraits/men/62.jpg",
+        78: "https://randomuser.me/api/portraits/men/64.jpg",
+        79: "https://randomuser.me/api/portraits/men/66.jpg",
+        80: "https://randomuser.me/api/portraits/men/68.jpg",
+        81: "https://randomuser.me/api/portraits/men/70.jpg",
+        82: "https://randomuser.me/api/portraits/men/72.jpg",
+        
+        // Refrigeración
+        83: "https://randomuser.me/api/portraits/men/74.jpg",
+        84: "https://randomuser.me/api/portraits/men/76.jpg",
+        85: "https://randomuser.me/api/portraits/men/78.jpg",
+        86: "https://randomuser.me/api/portraits/men/80.jpg",
+        87: "https://randomuser.me/api/portraits/men/82.jpg",
+        88: "https://randomuser.me/api/portraits/men/84.jpg",
+        89: "https://randomuser.me/api/portraits/men/86.jpg",
+        
+        // Calefón y Calderas
+        90: "https://randomuser.me/api/portraits/men/80.jpg",
+        91: "https://randomuser.me/api/portraits/men/81.jpg",
+        92: "https://randomuser.me/api/portraits/men/82.jpg",
+        93: "https://randomuser.me/api/portraits/men/83.jpg",
+        94: "https://randomuser.me/api/portraits/men/84.jpg",
+        95: "https://randomuser.me/api/portraits/men/85.jpg",
+        96: "https://randomuser.me/api/portraits/men/86.jpg",
+        
+        // Contadores
+        97: "https://randomuser.me/api/portraits/men/87.jpg",
+        98: "https://randomuser.me/api/portraits/men/88.jpg",
+        99: "https://randomuser.me/api/portraits/men/89.jpg",
+        100: "https://randomuser.me/api/portraits/men/90.jpg",
+        101: "https://randomuser.me/api/portraits/men/91.jpg",
+        102: "https://randomuser.me/api/portraits/men/92.jpg",
+        103: "https://randomuser.me/api/portraits/men/93.jpg",
+        
+        // Electricidad adicionales
+        104: "https://randomuser.me/api/portraits/men/94.jpg",
+        105: "https://randomuser.me/api/portraits/men/95.jpg",
+        106: "https://randomuser.me/api/portraits/men/96.jpg",
+        107: "https://randomuser.me/api/portraits/men/97.jpg",
+        
+        // Climatización adicionales
+        108: "https://randomuser.me/api/portraits/men/98.jpg",
+        109: "https://randomuser.me/api/portraits/men/99.jpg",
+        110: "https://randomuser.me/api/portraits/men/100.jpg",
+        111: "https://randomuser.me/api/portraits/men/101.jpg"
     };
     
     // Actualizar avatares en el array de profesionales
@@ -2223,5 +4705,5 @@ function updateProfessionalAvatars() {
         }
     });
     
-    console.log('Avatares actualizados correctamente');
+    console.log('Avatares actualizados correctamente para', Object.keys(avatarUpdates).length, 'profesionales');
 }
