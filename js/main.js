@@ -344,6 +344,79 @@ const initialProfessionals = [
             { cliente: "Constructora Prime", comentario: "El mejor electricista que hemos contratado", calificacion: 5 },
             { cliente: "Centro Comercial", comentario: "Maneja proyectos grandes perfectamente", calificacion: 5 }
         ]
+    },
+    // ===== CLIMATIZACIÓN (5 profesionales) =====
+    {
+        id: 14,
+        nombre: "Diego Castillo Vega",
+        especialidad: "Climatización",
+        experiencia: 9,
+        calificacion: 4.7,
+        totalReseñas: 134,
+        tarifaPorHora: 35000,
+        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+        certificado: "Técnico en Refrigeración y Climatización, Certificación HVAC",
+        biografia: "Especialista en sistemas HVAC con experiencia en instalación, mantenimiento y reparación de equipos de climatización residencial y comercial.",
+        servicios: ["Aire acondicionado", "Calefacción central", "Mantención HVAC", "Split residencial"],
+        tareasRealizadas: 287,
+        disponibilidad: "Lun-Vie 8:00-17:00, Sáb 9:00-13:00",
+        preciosAprox: {
+            "Instalación split": "$80.000 - $120.000",
+            "Mantención aire": "$25.000 - $40.000",
+            "Reparación general": "$30.000 - $60.000"
+        },
+        reseñas: [
+            { cliente: "Casa Las Condes", comentario: "Instaló mi aire acondicionado perfecto", calificacion: 5 },
+            { cliente: "Oficina Centro", comentario: "Muy profesional y ordenado", calificacion: 4 }
+        ]
+    },
+    {
+        id: 15,
+        nombre: "Patricia Muñoz Ríos",
+        especialidad: "Climatización",
+        experiencia: 11,
+        calificacion: 4.8,
+        totalReseñas: 189,
+        tarifaPorHora: 38000,
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=150&h=150&fit=crop&crop=face",
+        certificado: "Ingeniera en Refrigeración, Especialista Sistemas Industriales",
+        biografia: "Ingeniera especializada en sistemas de climatización industrial y comercial. Experta en eficiencia energética y sistemas automatizados.",
+        servicios: ["HVAC industrial", "Automatización", "Eficiencia energética", "Proyectos comerciales"],
+        tareasRealizadas: 456,
+        disponibilidad: "Lun-Vie 8:30-18:00",
+        preciosAprox: {
+            "Proyecto comercial": "$200.000 - $500.000",
+            "Sistema industrial": "$300.000 - $800.000",
+            "Consultoría": "$80.000 - $120.000"
+        },
+        reseñas: [
+            { cliente: "Mall Plaza", comentario: "Excelente trabajo en nuestro centro comercial", calificacion: 5 },
+            { cliente: "Empresa Logística", comentario: "Muy técnica y profesional", calificacion: 5 }
+        ]
+    },
+    {
+        id: 16,
+        nombre: "Andrés Herrera Cruz",
+        especialidad: "Climatización",
+        experiencia: 7,
+        calificacion: 4.5,
+        totalReseñas: 98,
+        tarifaPorHora: 32000,
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        certificado: "Técnico Climatización Residencial, Curso Splits Inverter",
+        biografia: "Técnico especializado en climatización residencial, con gran experiencia en instalación y reparación de equipos split y sistemas de calefacción.",
+        servicios: ["Split inverter", "Calefacción gas", "Mantención residencial", "Reparaciones urgentes"],
+        tareasRealizadas: 245,
+        disponibilidad: "Lun-Sáb 9:00-18:00",
+        preciosAprox: {
+            "Instalación split": "$70.000 - $100.000",
+            "Reparación split": "$25.000 - $50.000",
+            "Mantención anual": "$35.000 - $50.000"
+        },
+        reseñas: [
+            { cliente: "Departamento Providencia", comentario: "Rápido y eficiente", calificacion: 4 },
+            { cliente: "Casa Ñuñoa", comentario: "Buen precio y calidad", calificacion: 5 }
+        ]
     }
     // Continuar con más profesionales para completar las 10 categorías...
 ];
@@ -1531,6 +1604,484 @@ function removeFromCart(index) {
     }
 }
 
+// ======= FUNCIONES DE PROCESO DE PAGO =======
+
+// Función para proceder al pago
+function proceedToPayment() {
+    console.log('=== PROCEDIENDO AL PAGO ===');
+    
+    // Verificar que el usuario esté logueado
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        showAlert('Debes iniciar sesión para proceder al pago', 'warning');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+        return;
+    }
+    
+    // Verificar que haya items en el carrito
+    if (cart.length === 0) {
+        showAlert('Tu carrito está vacío. Agrega servicios antes de proceder al pago.', 'warning');
+        return;
+    }
+    
+    console.log('Procediendo al pago con', cart.length, 'servicios');
+    
+    // Cerrar el modal del carrito
+    const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+    if (cartModal) {
+        cartModal.hide();
+    }
+    
+    // Crear página de pago dinámicamente
+    createPaymentPage();
+}
+
+// Función para crear la página de pago
+function createPaymentPage() {
+    console.log('Creando página de pago...');
+    
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    
+    // Crear HTML de la página de pago
+    const paymentHTML = `
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4><i class="fas fa-credit-card me-2"></i>Proceso de Pago</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="payment-form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Información Personal</h5>
+                                        <div class="mb-3">
+                                            <label class="form-label">Nombre Completo</label>
+                                            <input type="text" class="form-control" value="${userName}" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" value="${userEmail}" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Teléfono *</label>
+                                            <input type="tel" class="form-control" required placeholder="Ej: +56 9 1234 5678">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Dirección del Servicio *</label>
+                                            <textarea class="form-control" required placeholder="Dirección donde se realizará el servicio"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Método de Pago</h5>
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" value="card" checked>
+                                                <label class="form-check-label">
+                                                    <i class="fas fa-credit-card me-2"></i>Tarjeta de Crédito/Débito
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" value="transfer">
+                                                <label class="form-check-label">
+                                                    <i class="fas fa-university me-2"></i>Transferencia Bancaria
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div id="card-details">
+                                            <div class="mb-3">
+                                                <label class="form-label">Número de Tarjeta *</label>
+                                                <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label class="form-label">Vencimiento *</label>
+                                                    <input type="text" id="card-expiry" class="form-control" placeholder="03/30" maxlength="5" required>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label">CVV *</label>
+                                                    <input type="text" id="card-cvv" class="form-control" placeholder="123" maxlength="4" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="goBackToCart()">
+                                        <i class="fas fa-arrow-left me-2"></i>Volver al Carrito
+                                    </button>
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <i class="fas fa-check me-2"></i>Confirmar Pago ($${total.toLocaleString()})
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-receipt me-2"></i>Resumen del Pedido</h5>
+                        </div>
+                        <div class="card-body">
+                            ${cart.map(item => `
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div>
+                                        <strong>${item.professionalName}</strong><br>
+                                        <small class="text-muted">${item.service}</small>
+                                    </div>
+                                    <div class="text-end">
+                                        $${item.price.toLocaleString()}
+                                    </div>
+                                </div>
+                                <hr>
+                            `).join('')}
+                            <div class="d-flex justify-content-between">
+                                <strong>Total:</strong>
+                                <strong class="text-primary">$${total.toLocaleString()}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Mostrar en un nuevo modal
+    showPaymentModal(paymentHTML);
+}
+
+// Función para mostrar el modal de pago
+function showPaymentModal(paymentHTML) {
+    // Crear modal dinámico
+    const modalHTML = `
+        <div class="modal fade" id="paymentModal" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-credit-card me-2"></i>Proceso de Pago - TEVP
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        ${paymentHTML}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Agregar modal al DOM
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Mostrar modal
+    const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+    paymentModal.show();
+    
+    // Agregar evento para el formulario
+    document.getElementById('payment-form').addEventListener('submit', handlePaymentSubmit);
+    
+    // Agregar formato automático para campos de tarjeta
+    setupCardFormatting();
+}
+
+// Función para manejar el envío del pago
+function handlePaymentSubmit(e) {
+    e.preventDefault();
+    
+    console.log('Procesando pago...');
+    showAlert('Procesando pago...', 'info');
+    
+    // Capturar datos del formulario
+    const formData = new FormData(e.target);
+    const paymentData = {
+        phone: e.target.querySelector('input[type="tel"]').value,
+        address: e.target.querySelector('textarea').value,
+        cardNumber: document.getElementById('card-number').value,
+        cardExpiry: document.getElementById('card-expiry').value,
+        paymentMethod: e.target.querySelector('input[name="paymentMethod"]:checked').value,
+        timestamp: new Date(),
+        services: [...cart],
+        total: cart.reduce((sum, item) => sum + item.price, 0),
+        userName: localStorage.getItem('userName'),
+        userEmail: localStorage.getItem('userEmail')
+    };
+    
+    // Simular procesamiento de pago
+    setTimeout(() => {
+        // Cerrar modal de pago
+        const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+        if (paymentModal) {
+            paymentModal.hide();
+        }
+        
+        // Generar comprobante de pago
+        generatePaymentReceipt(paymentData);
+        
+        // Limpiar carrito después del pago exitoso
+        cart = [];
+        localStorage.setItem('tevp-cart', JSON.stringify(cart));
+        updateCartCounter();
+        
+        console.log('Pago completado y carrito limpiado');
+    }, 2000);
+}
+
+// Función para generar comprobante de pago
+function generatePaymentReceipt(paymentData) {
+    console.log('Generando comprobante de pago...');
+    
+    const receiptNumber = 'TEVP-' + Date.now();
+    const currentDate = new Date().toLocaleDateString('es-CL');
+    const currentTime = new Date().toLocaleTimeString('es-CL');
+    
+    const receiptHTML = `
+        <div class="receipt-container" style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+            <div class="receipt-header text-center mb-4">
+                <h2 class="text-primary"><i class="fas fa-tools me-2"></i>TEVP</h2>
+                <h4>Comprobante de Pago</h4>
+                <p class="text-muted">Servicios Técnicos y de Reparación</p>
+            </div>
+            
+            <div class="receipt-info mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Número de Transacción:</strong><br>
+                        ${receiptNumber}
+                    </div>
+                    <div class="col-6 text-end">
+                        <strong>Fecha:</strong><br>
+                        ${currentDate} - ${currentTime}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="customer-info mb-4">
+                <h5><i class="fas fa-user me-2"></i>Información del Cliente</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Nombre:</strong> ${paymentData.userName}<br>
+                        <strong>Email:</strong> ${paymentData.userEmail}
+                    </div>
+                    <div class="col-6">
+                        <strong>Teléfono:</strong> ${paymentData.phone}<br>
+                        <strong>Dirección del Servicio:</strong><br>
+                        ${paymentData.address}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-info mb-4">
+                <h5><i class="fas fa-list me-2"></i>Servicios Contratados</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Profesional</th>
+                                <th>Especialidad</th>
+                                <th>Calificación</th>
+                                <th class="text-end">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${paymentData.services.map(service => `
+                                <tr>
+                                    <td>${service.professionalName}</td>
+                                    <td>${service.service}</td>
+                                    <td>
+                                        <i class="fas fa-star text-warning"></i> ${service.rating || '4.5'}
+                                    </td>
+                                    <td class="text-end">$${service.price.toLocaleString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                        <tfoot class="table-dark">
+                            <tr>
+                                <th colspan="3" class="text-end">TOTAL:</th>
+                                <th class="text-end">$${paymentData.total.toLocaleString()}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="payment-info mb-4">
+                <h5><i class="fas fa-credit-card me-2"></i>Información de Pago</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Método de Pago:</strong><br>
+                        ${paymentData.paymentMethod === 'card' ? 
+                            '<i class="fas fa-credit-card me-1"></i>Tarjeta de Crédito/Débito' : 
+                            '<i class="fas fa-university me-1"></i>Transferencia Bancaria'}
+                    </div>
+                    <div class="col-6">
+                        ${paymentData.paymentMethod === 'card' ? 
+                            `<strong>Tarjeta:</strong><br>****${paymentData.cardNumber.slice(-4)}` : 
+                            '<strong>Estado:</strong><br>Pendiente confirmación'}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="receipt-footer text-center">
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>¡Pago Procesado Exitosamente!</strong>
+                </div>
+                <p class="text-muted small mb-4">
+                    Te contactaremos pronto para coordinar la fecha y hora del servicio.<br>
+                    Guarda este comprobante para tus registros.
+                </p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-primary" onclick="printReceipt()">
+                        <i class="fas fa-print me-2"></i>Imprimir
+                    </button>
+                    <button class="btn btn-success" onclick="downloadReceipt()">
+                        <i class="fas fa-download me-2"></i>Descargar
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeReceipt()">
+                        <i class="fas fa-times me-2"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Mostrar comprobante en modal
+    showReceiptModal(receiptHTML);
+}
+
+// Función para mostrar el modal del comprobante
+function showReceiptModal(receiptHTML) {
+    const receiptModalHTML = `
+        <div class="modal fade" id="receiptModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-receipt me-2"></i>Comprobante de Pago - TEVP
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="receipt-content">
+                        ${receiptHTML}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remover modal anterior si existe
+    const existingModal = document.getElementById('receiptModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Agregar nuevo modal al DOM
+    document.body.insertAdjacentHTML('beforeend', receiptModalHTML);
+    
+    // Mostrar modal
+    const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+    receiptModal.show();
+}
+
+// Funciones para el comprobante
+function printReceipt() {
+    const receiptContent = document.getElementById('receipt-content').innerHTML;
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Comprobante TEVP</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            </head>
+            <body>
+                ${receiptContent}
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+}
+
+function downloadReceipt() {
+    showAlert('Función de descarga será implementada próximamente', 'info');
+}
+
+function closeReceipt() {
+    const receiptModal = bootstrap.Modal.getInstance(document.getElementById('receiptModal'));
+    if (receiptModal) {
+        receiptModal.hide();
+    }
+}
+
+// Función para volver al carrito
+function goBackToCart() {
+    const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+    if (paymentModal) {
+        paymentModal.hide();
+    }
+    
+    // Mostrar modal del carrito nuevamente
+    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    loadCartModal();
+    cartModal.show();
+}
+
+// Función para configurar el formato automático de campos de tarjeta
+function setupCardFormatting() {
+    console.log('Configurando formato de tarjeta...');
+    
+    // Formato para número de tarjeta (XXXX XXXX XXXX XXXX)
+    const cardNumberInput = document.getElementById('card-number');
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            if (formattedValue !== e.target.value) {
+                e.target.value = formattedValue;
+            }
+        });
+    }
+    
+    // Formato para fecha de vencimiento (MM/AA)
+    const cardExpiryInput = document.getElementById('card-expiry');
+    if (cardExpiryInput) {
+        cardExpiryInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Solo números
+            
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            
+            e.target.value = value;
+        });
+    }
+    
+    // Formato para CVV (solo números)
+    const cardCvvInput = document.getElementById('card-cvv');
+    if (cardCvvInput) {
+        cardCvvInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+    }
+}
+
+// Hacer funciones de pago globalmente accesibles
+window.proceedToPayment = proceedToPayment;
+window.goBackToCart = goBackToCart;
+window.handlePaymentSubmit = handlePaymentSubmit;
+window.printReceipt = printReceipt;
+window.downloadReceipt = downloadReceipt;
+window.closeReceipt = closeReceipt;
+
 // ======= FUNCIONES DE MANEJO DE USUARIO =======
 
 // Función para mostrar información del usuario logueado
@@ -1598,7 +2149,8 @@ function showUserOrders() {
 
 // Función loginSuccess actualizada con interfaz de usuario
 function loginSuccess(userData, redirectUrl) {
-    console.log('Login exitoso:', userData);
+    console.log('=== LOGIN EXITOSO ===');
+    console.log('Datos del usuario:', userData);
     
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('userRole', userData.role);
@@ -1606,16 +2158,27 @@ function loginSuccess(userData, redirectUrl) {
     localStorage.setItem('userEmail', userData.email);
     
     showLoginSpinner(false);
-    showAlert(`¡Bienvenido ${userData.name}!`, 'success');
     
-    // Actualizar interfaz después de un pequeño delay para permitir que se guarde en localStorage
-    setTimeout(() => {
+    // Si estamos en la página de login, actualizar inmediatamente sin recargar
+    const currentPage = getCurrentPage();
+    if (currentPage === 'login.html') {
+        showAlert(`¡Bienvenido ${userData.name}! Redirigiendo...`, 'success');
+        
+        // Actualizar interfaz inmediatamente
+        setTimeout(() => {
+            updateUserInterface();
+        }, 100);
+        
+        // Redirigir después de actualizar la interfaz
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 1500);
+    } else {
+        // Si no estamos en login, actualizar interfaz sin redirigir
+        showAlert(`¡Bienvenido ${userData.name}!`, 'success');
         updateUserInterface();
-    }, 100);
-    
-    setTimeout(() => {
-        window.location.href = redirectUrl;
-    }, 1500);
+        console.log('Interfaz actualizada sin recarga');
+    }
 }
 
 // Inicializar aplicación cuando el DOM esté listo
