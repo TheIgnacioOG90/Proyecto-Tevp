@@ -238,13 +238,25 @@
 
         // Función de acceso rápido para login
         function quickLogin(email, password) {
+            console.log('QuickLogin llamado con:', email);
+            
             document.getElementById('email').value = email;
             document.getElementById('password').value = password;
             
-            // Disparar el evento de submit del formulario
+            // Disparar validación y submit manualmente
             setTimeout(() => {
-                document.getElementById('login-form').dispatchEvent(new Event('submit'));
-            }, 100);
+                const loginForm = document.getElementById('login-form');
+                if (loginForm) {
+                    // Crear y disparar el evento submit
+                    const submitEvent = new Event('submit', {
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    loginForm.dispatchEvent(submitEvent);
+                } else {
+                    console.error('Formulario no encontrado');
+                }
+            }, 200);
         }
 
         // Crear usuarios de prueba si no existen

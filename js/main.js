@@ -500,6 +500,9 @@ function initApp() {
         default:
             console.log('Página no reconocida:', currentPage);
     }
+    
+    // Actualizar contador del carrito en todas las páginas
+    updateCartCounter();
 }
 
 // Obtener página actual
@@ -873,10 +876,11 @@ function logout() {
 
 // Función para autenticar usuario
 function authenticateUser(email, password) {
-    console.log('Intentando autenticar:', email);
+    console.log('Intentando autenticar:', email, 'Password length:', password.length);
     
     // Credenciales de administrador
     if (email === 'admin@tevp.cl' && password === 'admin123') {
+        console.log('Login como admin detectado');
         loginSuccess({
             email: email,
             role: 'admin',
@@ -887,6 +891,7 @@ function authenticateUser(email, password) {
     
     // Credenciales de vendedor
     if (email === 'vendedor@tevp.cl' && password === 'vend123') {
+        console.log('Login como vendedor detectado');
         loginSuccess({
             email: email,
             role: 'vendedor',
@@ -903,8 +908,10 @@ function authenticateUser(email, password) {
         { email: 'test@gmail.com', password: 'test', name: 'Usuario Prueba' }
     ];
     
+    console.log('Buscando en clientes de prueba...');
     const testClient = testClients.find(c => c.email === email && c.password === password);
     if (testClient) {
+        console.log('Cliente de prueba encontrado:', testClient.name);
         loginSuccess({
             email: testClient.email,
             role: 'cliente',
@@ -994,12 +1001,15 @@ function enhanceLoginForm() {
 
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        console.log('Formulario enviado');
+        console.log('Formulario de login enviado - evento capturado');
         
         const email = emailInput?.value?.trim() || '';
         const password = passwordInput?.value || '';
         
-        console.log('Datos del formulario:', { email, password: password ? '[PRESENTE]' : '[VACÍO]' });
+        console.log('Datos del formulario:', { 
+            email: email, 
+            password: password ? '[PRESENTE - ' + password.length + ' chars]' : '[VACÍO]' 
+        });
         
         // Limpiar errores previos
         clearAllErrors();
@@ -1011,9 +1021,12 @@ function enhanceLoginForm() {
         if (!validatePassword()) hasErrors = true;
         
         if (hasErrors) {
+            console.log('Errores de validación encontrados');
             showAlert('Por favor, corrige los errores en el formulario', 'warning');
             return;
         }
+        
+        console.log('Validación pasada, iniciando autenticación...');
         
         // Mostrar spinner de carga
         showLoginSpinner(true);
@@ -1075,8 +1088,47 @@ function validatePassword() {
 // Funciones de utilidades
 function showAlert(message, type = 'info') {
     console.log(`Alert [${type}]:`, message);
-    // Implementación básica de alerta
-    alert(message);
+    
+    // Crear elemento de alerta
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${getBootstrapType(type)} alert-dismissible fade show position-fixed`;
+    alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    
+    alertDiv.innerHTML = `
+        <i class="fas fa-${getAlertIcon(type)} me-2"></i>
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Agregar al body
+    document.body.appendChild(alertDiv);
+    
+    // Auto-remover después de 5 segundos
+    setTimeout(() => {
+        if (alertDiv && alertDiv.parentNode) {
+            alertDiv.parentNode.removeChild(alertDiv);
+        }
+    }, 5000);
+}
+
+function getBootstrapType(type) {
+    const typeMap = {
+        'error': 'danger',
+        'success': 'success',
+        'warning': 'warning',
+        'info': 'info'
+    };
+    return typeMap[type] || 'info';
+}
+
+function getAlertIcon(type) {
+    const iconMap = {
+        'error': 'exclamation-triangle',
+        'success': 'check-circle',
+        'warning': 'exclamation-circle',
+        'info': 'info-circle'
+    };
+    return iconMap[type] || 'info-circle';
 }
 
 function showLoginSpinner(show) {
@@ -1132,7 +1184,215 @@ function initLoginPage() {
 
 function initProfessionalsPage() {
     console.log('Iniciando página de profesionales');
-    // Aquí se cargarían los profesionales si la página existe
+    
+    // Obtener categoría desde URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoria = urlParams.get('categoria');
+    
+    console.log('Categoría seleccionada:', categoria);
+    
+    // Mostrar profesionales filtrados
+    if (categoria) {
+        displayProfessionalsByCategory(categoria);
+    } else {
+        displayAllProfessionals();
+    }
+}
+
+// Mostrar todos los profesionales
+function displayAllProfessionals() {
+    const container = document.getElementById('professionals-container') || 
+                      document.getElementById('professionals-grid') ||
+                      document.getElementById('productos-lista');
+    if (!container) {
+        console.log('Container de profesionales no encontrado');
+        return;
+    }
+    
+    console.log('Mostrando todos los profesionales:', professionals.length);
+    
+    container.innerHTML = professionals.map(professional => createDetailedProfessionalCard(professional)).join('');
+}
+
+// Mostrar profesionales por categoría
+function displayProfessionalsByCategory(categoria) {
+    const container = document.getElementById('professionals-container') || 
+                      document.getElementById('professionals-grid') ||
+                      document.getElementById('productos-lista');
+    if (!container) {
+        console.log('Container de profesionales no encontrado');
+        return;
+    }
+    
+    const filteredProfessionals = professionals.filter(p => p.especialidad === categoria);
+    console.log(`Profesionales de ${categoria}:`, filteredProfessionals.length);
+    
+    // Actualizar título si existe
+    const titleElement = document.getElementById('category-title') || document.getElementById('page-title');
+    if (titleElement) {
+        titleElement.textContent = `Profesionales de ${categoria}`;
+    }
+    
+    // Actualizar descripción si existe
+    const descElement = document.getElementById('category-description');
+    if (descElement) {
+        descElement.textContent = `${filteredProfessionals.length} profesionales especializados en ${categoria}`;
+    }
+    
+    if (filteredProfessionals.length === 0) {
+        container.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No hay profesionales disponibles en la categoría <strong>${categoria}</strong>
+                </div>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = filteredProfessionals.map(professional => createDetailedProfessionalCard(professional)).join('');
+}
+
+// Crear tarjeta detallada de profesional (para página de profesionales)
+function createDetailedProfessionalCard(professional) {
+    const avgRating = professional.calificacion || 0;
+    const totalReviews = professional.totalReseñas || 0;
+    
+    return `
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 professional-card">
+                <div class="card-header text-center">
+                    <img src="${professional.avatar}" alt="${professional.nombre}" 
+                         class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <h5 class="card-title mb-1">${professional.nombre}</h5>
+                    <span class="badge bg-${getColorForCategory(professional.especialidad)} mb-2">${professional.especialidad}</span>
+                    <div class="rating mb-2">
+                        ${generateStarRating(avgRating)}
+                        <span class="ms-1 text-muted">${avgRating} (${totalReviews} reseñas)</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small><strong>Experiencia:</strong></small>
+                            <span class="badge bg-primary">${professional.experiencia} años</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small><strong>Tarifa por hora:</strong></small>
+                            <span class="price-highlight">$${professional.tarifaPorHora.toLocaleString()}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small><strong>Trabajos realizados:</strong></small>
+                            <span class="badge bg-success">${professional.tareasRealizadas}</span>
+                        </div>
+                    </div>
+                    
+                    <p class="card-text small">${professional.biografia}</p>
+                    
+                    <div class="mb-3">
+                        <strong class="small">Servicios:</strong>
+                        <div class="mt-1">
+                            ${professional.servicios.map(servicio => 
+                                `<span class="badge bg-light text-dark me-1 mb-1">${servicio}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong class="small">Disponibilidad:</strong>
+                        <p class="small text-muted mb-0">${professional.disponibilidad}</p>
+                    </div>
+                    
+                    <!-- Reseñas recientes -->
+                    ${professional.reseñas && professional.reseñas.length > 0 ? `
+                        <div class="recent-reviews">
+                            <strong class="small">Reseñas recientes:</strong>
+                            ${professional.reseñas.slice(0, 2).map(review => `
+                                <div class="review-item small border-start border-primary ps-2 mt-1 mb-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <strong>${review.cliente}</strong>
+                                        <div class="rating-stars">${generateStarRating(review.calificacion, 'sm')}</div>
+                                    </div>
+                                    <p class="mb-0 text-muted fst-italic">"${review.comentario}"</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p class="text-muted small">Sin reseñas aún</p>'}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success w-100" onclick="hireProfessional(${professional.id})">
+                        <i class="fas fa-handshake me-2"></i>Contratar Servicio
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Contratar profesional (agregar al carrito)
+function hireProfessional(professionalId) {
+    const professional = professionals.find(p => p.id === professionalId);
+    if (!professional) {
+        console.log('Profesional no encontrado:', professionalId);
+        return;
+    }
+    
+    // Verificar si el usuario está logueado
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        showAlert('Debes iniciar sesión para contratar un servicio', 'warning');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+        return;
+    }
+    
+    // Agregar al carrito
+    const cartItem = {
+        id: Date.now(), // ID único para el item del carrito
+        professionalId: professional.id,
+        professionalName: professional.nombre,
+        service: professional.especialidad,
+        price: professional.tarifaPorHora,
+        quantity: 1,
+        date: new Date().toISOString()
+    };
+    
+    cart.push(cartItem);
+    localStorage.setItem('tevp-cart', JSON.stringify(cart));
+    
+    console.log('Profesional agregado al carrito:', cartItem);
+    showAlert(`${professional.nombre} agregado al carrito exitosamente!`, 'success');
+    
+    // Actualizar contador del carrito
+    updateCartCounter();
+}
+
+// Actualizar contador del carrito
+function updateCartCounter() {
+    const cartCounter = document.querySelector('.cart-count');
+    if (cartCounter) {
+        cartCounter.textContent = cart.length;
+    }
+}
+
+// Cargar modal del carrito
+function loadCartModal() {
+    console.log('Cargando modal del carrito. Items:', cart.length);
+    
+    // Aquí podrías agregar la lógica para mostrar los items del carrito
+    // Por ahora solo mostramos un alert con la información
+    if (cart.length === 0) {
+        showAlert('Tu carrito está vacío', 'info');
+        return;
+    }
+    
+    const cartSummary = cart.map(item => 
+        `${item.professionalName} - ${item.service} ($${item.price.toLocaleString()})`
+    ).join('\n');
+    
+    alert(`Carrito (${cart.length} items):\n\n${cartSummary}`);
 }
 
 // Inicializar aplicación cuando el DOM esté listo
