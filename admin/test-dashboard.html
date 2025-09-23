@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard</title>
+    <style>
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .nav-link { cursor: pointer; margin: 10px; padding: 10px; background: #007bff; color: white; text-decoration: none; }
+        .nav-link.active { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Test de Navegación Dashboard</h1>
+    
+    <div class="navigation">
+        <a class="nav-link active" href="#" onclick="return showSection('dashboard', this);">Dashboard</a>
+        <a class="nav-link" href="#" onclick="return showSection('ordenes', this);">Órdenes</a>
+        <a class="nav-link" href="#" onclick="return showSection('reportes', this);">Reportes</a>
+        <a class="nav-link" href="#" onclick="return showSection('inventario', this);">Inventario</a>
+    </div>
+    
+    <div id="dashboard-section" class="content-section active">
+        <h2>Dashboard</h2>
+        <p>Esta es la sección del dashboard</p>
+    </div>
+    
+    <div id="ordenes-section" class="content-section">
+        <h2>Órdenes</h2>
+        <p>Esta es la sección de órdenes/pedidos</p>
+    </div>
+    
+    <div id="reportes-section" class="content-section">
+        <h2>Reportes</h2>
+        <p>Esta es la sección de reportes</p>
+    </div>
+    
+    <div id="inventario-section" class="content-section">
+        <h2>Inventario</h2>
+        <p>Esta es la sección de inventario</p>
+    </div>
+    
+    <script>
+        function showSection(sectionName, element) {
+            console.log('showSection llamado con:', sectionName, element);
+            
+            try {
+                // Prevenir comportamiento default
+                if (event && event.preventDefault) {
+                    event.preventDefault();
+                }
+                
+                // Ocultar todas las secciones
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Mostrar sección seleccionada
+                const targetSectionId = sectionName + '-section';
+                const targetSection = document.getElementById(targetSectionId);
+                
+                console.log('Buscando sección:', targetSectionId);
+                console.log('Sección encontrada:', targetSection);
+                
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    console.log('Sección activada:', targetSectionId);
+                } else {
+                    console.error('No se encontró la sección:', targetSectionId);
+                    return false;
+                }
+                
+                // Actualizar navegación
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                if (element) {
+                    element.classList.add('active');
+                }
+                
+                return false;
+                
+            } catch (error) {
+                console.error('Error en showSection:', error);
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

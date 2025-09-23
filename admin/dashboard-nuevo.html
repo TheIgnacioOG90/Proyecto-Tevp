@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Panel Administrativo - TEVP (NUEVO)</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 15px 20px;
+            border: none;
+            border-radius: 0;
+            margin: 2px 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-left: 4px solid #ffd700;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-tevp {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+        }
+
+        .btn-tevp:hover {
+            background: linear-gradient(90deg, #2980b9, #1abc9c);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h4><i class="fas fa-shield-alt me-2"></i>TEVP Admin</h4>
+        </div>
+        
+        <nav>
+            <div class="nav-link active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            </div>
+            <div class="nav-link" data-section="ordenes">
+                <i class="fas fa-shopping-cart me-2"></i>Pedidos/Órdenes
+            </div>
+            <div class="nav-link" data-section="reportes">
+                <i class="fas fa-chart-bar me-2"></i>Reportes
+            </div>
+            <div class="nav-link" data-section="inventario">
+                <i class="fas fa-boxes me-2"></i>Inventario
+            </div>
+            <div class="nav-link" data-section="empleados">
+                <i class="fas fa-users-cog me-2"></i>Empleados
+            </div>
+            <div class="nav-link" data-section="clientes">
+                <i class="fas fa-users me-2"></i>Clientes
+            </div>
+        </nav>
+        
+        <div class="mt-auto p-3">
+            <button class="btn btn-outline-light btn-sm w-100" onclick="logoutAdmin()">
+                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="content-section active">
+            <div class="section-header">
+                <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard General</h2>
+                <p class="mb-0">Resumen ejecutivo de la plataforma TEVP</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-shopping-cart fa-2x mb-3"></i>
+                        <h3>1,245</h3>
+                        <p>Órdenes Totales</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-dollar-sign fa-2x mb-3"></i>
+                        <h3>$2.5M</h3>
+                        <p>Ingresos</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-users fa-2x mb-3"></i>
+                        <h3>856</h3>
+                        <p>Clientes</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-tools fa-2x mb-3"></i>
+                        <h3>124</h3>
+                        <p>Profesionales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Órdenes Section -->
+        <div id="ordenes-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-shopping-cart me-2"></i>Gestión de Pedidos/Órdenes</h2>
+                <p class="mb-0">Administrar todas las órdenes de servicios</p>
+            </div>
+
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Lista de Órdenes Activas</h5>
+                    <button class="btn btn-tevp">
+                        <i class="fas fa-plus me-2"></i>Nueva Orden
+                    </button>
+                </div>
+                
+                <table class="table table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#001</td>
+                            <td>Juan Pérez</td>
+                            <td>Plomería</td>
+                            <td>2024-03-15</td>
+                            <td><span class="badge bg-warning">Pendiente</span></td>
+                            <td>$85.000</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Ver</button>
+                                <button class="btn btn-sm btn-success">Completar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#002</td>
+                            <td>María González</td>
+                            <td>Electricidad</td>
+                            <td>2024-03-14</td>
+                            <td><span class="badge bg-info">En Proceso</span></td>
+                            <td>$120.000</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Ver</button>
+                                <button class="btn btn-sm btn-success">Completar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Reportes Section -->
+        <div id="reportes-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar me-2"></i>Reportes y Estadísticas</h2>
+                <p class="mb-0">Análisis de rendimiento y métricas</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="table-container">
+                        <h5><i class="fas fa-calendar-week me-2"></i>Reporte Semanal</h5>
+                        <p>Ventas y servicios completados esta semana</p>
+                        <canvas id="weeklyChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-container">
+                        <h5><i class="fas fa-calendar-month me-2"></i>Reporte Mensual</h5>
+                        <p>Rendimiento del mes actual</p>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <h4 class="text-primary">45</h4>
+                                <small>Servicios</small>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="text-success">$890K</h4>
+                                <small>Ingresos</small>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="text-warning">23</h4>
+                                <small>Nuevos Clientes</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Exportar Reportes</h5>
+                    <div>
+                        <button class="btn btn-tevp me-2">
+                            <i class="fas fa-file-excel me-1"></i>Excel
+                        </button>
+                        <button class="btn btn-tevp">
+                            <i class="fas fa-file-pdf me-1"></i>PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventario Section -->
+        <div id="inventario-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-boxes me-2"></i>Inventario</h2>
+                <p class="mb-0">Gestión de materiales y herramientas</p>
+            </div>
+
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Control de Stock</h5>
+                    <button class="btn btn-tevp">
+                        <i class="fas fa-plus me-2"></i>Agregar Item
+                    </button>
+                </div>
+                
+                <table class="table table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INV001</td>
+                            <td>Tubería PVC 1/2"</td>
+                            <td>Plomería</td>
+                            <td>45</td>
+                            <td>$2.500</td>
+                            <td><span class="badge bg-success">Disponible</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning">Editar</button>
+                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Empleados Section -->
+        <div id="empleados-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-users-cog me-2"></i>Empleados</h2>
+                <p class="mb-0">Gestión del personal y profesionales</p>
+            </div>
+
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Lista de Empleados</h5>
+                    <button class="btn btn-tevp">
+                        <i class="fas fa-user-plus me-2"></i>Nuevo Empleado
+                    </button>
+                </div>
+                
+                <table class="table table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EMP001</td>
+                            <td>Carlos Rodríguez</td>
+                            <td>Plomero</td>
+                            <td>carlos@tevp.com</td>
+                            <td>+56 9 1234 5678</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Ver</button>
+                                <button class="btn btn-sm btn-warning">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Clientes Section -->
+        <div id="clientes-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-users me-2"></i>Clientes</h2>
+                <p class="mb-0">Base de datos de clientes</p>
+            </div>
+
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Lista de Clientes</h5>
+                    <button class="btn btn-tevp">
+                        <i class="fas fa-user-plus me-2"></i>Nuevo Cliente
+                    </button>
+                </div>
+                
+                <table class="table table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Órdenes</th>
+                            <th>Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CLI001</td>
+                            <td>Ana Martínez</td>
+                            <td>ana@email.com</td>
+                            <td>+56 9 8765 4321</td>
+                            <td>3</td>
+                            <td>2024-01-15</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Ver</button>
+                                <button class="btn btn-sm btn-warning">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sistema de navegación mejorado
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Dashboard cargado correctamente');
+            
+            // Obtener todos los enlaces de navegación
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            console.log('Enlaces de navegación encontrados:', navLinks.length);
+            
+            // Agregar event listeners
+            navLinks.forEach((link, index) => {
+                const sectionName = link.getAttribute('data-section');
+                console.log(`Enlace ${index + 1}: ${sectionName}`);
+                
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log(`🎯 Click en: ${sectionName}`);
+                    showSection(sectionName, this);
+                });
+            });
+            
+            console.log('✅ Event listeners configurados');
+        });
+
+        function showSection(sectionName, clickedElement) {
+            console.log('=== INICIO showSection ===');
+            console.log('Sección solicitada:', sectionName);
+            
+            // 1. Ocultar todas las secciones
+            const allSections = document.querySelectorAll('.content-section');
+            console.log('Total de secciones:', allSections.length);
+            
+            allSections.forEach((section, index) => {
+                section.classList.remove('active');
+                console.log(`Sección ${index + 1} desactivada: ${section.id}`);
+            });
+            
+            // 2. Mostrar la sección solicitada
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+                console.log('✅ Sección activada:', sectionName + '-section');
+            } else {
+                console.error('❌ ERROR: Sección no encontrada:', sectionName + '-section');
+                return;
+            }
+            
+            // 3. Actualizar navegación
+            const allNavLinks = document.querySelectorAll('.sidebar .nav-link');
+            allNavLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+                console.log('✅ Navegación actualizada');
+            }
+            
+            console.log('=== FIN showSection ===');
+        }
+        
+        function logoutAdmin() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'login-admin.html';
+            }
+        }
+    </script>
+</body>
+</html>

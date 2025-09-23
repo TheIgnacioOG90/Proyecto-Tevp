@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Panel Administrativo - TEVP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #f8f9fa; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            min-height: calc(100vh - 80px);
+            color: white;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 250px;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+            margin-top: 80px;
+        }
+        
+        .navbar-admin {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            height: 80px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link-sidebar {
+            color: rgba(255,255,255,0.8);
+            padding: 1rem 1.5rem;
+            border-radius: 0;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-link-sidebar:hover, .nav-link-sidebar.active {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+        
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stats-card {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: none;
+            height: 150px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stats-card.success { background: linear-gradient(45deg, #27ae60, #2ecc71); }
+        .stats-card.warning { background: linear-gradient(45deg, #f39c12, #e67e22); }
+        .stats-card.danger { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+        
+        .table-admin {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .table-admin th {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 1rem;
+        }
+        
+        .table-admin td {
+            padding: 1rem;
+            border-color: #ecf0f1;
+            vertical-align: middle;
+        }
+        
+        .btn-admin {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-admin:hover {
+            transform: translateY(-1px);
+        }
+        
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-pendiente { background: #fff3cd; color: #856404; }
+        .status-completado { background: #d1edff; color: #004085; }
+        .status-cancelado { background: #f8d7da; color: #721c24; }
+        .status-activo { background: #d4edda; color: #155724; }
+        .status-inactivo { background: #f8d7da; color: #721c24; }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box .form-control {
+            border-radius: 25px;
+            padding-left: 3rem;
+            border: 2px solid #e9ecef;
+        }
+        
+        .search-box .fas {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .modal-admin .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .modal-admin .modal-header {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-admin fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-shield-alt me-2"></i>Panel Administrativo TEVP
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" 
+                             class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                        <span id="adminUserName">Administrador</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3">
+            <nav class="nav flex-column">
+                <a class="nav-link nav-link-sidebar active" href="javascript:void(0);" onclick="showSection('dashboard', this);">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a class="nav-link nav-link-sidebar" href="javascript:void(0);" onclick="showSection('ordenes', this);">
+                    <i class="fas fa-shopping-cart me-2"></i>Órdenes
+                </a>
+                <a class="nav-link nav-link-sidebar" href="javascript:void(0);" onclick="showSection('inventario', this);">
+                    <i class="fas fa-boxes me-2"></i>Inventario
+                </a>
+                <a class="nav-link nav-link-sidebar" href="javascript:void(0);" onclick="showSection('reportes', this);">
+                    <i class="fas fa-chart-bar me-2"></i>Reportes
+                </a>
+                <a class="nav-link nav-link-sidebar" href="javascript:void(0);" onclick="showSection('empleados', this);">
+                    <i class="fas fa-users-cog me-2"></i>Empleados
+                </a>
+                <a class="nav-link nav-link-sidebar" href="javascript:void(0);" onclick="showSection('clientes', this);">
+                    <i class="fas fa-users me-2"></i>Clientes
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="content-section active">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard General</h2>
+                <div class="text-muted">
+                    <i class="fas fa-calendar me-1"></i><span id="currentDate"></span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card stats-card">
+                        <div>
+                            <i class="fas fa-shopping-cart fa-2x mb-2 opacity-75"></i>
+                            <h3 class="mb-1">1,245</h3>
+                            <p class="mb-0">Órdenes Totales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card stats-card success">
+                        <div>
+                            <i class="fas fa-dollar-sign fa-2x mb-2 opacity-75"></i>
+                            <h3 class="mb-1">$2.5M</h3>
+                            <p class="mb-0">Ingresos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card stats-card warning">
+                        <div>
+                            <i class="fas fa-users fa-2x mb-2 opacity-75"></i>
+                            <h3 class="mb-1">8,945</h3>
+                            <p class="mb-0">Clientes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card stats-card danger">
+                        <div>
+                            <i class="fas fa-boxes fa-2x mb-2 opacity-75"></i>
+                            <h3 class="mb-1">156</h3>
+                            <p class="mb-0">Productos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Actividad Reciente</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Nueva orden #1234</strong>
+                                            <p class="mb-1 text-muted">Cliente: María González - Servicio de plomería</p>
+                                        </div>
+                                        <small class="text-muted">Hace 5 min</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Nuevo cliente registrado</strong>
+                                            <p class="mb-1 text-muted">Juan Pérez se registró en la plataforma</p>
+                                        </div>
+                                        <small class="text-muted">Hace 15 min</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Orden completada #1230</strong>
+                                            <p class="mb-1 text-muted">Servicio de electricidad finalizado</p>
+                                        </div>
+                                        <small class="text-muted">Hace 1 hora</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Resumen</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Órdenes Completadas</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Satisfacción Cliente</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Profesionales Activos</span>
+                                    <span>78%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Órdenes Section -->
+        <div id="ordenes-section" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-shopping-cart me-2"></i>Gestión de Órdenes</h2>
+                <button class="btn btn-primary btn-admin" onclick="showNewOrderModal()">
+                    <i class="fas fa-plus me-2"></i>Nueva Orden
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" placeholder="Buscar órdenes por cliente, número o servicio..." id="searchOrders">
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-responsive">
+                <table class="table table-admin">
+                    <thead>
+                        <tr>
+                            <th>Orden #</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
+                            <th>Monto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <tr>
+                            <td><strong>#1234</strong></td>
+                            <td>2024-09-23</td>
+                            <td>María González</td>
+                            <td>Reparación Plomería</td>
+                            <td><span class="status-badge status-pendiente">Pendiente</span></td>
+                            <td><strong>$45.000</strong></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary btn-admin" onclick="viewOrder(1234)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-success btn-admin" onclick="completeOrder(1234)">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-admin" onclick="cancelOrder(1234)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#1233</strong></td>
+                            <td>2024-09-22</td>
+                            <td>Juan Pérez</td>
+                            <td>Instalación Eléctrica</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                            <td><strong>$80.000</strong></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary btn-admin" onclick="viewOrder(1233)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary btn-admin" onclick="printInvoice(1233)">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#1232</strong></td>
+                            <td>2024-09-22</td>
+                            <td>Ana López</td>
+                            <td>Mantención Jardín</td>
+                            <td><span class="status-badge status-cancelado">Cancelado</span></td>
+                            <td><strong>$35.000</strong></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary btn-admin" onclick="viewOrder(1232)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Inventario Section -->
+        <div id="inventario-section" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-boxes me-2"></i>Inventario de Productos</h2>
+                <button class="btn btn-primary btn-admin" onclick="showNewProductModal()">
+                    <i class="fas fa-plus me-2"></i>Nuevo Producto
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" placeholder="Buscar productos..." id="searchProducts">
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop" class="card-img-top" alt="Servicio">
+                        <div class="card-body">
+                            <h6 class="card-title">Reparación de Electrodomésticos</h6>
+                            <p class="card-text text-muted small">Servicio profesional de reparación</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-success fw-bold">$25.000/hora</span>
+                                <span class="status-badge status-activo">Activo</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Editar</button>
+                                <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1558618047-0efc6d6f9b71?w=400&h=200&fit=crop" class="card-img-top" alt="Servicio">
+                        <div class="card-body">
+                            <h6 class="card-title">Plomería Residencial</h6>
+                            <p class="card-text text-muted small">Instalación y reparación de tuberías</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-success fw-bold">$30.000/hora</span>
+                                <span class="status-badge status-activo">Activo</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Editar</button>
+                                <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400&h=200&fit=crop" class="card-img-top" alt="Servicio">
+                        <div class="card-body">
+                            <h6 class="card-title">Servicios Eléctricos</h6>
+                            <p class="card-text text-muted small">Instalación eléctrica profesional</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-success fw-bold">$35.000/hora</span>
+                                <span class="status-badge status-inactivo">Inactivo</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Editar</button>
+                                <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reportes Section -->
+        <div id="reportes-section" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-chart-bar me-2"></i>Reportes y Estadísticas</h2>
+                <button class="btn btn-primary btn-admin">
+                    <i class="fas fa-download me-2"></i>Exportar Reportes
+                </button>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Ventas Mensuales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="salesChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-users me-2"></i>Crecimiento de Usuarios</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center g-3">
+                                <div class="col-4">
+                                    <div class="border rounded p-3">
+                                        <h3 class="text-primary">1,245</h3>
+                                        <small class="text-muted">Total Usuarios</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="border rounded p-3">
+                                        <h3 class="text-success">+158</h3>
+                                        <small class="text-muted">Este Mes</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="border rounded p-3">
+                                        <h3 class="text-info">856</h3>
+                                        <small class="text-muted">Activos</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empleados Section -->
+        <div id="empleados-section" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-users-cog me-2"></i>Gestión de Empleados</h2>
+                <button class="btn btn-primary btn-admin" onclick="showNewEmployeeModal()">
+                    <i class="fas fa-user-plus me-2"></i>Nuevo Empleado
+                </button>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" 
+                                 class="rounded-circle mb-3" style="width: 80px; height: 80px;">
+                            <h6>Juan Carlos Pérez</h6>
+                            <p class="text-muted small">Técnico Eléctrico</p>
+                            <div class="mb-2">
+                                <span class="status-badge status-activo">Activo</span>
+                            </div>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Ver</button>
+                                <button class="btn btn-outline-secondary btn-sm">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b812b9f3?w=100&h=100&fit=crop&crop=face" 
+                                 class="rounded-circle mb-3" style="width: 80px; height: 80px;">
+                            <h6>María González</h6>
+                            <p class="text-muted small">Especialista en Plomería</p>
+                            <div class="mb-2">
+                                <span class="status-badge status-activo">Activo</span>
+                            </div>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Ver</button>
+                                <button class="btn btn-outline-secondary btn-sm">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" 
+                                 class="rounded-circle mb-3" style="width: 80px; height: 80px;">
+                            <h6>Carlos Rodríguez</h6>
+                            <p class="text-muted small">Técnico en Climatización</p>
+                            <div class="mb-2">
+                                <span class="status-badge status-inactivo">Inactivo</span>
+                            </div>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary btn-sm">Ver</button>
+                                <button class="btn btn-outline-secondary btn-sm">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clientes Section -->
+        <div id="clientes-section" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-users me-2"></i>Gestión de Clientes</h2>
+                <button class="btn btn-primary btn-admin" onclick="showNewClientModal()">
+                    <i class="fas fa-user-plus me-2"></i>Nuevo Cliente
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" placeholder="Buscar clientes por nombre, email o teléfono..." id="searchClients">
+            </div>
+
+            <!-- Clients Table -->
+            <div class="table-responsive">
+                <table class="table table-admin">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Registro</th>
+                            <th>Órdenes</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTableBody">
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b812b9f3?w=40&h=40&fit=crop&crop=face" 
+                                         class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <div>
+                                        <strong>María González</strong>
+                                        <br><small class="text-muted">ID: #001</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>maria.gonzalez@email.com</td>
+                            <td>+56 9 1234 5678</td>
+                            <td>15 Mar 2024</td>
+                            <td><span class="badge bg-primary">8</span></td>
+                            <td><span class="status-badge status-activo">Activo</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary btn-admin" onclick="viewClient(1)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary btn-admin" onclick="editClient(1)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-admin" onclick="deleteClient(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" 
+                                         class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <div>
+                                        <strong>Juan Pérez</strong>
+                                        <br><small class="text-muted">ID: #002</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>juan.perez@email.com</td>
+                            <td>+56 9 8765 4321</td>
+                            <td>22 Mar 2024</td>
+                            <td><span class="badge bg-primary">3</span></td>
+                            <td><span class="status-badge status-activo">Activo</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary btn-admin" onclick="viewClient(2)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary btn-admin" onclick="editClient(2)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-admin" onclick="deleteClient(2)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verificar autenticación de administrador
+        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
+            window.location.href = 'login-admin.html';
+        }
+
+        // Mostrar fecha actual
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Navegación entre secciones
+        function showSection(sectionName, element) {
+            console.log('=== INICIO showSection ===');
+            console.log('Sección solicitada:', sectionName);
+            console.log('Elemento clickeado:', element);
+            
+            // Ocultar todas las secciones
+            const allSections = document.querySelectorAll('.content-section');
+            console.log('Secciones encontradas:', allSections.length);
+            
+            allSections.forEach((section, index) => {
+                console.log(`Sección ${index + 1}: ${section.id}`);
+                section.classList.remove('active');
+            });
+            
+            // Mostrar sección seleccionada
+            const targetSectionId = sectionName + '-section';
+            console.log('Buscando sección con ID:', targetSectionId);
+            
+            const targetSection = document.getElementById(targetSectionId);
+            console.log('Sección encontrada:', !!targetSection);
+            
+            if (targetSection) {
+                targetSection.classList.add('active');
+                console.log('✓ Sección activada exitosamente');
+            } else {
+                console.error('✗ ERROR: Sección no encontrada:', targetSectionId);
+                console.log('Secciones disponibles:');
+                allSections.forEach(section => {
+                    console.log(`- ${section.id}`);
+                });
+                return;
+            }
+            
+            // Actualizar navegación sidebar
+            document.querySelectorAll('.nav-link-sidebar').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (element) {
+                element.classList.add('active');
+                console.log('✓ Navegación actualizada');
+            }
+            
+            console.log('=== FIN showSection ===');
+        }
+
+        // Funciones de órdenes
+        function viewOrder(orderId) {
+            alert(`Ver detalles de la orden #${orderId}`);
+        }
+
+        function completeOrder(orderId) {
+            if (confirm(`¿Marcar orden #${orderId} como completada?`)) {
+                alert(`Orden #${orderId} completada exitosamente`);
+                // Aquí actualizar la tabla
+            }
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm(`¿Cancelar orden #${orderId}?`)) {
+                alert(`Orden #${orderId} cancelada`);
+                // Aquí actualizar la tabla
+            }
+        }
+
+        function showNewOrderModal() {
+            alert('Funcionalidad: Modal para crear nueva orden');
+        }
+
+        function showNewProductModal() {
+            alert('Funcionalidad: Modal para crear nuevo producto/servicio');
+        }
+
+        function showNewEmployeeModal() {
+            alert('Funcionalidad: Modal para agregar nuevo empleado');
+        }
+
+        function showNewClientModal() {
+            alert('Funcionalidad: Modal para registrar nuevo cliente');
+        }
+
+        // Funciones de gestión de clientes
+        function viewClient(clientId) {
+            alert(`Ver detalles del cliente #${clientId}`);
+        }
+
+        function editClient(clientId) {
+            alert(`Editar cliente #${clientId}`);
+        }
+
+        function deleteClient(clientId) {
+            if (confirm(`¿Eliminar cliente #${clientId}?`)) {
+                alert(`Cliente #${clientId} eliminado`);
+            }
+        }
+
+        function printInvoice(orderId) {
+            alert(`Imprimir factura de orden #${orderId}`);
+        }
+
+        // Logout
+        function logoutAdmin() {
+            if (confirm('¿Está seguro de cerrar la sesión administrativa?')) {
+                localStorage.removeItem('isAdminLoggedIn');
+                localStorage.removeItem('adminUser');
+                localStorage.removeItem('adminRole');
+                localStorage.removeItem('adminLoginTime');
+                window.location.href = 'login-admin.html';
+            }
+        }
+
+        // Búsqueda en tiempo real
+        document.getElementById('searchOrders').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#ordersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -284,5 +284,139 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    
+    <script>
+        // Funcionalidad del formulario de contacto
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const formData = new FormData(this);
+            const nombre = formData.get('nombre').trim();
+            const email = formData.get('email').trim();
+            const telefono = formData.get('telefono').trim();
+            const asunto = formData.get('asunto');
+            const comentario = formData.get('comentario').trim();
+            const newsletter = formData.get('newsletter') ? true : false;
+            
+            // Validaciones
+            if (!nombre) {
+                showError('El nombre es obligatorio');
+                document.getElementById('nombre').focus();
+                return;
+            }
+            
+            if (!comentario) {
+                showError('El mensaje es obligatorio');
+                document.getElementById('comentario').focus();
+                return;
+            }
+            
+            if (email && !isValidEmail(email)) {
+                showError('El formato del email no es válido');
+                document.getElementById('email').focus();
+                return;
+            }
+            
+            if (telefono && !isValidPhone(telefono)) {
+                showError('El formato del teléfono no es válido');
+                document.getElementById('telefono').focus();
+                return;
+            }
+            
+            // Simular envío exitoso
+            showSuccess('¡Mensaje enviado correctamente! Te responderemos pronto.');
+            
+            // Limpiar formulario
+            this.reset();
+            
+            // Opcional: enviar datos a servidor
+            console.log('Datos del formulario:', {
+                nombre, email, telefono, asunto, comentario, newsletter
+            });
+        });
+        
+        // Funciones de validación
+        function isValidEmail(email) {
+            const allowedDomains = ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'];
+            return allowedDomains.some(domain => email.endsWith(domain));
+        }
+        
+        function isValidPhone(phone) {
+            // Formato chileno: +56 9 XXXX XXXX
+            const phoneRegex = /^\+56\s?9\s?\d{4}\s?\d{4}$/;
+            return phoneRegex.test(phone);
+        }
+        
+        // Funciones de mensajes
+        function showSuccess(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show';
+            alertDiv.innerHTML = `
+                <i class="fas fa-check-circle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            const form = document.getElementById('contact-form');
+            form.parentNode.insertBefore(alertDiv, form);
+            
+            // Scroll al mensaje
+            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Auto-dismiss después de 5 segundos
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+        
+        function showError(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+            alertDiv.innerHTML = `
+                <i class="fas fa-exclamation-triangle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            const form = document.getElementById('contact-form');
+            form.parentNode.insertBefore(alertDiv, form);
+            
+            // Scroll al mensaje
+            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Auto-dismiss después de 4 segundos
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 4000);
+        }
+        
+        // Contador de caracteres para textarea
+        const comentarioTextarea = document.getElementById('comentario');
+        comentarioTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            const maxLength = this.getAttribute('maxlength');
+            const formText = this.nextElementSibling;
+            
+            formText.textContent = `${currentLength}/${maxLength} caracteres`;
+            
+            if (currentLength > maxLength * 0.9) {
+                formText.className = 'form-text text-warning';
+            } else {
+                formText.className = 'form-text';
+            }
+        });
+        
+        // Auto-format teléfono
+        document.getElementById('telefono').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, ''); // Solo números
+            
+            if (value.startsWith('569')) {
+                value = value.substring(3);
+                this.value = '+56 9 ' + value.replace(/(\d{4})(\d{4})/, '$1 $2');
+            } else if (value.startsWith('9') && value.length >= 9) {
+                value = value.substring(1);
+                this.value = '+56 9 ' + value.replace(/(\d{4})(\d{4})/, '$1 $2');
+            }
+        });
+    </script>
 </body>
 </html>

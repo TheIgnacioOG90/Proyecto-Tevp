@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Panel Administrativo TEVP - FUNCIONAL</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h3 {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin: 0.5rem 1rem;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .nav-button:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-button.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button i {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+        }
+
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, var(--primary-color), #5dade2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .panel-header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .panel-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .data-table {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), #5dade2);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            color: white;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: 600;
+            color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 25px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 2rem;
+            left: 1rem;
+            right: 1rem;
+        }
+
+        .btn-logout {
+            width: 100%;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+            padding: 0.75rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-shield-alt me-2"></i>TEVP Admin</h3>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <button class="nav-button active" onclick="showPanel('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showPanel('pedidos')">
+                        <i class="fas fa-shopping-cart"></i>
+                        Pedidos/Órdenes
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showPanel('reportes')">
+                        <i class="fas fa-chart-bar"></i>
+                        Reportes
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showPanel('inventario')">
+                        <i class="fas fa-boxes"></i>
+                        Inventario
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showPanel('empleados')">
+                        <i class="fas fa-users-cog"></i>
+                        Empleados
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showPanel('clientes')">
+                        <i class="fas fa-users"></i>
+                        Clientes
+                    </button>
+                </div>
+            </nav>
+            
+            <div class="logout-btn">
+                <button class="btn btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Panel -->
+            <section id="dashboard-panel" class="content-panel active">
+                <div class="panel-header">
+                    <h1><i class="fas fa-tachometer-alt me-3"></i>Dashboard General</h1>
+                    <p>Resumen ejecutivo de la plataforma TEVP</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="stat-number">1,245</div>
+                        <div class="stat-label">Órdenes Totales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-number">$4.2M</div>
+                        <div class="stat-label">Ingresos Totales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number">856</div>
+                        <div class="stat-label">Clientes Activos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-tools"></i></div>
+                        <div class="stat-number">124</div>
+                        <div class="stat-label">Profesionales</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pedidos Panel -->
+            <section id="pedidos-panel" class="content-panel">
+                <div class="panel-header">
+                    <h1><i class="fas fa-shopping-cart me-3"></i>Gestión de Pedidos</h1>
+                    <p>Administrar todas las órdenes de servicios</p>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2 class="table-title">Lista de Órdenes Activas</h2>
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-plus me-2"></i>Nueva Orden
+                        </button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Servicio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Total</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#001</strong></td>
+                                    <td>Juan Pérez</td>
+                                    <td>Plomería</td>
+                                    <td>23/09/2024</td>
+                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <td><strong>$85.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#002</strong></td>
+                                    <td>María González</td>
+                                    <td>Electricidad</td>
+                                    <td>22/09/2024</td>
+                                    <td><span class="badge bg-info">En Proceso</span></td>
+                                    <td><strong>$120.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#003</strong></td>
+                                    <td>Carlos Rodríguez</td>
+                                    <td>Climatización</td>
+                                    <td>21/09/2024</td>
+                                    <td><span class="badge bg-success">Completado</span></td>
+                                    <td><strong>$350.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Facturar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#004</strong></td>
+                                    <td>Ana Martínez</td>
+                                    <td>Reparación Electrodomésticos</td>
+                                    <td>20/09/2024</td>
+                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <td><strong>$95.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#005</strong></td>
+                                    <td>Pedro Sánchez</td>
+                                    <td>Construcción</td>
+                                    <td>19/09/2024</td>
+                                    <td><span class="badge bg-info">En Proceso</span></td>
+                                    <td><strong>$750.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#006</strong></td>
+                                    <td>Sofia López</td>
+                                    <td>Soldadura</td>
+                                    <td>18/09/2024</td>
+                                    <td><span class="badge bg-success">Completado</span></td>
+                                    <td><strong>$180.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Facturar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#007</strong></td>
+                                    <td>Miguel Torres</td>
+                                    <td>Plomería</td>
+                                    <td>17/09/2024</td>
+                                    <td><span class="badge bg-danger">Cancelado</span></td>
+                                    <td><strong>$65.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-warning">Reagendar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#008</strong></td>
+                                    <td>Carmen Díaz</td>
+                                    <td>Electricidad</td>
+                                    <td>16/09/2024</td>
+                                    <td><span class="badge bg-info">En Proceso</span></td>
+                                    <td><strong>$140.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#009</strong></td>
+                                    <td>Roberto Herrera</td>
+                                    <td>Climatización</td>
+                                    <td>15/09/2024</td>
+                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <td><strong>$420.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#010</strong></td>
+                                    <td>Valentina Ruiz</td>
+                                    <td>Reparación Electrodomésticos</td>
+                                    <td>14/09/2024</td>
+                                    <td><span class="badge bg-success">Completado</span></td>
+                                    <td><strong>$110.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Facturar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#011</strong></td>
+                                    <td>Fernando Castro</td>
+                                    <td>Construcción</td>
+                                    <td>13/09/2024</td>
+                                    <td><span class="badge bg-info">En Proceso</span></td>
+                                    <td><strong>$890.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#012</strong></td>
+                                    <td>Javiera Morales</td>
+                                    <td>Soldadura</td>
+                                    <td>12/09/2024</td>
+                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <td><strong>$205.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#013</strong></td>
+                                    <td>Ricardo Vargas</td>
+                                    <td>Plomería</td>
+                                    <td>11/09/2024</td>
+                                    <td><span class="badge bg-success">Completado</span></td>
+                                    <td><strong>$75.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Facturar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#014</strong></td>
+                                    <td>Francisca Silva</td>
+                                    <td>Electricidad</td>
+                                    <td>10/09/2024</td>
+                                    <td><span class="badge bg-info">En Proceso</span></td>
+                                    <td><strong>$165.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#015</strong></td>
+                                    <td>Andrés Mendoza</td>
+                                    <td>Climatización</td>
+                                    <td>09/09/2024</td>
+                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <td><strong>$380.000</strong></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Completar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reportes Panel -->
+            <section id="reportes-panel" class="content-panel">
+                <div class="panel-header">
+                    <h1><i class="fas fa-chart-bar me-3"></i>Reportes y Estadísticas</h1>
+                    <p>Análisis de rendimiento y métricas</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="data-table">
+                            <h3 class="table-title"><i class="fas fa-calendar-week me-2"></i>Reporte Semanal</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Servicios</th>
+                                            <th>Ingresos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>23/09/2024</td>
+                                            <td><strong>8</strong></td>
+                                            <td><strong>$485.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>22/09/2024</td>
+                                            <td><strong>12</strong></td>
+                                            <td><strong>$750.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>21/09/2024</td>
+                                            <td><strong>6</strong></td>
+                                            <td><strong>$320.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20/09/2024</td>
+                                            <td><strong>9</strong></td>
+                                            <td><strong>$590.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>19/09/2024</td>
+                                            <td><strong>11</strong></td>
+                                            <td><strong>$680.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>18/09/2024</td>
+                                            <td><strong>7</strong></td>
+                                            <td><strong>$425.000</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>17/09/2024</td>
+                                            <td><strong>5</strong></td>
+                                            <td><strong>$285.000</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="data-table">
+                            <h3 class="table-title"><i class="fas fa-calendar-month me-2"></i>Reporte Mensual</h3>
+                            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 1rem;">
+                                <div class="stat-card" style="padding: 1rem;">
+                                    <div class="stat-number" style="font-size: 1.8rem;">185</div>
+                                    <div class="stat-label">Servicios</div>
+                                </div>
+                                <div class="stat-card" style="padding: 1rem;">
+                                    <div class="stat-number" style="font-size: 1.8rem; color: var(--success-color);">$4.2M</div>
+                                    <div class="stat-label">Ingresos</div>
+                                </div>
+                                <div class="stat-card" style="padding: 1rem;">
+                                    <div class="stat-number" style="font-size: 1.8rem; color: var(--warning-color);">47</div>
+                                    <div class="stat-label">Nuevos Clientes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2 class="table-title">Reportes Detallados</h2>
+                        <div>
+                            <button class="btn btn-primary-custom me-2">
+                                <i class="fas fa-file-excel me-1"></i>Excel
+                            </button>
+                            <button class="btn btn-primary-custom">
+                                <i class="fas fa-file-pdf me-1"></i>PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Reporte</th>
+                                    <th>Tipo</th>
+                                    <th>Período</th>
+                                    <th>Profesional</th>
+                                    <th>Servicios</th>
+                                    <th>Ingresos</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>RPT001</strong></td>
+                                    <td><span class="badge bg-primary">Semanal</span></td>
+                                    <td>16-23 Sep 2024</td>
+                                    <td>Carlos Rodríguez</td>
+                                    <td><strong>12</strong></td>
+                                    <td><strong>$650.000</strong></td>
+                                    <td>23/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT002</strong></td>
+                                    <td><span class="badge bg-info">Mensual</span></td>
+                                    <td>Septiembre 2024</td>
+                                    <td>Ana Martínez</td>
+                                    <td><strong>28</strong></td>
+                                    <td><strong>$1.240.000</strong></td>
+                                    <td>22/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT003</strong></td>
+                                    <td><span class="badge bg-warning">Trimestral</span></td>
+                                    <td>Jul-Sep 2024</td>
+                                    <td>Pedro Sánchez</td>
+                                    <td><strong>45</strong></td>
+                                    <td><strong>$2.850.000</strong></td>
+                                    <td>21/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT004</strong></td>
+                                    <td><span class="badge bg-primary">Semanal</span></td>
+                                    <td>09-16 Sep 2024</td>
+                                    <td>Sofia López</td>
+                                    <td><strong>15</strong></td>
+                                    <td><strong>$780.000</strong></td>
+                                    <td>20/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT005</strong></td>
+                                    <td><span class="badge bg-info">Mensual</span></td>
+                                    <td>Agosto 2024</td>
+                                    <td>Miguel Torres</td>
+                                    <td><strong>32</strong></td>
+                                    <td><strong>$1.680.000</strong></td>
+                                    <td>19/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT006</strong></td>
+                                    <td><span class="badge bg-primary">Semanal</span></td>
+                                    <td>02-09 Sep 2024</td>
+                                    <td>Carmen Díaz</td>
+                                    <td><strong>9</strong></td>
+                                    <td><strong>$520.000</strong></td>
+                                    <td>18/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT007</strong></td>
+                                    <td><span class="badge bg-danger">Anual</span></td>
+                                    <td>2024</td>
+                                    <td>Roberto Herrera</td>
+                                    <td><strong>156</strong></td>
+                                    <td><strong>$8.950.000</strong></td>
+                                    <td>17/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT008</strong></td>
+                                    <td><span class="badge bg-info">Mensual</span></td>
+                                    <td>Julio 2024</td>
+                                    <td>Valentina Ruiz</td>
+                                    <td><strong>41</strong></td>
+                                    <td><strong>$2.150.000</strong></td>
+                                    <td>16/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT009</strong></td>
+                                    <td><span class="badge bg-primary">Semanal</span></td>
+                                    <td>26 Ago-02 Sep 2024</td>
+                                    <td>Fernando Castro</td>
+                                    <td><strong>18</strong></td>
+                                    <td><strong>$950.000</strong></td>
+                                    <td>15/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT010</strong></td>
+                                    <td><span class="badge bg-warning">Trimestral</span></td>
+                                    <td>Abr-Jun 2024</td>
+                                    <td>Javiera Morales</td>
+                                    <td><strong>67</strong></td>
+                                    <td><strong>$3.740.000</strong></td>
+                                    <td>14/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT011</strong></td>
+                                    <td><span class="badge bg-info">Mensual</span></td>
+                                    <td>Junio 2024</td>
+                                    <td>Ricardo Vargas</td>
+                                    <td><strong>29</strong></td>
+                                    <td><strong>$1.485.000</strong></td>
+                                    <td>13/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RPT012</strong></td>
+                                    <td><span class="badge bg-primary">Semanal</span></td>
+                                    <td>19-26 Ago 2024</td>
+                                    <td>Francisca Silva</td>
+                                    <td><strong>13</strong></td>
+                                    <td><strong>$685.000</strong></td>
+                                    <td>12/09/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-success">Descargar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inventario Panel -->
+            <section id="inventario-panel" class="content-panel">
+                <div class="panel-header">
+                    <h1><i class="fas fa-boxes me-3"></i>Inventario</h1>
+                    <p>Gestión de materiales y herramientas</p>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2 class="table-title">Control de Stock</h2>
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-plus me-2"></i>Agregar Item
+                        </button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>INV001</strong></td>
+                                    <td>Tubería PVC 1/2"</td>
+                                    <td>Plomería</td>
+                                    <td><strong>45</strong></td>
+                                    <td><strong>$2.500</strong></td>
+                                    <td><span class="badge bg-success">Disponible</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning">Editar</button>
+                                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>INV002</strong></td>
+                                    <td>Cable Eléctrico 12AWG</td>
+                                    <td>Electricidad</td>
+                                    <td><strong>120</strong></td>
+                                    <td><strong>$1.800</strong></td>
+                                    <td><span class="badge bg-success">Disponible</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning">Editar</button>
+                                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Empleados Panel -->
+            <section id="empleados-panel" class="content-panel">
+                <div class="panel-header">
+                    <h1><i class="fas fa-users-cog me-3"></i>Empleados</h1>
+                    <p>Gestión del personal y profesionales</p>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2 class="table-title">Lista de Empleados</h2>
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-user-plus me-2"></i>Nuevo Empleado
+                        </button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Especialidad</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>EMP001</strong></td>
+                                    <td>Carlos Rodríguez</td>
+                                    <td>Plomero</td>
+                                    <td>carlos@tevp.com</td>
+                                    <td>+56 9 1234 5678</td>
+                                    <td><span class="badge bg-success">Activo</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-warning">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clientes Panel -->
+            <section id="clientes-panel" class="content-panel">
+                <div class="panel-header">
+                    <h1><i class="fas fa-users me-3"></i>Clientes</h1>
+                    <p>Base de datos de clientes</p>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2 class="table-title">Lista de Clientes</h2>
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-user-plus me-2"></i>Nuevo Cliente
+                        </button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Órdenes</th>
+                                    <th>Registro</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>CLI001</strong></td>
+                                    <td>Ana Martínez</td>
+                                    <td>ana@email.com</td>
+                                    <td>+56 9 8765 4321</td>
+                                    <td><strong>3</strong></td>
+                                    <td>15/01/2024</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-warning">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 🚀 SISTEMA DE NAVEGACIÓN GARANTIZADO SIN ERRORES 404
+        
+        console.log('🎯 Inicializando Dashboard TEVP...');
+        
+        // Función principal de navegación
+        function showPanel(panelName) {
+            console.log(`🔄 Cambiando a panel: ${panelName}`);
+            
+            try {
+                // 1. Ocultar todos los paneles
+                const allPanels = document.querySelectorAll('.content-panel');
+                console.log(`📋 Total de paneles encontrados: ${allPanels.length}`);
+                
+                allPanels.forEach((panel, index) => {
+                    panel.classList.remove('active');
+                    console.log(`❌ Panel ${panel.id} desactivado`);
+                });
+                
+                // 2. Mostrar el panel solicitado
+                const targetPanel = document.getElementById(panelName + '-panel');
+                
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                    console.log(`✅ Panel ${panelName}-panel activado exitosamente`);
+                } else {
+                    console.error(`❌ ERROR: Panel ${panelName}-panel no encontrado`);
+                    
+                    // Mostrar todos los paneles disponibles para debugging
+                    console.log('📝 Paneles disponibles:');
+                    allPanels.forEach(panel => {
+                        console.log(`   - ${panel.id}`);
+                    });
+                    
+                    // Activar dashboard por defecto si hay error
+                    const dashboardPanel = document.getElementById('dashboard-panel');
+                    if (dashboardPanel) {
+                        dashboardPanel.classList.add('active');
+                        console.log('🔄 Activando dashboard por defecto debido al error');
+                    }
+                    return;
+                }
+                
+                // 3. Actualizar navegación activa
+                const allNavButtons = document.querySelectorAll('.nav-button');
+                allNavButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Encontrar y activar el botón correspondiente
+                const activeButton = document.querySelector(`[onclick="showPanel('${panelName}')"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                    console.log(`✅ Botón de navegación ${panelName} activado`);
+                }
+                
+                console.log(`🎉 Navegación a ${panelName} completada exitosamente`);
+                
+            } catch (error) {
+                console.error('💥 ERROR CRÍTICO en showPanel:', error);
+                
+                // Fallback: activar dashboard
+                const dashboardPanel = document.getElementById('dashboard-panel');
+                const dashboardButton = document.querySelector(`[onclick="showPanel('dashboard')"]`);
+                
+                if (dashboardPanel) {
+                    dashboardPanel.classList.add('active');
+                }
+                if (dashboardButton) {
+                    dashboardButton.classList.add('active');
+                }
+                
+                console.log('🚨 Fallback activado: Dashboard por defecto');
+            }
+        }
+        
+        // Función de logout
+        function logout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                console.log('👋 Cerrando sesión...');
+                
+                // Limpiar localStorage
+                localStorage.removeItem('isAdminLoggedIn');
+                localStorage.removeItem('adminUser');
+                localStorage.removeItem('adminRole');
+                localStorage.removeItem('adminLoginTime');
+                
+                // Redireccionar
+                window.location.href = 'login-admin.html';
+            }
+        }
+        
+        // Verificar autenticación al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔐 Verificando autenticación...');
+            
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminUser = localStorage.getItem('adminUser');
+            
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                console.log('❌ No autenticado, redirigiendo al login...');
+                window.location.href = 'login-admin.html';
+                return;
+            }
+            
+            console.log(`✅ Usuario autenticado: ${adminUser}`);
+            console.log('🎯 Dashboard cargado y listo');
+            
+            // Mostrar dashboard por defecto
+            showPanel('dashboard');
+        });
+        
+        // Log inicial para debugging
+        console.log('📋 Resumen del Dashboard:');
+        console.log('   - dashboard-panel: Dashboard General');
+        console.log('   - pedidos-panel: Gestión de Pedidos (15 órdenes)');
+        console.log('   - reportes-panel: Reportes y Estadísticas (12 reportes)');
+        console.log('   - inventario-panel: Control de Stock');
+        console.log('   - empleados-panel: Gestión de Personal');
+        console.log('   - clientes-panel: Base de Datos de Clientes');
+        console.log('🚀 Sistema listo - Sin errores 404 garantizado');
+    </script>
+</body>
+</html>
