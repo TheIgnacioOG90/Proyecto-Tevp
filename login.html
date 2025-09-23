@@ -130,7 +130,7 @@
                     <div class="mt-4 p-3 bg-light rounded border">
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-info-circle text-info me-2"></i>
-                            <h6 class="text-muted mb-0">Usuarios de Prueba:</h6>
+                            <h6 class="text-muted mb-0">Usuarios de Prueba - ¡Copia y pega!</h6>
                         </div>
                         <div class="row text-start">
                             <div class="col-12">
@@ -142,10 +142,42 @@
                                     <span class="badge bg-warning me-2">Vendedor</span>
                                     <code>vendedor@tevp.cl</code> / <code>vend123</code>
                                 </small>
-                                <small class="d-block mb-1">
-                                    <span class="badge bg-success me-2">Cliente</span>
-                                    Cualquier email válido / mín. 4 caracteres
+                                <small class="d-block mb-2">
+                                    <span class="badge bg-success me-2">Clientes</span>
                                 </small>
+                                <small class="d-block mb-1 ms-3">
+                                    <i class="fas fa-user me-1 text-success"></i>
+                                    <code>cliente@gmail.com</code> / <code>1234</code>
+                                </small>
+                                <small class="d-block mb-1 ms-3">
+                                    <i class="fas fa-user me-1 text-success"></i>
+                                    <code>maria@duoc.cl</code> / <code>1234</code>
+                                </small>
+                                <small class="d-block mb-1 ms-3">
+                                    <i class="fas fa-user me-1 text-success"></i>
+                                    <code>test@gmail.com</code> / <code>test</code>
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de acceso rápido -->
+                        <div class="mt-3">
+                            <small class="d-block mb-2 text-muted">
+                                <i class="fas fa-rocket me-1"></i>Acceso rápido:
+                            </small>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button type="button" class="btn btn-outline-success btn-sm" 
+                                        onclick="quickLogin('cliente@gmail.com', '1234')">
+                                    <i class="fas fa-user me-1"></i>Cliente Juan
+                                </button>
+                                <button type="button" class="btn btn-outline-success btn-sm" 
+                                        onclick="quickLogin('maria@duoc.cl', '1234')">
+                                    <i class="fas fa-user me-1"></i>Cliente María
+                                </button>
+                                <button type="button" class="btn btn-outline-success btn-sm" 
+                                        onclick="quickLogin('test@gmail.com', 'test')">
+                                    <i class="fas fa-user me-1"></i>Test
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -202,6 +234,17 @@
                 toggleIcon.classList.remove('fa-eye-slash');
                 toggleIcon.classList.add('fa-eye');
             }
+        }
+
+        // Función de acceso rápido para login
+        function quickLogin(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            
+            // Disparar el evento de submit del formulario
+            setTimeout(() => {
+                document.getElementById('login-form').dispatchEvent(new Event('submit'));
+            }, 100);
         }
 
         // Crear usuarios de prueba si no existen

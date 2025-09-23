@@ -895,6 +895,24 @@ function authenticateUser(email, password) {
         return;
     }
     
+    // Usuarios cliente predefinidos para pruebas
+    const testClients = [
+        { email: 'cliente@gmail.com', password: '1234', name: 'Juan Pérez' },
+        { email: 'maria@duoc.cl', password: '1234', name: 'María González' },
+        { email: 'carlos@gmail.com', password: '1234', name: 'Carlos Rodríguez' },
+        { email: 'test@gmail.com', password: 'test', name: 'Usuario Prueba' }
+    ];
+    
+    const testClient = testClients.find(c => c.email === email && c.password === password);
+    if (testClient) {
+        loginSuccess({
+            email: testClient.email,
+            role: 'cliente',
+            name: testClient.name
+        }, 'index.html');
+        return;
+    }
+    
     // Simulación de usuarios registrados
     const registeredUsers = JSON.parse(localStorage.getItem('tevp-registered-users') || '[]');
     const user = registeredUsers.find(u => u.email === email && u.password === password);
