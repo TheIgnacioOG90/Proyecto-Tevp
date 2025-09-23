@@ -2782,7 +2782,7 @@ const initialServices = [
         categoria: "Climatización",
         precioDesde: 35000,
         precioHasta: 800000,
-        imagen: "https://images.unsplash.com/photo-1621905252472-e8ec1a12307c?w=400&h=300&fit=crop&crop=center",
+        imagen: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center",
         profesionalesDisponibles: 10,
         tiempoRespuesta: "1 - 4 hrs"
     },
@@ -2922,8 +2922,13 @@ function loadInitialData() {
     localStorage.removeItem('tevp-services');
     console.log('Datos anteriores limpiados para forzar actualización');
     
+    // Agregar timestamp para forzar recarga
+    const updateTimestamp = new Date().toISOString();
+    console.log('Timestamp de actualización:', updateTimestamp);
+    
     // Cargar profesionales nuevos
     localStorage.setItem('tevp-professionals', JSON.stringify(initialProfessionals));
+    localStorage.setItem('tevp-update-timestamp', updateTimestamp);
     console.log('Profesionales nuevos guardados en localStorage');
     
     // Cargar servicios nuevos
@@ -4429,11 +4434,19 @@ function updateUserInterface() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userName = localStorage.getItem('userName');
     const userInfo = document.getElementById('user-info');
-    const authLinks = document.getElementById('auth-links');
+    const authRegister = document.getElementById('auth-link-register');
+    const authLogin = document.getElementById('auth-link-login');
+    const authLinks = document.getElementById('auth-links'); // Para compatibilidad con páginas que aún lo usen
     const userNameElement = document.getElementById('user-name');
     
     console.log('Actualizando interfaz de usuario:', { isLoggedIn, userName });
-    console.log('Elementos encontrados:', { userInfo: !!userInfo, authLinks: !!authLinks, userNameElement: !!userNameElement });
+    console.log('Elementos encontrados:', { 
+        userInfo: !!userInfo, 
+        authRegister: !!authRegister, 
+        authLogin: !!authLogin, 
+        authLinks: !!authLinks,
+        userNameElement: !!userNameElement 
+    });
     
     if (isLoggedIn && userName) {
         // Usuario logueado - mostrar perfil
@@ -4441,9 +4454,14 @@ function updateUserInterface() {
             userInfo.classList.remove('d-none');
             userInfo.style.display = 'block';
         }
-        if (authLinks) {
-            authLinks.style.display = 'none';
-        }
+        
+        // Ocultar botones de auth (nuevo sistema)
+        if (authRegister) authRegister.style.display = 'none';
+        if (authLogin) authLogin.style.display = 'none';
+        
+        // Ocultar botones de auth (sistema anterior para compatibilidad)
+        if (authLinks) authLinks.style.display = 'none';
+        
         if (userNameElement) {
             userNameElement.textContent = userName;
         }
@@ -4454,9 +4472,14 @@ function updateUserInterface() {
             userInfo.classList.add('d-none');
             userInfo.style.display = 'none';
         }
-        if (authLinks) {
-            authLinks.style.display = 'block';
-        }
+        
+        // Mostrar botones de auth (nuevo sistema)
+        if (authRegister) authRegister.style.display = 'block';
+        if (authLogin) authLogin.style.display = 'block';
+        
+        // Mostrar botones de auth (sistema anterior para compatibilidad)
+        if (authLinks) authLinks.style.display = 'block';
+        
         console.log('Usuario no logueado - mostrando enlaces de registro/login');
     }
 }
