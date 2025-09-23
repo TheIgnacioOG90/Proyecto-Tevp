@@ -1,8 +1,11 @@
 // ===== VARIABLES GLOBALES =====
 let services = [];
 let professionals = [];
-let cart = JSON.parse(localStorage.getItem('tevp-cart')) || [];
+let cart = []; // Iniciar vacío
 let currentUser = JSON.parse(localStorage.getItem('tevp-currentUser')) || null;
+
+// Limpiar carrito al cargar la página
+localStorage.removeItem('tevp-cart');
 
 // Hacer las variables accesibles globalmente
 window.services = services;
@@ -508,6 +511,11 @@ function initApp() {
     
     // Actualizar contador del carrito en todas las páginas
     updateCartCounter();
+    
+    // Inicializar carrito vacío
+    cart = [];
+    localStorage.setItem('tevp-cart', JSON.stringify(cart));
+    console.log('Carrito inicializado vacío');
 }
 
 // Obtener página actual
@@ -972,8 +980,9 @@ function authenticateUser(email, password) {
 }
 
 // Función para manejar login exitoso
-function loginSuccess(userData, redirectUrl) {
-    console.log('Login exitoso:', userData);
+function loginSuccessOriginal(userData, redirectUrl) {
+    // Esta función fue reemplazada por una nueva versión más abajo
+    console.log('Login exitoso (función original):', userData);
     
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('userRole', userData.role);
@@ -1354,21 +1363,30 @@ window.createDetailedProfessionalCard = createDetailedProfessionalCard;
 
 // Contratar profesional (agregar al carrito)
 function hireProfessional(professionalId) {
+    console.log('=== CONTRATAR PROFESIONAL ===');
+    console.log('ID del profesional:', professionalId);
+    
     const professional = professionals.find(p => p.id === professionalId);
     if (!professional) {
-        console.log('Profesional no encontrado:', professionalId);
+        console.error('Profesional no encontrado:', professionalId);
+        alert('Error: Profesional no encontrado');
         return;
     }
+    
+    console.log('Profesional encontrado:', professional.nombre);
     
     // Verificar si el usuario está logueado
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
+        console.log('Usuario no logueado - redirigiendo a login');
         showAlert('Debes iniciar sesión para contratar un servicio', 'warning');
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 2000);
         return;
     }
+    
+    console.log('Usuario logueado - procediendo a agregar al carrito');
     
     // Agregar al carrito
     const cartItem = {
@@ -1377,19 +1395,31 @@ function hireProfessional(professionalId) {
         professionalName: professional.nombre,
         service: professional.especialidad,
         price: professional.tarifaPorHora,
+        rating: professional.calificacion,
+        experience: professional.experiencia,
+        avatar: professional.avatar,
         quantity: 1,
         date: new Date().toISOString()
     };
+    
+    console.log('Item creado para carrito:', cartItem);
+    
+    // Recargar carrito desde localStorage para asegurar sincronización
+    cart = JSON.parse(localStorage.getItem('tevp-cart')) || [];
+    console.log('Carrito actual antes de agregar:', cart);
     
     cart.push(cartItem);
     window.cart = cart; // Actualizar variable global
     localStorage.setItem('tevp-cart', JSON.stringify(cart));
     
-    console.log('Profesional agregado al carrito:', cartItem);
+    console.log('Carrito después de agregar:', cart);
+    console.log('Item agregado exitosamente. Total items:', cart.length);
+    
     showAlert(`${professional.nombre} agregado al carrito exitosamente!`, 'success');
     
     // Actualizar contador del carrito
     updateCartCounter();
+    console.log('=== CONTRATACIÓN COMPLETADA ===');
 }
 
 // Hacer función global
@@ -1405,24 +1435,192 @@ function updateCartCounter() {
 
 // Cargar modal del carrito
 function loadCartModal() {
-    console.log('Cargando modal del carrito. Items:', cart.length);
+    console.log('=== CARGANDO MODAL DEL CARRITO ===');
+    console.log('Items en carrito:', cart.length);
+    console.log('Contenido del carrito:', cart);
     
-    // Aquí podrías agregar la lógica para mostrar los items del carrito
-    // Por ahora solo mostramos un alert con la información
-    if (cart.length === 0) {
-        showAlert('Tu carrito está vacío', 'info');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    
+    if (!cartItemsContainer) {
+        console.error('ERROR: No se encontró el contenedor cart-items');
+        alert('Error: No se encontró el contenedor del carrito');
         return;
     }
     
-    const cartSummary = cart.map(item => 
-        `${item.professionalName} - ${item.service} ($${item.price.toLocaleString()})`
-    ).join('\n');
+    console.log('Contenedor cart-items encontrado');
     
-    alert(`Carrito (${cart.length} items):\n\n${cartSummary}`);
+    // Limpiar contenido anterior
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+        console.log('Carrito vacío - mostrando mensaje');
+        cartItemsContainer.innerHTML = `
+            <div class="text-center py-4">
+                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Tu carrito está vacío</h5>
+                <p class="text-muted">Explora nuestros servicios y contrata profesionales</p>
+                <a href="productos.html" class="btn btn-primary">Ver Servicios</a>
+            </div>
+        `;
+        
+        if (cartTotalElement) {
+            cartTotalElement.textContent = '$0';
+        }
+        console.log('Modal del carrito vacío configurado');
+        return;
+    }
+    
+    console.log('Mostrando', cart.length, 'items en el carrito');
+    
+    // Mostrar items del carrito
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += item.price;
+        console.log(`Item ${index + 1}:`, item.professionalName, '-', item.service, '$' + item.price.toLocaleString());
+        
+        const cartItemHTML = `
+            <div class="cart-item border-bottom py-3">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="${item.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face'}" 
+                             alt="${item.professionalName}" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="mb-1">${item.professionalName}</h6>
+                        <p class="mb-1 text-muted">${item.service}</p>
+                        <small class="text-muted">
+                            <i class="fas fa-star text-warning"></i> ${item.rating || '4.5'} • 
+                            ${item.experience || '5'} años de experiencia
+                        </small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <h6 class="mb-0">$${item.price.toLocaleString()}</h6>
+                        <small class="text-muted">Por proyecto</small>
+                    </div>
+                    <div class="col-md-1 text-end">
+                        <button type="button" class="btn btn-sm btn-outline-danger" 
+                                onclick="removeFromCart(${index})" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        cartItemsContainer.innerHTML += cartItemHTML;
+    });
+    
+    // Actualizar total
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `$${total.toLocaleString()}`;
+        console.log('Total del carrito:', '$' + total.toLocaleString());
+    }
+    
+    console.log('=== MODAL DEL CARRITO CARGADO EXITOSAMENTE ===');
+}
+
+// Función para eliminar item del carrito
+function removeFromCart(index) {
+    if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        localStorage.setItem('tevp-cart', JSON.stringify(cart));
+        updateCartCounter();
+        loadCartModal(); // Recargar el modal
+        showAlert('Servicio eliminado del carrito', 'success');
+    }
+}
+
+// ======= FUNCIONES DE MANEJO DE USUARIO =======
+
+// Función para mostrar información del usuario logueado
+function updateUserInterface() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userName = localStorage.getItem('userName');
+    const userInfo = document.getElementById('user-info');
+    const authLinks = document.getElementById('auth-links');
+    const userNameElement = document.getElementById('user-name');
+    
+    console.log('Actualizando interfaz de usuario:', { isLoggedIn, userName });
+    
+    if (isLoggedIn && userName && userInfo && authLinks) {
+        // Mostrar información del usuario
+        userInfo.classList.remove('d-none');
+        authLinks.style.display = 'none';
+        
+        if (userNameElement) {
+            userNameElement.textContent = userName;
+        }
+    } else if (userInfo && authLinks) {
+        // Mostrar enlaces de login/registro
+        userInfo.classList.add('d-none');
+        authLinks.style.display = 'block';
+    }
+}
+
+// Función para cerrar sesión
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+    
+    showAlert('Sesión cerrada correctamente', 'success');
+    
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
+}
+
+// Función para mostrar perfil del usuario
+function showUserProfile() {
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+    
+    showAlert(`Perfil de Usuario:\nNombre: ${userName}\nEmail: ${userEmail}`, 'info');
+}
+
+// Función para mostrar pedidos del usuario
+function showUserOrders() {
+    const cart = JSON.parse(localStorage.getItem('tevp-cart') || '[]');
+    
+    if (cart.length === 0) {
+        showAlert('No tienes pedidos actualmente', 'info');
+        return;
+    }
+    
+    const ordersSummary = cart.map(item => 
+        `• ${item.professionalName} - ${item.service}\n  Precio: $${item.price.toLocaleString()}`
+    ).join('\n\n');
+    
+    showAlert(`Tus Pedidos Actuales:\n\n${ordersSummary}`, 'info');
+}
+
+// Función loginSuccess actualizada con interfaz de usuario
+function loginSuccess(userData, redirectUrl) {
+    console.log('Login exitoso:', userData);
+    
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userRole', userData.role);
+    localStorage.setItem('userName', userData.name);
+    localStorage.setItem('userEmail', userData.email);
+    
+    showLoginSpinner(false);
+    showAlert(`¡Bienvenido ${userData.name}!`, 'success');
+    
+    // Actualizar interfaz después de un pequeño delay para permitir que se guarde en localStorage
+    setTimeout(() => {
+        updateUserInterface();
+    }, 100);
+    
+    setTimeout(() => {
+        window.location.href = redirectUrl;
+    }, 1500);
 }
 
 // Inicializar aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM cargado, iniciando aplicación');
     initApp();
+    updateUserInterface(); // Actualizar interfaz de usuario al cargar la página
 });
