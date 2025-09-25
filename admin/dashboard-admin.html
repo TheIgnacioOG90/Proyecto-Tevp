@@ -1,53 +1,85 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para el panel administrativo -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
+    <!-- Meta etiquetas para evitar caché durante desarrollo -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Panel Administrativo TEVP - FUNCIONAL</title>
+    <!-- Estas etiquetas aseguran que siempre se cargue la versión más reciente -->
     
-    <!-- Bootstrap CSS -->
+    <title>Panel Administrativo TEVP - FUNCIONAL</title>
+    <!-- Título específico para el panel de administración -->
+    
+    <!-- Bootstrap CSS - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome - Iconos vectoriales para la interfaz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /**
+         * VARIABLES CSS PARA EL PANEL ADMINISTRATIVO
+         * Colores específicos para la interfaz de administración
+         */
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --danger-color: #e74c3c;
+            --primary-color: #3498db;    /* Azul principal para elementos destacados */
+            --secondary-color: #2c3e50;  /* Azul oscuro para textos y fondos */
+            --success-color: #27ae60;    /* Verde para estados exitosos */
+            --warning-color: #f39c12;    /* Amarillo para advertencias */
+            --danger-color: #e74c3c;     /* Rojo para errores o acciones peligrosas */
         }
 
+        /**
+         * RESET CSS BÁSICO
+         * Elimina márgenes y paddings por defecto del navegador
+         */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box;  /* Incluye padding y border en el ancho total */
         }
 
+        /**
+         * ESTILOS BASE DEL BODY
+         * Configuración general del panel administrativo
+         */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            overflow-x: hidden;
+            background-color: #f8f9fa;  /* Fondo gris claro */
+            overflow-x: hidden;         /* Oculta scroll horizontal */
         }
 
+        /**
+         * CONTENEDOR PRINCIPAL DEL ADMIN
+         * Layout flexbox para sidebar + contenido principal
+         */
         .admin-container {
-            display: flex;
-            min-height: 100vh;
+            display: flex;           /* Flexbox para layout horizontal */
+            min-height: 100vh;      /* Altura mínima de toda la pantalla */
         }
 
+        /**
+         * SIDEBAR DE NAVEGACIÓN ADMINISTRATIVA
+         * Panel lateral fijo con menú de opciones del administrador
+         */
         .sidebar {
-            width: 280px;
+            width: 280px;                    /* Ancho fijo del sidebar */
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            color: white;                    /* Texto blanco sobre fondo azul */
+            position: fixed;                 /* Posición fija al hacer scroll */
+            height: 100vh;                   /* Altura completa de la ventana */
+            overflow-y: auto;                /* Scroll vertical si es necesario */
+            z-index: 1000;                   /* Nivel alto para estar sobre otros elementos */
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);  /* Sombra lateral */
         }
 
         .sidebar-header {
@@ -365,64 +397,98 @@
                         <div class="stat-label">Ingresos Totales</div>
                     </div>
                     <div class="stat-card">
+                    <!-- TARJETA ESTADÍSTICA: CLIENTES ACTIVOS -->
+                    <div class="stat-card">
+                        <!-- ÍCONO REPRESENTATIVO DE USUARIOS -->
                         <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <!-- NÚMERO DESTACADO DE CLIENTES ACTIVOS -->
                         <div class="stat-number">856</div>
+                        <!-- ETIQUETA DESCRIPTIVA -->
                         <div class="stat-label">Clientes Activos</div>
                     </div>
+                    <!-- TARJETA ESTADÍSTICA: PROFESIONALES REGISTRADOS -->
                     <div class="stat-card">
+                        <!-- ÍCONO DE HERRAMIENTAS PARA PROFESIONALES -->
                         <div class="stat-icon"><i class="fas fa-tools"></i></div>
+                        <!-- CANTIDAD TOTAL DE PROFESIONALES -->
                         <div class="stat-number">124</div>
+                        <!-- ETIQUETA DESCRIPTIVA -->
                         <div class="stat-label">Profesionales</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Pedidos Panel -->
+            <!-- PANEL DE GESTIÓN DE PEDIDOS/ÓRDENES -->
+            <!-- Sección completa para administrar órdenes de servicios -->
             <section id="pedidos-panel" class="content-panel">
+                <!-- ENCABEZADO DEL PANEL DE PEDIDOS -->
                 <div class="panel-header">
+                    <!-- TÍTULO CON ÍCONO DE CARRITO DE COMPRAS -->
                     <h1><i class="fas fa-shopping-cart me-3"></i>Gestión de Pedidos</h1>
+                    <!-- DESCRIPCIÓN DEL PROPÓSITO DEL PANEL -->
                     <p>Administrar todas las órdenes de servicios</p>
                 </div>
                 
+                <!-- CONTENEDOR DE TABLA DE DATOS -->
                 <div class="data-table">
+                    <!-- ENCABEZADO DE LA TABLA CON TÍTULO Y BOTÓN -->
                     <div class="table-header">
+                        <!-- TÍTULO DE LA TABLA DE ÓRDENES -->
                         <h2 class="table-title">Lista de Órdenes Activas</h2>
+                        <!-- BOTÓN PARA CREAR NUEVA ORDEN -->
                         <button class="btn btn-primary-custom">
                             <i class="fas fa-plus me-2"></i>Nueva Orden
                         </button>
                     </div>
                     
+                    <!-- TABLA RESPONSIVE BOOTSTRAP -->
+                    <!-- Se adapta a diferentes tamaños de pantalla -->
                     <div class="table-responsive">
+                        <!-- TABLA BOOTSTRAP PARA MOSTRAR ÓRDENES -->
                         <table class="table">
+                            <!-- ENCABEZADO DE LA TABLA CON COLUMNAS -->
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Cliente</th>
-                                    <th>Servicio</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
+                                    <th>ID</th>           <!-- Identificador único de orden -->
+                                    <th>Cliente</th>      <!-- Nombre del cliente -->
+                                    <th>Servicio</th>     <!-- Tipo de servicio solicitado -->
+                                    <th>Fecha</th>        <!-- Fecha de la orden -->
+                                    <th>Estado</th>       <!-- Estado actual de la orden -->
+                                    <th>Total</th>        <!-- Monto total de la orden -->
+                                    <th>Acciones</th>     <!-- Botones de acción -->
                                 </tr>
                             </thead>
+                            <!-- CUERPO DE LA TABLA CON DATOS DE ÓRDENES -->
                             <tbody>
+                                <!-- FILA DE ORDEN #001 -->
                                 <tr>
+                                    <!-- ID DE LA ORDEN CON FORMATO DESTACADO -->
                                     <td><strong>#001</strong></td>
+                                    <!-- NOMBRE DEL CLIENTE -->
                                     <td>Juan Pérez</td>
+                                    <!-- TIPO DE SERVICIO SOLICITADO -->
                                     <td>Plomería</td>
+                                    <!-- FECHA DE LA ORDEN -->
                                     <td>23/09/2024</td>
+                                    <!-- BADGE DE ESTADO CON COLOR AMARILLO -->
                                     <td><span class="badge bg-warning">Pendiente</span></td>
+                                    <!-- MONTO TOTAL CON FORMATO DESTACADO -->
                                     <td><strong>$85.000</strong></td>
+                                    <!-- BOTONES DE ACCIÓN -->
                                     <td>
+                                        <!-- BOTÓN PARA VER DETALLES -->
                                         <button class="btn btn-sm btn-primary">Ver</button>
+                                        <!-- BOTÓN PARA COMPLETAR ORDEN -->
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #002 -->
                                 <tr>
                                     <td><strong>#002</strong></td>
                                     <td>María González</td>
                                     <td>Electricidad</td>
                                     <td>22/09/2024</td>
+                                    <!-- ESTADO EN PROCESO CON BADGE AZUL -->
                                     <td><span class="badge bg-info">En Proceso</span></td>
                                     <td><strong>$120.000</strong></td>
                                     <td>
@@ -430,18 +496,22 @@
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #003 -->
                                 <tr>
                                     <td><strong>#003</strong></td>
                                     <td>Carlos Rodríguez</td>
                                     <td>Climatización</td>
                                     <td>21/09/2024</td>
+                                    <!-- ESTADO COMPLETADO CON BADGE VERDE -->
                                     <td><span class="badge bg-success">Completado</span></td>
                                     <td><strong>$350.000</strong></td>
                                     <td>
                                         <button class="btn btn-sm btn-primary">Ver</button>
+                                        <!-- BOTÓN PARA GENERAR FACTURA -->
                                         <button class="btn btn-sm btn-secondary">Facturar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #004 -->
                                 <tr>
                                     <td><strong>#004</strong></td>
                                     <td>Ana Martínez</td>
@@ -454,6 +524,7 @@
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #005 -->
                                 <tr>
                                     <td><strong>#005</strong></td>
                                     <td>Pedro Sánchez</td>
@@ -466,6 +537,7 @@
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #006 -->
                                 <tr>
                                     <td><strong>#006</strong></td>
                                     <td>Sofia López</td>
@@ -478,18 +550,22 @@
                                         <button class="btn btn-sm btn-secondary">Facturar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #007 - ESTADO CANCELADO -->
                                 <tr>
                                     <td><strong>#007</strong></td>
                                     <td>Miguel Torres</td>
                                     <td>Plomería</td>
                                     <td>17/09/2024</td>
+                                    <!-- BADGE ROJO PARA ORDEN CANCELADA -->
                                     <td><span class="badge bg-danger">Cancelado</span></td>
                                     <td><strong>$65.000</strong></td>
                                     <td>
                                         <button class="btn btn-sm btn-primary">Ver</button>
+                                        <!-- BOTÓN PARA REAGENDAR ORDEN CANCELADA -->
                                         <button class="btn btn-sm btn-warning">Reagendar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #008 -->
                                 <tr>
                                     <td><strong>#008</strong></td>
                                     <td>Carmen Díaz</td>
@@ -502,6 +578,7 @@
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #009 -->
                                 <tr>
                                     <td><strong>#009</strong></td>
                                     <td>Roberto Herrera</td>
@@ -514,6 +591,7 @@
                                         <button class="btn btn-sm btn-success">Completar</button>
                                     </td>
                                 </tr>
+                                <!-- FILA DE ORDEN #010 -->
                                 <tr>
                                     <td><strong>#010</strong></td>
                                     <td>Valentina Ruiz</td>
@@ -526,7 +604,7 @@
                                         <button class="btn btn-sm btn-secondary">Facturar</button>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- FILA DE ORDEN ADICIONAL -->
                                     <td><strong>#011</strong></td>
                                     <td>Fernando Castro</td>
                                     <td>Construcción</td>

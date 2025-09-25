@@ -1,79 +1,157 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 estándar -->
 <html lang="es">
+<!-- El atributo lang="es" indica que el contenido está en español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas básicas requeridas para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Define la codificación de caracteres como UTF-8 para soportar caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración de viewport para diseño responsivo en dispositivos móviles -->
+    
+    <!-- Meta etiquetas para evitar el cache del navegador durante desarrollo -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <!-- Estas meta etiquetas aseguran que el navegador siempre cargue la versión más reciente -->
+    
     <title>TEVP - Tienda de Servicios Profesionales</title>
-    <!-- Bootstrap CSS -->
+    <!-- Título que aparece en la pestaña del navegador y en resultados de búsqueda -->
+    
+    <!-- Bootstrap CSS - Framework de CSS para diseño responsivo y componentes -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome - Biblioteca de iconos vectoriales -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados de la aplicación -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header Principal -->
+    <!-- Estructura principal del cuerpo de la página -->
+    
+    <!-- Header Principal - Encabezado de la página que contiene la navegación -->
     <header>
-        <!-- Navegación -->
+        <!-- Navegación principal usando Bootstrap navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <!-- sticky-top hace que la navegación se mantenga fija al hacer scroll -->
             <div class="container">
+                <!-- Logo y nombre de la marca TEVP -->
                 <a class="navbar-brand" href="index.html">
                     <i class="fas fa-tools me-2"></i>TEVP
+                    <!-- Icono de herramientas que representa los servicios técnicos -->
                 </a>
                 
+                <!-- Botón hamburguesa para navegación móvil (colapsa el menú en pantallas pequeñas) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
+                <!-- CONTENEDOR COLAPSABLE DE LA NAVEGACIÓN -->
+                <!-- collapse: hace que el menú sea colapsible en dispositivos móviles -->
+                <!-- navbar-collapse: clase Bootstrap para el contenido del navbar -->
                 <div class="collapse navbar-collapse" id="navbarNav">
+                    
+                    <!-- MENÚ PRINCIPAL DE NAVEGACIÓN (LADO IZQUIERDO) -->
                     <ul class="navbar-nav me-auto">
+                        <!-- me-auto: margen automático que empuja otros elementos hacia la derecha -->
+                        
                         <li class="nav-item">
+                            <!-- nav-item: contenedor Bootstrap para cada elemento de navegación -->
+                            <!-- nav-link: estilo Bootstrap para enlaces de navegación -->
+                            <!-- active: clase que resalta la página actual -->
                             <a class="nav-link active" href="index.html">Inicio</a>
                         </li>
+                        
                         <li class="nav-item">
+                            <!-- Enlace a la página de servicios disponibles -->
                             <a class="nav-link" href="servicios.html">Servicios</a>
                         </li>
+                        
                         <li class="nav-item">
+                            <!-- Enlace a información sobre la empresa -->
                             <a class="nav-link" href="nosotros.html">Nosotros</a>
                         </li>
+                        
                         <li class="nav-item">
+                            <!-- Enlace a la sección de blog/noticias -->
                             <a class="nav-link" href="blogs.html">Blog</a>
                         </li>
+                        
                         <li class="nav-item">
+                            <!-- Enlace a información de contacto -->
                             <a class="nav-link" href="contacto.html">Contacto</a>
                         </li>
                     </ul>
                     
+                    <!-- MENÚ DE UTILIDADES (LADO DERECHO) -->
                     <ul class="navbar-nav">
+                        
+                        <!-- ÍCONO DEL CARRITO DE COMPRAS -->
                         <li class="nav-item me-3">
+                            <!-- me-3: margen derecho de 3 unidades Bootstrap -->
+                            <!-- data-bs-toggle="modal": atributo que activa modal de Bootstrap -->
+                            <!-- data-bs-target="#cartModal": especifica qué modal abrir -->
+                            <!-- onclick="loadCartModal()": función JavaScript que carga contenido del carrito -->
                             <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                                <!-- fas fa-shopping-cart: icono Font Awesome del carrito -->
                                 <i class="fas fa-shopping-cart"></i>
+                                <!-- cart-count: clase CSS personalizada para el contador -->
+                                <!-- Inicializado en 0, se actualiza dinámicamente con JavaScript -->
                                 <span class="cart-count">0</span>
                             </a>
                         </li>
                         
-                        <!-- Información del usuario logueado -->
+                        <!-- MENÚ DESPLEGABLE DEL USUARIO LOGUEADO -->
                         <li class="nav-item dropdown d-none" id="user-info">
+                            <!-- d-none: clase Bootstrap que oculta el elemento -->
+                            <!-- Se mostrará dinámicamente cuando el usuario inicie sesión -->
+                            <!-- dropdown: clase Bootstrap para menú desplegable -->
+                            
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                                <!-- dropdown-toggle: estilo Bootstrap para botón desplegable -->
+                                <!-- d-flex: display flex de Bootstrap -->
+                                <!-- align-items-center: alineación vertical centrada -->
+                                <!-- role="button": accesibilidad para lectores de pantalla -->
+                                
                                 <i class="fas fa-user-circle me-2"></i>
+                                <!-- fas fa-user-circle: icono de usuario circular -->
+                                <!-- me-2: margen derecho de 2 unidades -->
+                                
                                 <span id="user-name">Usuario</span>
+                                <!-- Contenido que se cargará dinámicamente con el nombre del usuario -->
                             </a>
+                            
+                            <!-- OPCIONES DEL MENÚ DESPLEGABLE DEL USUARIO -->
                             <ul class="dropdown-menu">
+                                <!-- dropdown-menu: clase Bootstrap para el contenido del desplegable -->
+                                
                                 <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
+                                <!-- dropdown-item: estilo Bootstrap para elementos del desplegable -->
+                                <!-- onclick: ejecuta función JavaScript para mostrar perfil -->
+                                
                                 <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
+                                <!-- Función para mostrar los pedidos del usuario -->
+                                
                                 <li><hr class="dropdown-divider"></li>
+                                <!-- dropdown-divider: línea divisoria Bootstrap en el menú desplegable -->
+                                
                                 <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
+                                <!-- onclick="logout()": función JavaScript para cerrar sesión y limpiar datos del usuario -->
                             </ul>
                         </li>
                         
-                        <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
+                        <!-- ENLACES DE AUTENTICACIÓN (SOLO VISIBLES CUANDO NO ESTÉ LOGUEADO) -->
                         <li class="nav-item" id="auth-link-register">
+                            <!-- id="auth-link-register": identificador para mostrar/ocultar con JavaScript -->
+                            <!-- Enlace a la página de registro de nuevos usuarios -->
                             <a class="nav-link" href="registro.html">Registro</a>
                         </li>
+                        
                         <li class="nav-item" id="auth-link-login">
+                            <!-- id="auth-link-login": identificador para control de visibilidad -->
+                            <!-- Enlace a la página de inicio de sesión -->
                             <a class="nav-link" href="login.html">Iniciar Sesión</a>
                         </li>
                     </ul>
@@ -82,94 +160,269 @@
         </nav>
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- =================================================================== -->
+    <!-- CONTENIDO PRINCIPAL DE LA PÁGINA DE INICIO -->
+    <!-- =================================================================== -->
     <main>
+        <!-- main: elemento semántico HTML5 que contiene el contenido principal -->
+        
         <div class="main-content">
-            <!-- Sección Hero -->
+            <!-- main-content: clase CSS personalizada para estilos generales -->
+            
+            <!-- =================================================================== -->
+            <!-- SECCIÓN HERO - ÁREA DE BIENVENIDA Y PRESENTACIÓN PRINCIPAL -->
+            <!-- =================================================================== -->
             <section class="hero-section">
-            <div class="container text-center">
-                <h1>Bienvenido a TEVP</h1>
-                <p class="lead">Contrata los mejores profesionales en servicios técnicos y de reparación</p>
-                <p>Plomeros • Electricistas • Técnicos en Climatización • Reparación de Electrodomésticos • Construcción • Soldadura</p>
-                <div class="mt-4">
-                    <a href="servicios.html" class="btn btn-primary btn-lg me-3">Ver Servicios</a>
-                    <a href="registro.html" class="btn btn-outline-light btn-lg">Registrarse</a>
+                <!-- PROPÓSITO DE LA SECCIÓN HERO:
+                     - Primera impresión visual del sitio
+                     - Comunica el valor principal de TEVP
+                     - Incluye llamadas a la acción (CTA) principales
+                     - Background con imagen/gradient para impacto visual -->
+                
+                <div class="container text-center">
+                    <!-- container: contenedor responsivo Bootstrap -->
+                    <!-- text-center: centra todo el contenido de texto -->
+                    
+                    <!-- TÍTULO PRINCIPAL DE LA PÁGINA -->
+                    <h1>Bienvenido a TEVP</h1>
+                    <!-- h1: elemento semántico más importante para SEO -->
+                    <!-- Define el propósito principal del sitio -->
+                    
+                    <!-- SUBTÍTULO CON PROPUESTA DE VALOR -->
+                    <p class="lead">Contrata los mejores profesionales en servicios técnicos y de reparación</p>
+                    <!-- lead: clase Bootstrap que hace el texto más prominente -->
+                    <!-- Explica claramente qué ofrece TEVP -->
+                    
+                    <!-- LISTA DE SERVICIOS PARA SEO Y CLARIDAD -->
+                    <p>Plomeros • Electricistas • Técnicos en Climatización • Reparación de Electrodomésticos • Construcción • Soldadura</p>
+                    <!-- Lista con separadores (•) que mejora SEO y da información específica -->
+                    <!-- Palabras clave importantes para buscadores -->
+                    
+                    <!-- BOTONES DE LLAMADA A LA ACCIÓN (CTA) -->
+                    <div class="mt-4">
+                        <!-- mt-4: margen superior de 4 unidades Bootstrap -->
+                        
+                        <!-- BOTÓN PRINCIPAL: VER SERVICIOS -->
+                        <a href="servicios.html" class="btn btn-primary btn-lg me-3">Ver Servicios</a>
+                        <!-- CLASES DEL BOTÓN:
+                             - btn: clase base Bootstrap para botones
+                             - btn-primary: estilo azul principal
+                             - btn-lg: tamaño grande para más prominencia
+                             - me-3: margen derecho de 3 unidades -->
+                        
+                        <!-- BOTÓN SECUNDARIO: REGISTRO -->
+                        <a href="registro.html" class="btn btn-outline-light btn-lg">Registrarse</a>
+                        <!-- btn-outline-light: botón con borde claro y fondo transparente -->
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    <!-- Contenido Principal -->
-    <div class="container my-5">
-        <!-- Servicios Destacados -->
-        <section class="mb-5">
-            <h2 class="section-title">Servicios Destacados</h2>
-            <div class="row" id="servicios-lista">
-                <!-- Los servicios se cargarán aquí con JavaScript -->
-                <div class="col-12 text-center">
-                    <div class="loading">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Cargando...</span>
+            <!-- =================================================================== -->
+            <!-- CONTAINER PRINCIPAL PARA CONTENIDO ESTRUCTURADO -->
+            <!-- =================================================================== -->
+            <div class="container my-5">
+                <!-- my-5: margen vertical (top y bottom) de 5 unidades Bootstrap -->
+                
+                <!-- SECCIÓN DE SERVICIOS DESTACADOS -->
+                <section class="mb-5">
+                    <!-- mb-5: margen inferior de 5 unidades -->
+                    
+                    <!-- TÍTULO DE SECCIÓN -->
+                    <h2 class="section-title">Servicios Destacados</h2>
+                    <!-- section-title: clase CSS personalizada para títulos de sección -->
+                    
+                    <!-- CONTENEDOR DINÁMICO PARA SERVICIOS -->
+                    <div class="row" id="servicios-lista">
+                        <!-- ELEMENTOS IMPORTANTES:
+                             - row: fila del sistema de grid Bootstrap
+                             - id="servicios-lista": identificador para JavaScript
+                             - Este div se llena dinámicamente con main.js usando displayFeaturedServices() -->
+                        
+                        <!-- INDICADOR DE CARGA INICIAL -->
+                        <div class="col-12 text-center">
+                            <!-- col-12: ocupa las 12 columnas (100% del ancho) -->
+                            
+                            <div class="loading">
+                                <!-- loading: clase CSS personalizada para estilos de carga -->
+                                
+                                <!-- SPINNER DE BOOTSTRAP -->
+                                <div class="spinner-border" role="status">
+                                    <!-- spinner-border: componente Bootstrap para animación de carga -->
+                                    <!-- role="status": atributo de accesibilidad -->
+                                    <span class="visually-hidden">Cargando...</span>
+                                    <!-- visually-hidden: texto solo para lectores de pantalla -->
+                                </div>
+                                <p class="mt-2">Cargando servicios...</p>
+                                <!-- Texto visible del estado de carga -->
+                            </div>
                         </div>
-                        <p class="mt-2">Cargando servicios...</p>
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <!-- Información sobre TEVP -->
-        <article class="mb-5">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h3 class="text-gradient">¿Por qué elegir TEVP?</h3>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success me-2"></i>Profesionales certificados y con experiencia</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>Atención rápida y confiable</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>Precios justos y transparentes</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>Garantía en todos nuestros servicios</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>Disponibilidad en toda la región</li>
-                    </ul>
-                </div>
-                <div class="col-md-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=400&fit=crop" 
-                         class="img-fluid rounded shadow" alt="Profesionales TEVP">
-                </div>
-            </div>
-        </article>
+                <!-- =================================================================== -->
+                <!-- SECCIÓN INFORMATIVA SOBRE VENTAJAS DE TEVP -->
+                <!-- =================================================================== -->
+                <article class="mb-5">
+                    <!-- ELEMENTO SEMÁNTICO: article para contenido independiente y completo -->
+                    
+                    <div class="row align-items-center">
+                        <!-- CLASES DE BOOTSTRAP:
+                             - row: fila del sistema de grid Bootstrap
+                             - align-items-center: alineación vertical centrada -->
+                        
+                        <!-- =================================================================== -->
+                        <!-- COLUMNA DE CONTENIDO TEXTUAL -->
+                        <!-- =================================================================== -->
+                        <div class="col-md-6">
+                            <!-- col-md-6: 6 columnas (50% ancho) en pantallas medianas -->
+                            
+                            <!-- TÍTULO CON GRADIENTE CSS PERSONALIZADO -->
+                            <h3 class="text-gradient">¿Por qué elegir TEVP?</h3>
+                            <!-- text-gradient: clase CSS personalizada que aplica degradado al texto -->
+                            
+                            <!-- LISTA DE BENEFICIOS SIN ESTILOS POR DEFECTO -->
+                            <ul class="list-unstyled">
+                                <!-- list-unstyled: clase Bootstrap que quita los puntos de la lista -->
+                                
+                                <!-- PRIMER BENEFICIO: PROFESIONALES CERTIFICADOS -->
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Profesionales certificados y con experiencia</li>
+                                <!-- ICONOS Y CLASES:
+                                     - fas fa-check-circle: icono de marca de verificación de Font Awesome
+                                     - text-success: color verde Bootstrap (éxito)
+                                     - me-2: margen derecho de 2 unidades -->
+                                
+                                <!-- SEGUNDO BENEFICIO: ATENCIÓN RÁPIDA -->
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Atención rápida y confiable</li>
+                                <!-- Mensaje sobre rapidez y confiabilidad del servicio -->
+                                
+                                <!-- TERCER BENEFICIO: PRECIOS TRANSPARENTES -->
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Precios justos y transparentes</li>
+                                <!-- Promesa de transparencia en precios que genera confianza -->
+                                
+                                <!-- CUARTO BENEFICIO: GARANTÍA -->
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Garantía en todos nuestros servicios</li>
+                                <!-- Garantía que reduce riesgo percibido del usuario -->
+                                
+                                <!-- QUINTO BENEFICIO: COBERTURA GEOGRÁFICA -->
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Disponibilidad en toda la región</li>
+                                <!-- Comunicar cobertura amplia del servicio -->
+                            </ul>
+                        </div>
+                        
+                        <!-- =================================================================== -->
+                        <!-- COLUMNA DE IMAGEN REPRESENTATIVA -->
+                        <!-- =================================================================== -->
+                        <div class="col-md-6 text-center">
+                            <!-- Columna de imagen centrada -->
+                            
+                            <!-- IMAGEN DE UNSPLASH CON PARÁMETROS DE OPTIMIZACIÓN -->
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=400&fit=crop" 
+                                 class="img-fluid rounded shadow" alt="Profesionales TEVP">
+                            <!-- CLASES DE BOOTSTRAP PARA IMAGEN:
+                                 - img-fluid: hace la imagen responsiva (max-width: 100%)
+                                 - rounded: aplica border-radius para esquinas redondeadas
+                                 - shadow: agrega sombra sutil para profundidad
+                                 - alt: texto alternativo importante para accesibilidad y SEO -->
+                        </div>
+                    </div>
+                </article>
 
-        <!-- Categorías de Servicios -->
-        <section class="mb-5">
-            <h3 class="section-title">Nuestras Especialidades</h3>
-            <div class="row">
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card text-center h-100">
-                        <div class="card-body">
-                            <i class="fas fa-wrench fa-3x text-primary mb-3"></i>
-                            <h5>Plomería</h5>
-                            <p class="card-text">Reparación de filtraciones, instalaciones sanitarias</p>
+                <!-- =================================================================== -->
+                <!-- SECCIÓN DE CATEGORÍAS DE SERVICIOS - ESPECIALIDADES PRINCIPALES -->
+                <!-- =================================================================== -->
+                <section class="mb-5">
+                    <!-- PROPÓSITO: Mostrar las diferentes especialidades disponibles en TEVP -->
+                    
+                    <h3 class="section-title">Nuestras Especialidades</h3>
+                    <!-- section-title: clase CSS personalizada para títulos de sección -->
+                    
+                    <div class="row">
+                        <!-- Sistema de grid Bootstrap para tarjetas responsivas -->
+                        
+                        <!-- =================================================================== -->
+                        <!-- TARJETA 1: SERVICIO DE PLOMERÍA -->
+                        <!-- =================================================================== -->
+                        <div class="col-md-3 col-sm-6 mb-4">
+                            <!-- CLASES RESPONSIVAS:
+                                 - col-md-3: 3 columnas (25% ancho) en pantallas medianas
+                                 - col-sm-6: 6 columnas (50% ancho) en pantallas pequeñas
+                                 - mb-4: margen inferior de 4 unidades -->
+                            
+                            <div class="card text-center h-100">
+                                <!-- CLASES DE TARJETA BOOTSTRAP:
+                                     - card: componente tarjeta Bootstrap
+                                     - text-center: centra todo el contenido
+                                     - h-100: altura del 100% para igualar todas las tarjetas -->
+                                
+                                <div class="card-body">
+                                    <!-- card-body: contenedor principal del contenido de la tarjeta -->
+                                    
+                                    <!-- ICONO REPRESENTATIVO DEL SERVICIO -->
+                                    <i class="fas fa-wrench fa-3x text-primary mb-3"></i>
+                                    <!-- CLASES DEL ICONO:
+                                         - fas fa-wrench: icono de llave inglesa de Font Awesome
+                                         - fa-3x: tamaño 3 veces mayor que el normal
+                                         - text-primary: color azul principal de Bootstrap
+                                         - mb-3: margen inferior de 3 unidades -->
+                                    
+                                    <h5>Plomería</h5>
+                                    <!-- Título del servicio usando h5 para jerarquía -->
+                                    
+                                    <p class="card-text">Reparación de filtraciones, instalaciones sanitarias</p>
+                                    <!-- card-text: clase Bootstrap para texto del cuerpo de la tarjeta -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card text-center h-100">
-                        <div class="card-body">
-                            <i class="fas fa-bolt fa-3x text-warning mb-3"></i>
-                            <h5>Electricidad</h5>
-                            <p class="card-text">Instalaciones eléctricas, reparación de cortocircuitos</p>
+                        
+                        <!-- =================================================================== -->
+                        <!-- TARJETA 2: SERVICIO DE ELECTRICIDAD -->
+                        <!-- =================================================================== -->
+                        <div class="col-md-3 col-sm-6 mb-4">
+                            <!-- Misma estructura responsiva que la tarjeta anterior -->
+                            
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <!-- ICONO DE RAYO PARA ELECTRICIDAD -->
+                                    <i class="fas fa-bolt fa-3x text-warning mb-3"></i>
+                                    <!-- CLASES DEL ICONO:
+                                         - fas fa-bolt: icono de rayo de Font Awesome
+                                         - text-warning: color amarillo Bootstrap (apropiado para electricidad) -->
+                                    
+                                    <h5>Electricidad</h5>
+                                    <!-- Título del servicio eléctrico -->
+                                    
+                                    <p class="card-text">Instalaciones eléctricas, reparación de cortocircuitos</p>
+                                    <!-- Descripción específica de servicios eléctricos -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card text-center h-100">
-                        <div class="card-body">
-                            <i class="fas fa-snowflake fa-3x text-info mb-3"></i>
-                            <h5>Climatización</h5>
-                            <p class="card-text">Mantención de aires acondicionados y calefacción</p>
+                        
+                        <!-- =================================================================== -->
+                        <!-- TARJETA 3: SERVICIO DE CLIMATIZACIÓN -->
+                        <!-- =================================================================== -->
+                        <div class="col-md-3 col-sm-6 mb-4">
+                            <!-- Tercera tarjeta del grid responsivo -->
+                            
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <!-- ICONO DE COPO DE NIEVE PARA CLIMATIZACIÓN -->
+                                    <i class="fas fa-snowflake fa-3x text-info mb-3"></i>
+                                    <!-- CLASES DEL ICONO:
+                                         - fas fa-snowflake: icono de copo de nieve de Font Awesome
+                                         - text-info: color azul claro Bootstrap (apropiado para frío) -->
+                                    
+                                    <h5>Climatización</h5>
+                                    <!-- Título del servicio de climatización -->
+                                    
+                                    <p class="card-text">Mantención de aires acondicionados y calefacción</p>
+                                    <!-- Descripción que incluye tanto frío como calor -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card text-center h-100">
-                        <div class="card-body">
+                        
+                        <!-- =================================================================== -->
+                        <!-- TARJETA 4: SERVICIO DE CONSTRUCCIÓN -->
+                        <!-- =================================================================== -->
                             <i class="fas fa-hammer fa-3x text-success mb-3"></i>
                             <h5>Construcción</h5>
                             <p class="card-text">Trabajos de albañilería, remodelaciones</p>
@@ -179,11 +432,12 @@
             </div>
         </section>
 
-        <!-- Mejores Profesionales -->
+        <!-- Sección de Mejores Profesionales - Lista los profesionales mejor calificados -->
         <section class="mb-5">
             <h3 class="section-title">Mejores Profesionales</h3>
+            <!-- Contenedor donde se cargarán los mejores profesionales dinámicamente -->
             <div class="row" id="top-professionals">
-                <!-- Los mejores profesionales se cargarán aquí con JavaScript -->
+                <!-- Indicador de carga mientras se obtienen los datos de los profesionales -->
                 <div class="col-12 text-center">
                     <div class="loading">
                         <div class="spinner-border" role="status">
@@ -196,26 +450,34 @@
         </section>
     </div>
 
-    <!-- Modal del Carrito -->
+    <!-- Modal del Carrito de Compras - Ventana emergente para gestionar items del carrito -->
     <div class="modal fade" id="cartModal" tabindex="-1">
+        <!-- modal-lg hace el modal más grande para mostrar mejor el contenido -->
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                <!-- Encabezado del modal con título y botón de cierre -->
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="fas fa-shopping-cart me-2"></i>Carrito de Compras
                     </h5>
+                    <!-- Botón X para cerrar el modal -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <!-- Contenido principal donde se muestran los items del carrito -->
                 <div class="modal-body">
                     <div id="cart-items">
-                        <!-- Items del carrito se cargarán aquí -->
+                        <!-- Los items del carrito se cargarán aquí dinámicamente con JavaScript -->
                     </div>
                 </div>
+                <!-- Pie del modal con total y botones de acción -->
                 <div class="modal-footer">
+                    <!-- Total del carrito alineado a la izquierda -->
                     <div class="cart-total me-auto">
                         Total: <span id="cart-total">$0</span>
                     </div>
+                    <!-- Botones de acción -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <!-- Botón que lleva al proceso de pago -->
                     <button type="button" class="btn btn-primary" onclick="proceedToPayment()">Proceder al Pago</button>
                 </div>
             </div>
@@ -223,37 +485,47 @@
     </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer - Pie de página con información de contacto y enlaces -->
     <footer class="mt-5">
         <div class="container">
             <div class="row">
+                <!-- Columna con información de la empresa -->
                 <div class="col-md-4">
                     <h5><i class="fas fa-tools me-2"></i>TEVP</h5>
+                    <!-- Descripción breve de la empresa -->
                     <p>Tu solución en servicios profesionales técnicos</p>
                 </div>
+                <!-- Columna con enlaces rápidos a páginas principales -->
                 <div class="col-md-4">
                     <h5>Enlaces Rápidos</h5>
                     <ul class="list-unstyled">
+                        <!-- Enlaces con clase text-light para que sean visibles en fondo oscuro -->
                         <li><a href="servicios.html" class="text-light">Servicios</a></li>
                         <li><a href="nosotros.html" class="text-light">Nosotros</a></li>
                         <li><a href="contacto.html" class="text-light">Contacto</a></li>
                     </ul>
                 </div>
+                <!-- Columna con información de contacto -->
                 <div class="col-md-4">
                     <h5>Contacto</h5>
+                    <!-- Iconos Font Awesome para email y teléfono -->
                     <p><i class="fas fa-envelope me-2"></i>contacto@tevp.cl</p>
                     <p><i class="fas fa-phone me-2"></i>+56 2 2345 6789</p>
                 </div>
             </div>
+            <!-- Línea separadora -->
             <hr>
+            <!-- Copyright centrado -->
             <div class="text-center">
                 <p>&copy; 2025 TEVP. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts de JavaScript - Se cargan al final para mejor rendimiento -->
+    <!-- Bootstrap JavaScript Bundle - Incluye Popper.js para componentes interactivos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script principal de la aplicación con toda la funcionalidad personalizada -->
     <script src="js/main.js"></script>
 </body>
-</html></script>
+</html>

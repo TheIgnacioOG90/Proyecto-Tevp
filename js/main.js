@@ -1,66 +1,276 @@
-// ===== VARIABLES GLOBALES =====
-let services = [];
-let professionals = [];
-let cart = []; // Iniciar vacío
+// =============================================================================
+// MAIN.JS - ARCHIVO PRINCIPAL DE JAVASCRIPT DE TEVP
+// =============================================================================
+// Este archivo contiene toda la lógica principal del marketplace de servicios:
+// - Gestión de datos de servicios y profesionales
+// - Sistema de autenticación de usuarios (login/logout)
+// - Funcionalidad del carrito de compras
+// - Formularios de contacto y registro
+// - Filtros y búsquedas de servicios
+// - Validaciones de campos y datos
+// - Interacciones con localStorage para persistencia
+
+// =============================================================================
+// VARIABLES GLOBALES PRINCIPALES DEL SISTEMA
+// =============================================================================
+/**
+ * services[] - Array que almacena todos los servicios disponibles
+ * Se inicializa vacío y luego se llena desde initialProfessionals
+ * Cada servicio tiene: id, nombre, categoría, precio, profesional, etc.
+ */
+let services = []; 
+
+/**
+ * professionals[] - Array con todos los profesionales registrados
+ * Contiene datos completos: experiencia, calificaciones, tarifas, disponibilidad
+ * Se usa para mostrar tarjetas de profesionales y datos de contacto
+ */
+let professionals = []; 
+
+/**
+ * cart[] - Array del carrito de compras (inicia vacío)
+ * Almacena servicios seleccionados por el usuario
+ * Cada elemento tiene: servicio, cantidad, precio total, fecha de agregado
+ */
+let cart = []; 
+
+/**
+ * currentUser - Objeto del usuario actualmente logueado
+ * Se obtiene de localStorage al cargar la página
+ * null si no hay usuario logueado, objeto con datos del usuario si está autenticado
+ * Contiene: nombre, email, rol, fechaRegistro, etc.
+ */
 let currentUser = JSON.parse(localStorage.getItem('tevp-currentUser')) || null;
 
-// Limpiar carrito al cargar la página
+// =============================================================================
+// LIMPIEZA INICIAL DE DATOS DEL CARRITO
+// =============================================================================
+// Limpiar carrito al cargar la página para evitar datos antiguos o corruptos
+// Esto asegura que cada sesión inicie con un carrito vacío limpio
 localStorage.removeItem('tevp-cart');
 
-// Hacer las variables accesibles globalmente
+// =============================================================================
+// HACER VARIABLES ACCESIBLES GLOBALMENTE PARA OTROS SCRIPTS
+// =============================================================================
+// Estas variables se asignan al objeto window para que sean accesibles
+// desde otros archivos JavaScript o desde la consola del navegador
 window.services = services;
 window.professionals = professionals;
 window.cart = cart;
 
-// ===== DATOS INICIALES =====
-
-// Categorías de servicios disponibles
+// =============================================================================
+// CATEGORÍAS DE SERVICIOS - TIPOS DE SERVICIOS DISPONIBLES EN TEVP
+// =============================================================================
+/**
+ * serviceCategories - Array que define todos los tipos de servicios ofrecidos
+ * 
+ * ESTRUCTURA DE CADA CATEGORÍA:
+ * - id: identificador único numérico
+ * - nombre: nombre descriptivo de la categoría
+ * - icono: clase de Font Awesome para el ícono visual
+ * - color: clase de color Bootstrap (primary, warning, info, etc.)
+ * 
+ * ESTOS DATOS SE USAN PARA:
+ * - Mostrar filtros por categoría en servicios.html
+ * - Crear botones de filtrado con iconos y colores
+ * - Clasificar profesionales por especialidad
+ * - Generar tarjetas de servicios con iconografía consistente
+ */
 const serviceCategories = [
-    { id: 1, nombre: "Plomería", icono: "fas fa-wrench", color: "primary" },
-    { id: 2, nombre: "Electricidad", icono: "fas fa-bolt", color: "warning" },
-    { id: 3, nombre: "Climatización", icono: "fas fa-snowflake", color: "info" },
-    { id: 4, nombre: "Construcción", icono: "fas fa-hard-hat", color: "secondary" },
-    { id: 5, nombre: "Soldadura", icono: "fas fa-fire-flame-curved", color: "danger" },
-    { id: 6, nombre: "Pintura", icono: "fas fa-paint-roller", color: "success" },
-    { id: 7, nombre: "Jardinería", icono: "fas fa-seedling", color: "success" },
-    { id: 8, nombre: "Limpieza", icono: "fas fa-broom", color: "info" },
-    { id: 9, nombre: "Seguridad", icono: "fas fa-shield-alt", color: "dark" },
-    { id: 10, nombre: "Electrodomésticos", icono: "fas fa-tv", color: "primary" },
-    { id: 11, nombre: "Carpintería", icono: "fas fa-hammer", color: "dark" },
-    { id: 12, nombre: "Cerrajería", icono: "fas fa-key", color: "warning" },
-    { id: 13, nombre: "Gasfitería", icono: "fas fa-fire", color: "danger" },
-    { id: 14, nombre: "Refrigeración", icono: "fas fa-temperature-low", color: "primary" },
-    { id: 15, nombre: "Calefón y Calderas", icono: "fas fa-water", color: "info" },
-    { id: 16, nombre: "Contadores", icono: "fas fa-tachometer-alt", color: "secondary" }
+    // SERVICIOS TÉCNICOS BÁSICOS DEL HOGAR
+    { 
+        id: 1, 
+        nombre: "Plomería", 
+        icono: "fas fa-wrench",        // Icono de llave inglesa
+        color: "primary"               // Color azul Bootstrap
+    },
+    { 
+        id: 2, 
+        nombre: "Electricidad", 
+        icono: "fas fa-bolt",          // Icono de rayo eléctrico
+        color: "warning"               // Color amarillo Bootstrap  
+    },
+    { 
+        id: 3, 
+        nombre: "Climatización", 
+        icono: "fas fa-snowflake",     // Icono de copo de nieve
+        color: "info"                  // Color celeste Bootstrap
+    },
+    { 
+        id: 4, 
+        nombre: "Construcción", 
+        icono: "fas fa-hard-hat",      // Icono de casco de construcción
+        color: "secondary"             // Color gris Bootstrap
+    },
+    { 
+        id: 5, 
+        nombre: "Soldadura", 
+        icono: "fas fa-fire-flame-curved", // Icono de llama
+        color: "danger"                // Color rojo Bootstrap
+    },
+    { 
+        id: 6, 
+        nombre: "Pintura", 
+        icono: "fas fa-paint-roller",  // Icono de rodillo de pintura
+        color: "success"               // Color verde Bootstrap
+    },
+    
+    // SERVICIOS EXTERIORES Y MANTENIMIENTO
+    { 
+        id: 7, 
+        nombre: "Jardinería", 
+        icono: "fas fa-seedling",      // Icono de planta/brote
+        color: "success"               // Color verde Bootstrap
+    },
+    { 
+        id: 8, 
+        nombre: "Limpieza", 
+        icono: "fas fa-broom",         // Icono de escoba
+        color: "info"                  // Color celeste Bootstrap
+    },
+    { 
+        id: 9, 
+        nombre: "Seguridad", 
+        icono: "fas fa-shield-alt",    // Icono de escudo de seguridad
+        color: "dark"                  // Color negro Bootstrap
+    },
+    
+    // SERVICIOS ESPECIALIZADOS Y TÉCNICOS AVANZADOS
+    { 
+        id: 10, 
+        nombre: "Electrodomésticos", 
+        icono: "fas fa-tv",            // Icono de televisor/electrodoméstico
+        color: "primary"               // Color azul Bootstrap
+    },
+    { 
+        id: 11, 
+        nombre: "Carpintería", 
+        icono: "fas fa-hammer",        // Icono de martillo
+        color: "dark"                  // Color negro Bootstrap
+    },
+    { 
+        id: 12, 
+        nombre: "Cerrajería", 
+        icono: "fas fa-key",           // Icono de llave
+        color: "warning"               // Color amarillo Bootstrap
+    },
+    { 
+        id: 13, 
+        nombre: "Gasfitería", 
+        icono: "fas fa-fire",          // Icono de fuego/gas
+        color: "danger"                // Color rojo Bootstrap
+    },
+    { 
+        id: 14, 
+        nombre: "Refrigeración", 
+        icono: "fas fa-temperature-low", // Icono de termómetro frío
+        color: "primary"               // Color azul Bootstrap
+    },
+    { 
+        id: 15, 
+        nombre: "Calefón y Calderas", 
+        icono: "fas fa-water",         // Icono de agua/sistemas hidráulicos
+        color: "info"                  // Color celeste Bootstrap
+    },
+    { 
+        id: 16, 
+        nombre: "Contadores", 
+        icono: "fas fa-tachometer-alt", // Icono de medidor/contador
+        color: "secondary"             // Color gris Bootstrap
+    }
 ];
 
-// Profesionales expandidos (10+ por categoría)
+// =============================================================================
+// BASE DE DATOS DE PROFESIONALES - INFORMACIÓN COMPLETA DEL EQUIPO TEVP
+// =============================================================================
+/**
+ * initialProfessionals - Array con información detallada de todos los profesionales
+ * 
+ * ESTRUCTURA COMPLETA DE CADA PROFESIONAL:
+ * ========================================
+ * - id: identificador único numérico
+ * - nombre: nombre completo del profesional
+ * - especialidad: área de expertise (debe coincidir con serviceCategories)
+ * - experiencia: años de experiencia laboral
+ * - calificacion: promedio de valoraciones (escala 1-5 estrellas)
+ * - totalReseñas: cantidad total de reseñas recibidas
+ * - tarifaPorHora: precio en pesos chilenos por hora de trabajo
+ * - avatar: URL de foto de perfil (usando randomuser.me para demos)
+ * - certificado: credenciales y certificaciones profesionales
+ * - biografia: descripción profesional detallada
+ * - servicios: array de servicios específicos que ofrece
+ * - tareasRealizadas: contador total de trabajos completados
+ * - disponibilidad: horarios de atención disponibles
+ * - preciosAprox: objeto con rangos de precios por tipo de servicio
+ * - reseñas: array con comentarios y calificaciones de clientes
+ * 
+ * ESTE ARRAY SE USA PARA:
+ * =======================
+ * - Generar tarjetas de profesionales en profesionales.html
+ * - Mostrar detalles completos en modales de información
+ * - Filtrar profesionales por categoría de servicio
+ * - Calcular promedios y estadísticas del sistema
+ * - Mostrar reseñas y testimonios de clientes
+ * - Generar opciones de contratación con precios
+ */
 const initialProfessionals = [
-    // ===== PLOMERÍA (10 profesionales) =====
+    // =============================================================================
+    // PROFESIONALES DE PLOMERÍA (10 especialistas)
+    // =============================================================================
+    /**
+     * PROFESIONAL #1 - CARLOS MENDOZA RIVERA
+     * =======================================
+     * Ejemplo completo de estructura de datos de un profesional
+     * Muestra todos los campos necesarios para el funcionamiento del sistema
+     */
     {
-        id: 1,
-        nombre: "Carlos Mendoza Rivera",
-        especialidad: "Plomería",
-        experiencia: 8,
-        calificacion: 4.8,
-        totalReseñas: 156,
-        tarifaPorHora: 32000,
-        avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+        id: 1,                                    // ID único para referencias y búsquedas
+        nombre: "Carlos Mendoza Rivera",          // Nombre completo del profesional
+        especialidad: "Plomería",                 // Especialidad (debe coincidir con serviceCategories)
+        experiencia: 8,                           // Años de experiencia profesional
+        calificacion: 4.8,                       // Promedio de calificaciones (1-5 estrellas)
+        totalReseñas: 156,                        // Cantidad total de reseñas de clientes
+        tarifaPorHora: 32000,                     // Tarifa por hora en pesos chilenos
+        avatar: "https://randomuser.me/api/portraits/men/12.jpg", // Foto de perfil
+        // Certificaciones y credenciales profesionales
         certificado: "Técnico en Instalaciones Sanitarias DUOC UC, Certificación SEC",
+        // Biografía profesional completa para mostrar en modal de detalles
         biografia: "Técnico especializado en sistemas hidráulicos residenciales e industriales con 8 años de experiencia. Experto en reparaciones complejas, instalaciones nuevas y sistemas de alta presión.",
-        servicios: ["Reparación filtraciones", "Cambio de cañerías", "Instalación sanitarios", "Sistemas de riego"],
-        tareasRealizadas: 342,
-        disponibilidad: "Lun-Vie 8:00-18:00, Sáb 9:00-14:00",
+        // Array de servicios específicos que ofrece este profesional
+        servicios: [
+            "Reparación filtraciones",     // Servicio específico 1
+            "Cambio de cañerías",          // Servicio específico 2  
+            "Instalación sanitarios",      // Servicio específico 3
+            "Sistemas de riego"            // Servicio específico 4
+        ],
+        tareasRealizadas: 342,                    // Contador total de trabajos completados
+        disponibilidad: "Lun-Vie 8:00-18:00, Sáb 9:00-14:00", // Horarios de disponibilidad
+        // Objeto con rangos de precios por tipo de servicio (para mostrar estimaciones)
         preciosAprox: {
-            "Reparación básica": "$25.000 - $35.000",
-            "Cambio de cañería": "$45.000 - $80.000",
-            "Instalación completa": "$120.000 - $200.000"
+            "Reparación básica": "$25.000 - $35.000",      // Reparaciones simples
+            "Cambio de cañería": "$45.000 - $80.000",      // Trabajos medianos
+            "Instalación completa": "$120.000 - $200.000"  // Proyectos grandes
         },
+        // Array de reseñas de clientes anteriores (para testimonios y credibilidad)
         reseñas: [
-            { cliente: "María S.", comentario: "Excelente trabajo, muy profesional y limpio", calificacion: 5 },
-            { cliente: "Juan P.", comentario: "Rápido y eficiente, solucionó todo en una visita", calificacion: 5 }
+            { 
+                cliente: "María S.", 
+                comentario: "Excelente trabajo, muy profesional y limpio", 
+                calificacion: 5 
+            },
+            { 
+                cliente: "Juan P.", 
+                comentario: "Rápido y eficiente, solucionó todo en una visita", 
+                calificacion: 5 
+            }
         ]
     },
+    
+    /**
+     * PROFESIONAL #2 - MIGUEL TORRES SÁNCHEZ  
+     * =======================================
+     * Profesional especializado en emergencias y sistemas complejos
+     */
     {
         id: 2,
         nombre: "Miguel Torres Sánchez",
@@ -97,40 +307,110 @@ const initialProfessionals = [
         certificado: "Técnico en Gasfitería CFT, Curso SENCE Actualizado",
         biografia: "Técnico joven y dinámico, especializado en reparaciones rápidas y eficientes. Excelente atención al cliente y precios competitivos.",
         servicios: ["Destapes", "Llaves de paso", "Mantención general", "Instalaciones menores"],
-        tareasRealizadas: 178,
-        disponibilidad: "Lun-Sáb 9:00-19:00",
+        /**
+         * CAMPOS DE DATOS DEL PROFESIONAL - EXPLICACIÓN DETALLADA:
+         */
+        tareasRealizadas: 178,          // CONTADOR DE TRABAJOS: Total de servicios completados exitosamente
+                                        // PROPÓSITO: Demostrar experiencia práctica al cliente
+                                        // USO: Se muestra en el perfil para generar confianza
+        
+        disponibilidad: "Lun-Sáb 9:00-19:00",  // HORARIO DE TRABAJO: Cuándo está disponible el profesional
+                                                // FORMATO: Días de la semana + rango horario
+                                                // FUNCIÓN: Permite al cliente saber cuándo puede contratarlo
+        
+        /**
+         * TABLA DE PRECIOS APROXIMADOS: Rangos de costos por tipo de servicio
+         * ESTRUCTURA: Objeto clave-valor donde la clave es el servicio y valor es el rango de precio
+         * PROPÓSITO: Dar transparencia de precios al cliente antes de contratar
+         */
         preciosAprox: {
-            "Destape cañería": "$20.000 - $40.000",
-            "Cambio llave": "$15.000 - $25.000",
-            "Visita técnica": "$12.000"
+            "Destape cañería": "$20.000 - $40.000",    // Servicio común con rango de precios
+            "Cambio llave": "$15.000 - $25.000",       // Trabajo sencillo, precio menor
+            "Visita técnica": "$12.000"                // Precio fijo para diagnóstico
         },
+        
+        /**
+         * SISTEMA DE RESEÑAS: Comentarios y calificaciones de clientes anteriores
+         * ESTRUCTURA: Array de objetos con datos de cada reseña
+         * FUNCIÓN: Sistema de reputación para generar confianza
+         */
         reseñas: [
-            { cliente: "Luis C.", comentario: "Muy buen precio y rápido en la solución", calificacion: 4 },
-            { cliente: "Elena V.", comentario: "Joven pero muy competente y responsable", calificacion: 5 }
+            { 
+                cliente: "Luis C.",                                    // NOMBRE DEL CLIENTE: Identificador público
+                comentario: "Muy buen precio y rápido en la solución", // OPINIÓN TEXTUAL: Experiencia del cliente
+                calificacion: 4                                       // PUNTUACIÓN NUMÉRICA: Escala 1-5 estrellas
+            },
+            { 
+                cliente: "Elena V.", 
+                comentario: "Joven pero muy competente y responsable", 
+                calificacion: 5 
+            }
         ]
     },
+    /**
+     * PROFESIONAL DE PLOMERÍA #4 - JUAN PÉREZ (PROFESIONAL SENIOR)
+     * EJEMPLO DE PROFESIONAL DE ALTO NIVEL: Demuestra cómo los datos reflejan experiencia
+     */
     {
-        id: 4,
-        nombre: "Juan Pérez Contreras",
-        especialidad: "Plomería",
-        experiencia: 15,
-        calificacion: 4.9,
-        totalReseñas: 287,
-        tarifaPorHora: 42000,
-        avatar: "https://randomuser.me/api/portraits/men/55.jpg",
+        id: 4,                                  // IDENTIFICADOR ÚNICO: Para referenciarlo en la base de datos
+        nombre: "Juan Pérez Contreras",         // NOMBRE COMPLETO: Para identificación oficial
+        especialidad: "Plomería",               // ÁREA DE EXPERTISE: Categoría principal de servicio
+        experiencia: 15,                        // AÑOS DE EXPERIENCIA: 15 años = profesional muy experimentado
+        calificacion: 4.9,                      // RATING PROMEDIO: 4.9/5 = excelente reputación
+        totalReseñas: 287,                      // CANTIDAD DE EVALUACIONES: Muchas reseñas = alta actividad
+        tarifaPorHora: 42000,                   // TARIFA PREMIUM: $42.000/hora = profesional costoso pero experto
+        avatar: "https://randomuser.me/api/portraits/men/55.jpg", // FOTO DE PERFIL: Imagen generada aleatoriamente
+        
+        /**
+         * CERTIFICACIONES AVANZADAS: Demuestra nivel profesional superior
+         * INCLUYE: Maestro Mayor, Instructor, Certificación Internacional
+         * PROPÓSITO: Justificar tarifa alta y atraer proyectos complejos
+         */
         certificado: "Maestro Mayor Plomero, Instructor DUOC UC, Certificación Internacional",
+        
+        /**
+         * BIOGRAFÍA PROFESIONAL: Historia y especialización del profesional
+         * MENCIONA: Años de experiencia, proyectos completados, rol académico
+         * FUNCIÓN: Establecer credibilidad y diferenciación
+         */
         biografia: "Maestro plomero con 15 años de experiencia y más de 500 proyectos completados. Instructor en DUOC UC y consultor técnico.",
+        
+        /**
+         * SERVICIOS ESPECIALIZADOS: Tipos de trabajo que acepta este profesional
+         * ENFOQUE: Proyectos complejos, grandes edificios, consultoría
+         * DIFERENCIA: No hace trabajos pequeños, se enfoca en lo complejo
+         */
         servicios: ["Proyectos complejos", "Edificios", "Consultorías técnicas", "Supervisión obras"],
-        tareasRealizadas: 523,
-        disponibilidad: "Lun-Vie 8:00-17:00",
+        
+        tareasRealizadas: 523,                  // CONTADOR ALTO: 523 trabajos = muy experimentado
+        disponibilidad: "Lun-Vie 8:00-17:00",  // HORARIO EJECUTIVO: Solo días hábiles, horario de oficina
+        
+        /**
+         * PRECIOS ESPECIALIZADOS: Tarifas para servicios de alto nivel
+         * OBSERVAR: Precios significativamente más altos que profesionales básicos
+         * INCLUYE: Consultoría, proyectos grandes, supervisión
+         */
         preciosAprox: {
-            "Consultoría técnica": "$60.000 - $80.000",
-            "Proyecto edificio": "$500.000+",
-            "Supervisión obra": "$100.000/día"
+            "Consultoría técnica": "$60.000 - $80.000",    // CONSULTORÍA: Servicio intelectual, precio alto
+            "Proyecto edificio": "$500.000+",              // PROYECTO GRANDE: Precio abierto para obras mayores  
+            "Supervisión obra": "$100.000/día"             // SUPERVISIÓN: Tarifa diaria para control de obras
         },
+        
+        /**
+         * RESEÑAS DE CLIENTES CORPORATIVOS: Testimonios de empresas y proyectos grandes
+         * DIFERENCIA: Clientes empresariales vs. residenciales en otros profesionales
+         */
         reseñas: [
-            { cliente: "Constructora ABC", comentario: "Profesional de primera, maneja proyectos grandes", calificacion: 5 },
-            { cliente: "Rodrigo M.", comentario: "Solucionó un problema que nadie más pudo", calificacion: 5 }
+            { 
+                cliente: "Constructora ABC",                              // CLIENTE EMPRESARIAL
+                comentario: "Profesional de primera, maneja proyectos grandes", 
+                calificacion: 5 
+            },
+            { 
+                cliente: "Rodrigo M.", 
+                comentario: "Solucionó un problema que nadie más pudo",   // PROBLEMA COMPLEJO
+                calificacion: 5 
+            }
         ]
     },
     {
@@ -2862,62 +3142,146 @@ const initialServices = [
 
 // ===== FUNCIONES PRINCIPALES =====
 
-// Función para inicializar la aplicación
+/**
+ * FUNCIÓN PRINCIPAL DE INICIALIZACIÓN
+ * Esta función se ejecuta cuando la página termina de cargar
+ * Coordina todas las operaciones de inicio de la aplicación
+ */
+// =============================================================================
+// FUNCIÓN PRINCIPAL DE INICIALIZACIÓN DE LA APLICACIÓN
+// =============================================================================
+/**
+ * initApp() - FUNCIÓN PRINCIPAL QUE INICIA TODO EL SISTEMA TEVP
+ * =============================================================
+ * 
+ * ESTA ES LA FUNCIÓN MÁS IMPORTANTE DE LA APLICACIÓN
+ * Se ejecuta automáticamente cuando se carga cualquier página del sitio
+ * 
+ * RESPONSABILIDADES:
+ * ==================
+ * 1. Cargar datos iniciales (profesionales, servicios, usuarios demo)
+ * 2. Verificar estado de autenticación del usuario actual
+ * 3. Detectar qué página se está cargando (router básico)
+ * 4. Inicializar funcionalidad específica de cada página
+ * 5. Configurar el carrito de compras para la sesión
+ * 6. Establecer event listeners y validaciones
+ * 
+ * FLUJO DE INICIALIZACIÓN:
+ * ========================
+ * loadInitialData() → checkAuthStatus() → getCurrentPage() → 
+ * inicializar página específica → updateCartCounter() → limpiar carrito
+ */
 function initApp() {
     console.log('Iniciando aplicación TEVP');
     
-    // Cargar datos iniciales
+    // PASO 1: Cargar todos los datos iniciales (profesionales, servicios, usuarios demo)
+    // Esta función llena los arrays services[] y professionals[] desde initialProfessionals
     loadInitialData();
     
-    // Verificar autenticación
+    // PASO 2: Verificar si hay un usuario logueado y actualizar la interfaz de navegación
+    // Revisa localStorage para currentUser y muestra/oculta elementos del menú
     checkAuthStatus();
     
-    // Obtener página actual
+    // PASO 3: Detectar en qué página estamos para inicializar funcionalidad específica
+    // Obtiene el nombre del archivo HTML actual (ej: 'index.html', 'servicios.html')
     const currentPage = getCurrentPage();
     
     console.log('Página actual:', currentPage);
     
-    // Inicializar página específica
+    // =============================================================================
+    // ROUTER BÁSICO - INICIALIZACIÓN ESPECÍFICA POR PÁGINA
+    // =============================================================================
+    /**
+     * SISTEMA DE ROUTING SIMPLE
+     * =========================
+     * Cada página del sitio tiene funcionalidades específicas:
+     * - index.html: servicios destacados, profesionales top, carousel
+     * - servicios.html: catálogo completo, filtros, búsqueda
+     * - profesionales.html: listado de profesionales, filtros por categoría
+     * - login.html: formulario de autenticación, validaciones
+     * 
+     * FUNCIONES DE INICIALIZACIÓN POR PÁGINA:
+     * =======================================
+     * - initHomePage(): carga servicios/profesionales destacados
+     * - initProductsPage(): configura filtros y muestra todos los servicios
+     * - initProfessionalsPage(): muestra profesionales con filtros por categoría
+     * - initLoginPage(): configura validaciones del formulario de login
+     */
     switch(currentPage) {
         case 'index.html':
-        case '':
+        case '': // Página principal (cuando no hay archivo especificado en la URL)
+            // Cargar servicios destacados y profesionales mejor calificados
             initHomePage();
             break;
-        case 'servicios.html':
+            
+        case 'servicios.html': // Catálogo completo de servicios
+            // Configurar filtros por categoría, búsqueda y mostrar todas las opciones
             initProductsPage();
             break;
-        case 'profesionales.html':
+            
+        case 'profesionales.html': // Lista de profesionales disponibles
+            // Mostrar todos los profesionales con opciones de filtrado por especialidad
             initProfessionalsPage();
             break;
-        case 'login.html':
+            
+        case 'login.html': // Página de autenticación de usuarios
+            // Configurar validaciones de campos y manejo del formulario de login
             initLoginPage();
-            enhanceLoginForm();
+            enhanceLoginForm(); // Añade validaciones en tiempo real y mejor UX
             break;
+            
         default:
+            // Página no reconocida o nueva - solo registrar en consola
             console.log('Página no reconocida:', currentPage);
     }
     
-    // Actualizar contador del carrito en todas las páginas
+    // PASO 4: Actualizar el contador del carrito en todas las páginas
+    // Sincroniza el badge del carrito con el número de items actuales
     updateCartCounter();
     
-    // Inicializar carrito vacío
+    // PASO 5: Inicializar carrito vacío para esta sesión
+    // Cada vez que se carga la app, el carrito inicia limpio
     cart = [];
     localStorage.setItem('tevp-cart', JSON.stringify(cart));
     console.log('Carrito inicializado vacío');
 }
 
-// Obtener página actual
+// =============================================================================
+// FUNCIONES AUXILIARES DE INICIALIZACIÓN
+// =============================================================================
+
+/**
+ * getCurrentPage() - DETECTAR QUÉ PÁGINA SE ESTÁ CARGANDO
+ * =======================================================
+ * Extrae el nombre del archivo HTML de la URL actual
+ * Retorna: 'index.html', 'servicios.html', 'login.html', etc.
+ * Se usa para el sistema de routing y carga de funcionalidad específica
+ */
 function getCurrentPage() {
-    const path = window.location.pathname;
-    const page = path.split('/').pop();
-    return page || 'index.html';
+    const path = window.location.pathname;    // Obtiene la ruta completa
+    const page = path.split('/').pop();       // Extrae solo el nombre del archivo
+    return page || 'index.html';              // Retorna el archivo o 'index.html' por defecto
 }
 
-// Cargar datos iniciales
+/**
+ * loadInitialData() - CARGA TODOS LOS DATOS INICIALES DEL SISTEMA
+ * ===============================================================
+ * 
+ * RESPONSABILIDADES:
+ * ==================
+ * 1. Limpiar datos anteriores de localStorage (forzar actualización)
+ * 2. Cargar profesionales desde initialProfessionals array
+ * 3. Generar servicios basados en profesionales y categorías
+ * 4. Almacenar datos en localStorage para persistencia
+ * 5. Llenar arrays globales (professionals[], services[])
+ * 
+ * ESTA FUNCIÓN ES CRÍTICA PORQUE ALIMENTA TODO EL SISTEMA DE DATOS
+ */
 function loadInitialData() {
     console.log('Cargando datos iniciales...');
     
-    // FORZAR ACTUALIZACIÓN - Limpiar datos anteriores
+    // FORZAR ACTUALIZACIÓN - Limpiar datos anteriores de localStorage
+    // Esto asegura que siempre se cargue la versión más reciente de los datos
     localStorage.removeItem('tevp-professionals');
     localStorage.removeItem('tevp-services');
     console.log('Datos anteriores limpiados para forzar actualización');
@@ -2959,24 +3323,38 @@ function loadInitialData() {
     console.log('Datos cargados:', { professionals: professionals.length, services: services.length });
 }
 
-// Verificar estado de autenticación
+/**
+ * SISTEMA DE AUTENTICACIÓN
+ * Funciones para manejar el estado de login/logout de usuarios
+ */
+
+/**
+ * Verifica el estado actual de autenticación
+ * Lee datos del localStorage para determinar si hay usuario logueado
+ */
 function checkAuthStatus() {
+    // Obtener datos de autenticación del almacenamiento local
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userRole = localStorage.getItem('userRole');
     const userName = localStorage.getItem('userName');
     
     console.log('Estado auth:', { isLoggedIn, userRole, userName });
     
+    // Actualizar la interfaz según el estado de autenticación
     updateAuthUI(isLoggedIn, userRole, userName);
 }
 
-// Actualizar UI de autenticación
+/**
+ * Actualiza la interfaz de usuario según el estado de autenticación
+ * Muestra/oculta elementos de login y menús de usuario
+ */
 function updateAuthUI(isLoggedIn, userRole, userName) {
     const loginBtn = document.getElementById('login-btn');
     const userInfo = document.getElementById('user-info');
     
     if (loginBtn && userInfo) {
         if (isLoggedIn && userName) {
+            // Usuario logueado: ocultar botón de login, mostrar menú de usuario
             loginBtn.style.display = 'none';
             userInfo.style.display = 'block';
             userInfo.innerHTML = `
@@ -3054,72 +3432,122 @@ function displayFeaturedServices() {
     `).join('');
 }
 
-// Mostrar mejores profesionales
+/**
+ * FUNCIÓN PARA MOSTRAR LOS MEJORES PROFESIONALES
+ * Propósito: Renderizar las 6 mejores tarjetas de profesionales en la página principal
+ * Criterio: Ordenados por calificación (rating) de mayor a menor
+ * Ubicación: Sección "Profesionales Destacados" de index.html
+ */
 function displayTopProfessionals() {
+    // PASO 1: OBTENER CONTENEDOR DESTINO EN EL DOM
     const container = document.getElementById('top-professionals');
+    
+    // PASO 2: VALIDACIÓN DEL ELEMENTO DOM
     if (!container) {
         console.log('Container top-professionals no encontrado');
-        return;
+        return; // Terminar si no existe el contenedor
     }
     
-    // Ordenar por calificación y mostrar top 6
+    // PASO 3: SELECCIÓN Y ORDENAMIENTO DE MEJORES PROFESIONALES
+    // Proceso de filtrado y ordenamiento:
+    // 1. Tomar array completo de professionals
+    // 2. Ordenar por calificación descendente (mejores primero)
+    // 3. Tomar solo los primeros 6 elementos
     const topProfessionals = professionals
-        .sort((a, b) => b.calificacion - a.calificacion)
-        .slice(0, 6);
+        .sort((a, b) => b.calificacion - a.calificacion)  // Ordenar por calificación DESC
+        .slice(0, 6);  // Limitar a 6 mejores profesionales
     
+    // PASO 4: LOGGING PARA DEBUGGING
     console.log('Mostrando mejores profesionales:', topProfessionals.length);
     
+    // PASO 5: RENDERIZADO DE TARJETAS
+    // Generar HTML para cada profesional y unir en string final
     container.innerHTML = topProfessionals.map(professional => createProfessionalCard(professional)).join('');
 }
 
-// Crear tarjeta de profesional
+/**
+ * FUNCIÓN GENERADORA DE TARJETAS DE PROFESIONALES
+ * Propósito: Crear HTML completo para mostrar información de un profesional individual
+ * Parámetro: professional (objeto con datos completos del profesional)
+ * Retorna: string HTML con la estructura Bootstrap de tarjeta
+ * Componentes: Header con avatar, body con información, footer con acciones
+ */
 function createProfessionalCard(professional) {
+    // PASO 1: EXTRACCIÓN Y VALIDACIÓN DE DATOS
+    // Obtener calificación promedio con valor por defecto para evitar errores
     const avgRating = professional.calificacion || 0;
+    // Obtener total de reseñas con valor por defecto
     const totalReviews = professional.totalReseñas || 0;
     
+    // PASO 2: GENERACIÓN DEL HTML DE LA TARJETA
     return `
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 professional-card">
+        <!-- TARJETA BOOTSTRAP CON ALTURA UNIFORME -->
+        <div class="col-md-6 col-lg-4 mb-4">  <!-- Grid responsive: 2 cols en tablet, 3 en desktop -->
+            <div class="card h-100 professional-card">  <!-- h-100 para altura uniforme -->
+                
+                <!-- HEADER DE LA TARJETA: INFORMACIÓN VISUAL PRINCIPAL -->
                 <div class="card-header text-center">
+                    <!-- AVATAR DEL PROFESIONAL -->
                     <img src="${professional.avatar}" alt="${professional.nombre}" 
                          class="rounded-circle mb-2" style="width: 80px; height: 80px; object-fit: cover;">
+                         <!-- object-fit: cover mantiene proporción sin deformar -->
+                    
+                    <!-- NOMBRE DEL PROFESIONAL -->
                     <h5 class="card-title mb-1">${professional.nombre}</h5>
+                    
+                    <!-- BADGE DE ESPECIALIDAD CON COLOR DINÁMICO -->
                     <span class="badge bg-${getColorForCategory(professional.especialidad)} mb-2">${professional.especialidad}</span>
                 </div>
+                
+                <!-- BODY: INFORMACIÓN DETALLADA DEL PROFESIONAL -->
                 <div class="card-body">
+                    
+                    <!-- SECCIÓN DE CALIFICACIONES -->
                     <div class="rating mb-2">
-                        ${generateStarRating(avgRating)}
-                        <span class="ms-1">${avgRating} (${totalReviews} reseñas)</span>
+                        ${generateStarRating(avgRating)}  <!-- Estrellas visuales generadas dinámicamente -->
+                        <span class="ms-1">${avgRating} (${totalReviews} reseñas)</span>  <!-- Información numérica -->
                     </div>
+                    
+                    <!-- INFORMACIÓN BÁSICA: EXPERIENCIA Y TARIFA -->
                     <p class="card-text">
                         <small><strong>Experiencia:</strong> ${professional.experiencia} años</small><br>
                         <small><strong>Tarifa:</strong> $${professional.tarifaPorHora.toLocaleString()}/hora</small>
+                        <!-- toLocaleString() formatea números con separadores de miles -->
                     </p>
-                    <p class="card-text text-truncate">${professional.biografia}</p>
                     
-                    <!-- Mostrar mejores reseñas por defecto -->
+                    <!-- BIOGRAFÍA TRUNCADA -->
+                    <p class="card-text text-truncate">${professional.biografia}</p>  <!-- text-truncate evita desborde -->
+                    
+                    <!-- SECCIÓN DE RESEÑAS DESTACADAS -->
                     <div class="recent-reviews mt-2">
                         ${professional.reseñas && professional.reseñas.length > 0 ? 
+                            // SI HAY RESEÑAS: Mostrar la primera reseña como muestra
                             professional.reseñas.slice(0, 1).map(review => `
                                 <div class="review-item small border-start border-primary ps-2 mb-1">
+                                    <!-- HEADER DE LA RESEÑA -->
                                     <div class="d-flex justify-content-between">
-                                        <strong>${review.cliente}</strong>
-                                        <div>${generateStarRating(review.calificacion, 'sm')}</div>
+                                        <strong>${review.cliente}</strong>  <!-- Nombre del cliente -->
+                                        <div>${generateStarRating(review.calificacion, 'sm')}</div>  <!-- Rating pequeño -->
                                     </div>
+                                    <!-- COMENTARIO DE LA RESEÑA -->
                                     <p class="mb-0 text-muted">"${review.comentario}"</p>
                                 </div>
                             `).join('') : 
+                            // SI NO HAY RESEÑAS: Mostrar mensaje por defecto
                             '<p class="text-muted small">Sin reseñas aún</p>'
                         }
                     </div>
                 </div>
+                
+                <!-- FOOTER: BOTÓN DE ACCIÓN PRINCIPAL -->
                 <div class="card-footer">
                     <button class="btn btn-primary w-100" onclick="viewProfessionalDetail(${professional.id})">
-                        Ver Perfil Completo
+                        Ver Perfil Completo  <!-- Botón que lleva al detalle del profesional -->
                     </button>
                 </div>
-            </div>
-        </div>
+                
+            </div>  <!-- Fin de card -->
+        </div>  <!-- Fin de columna -->
     `;
 }
 
@@ -3313,29 +3741,41 @@ function logout() {
     }, 1500);
 }
 
-// Función para autenticar usuario
+// FUNCIÓN DE AUTENTICACIÓN DE USUARIOS EN TEVP
+// Propósito: Validar credenciales de usuario y determinar tipo de cuenta (admin, vendedor, cliente)
+// Parámetros: email (string), password (string)
+// Retorna: void (redirige según tipo de usuario)
+// Sistema: Utiliza credenciales hardcodeadas para demostración
 function authenticateUser(email, password) {
+    // PASO 1: REGISTRO DE INTENTO DE AUTENTICACIÓN
+    // Log para debugging que registra el email y longitud de password (no el password real por seguridad)
     console.log('Intentando autenticar:', email, 'Password length:', password.length);
     
-    // Credenciales de administrador
+    // PASO 2: VERIFICACIÓN DE CREDENCIALES DE ADMINISTRADOR
+    // Sistema: Admin tiene acceso completo al panel administrativo
     if (email === 'admin@tevp.cl' && password === 'admin123') {
-        console.log('Login como admin detectado');
+        console.log('Login como admin detectado'); // Log de éxito para debugging
+        
+        // Ejecutar función de login exitoso con datos de administrador
         loginSuccess({
-            email: email,
-            role: 'admin',
-            name: 'Administrador TEVP'
-        }, 'admin/home.html');
-        return;
+            email: email,           // Email del administrador
+            role: 'admin',         // Rol: acceso total al sistema
+            name: 'Administrador TEVP' // Nombre para mostrar en UI
+        }, 'admin/home.html');     // Redirección a dashboard administrativo
+        return; // Terminar función después de login exitoso
     }
     
-    // Credenciales de vendedor
+    // PASO 3: VERIFICACIÓN DE CREDENCIALES DE VENDEDOR
+    // Sistema: Vendedor tiene acceso limitado al panel administrativo (solo ventas)
     if (email === 'vendedor@tevp.cl' && password === 'vend123') {
-        console.log('Login como vendedor detectado');
+        console.log('Login como vendedor detectado'); // Log de éxito para debugging
+        
+        // Ejecutar función de login exitoso con datos de vendedor
         loginSuccess({
-            email: email,
-            role: 'vendedor',
-            name: 'Vendedor TEVP'
-        }, 'admin/dashboard-vendedor.html');
+            email: email,           // Email del vendedor
+            role: 'vendedor',      // Rol: acceso limitado a funciones de venta
+            name: 'Vendedor TEVP'  // Nombre para mostrar en UI
+        }, 'admin/dashboard-vendedor.html'); // Redirección a dashboard de vendedor
         return;
     }
     
@@ -3348,14 +3788,19 @@ function authenticateUser(email, password) {
     ];
     
     console.log('Buscando en clientes de prueba...');
+    
+    // find: busca el primer elemento que coincida con email Y password
     const testClient = testClients.find(c => c.email === email && c.password === password);
+    
+    // Si encuentra el cliente, hacer login
     if (testClient) {
         console.log('Cliente de prueba encontrado:', testClient.name);
+        
         loginSuccess({
             email: testClient.email,
-            role: 'cliente',
+            role: 'cliente', // Rol de cliente normal
             name: testClient.name
-        }, 'index.html');
+        }, 'index.html'); // Redirigir al inicio
         return;
     }
     
@@ -3415,43 +3860,91 @@ function loginSuccessOriginal(userData, redirectUrl) {
     }, 1500);
 }
 
-// Funciones para mejorar formularios
+// =============================================================================
+// FUNCIONES DE MEJORA Y VALIDACIÓN DE FORMULARIOS
+// =============================================================================
+
+/**
+ * enhanceLoginForm() - MEJORA EL FORMULARIO DE LOGIN CON VALIDACIONES EN TIEMPO REAL
+ * ==================================================================================
+ * 
+ * ESTA FUNCIÓN ES CLAVE PARA EL FORMULARIO DE AUTENTICACIÓN
+ * Se ejecuta en login.html para agregar funcionalidad avanzada al formulario básico HTML
+ * 
+ * FUNCIONALIDADES QUE AGREGA:
+ * ===========================
+ * 1. Validación en tiempo real de email y contraseña
+ * 2. Event listeners para eventos blur (perder foco) e input (escribir)
+ * 3. Manejo del evento submit con preventDefault()
+ * 4. Limpieza de errores cuando el usuario empieza a corregir
+ * 5. Validaciones antes de envío
+ * 6. Llamada a authenticateUser() con los datos del formulario
+ * 
+ * EVENT LISTENERS CONFIGURADOS:
+ * =============================
+ * - email input 'blur': valida formato del email cuando pierde foco
+ * - email input 'input': limpia errores mientras el usuario escribe
+ * - password input 'blur': valida longitud mínima cuando pierde foco
+ * - password input 'input': limpia errores mientras el usuario escribe
+ * - form 'submit': previene envío por defecto y ejecuta validación completa
+ */
 function enhanceLoginForm() {
+    // Buscar el formulario de login en el DOM
     const loginForm = document.getElementById('login-form');
     if (!loginForm) {
-        console.log('Formulario de login no encontrado');
+        console.log('Formulario de login no encontrado - función no aplicable en esta página');
         return;
     }
 
-    console.log('Mejorando formulario de login');
+    console.log('Mejorando formulario de login con validaciones en tiempo real');
 
-    // Configurar validación en tiempo real
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
+    // CONFIGURAR VALIDACIÓN EN TIEMPO REAL PARA CAMPOS DE ENTRADA
+    // ===========================================================
+    const emailInput = document.getElementById('email');        // Campo de email
+    const passwordInput = document.getElementById('password');  // Campo de contraseña
     
+    // VALIDACIONES PARA EL CAMPO DE EMAIL
     if (emailInput) {
+        // Validar cuando el campo pierde el foco (usuario termina de escribir)
         emailInput.addEventListener('blur', validateEmail);
+        // Limpiar errores mientras el usuario está escribiendo (mejor UX)
         emailInput.addEventListener('input', clearFieldError);
     }
     
+    // VALIDACIONES PARA EL CAMPO DE CONTRASEÑA
     if (passwordInput) {
+        // Validar cuando el campo pierde el foco
         passwordInput.addEventListener('blur', validatePassword);
+        // Limpiar errores mientras el usuario está escribiendo
         passwordInput.addEventListener('input', clearFieldError);
     }
 
+    // =============================================================================
+    // MANEJO DEL EVENTO SUBMIT DEL FORMULARIO
+    // =============================================================================
+    /**
+     * EVENT LISTENER PARA EL ENVÍO DEL FORMULARIO
+     * ============================================
+     * Este es el punto central donde se procesa el intento de login
+     * Previene el envío HTML estándar y ejecuta validación JavaScript personalizada
+     */
     loginForm.addEventListener('submit', function(e) {
+        // Prevenir el envío estándar del formulario HTML
         e.preventDefault();
-        console.log('Formulario de login enviado - evento capturado');
+        console.log('Formulario de login enviado - evento capturado y procesando...');
         
-        const email = emailInput?.value?.trim() || '';
-        const password = passwordInput?.value || '';
+        // EXTRAER Y LIMPIAR DATOS DEL FORMULARIO
+        // ======================================
+        const email = emailInput?.value?.trim() || '';     // Email limpio sin espacios
+        const password = passwordInput?.value || '';        // Contraseña tal como se escribió
         
+        // Log de seguridad (no mostrar contraseña real en consola)
         console.log('Datos del formulario:', { 
             email: email, 
             password: password ? '[PRESENTE - ' + password.length + ' chars]' : '[VACÍO]' 
         });
         
-        // Limpiar errores previos
+        // LIMPIAR ERRORES PREVIOS ANTES DE NUEVA VALIDACIÓN
         clearAllErrors();
         
         // Validar campos
@@ -3784,25 +4277,58 @@ function createDetailedProfessionalCard(professional) {
 // Hacer función global
 window.createDetailedProfessionalCard = createDetailedProfessionalCard;
 
-// Contratar profesional (agregar al carrito)
+// =============================================================================
+// FUNCIÓN: CONTRATAR PROFESIONAL (SISTEMA DE CARRITO)
+// =============================================================================
+/**
+ * hireProfessional() - FUNCIÓN CLAVE PARA AGREGAR SERVICIOS AL CARRITO
+ * ====================================================================
+ * 
+ * ESTA ES UNA DE LAS FUNCIONES MÁS IMPORTANTES DEL SISTEMA TEVP
+ * Se ejecuta cuando el usuario hace clic en "Solicitar Servicio" en cualquier tarjeta de profesional
+ * 
+ * RESPONSABILIDADES:
+ * ==================
+ * 1. Validar que el profesional existe en la base de datos
+ * 2. Verificar que el usuario esté autenticado (login requerido)
+ * 3. Crear un item del carrito con datos del profesional
+ * 4. Agregar el item al array global cart[]
+ * 5. Sincronizar con localStorage para persistencia
+ * 6. Actualizar contador visual del carrito
+ * 7. Mostrar confirmación al usuario
+ * 
+ * FLUJO DE CONTRATACIÓN:
+ * ======================
+ * Click botón → Buscar profesional → Verificar login → Crear item carrito → 
+ * Agregar a cart[] → Guardar localStorage → Actualizar UI → Confirmar
+ * 
+ * @param {number} professionalId - ID único del profesional a contratar
+ */
 function hireProfessional(professionalId) {
-    console.log('=== CONTRATAR PROFESIONAL ===');
-    console.log('ID del profesional:', professionalId);
+    console.log('=== INICIANDO PROCESO DE CONTRATACIÓN DE PROFESIONAL ===');
+    console.log('ID del profesional solicitado:', professionalId);
     
+    // PASO 1: VALIDAR QUE EL PROFESIONAL EXISTE
+    // ==========================================
+    // find(): busca el primer elemento del array que coincida con la condición
     const professional = professionals.find(p => p.id === professionalId);
+    
+    // Si no encuentra el profesional en la base de datos, mostrar error
     if (!professional) {
-        console.error('Profesional no encontrado:', professionalId);
-        alert('Error: Profesional no encontrado');
-        return;
+        console.error('ERROR: Profesional no encontrado en base de datos:', professionalId);
+        alert('Error: Profesional no encontrado. Por favor recarga la página e intenta nuevamente.');
+        return; // Terminar ejecución de la función
     }
     
     console.log('Profesional encontrado:', professional.nombre);
     
     // Verificar si el usuario está logueado
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
     if (!isLoggedIn) {
         console.log('Usuario no logueado - redirigiendo a login');
         showAlert('Debes iniciar sesión para contratar un servicio', 'warning');
+        // setTimeout: espera 2 segundos y luego redirige a login
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 2000);
@@ -3811,9 +4337,9 @@ function hireProfessional(professionalId) {
     
     console.log('Usuario logueado - procediendo a agregar al carrito');
     
-    // Agregar al carrito
+    // Crear objeto item para el carrito
     const cartItem = {
-        id: Date.now(), // ID único para el item del carrito
+        id: Date.now(), // ID único usando timestamp
         professionalId: professional.id,
         professionalName: professional.nombre,
         service: professional.especialidad,
@@ -3821,76 +4347,162 @@ function hireProfessional(professionalId) {
         rating: professional.calificacion,
         experience: professional.experiencia,
         avatar: professional.avatar,
-        quantity: 1,
-        date: new Date().toISOString()
+        quantity: 1, // Siempre 1 para servicios
+        date: new Date().toISOString() // Fecha actual en formato ISO
     };
     
     console.log('Item creado para carrito:', cartItem);
     
-    // Recargar carrito desde localStorage para asegurar sincronización
+    // Obtener carrito actual del localStorage
     cart = JSON.parse(localStorage.getItem('tevp-cart')) || [];
     console.log('Carrito actual antes de agregar:', cart);
     
+    // Agregar nuevo item al carrito
     cart.push(cartItem);
-    window.cart = cart; // Actualizar variable global
+    // EXPLICACIÓN: push() añade el elemento al final del array
+    // RESULTADO: cart ahora tiene un elemento más
+    
+    /**
+     * PASO 6: ACTUALIZACIÓN DE ESTADO GLOBAL Y PERSISTENCIA
+     * Sincronizar cambios en todas las variables y almacenamiento
+     */
+    window.cart = cart;  // ACTUALIZAR VARIABLE GLOBAL: Para que otros scripts accedan
+    localStorage.setItem('tevp-cart', JSON.stringify(cart));  // PERSISTIR EN NAVEGADOR
+    // EXPLICACIÓN:
+    // 1. JSON.stringify(cart): Convierte array JavaScript a string JSON
+    // 2. localStorage.setItem(): Guarda en almacenamiento local del navegador
+    // 3. Los datos persisten entre sesiones (cerrar/abrir navegador)
+    
+    /**
+     * PASO 7: LOGS CONFIRMATORIOS Y MÉTRICAS
+     * Registrar el éxito de la operación con datos útiles
+     */
+    console.log('Carrito después de agregar:', cart);               // Estado final del carrito
+    console.log('Item agregado exitosamente. Total items:', cart.length);  // Contador total
+    
+    /**
+     * PASO 8: FEEDBACK VISUAL AL USUARIO
+     * Mostrar confirmación de que la acción fue exitosa
+     */
+    showAlert(`${professional.nombre} agregado al carrito exitosamente!`, 'success');
+    // PARÁMETROS:
+    // 1. Mensaje personalizado con nombre del profesional
+    // 2. Tipo 'success' = alerta verde con ícono de éxito
+    
+    console.log('Nuevo carrito después de agregar:', cart);
+    
+    // Guardar carrito en localStorage
     localStorage.setItem('tevp-cart', JSON.stringify(cart));
     
-    console.log('Carrito después de agregar:', cart);
-    console.log('Item agregado exitosamente. Total items:', cart.length);
-    
+    // Mostrar mensaje de éxito
     showAlert(`${professional.nombre} agregado al carrito exitosamente!`, 'success');
     
-    // Actualizar contador del carrito
+    // Actualizar contador del carrito en la navegación
     updateCartCounter();
+    
     console.log('=== CONTRATACIÓN COMPLETADA ===');
 }
 
 // Hacer función global
 window.hireProfessional = hireProfessional;
 
-// Actualizar contador del carrito
+/**
+ * GESTIÓN DEL CARRITO DE COMPRAS
+ * Conjunto de funciones para manejar el carrito de servicios
+ */
+
+/**
+ * FUNCIÓN: ACTUALIZAR CONTADOR VISUAL DEL CARRITO
+ * Esta función actualiza el número que aparece en el ícono del carrito de la navegación
+ * PROPÓSITO: Mostrar al usuario cuántos items tiene en su carrito sin abrir el modal
+ * USO: Se ejecuta después de agregar/quitar items del carrito
+ */
 function updateCartCounter() {
+    /**
+     * PASO 1: OBTENER REFERENCIA AL ELEMENTO DEL CONTADOR
+     * Buscar en el DOM el elemento que muestra el número del carrito
+     */
     const cartCounter = document.querySelector('.cart-count');
+    // EXPLICACIÓN DETALLADA:
+    // 1. document.querySelector(): Busca el PRIMER elemento que coincida con el selector CSS
+    // 2. '.cart-count': Selector de clase CSS (busca elemento con class="cart-count")
+    // 3. RETORNA: El elemento HTML o null si no se encuentra
+    
+    /**
+     * PASO 2: VALIDACIÓN Y ACTUALIZACIÓN
+     * Verificar que el elemento existe antes de intentar modificarlo
+     */
     if (cartCounter) {
+        // ELEMENTO ENCONTRADO: Proceder a actualizar su contenido
+        
         cartCounter.textContent = cart.length;
+        // EXPLICACIÓN DETALLADA:
+        // 1. textContent: Propiedad que contiene el texto visible del elemento
+        // 2. cart.length: Cantidad de elementos en el array del carrito
+        // 3. RESULTADO: El número en el ícono cambia para reflejar items actuales
+        
+        // EJEMPLO PRÁCTICO:
+        // - Si cart = [] (vacío), cartCounter.textContent = "0"
+        // - Si cart = [item1, item2], cartCounter.textContent = "2"
+        // - Si cart = [item1, item2, item3], cartCounter.textContent = "3"
     }
+    // NOTA: Si cartCounter es null (elemento no encontrado), no hace nada
+    // Esto previene errores cuando la función se ejecuta en páginas sin carrito
 }
 
-// Cargar modal del carrito
+/**
+ * FUNCIÓN PRINCIPAL DEL MODAL DE CARRITO DE COMPRAS
+ * Propósito: Cargar y mostrar todos los items del carrito en una ventana modal interactiva
+ * Funcionalidad: Renderiza items, calcula totales, permite modificar cantidades y proceder al pago
+ * Sistema: Se ejecuta cuando usuario hace clic en el icono del carrito
+ * Dependencias: Variable global 'cart', elementos DOM del modal, funciones de formateo
+ */
 function loadCartModal() {
+    // PASO 1: LOGGING DETALLADO PARA DEBUGGING
     console.log('=== CARGANDO MODAL DEL CARRITO ===');
-    console.log('Items en carrito:', cart.length);
-    console.log('Contenido del carrito:', cart);
+    console.log('Items en carrito:', cart.length);      // Cantidad de items para verificar estado
+    console.log('Contenido del carrito:', cart);        // Array completo para debug detallado
     
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
+    // PASO 2: OBTENCIÓN DE ELEMENTOS DOM CRÍTICOS
+    // Estos elementos son esenciales para mostrar el carrito correctamente
+    const cartItemsContainer = document.getElementById('cart-items');    // Contenedor donde se renderizan los items
+    const cartTotalElement = document.getElementById('cart-total');      // Elemento que muestra el total del carrito
     
+    // PASO 3: VALIDACIÓN CRÍTICA DE ELEMENTOS DOM
+    // Verificar que el contenedor principal existe antes de proceder
     if (!cartItemsContainer) {
         console.error('ERROR: No se encontró el contenedor cart-items');
         alert('Error: No se encontró el contenedor del carrito');
-        return;
+        return; // Terminar función si elementos críticos faltan
     }
     
-    console.log('Contenedor cart-items encontrado');
+    console.log('Contenedor cart-items encontrado'); // Log de éxito en validación
     
-    // Limpiar contenido anterior
+    // PASO 4: LIMPIEZA DEL CONTENIDO ANTERIOR
+    // Eliminar cualquier contenido previo para evitar duplicaciones
     cartItemsContainer.innerHTML = '';
     
+    // PASO 5: MANEJO DEL CARRITO VACÍO
+    // Mostrar interfaz especial cuando no hay items en el carrito
     if (cart.length === 0) {
-        console.log('Carrito vacío - mostrando mensaje');
+        console.log('Carrito vacío - mostrando mensaje'); // Log de estado vacío
+        
+        // Renderizar interfaz de carrito vacío con call-to-action
         cartItemsContainer.innerHTML = `
             <div class="text-center py-4">
-                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">Tu carrito está vacío</h5>
-                <p class="text-muted">Explora nuestros servicios y contrata profesionales</p>
-                <a href="servicios.html" class="btn btn-primary">Ver Servicios</a>
+                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>      <!-- Icono grande de carrito -->
+                <h5 class="text-muted">Tu carrito está vacío</h5>               <!-- Mensaje principal -->
+                <p class="text-muted">Explora nuestros servicios y contrata profesionales</p>  <!-- Descripción -->
+                <a href="servicios.html" class="btn btn-primary">Ver Servicios</a>  <!-- Botón para ir a servicios -->
             </div>
         `;
         
+        // PASO 6: ACTUALIZAR TOTAL A CERO PARA CARRITO VACÍO
         if (cartTotalElement) {
-            cartTotalElement.textContent = '$0';
+            cartTotalElement.textContent = '$0'; // Mostrar total en cero
         }
-        console.log('Modal del carrito vacío configurado');
+        
+        console.log('Modal del carrito vacío configurado'); // Log de configuración completa
         return;
     }
     
@@ -4561,14 +5173,21 @@ function loginSuccess(userData, redirectUrl) {
     }
 }
 
-// Inicializar aplicación cuando el DOM esté listo
+/**
+ * EVENTO PRINCIPAL DE INICIALIZACIÓN
+ * Se ejecuta cuando el DOM (Document Object Model) está completamente cargado
+ * Garantiza que todos los elementos HTML estén disponibles antes de manipularlos
+ */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM cargado, iniciando aplicación');
     
-    // Actualizar avatares problemáticos con URLs más confiables
+    // Corregir avatares problemáticos con URLs más confiables
     updateProfessionalAvatars();
     
+    // Inicializar toda la funcionalidad de la aplicación
     initApp();
+    
+    // Actualizar la interfaz de usuario según el estado actual
     updateUserInterface(); // Actualizar interfaz de usuario al cargar la página
 });
 
@@ -4838,5 +5457,43 @@ function showProfessionalDetails(professionalId) {
     modal.show();
 }
 
-// Hacer función global
+// Hacer función global para acceso desde HTML
 window.showProfessionalDetails = showProfessionalDetails;
+
+// =============================================================================
+// INICIALIZACIÓN AUTOMÁTICA DE LA APLICACIÓN
+// =============================================================================
+/**
+ * EVENTO DOMCONTENTLOADED - PUNTO DE ENTRADA PRINCIPAL
+ * ====================================================
+ * 
+ * ESTE ES EL CÓDIGO QUE SE EJECUTA AUTOMÁTICAMENTE AL CARGAR CUALQUIER PÁGINA
+ * No requiere intervención manual - se activa cuando el DOM está completamente cargado
+ * 
+ * ¿POR QUÉ DOMContentLoaded?
+ * ==========================
+ * - Se ejecuta cuando el HTML está completamente parseado
+ * - No espera a que se carguen imágenes, CSS externos o otros recursos
+ * - Garantiza que todos los elementos del DOM estén disponibles
+ * - Es más rápido que window.onload
+ * 
+ * FLUJO DE INICIALIZACIÓN AUTOMÁTICA:
+ * ==================================
+ * 1. Navegador carga la página HTML
+ * 2. Se dispara evento DOMContentLoaded
+ * 3. Se ejecuta initApp() automáticamente
+ * 4. initApp() detecta qué página es e inicializa funcionalidad específica
+ * 5. La aplicación queda completamente funcional
+ * 
+ * ESTO HACE QUE TEVP FUNCIONE SIN CONFIGURACIÓN MANUAL
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== TEVP - INICIALIZACIÓN AUTOMÁTICA ===');
+    console.log('DOM completamente cargado, iniciando aplicación...');
+    
+    // Ejecutar función principal de inicialización
+    // Esta función maneja todo el sistema automáticamente
+    initApp();
+    
+    console.log('=== APLICACIÓN TEVP INICIALIZADA CORRECTAMENTE ===');
+});

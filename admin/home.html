@@ -1,33 +1,57 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para página principal del panel administrativo -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
     <title>Panel de Administración - TEVP</title>
-    <!-- Bootstrap CSS -->
+    <!-- Título para la página principal del panel admin -->
+    
+    <!-- Bootstrap CSS 5.3.2 - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome 6.4.0 - Iconos vectoriales para interfaz admin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados del proyecto TEVP -->
     <link rel="stylesheet" href="../css/styles.css">
+    
     <style>
+        /**
+         * ESTILOS ESPECÍFICOS PARA DASHBOARD PRINCIPAL ADMIN
+         * Página de inicio del panel de administración con resumen ejecutivo
+         */
+        
+        /* SIDEBAR DE NAVEGACIÓN ADMIN */
         .sidebar {
-            min-height: 100vh;
-            background-color: #f8f9fa;
+            min-height: 100vh;              /* Altura completa de la ventana */
+            background-color: #f8f9fa;      /* Fondo gris claro Bootstrap */
         }
+        
+        /* CONTENEDOR PRINCIPAL DEL CONTENIDO */
         .content-wrapper {
-            padding: 20px;
+            padding: 20px;                  /* Espaciado interno estándar */
         }
+        
+        /* TARJETAS DE ESTADÍSTICAS PRINCIPALES */
         .stat-card {
-            background: linear-gradient(45deg, #007bff, #0056b3);
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: linear-gradient(45deg, #007bff, #0056b3);  /* Degradado azul */
+            color: white;                   /* Texto blanco */
+            border-radius: 10px;            /* Bordes redondeados */
+            padding: 20px;                  /* Espaciado interno generoso */
+            margin-bottom: 20px;            /* Margen inferior */
         }
+        
+        /* NÚMEROS GRANDES EN TARJETAS ESTADÍSTICAS */
         .stat-card h3 {
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 2rem;                /* Tamaño de fuente grande */
+            margin-bottom: 5px;             /* Margen inferior mínimo */
         }
     </style>
 </head>

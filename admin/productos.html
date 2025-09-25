@@ -1,68 +1,105 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para gestión administrativa de productos/servicios -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
     <title>Gestión de Productos - TEVP Admin</title>
-    <!-- Bootstrap CSS -->
+    <!-- Título específico para la página de gestión de servicios/productos -->
+    
+    <!-- Bootstrap CSS 5.3.2 - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome 6.4.0 - Iconos vectoriales para interfaz admin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados del proyecto TEVP -->
     <link rel="stylesheet" href="../css/styles.css">
+    
     <style>
+        /**
+         * ESTILOS ESPECÍFICOS PARA GESTIÓN DE PRODUCTOS/SERVICIOS
+         * Página administrativa para CRUD completo de servicios TEVP
+         */
+        
+        /* SIDEBAR DE NAVEGACIÓN ADMIN */
         .sidebar {
-            min-height: 100vh;
-            background-color: #f8f9fa;
+            min-height: 100vh;              /* Altura completa de la ventana */
+            background-color: #f8f9fa;      /* Fondo gris claro Bootstrap */
         }
+        
+        /* CONTENEDOR PRINCIPAL DEL CONTENIDO */
         .content-wrapper {
-            padding: 20px;
+            padding: 20px;                  /* Espaciado interno estándar */
         }
     </style>
 </head>
 <body>
+    <!-- CONTENEDOR FLUID DE BOOTSTRAP PARA LAYOUT COMPLETO -->
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
+            <!-- SIDEBAR DE NAVEGACIÓN ADMINISTRATIVA -->
+            <!-- Responsive: col-md-3 col-lg-2, colapsa en móviles -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <!-- POSICIÓN STICKY PARA MANTENER FIJO AL HACER SCROLL -->
                 <div class="position-sticky pt-3">
+                    <!-- ENCABEZADO DEL PANEL ADMIN -->
                     <div class="text-center mb-4">
+                        <!-- TÍTULO PRINCIPAL CON ÍCONO DE HERRAMIENTAS -->
                         <h4><i class="fas fa-tools me-2"></i>TEVP Admin</h4>
+                        <!-- SUBTÍTULO DESCRIPTIVO -->
                         <small class="text-muted">Panel de Control</small>
                     </div>
                     
+                    <!-- MENÚ DE NAVEGACIÓN VERTICAL -->
+                    <!-- Bootstrap nav flex-column para orientación vertical -->
                     <ul class="nav flex-column">
+                        <!-- ENLACE AL DASHBOARD PRINCIPAL -->
                         <li class="nav-item">
                             <a class="nav-link" href="home.html">
                                 <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                             </a>
                         </li>
+                        <!-- ENLACE ACTIVO A GESTIÓN DE SERVICIOS/PRODUCTOS -->
+                        <!-- Clase 'active' para indicar página actual -->
                         <li class="nav-item">
                             <a class="nav-link active" href="../servicios.html">
                                 <i class="fas fa-tools me-2"></i>Servicios
                             </a>
                         </li>
+                        <!-- ENLACE A GESTIÓN DE USUARIOS -->
                         <li class="nav-item">
                             <a class="nav-link" href="usuarios.html">
                                 <i class="fas fa-users me-2"></i>Usuarios
                             </a>
                         </li>
+                        <!-- ENLACE A GESTIÓN DE PEDIDOS -->
                         <li class="nav-item">
                             <a class="nav-link" href="pedidos.html">
                                 <i class="fas fa-shopping-cart me-2"></i>Pedidos
                             </a>
                         </li>
+                        <!-- ENLACE A REPORTES Y ESTADÍSTICAS -->
                         <li class="nav-item">
                             <a class="nav-link" href="reportes.html">
                                 <i class="fas fa-chart-line me-2"></i>Reportes
                             </a>
                         </li>
+                        <!-- SEPARADOR VISUAL -->
                         <hr>
+                        <!-- ENLACE PARA VER SITIO WEB PÚBLICO -->
                         <li class="nav-item">
                             <a class="nav-link" href="../index.html">
                                 <i class="fas fa-globe me-2"></i>Ver Sitio Web
                             </a>
                         </li>
+                        <!-- ENLACE PARA CERRAR SESIÓN -->
                         <li class="nav-item">
                             <a class="nav-link" href="../login.html">
                                 <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
@@ -72,14 +109,21 @@
                 </div>
             </nav>
 
-            <!-- Main content -->
+            <!-- CONTENIDO PRINCIPAL DE LA PÁGINA PRODUCTOS -->
+            <!-- Responsive: col-md-9 ms-sm-auto col-lg-10 para ajustarse al sidebar -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- CONTENEDOR CON PADDING PERSONALIZADO -->
                 <div class="content-wrapper">
-                    <!-- Header -->
+                    <!-- ENCABEZADO DE LA PÁGINA PRODUCTOS -->
+                    <!-- Flexbox para alinear título y posibles botones -->
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <!-- TÍTULO PRINCIPAL DE LA PÁGINA -->
                         <h1 class="h2">Gestión de Productos</h1>
+                        <!-- BARRA DE HERRAMIENTAS CON BOTONES DE ACCIÓN -->
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <div class="btn-group me-2">
+                                <!-- BOTÓN PARA AGREGAR NUEVO PRODUCTO/SERVICIO -->
+                                <!-- Trigger del modal de creación de producto -->
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
                                     <i class="fas fa-plus me-1"></i>Agregar Producto
                                 </button>
@@ -87,15 +131,22 @@
                         </div>
                     </div>
 
-                    <!-- Filtros y Búsqueda -->
+                    <!-- SECCIÓN DE FILTROS Y BÚSQUEDA -->
+                    <!-- Grid responsivo para organizar controles de filtro -->
                     <div class="row mb-4">
+                        <!-- CAMPO DE BÚSQUEDA PRINCIPAL -->
                         <div class="col-md-6">
+                            <!-- Input Group Bootstrap con ícono -->
                             <div class="input-group">
+                                <!-- ÍCONO DE BÚSQUEDA -->
                                 <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <!-- CAMPO DE TEXTO PARA BUSCAR PRODUCTOS -->
                                 <input type="text" class="form-control" placeholder="Buscar productos..." id="searchInput">
                             </div>
                         </div>
+                        <!-- FILTRO POR CATEGORÍA -->
                         <div class="col-md-3">
+                            <!-- SELECT BOOTSTRAP PARA FILTRAR POR CATEGORÍA -->
                             <select class="form-select" id="categoryFilter">
                                 <option value="">Todas las categorías</option>
                                 <option value="Electricidad">Electricidad</option>
@@ -105,7 +156,9 @@
                                 <option value="Electrodomésticos">Electrodomésticos</option>
                             </select>
                         </div>
+                        <!-- FILTRO POR ESTADO ACTIVO/INACTIVO -->
                         <div class="col-md-3">
+                            <!-- SELECT PARA FILTRAR POR ESTADO DE PRODUCTO -->
                             <select class="form-select" id="statusFilter">
                                 <option value="">Todos los estados</option>
                                 <option value="true">Activo</option>
@@ -114,42 +167,56 @@
                         </div>
                     </div>
 
-                    <!-- Tabla de Productos -->
+                    <!-- TABLA PRINCIPAL DE PRODUCTOS/SERVICIOS -->
+                    <!-- Tarjeta Bootstrap para contener la tabla -->
                     <div class="card">
                         <div class="card-body">
+                            <!-- TABLA RESPONSIVE BOOTSTRAP -->
+                            <!-- Se adapta a diferentes tamaños de pantalla -->
                             <div class="table-responsive">
+                                <!-- TABLA CON EFECTO HOVER -->
                                 <table class="table table-hover" id="productsTable">
+                                    <!-- ENCABEZADO DE TABLA CON FONDO OSCURO -->
                                     <thead class="table-dark">
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Imagen</th>
-                                            <th>Nombre</th>
-                                            <th>Categoría</th>
-                                            <th>Precio</th>
-                                            <th>Estado</th>
-                                            <th>Fecha Creación</th>
-                                            <th>Acciones</th>
+                                            <th>ID</th>              <!-- Identificador único -->
+                                            <th>Imagen</th>          <!-- Imagen del producto/servicio -->
+                                            <th>Nombre</th>          <!-- Nombre del producto -->
+                                            <th>Categoría</th>       <!-- Categoría del servicio -->
+                                            <th>Precio</th>          <!-- Precio del servicio -->
+                                            <th>Estado</th>          <!-- Activo/Inactivo -->
+                                            <th>Fecha Creación</th>  <!-- Fecha de creación -->
+                                            <th>Acciones</th>        <!-- Botones de acción -->
                                         </tr>
                                     </thead>
+                                    <!-- CUERPO DE LA TABLA -->
+                                    <!-- Se llena dinámicamente con JavaScript -->
                                     <tbody id="productsTableBody">
                                         <!-- Los productos se cargarán aquí dinámicamente -->
+                                        <!-- JavaScript main.js populate esta sección -->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Paginación -->
+                    <!-- SISTEMA DE PAGINACIÓN -->
+                    <!-- Navegación Bootstrap para paginado de resultados -->
                     <nav aria-label="Paginación de productos" class="mt-4">
+                        <!-- LISTA DE PAGINACIÓN CENTRADA -->
                         <ul class="pagination justify-content-center">
+                            <!-- BOTÓN ANTERIOR (DESHABILITADO) -->
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" aria-label="Anterior">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
+                            <!-- PÁGINA ACTUAL ACTIVA -->
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <!-- PÁGINAS ADICIONALES -->
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <!-- BOTÓN SIGUIENTE -->
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Siguiente">
                                     <span aria-hidden="true">&raquo;</span>
@@ -180,8 +247,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <!-- CAMPO SELECTOR DE CATEGORÍA -->
                                 <div class="mb-3">
+                                    <!-- ETIQUETA DEL CAMPO -->
                                     <label for="productCategory" class="form-label">Categoría</label>
+                                    <!-- SELECT BOOTSTRAP CON CATEGORÍAS PREDEFINIDAS -->
                                     <select class="form-select" id="productCategory" required>
                                         <option value="">Seleccionar categoría</option>
                                         <option value="Electricidad">Electricidad</option>
@@ -195,39 +265,59 @@
                             </div>
                         </div>
                         
+                        <!-- FILA PARA PRECIO E IMAGEN -->
                         <div class="row">
+                            <!-- CAMPO DE PRECIO -->
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <!-- ETIQUETA PARA PRECIO -->
                                     <label for="productPrice" class="form-label">Precio</label>
+                                    <!-- INPUT GROUP CON SÍMBOLO DE PESO CHILENO -->
                                     <div class="input-group">
+                                        <!-- PREFIJO CON SÍMBOLO DE MONEDA -->
                                         <span class="input-group-text">$</span>
+                                        <!-- CAMPO NUMÉRICO PARA PRECIO -->
                                         <input type="number" class="form-control" id="productPrice" required min="0">
                                     </div>
                                 </div>
                             </div>
+                            <!-- CAMPO DE URL DE IMAGEN -->
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <!-- ETIQUETA PARA URL DE IMAGEN -->
                                     <label for="productImage" class="form-label">URL de Imagen</label>
+                                    <!-- CAMPO URL PARA IMAGEN DEL PRODUCTO -->
                                     <input type="url" class="form-control" id="productImage" required>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- CAMPO DE DESCRIPCIÓN -->
                         <div class="mb-3">
+                            <!-- ETIQUETA PARA DESCRIPCIÓN -->
                             <label for="productDescription" class="form-label">Descripción</label>
+                            <!-- TEXTAREA PARA DESCRIPCIÓN DETALLADA -->
                             <textarea class="form-control" id="productDescription" rows="4" required></textarea>
                         </div>
                         
+                        <!-- FILA PARA DURACIÓN Y ESTADO -->
                         <div class="row">
+                            <!-- CAMPO DE DURACIÓN -->
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <!-- ETIQUETA PARA DURACIÓN -->
                                     <label for="productDuration" class="form-label">Duración (horas)</label>
+                                    <!-- CAMPO NUMÉRICO PARA HORAS DE DURACIÓN -->
                                     <input type="number" class="form-control" id="productDuration" required min="1">
                                 </div>
                             </div>
+                            <!-- CHECKBOX PARA ESTADO ACTIVO -->
                             <div class="col-md-6">
+                                <!-- CHECKBOX BOOTSTRAP -->
                                 <div class="form-check mt-4">
+                                    <!-- CHECKBOX PARA MARCAR PRODUCTO COMO ACTIVO -->
                                     <input class="form-check-input" type="checkbox" id="productActive" checked>
+                                    <!-- ETIQUETA DEL CHECKBOX -->
                                     <label class="form-check-label" for="productActive">
                                         Producto Activo
                                     </label>

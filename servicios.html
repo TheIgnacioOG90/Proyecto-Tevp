@@ -1,119 +1,223 @@
-<!DOCTYPE html>
-<html lang="es">
+<!-- 
+SERVICIOS.HTML - PÁGINA DE CATÁLOGO DE SERVICIOS
+Propósito: Página dedicada a mostrar todos los servicios disponibles en TEVP
+Funcionalidad principal: Catálogo filtrable de profesionales y sus servicios
+Conexión: Se integra con main.js para mostrar datos de profesionales
+-->
+<!DOCTYPE html> <!-- Declaración estándar HTML5 -->
+<html lang="es"> <!-- Documento en español para SEO y accesibilidad -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Servicios - TEVP</title>
-    <!-- Bootstrap CSS -->
+    <!-- META TAGS PRINCIPALES -->
+    <meta charset="UTF-8"> <!-- Codificación Unicode para caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design para dispositivos móviles -->
+    
+    <!-- META TAGS PARA CONTROL DE CACHÉ -->
+    <!-- Estas etiquetas previenen el almacenamiento en caché del navegador -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> <!-- Control de caché HTTP -->
+    <meta http-equiv="Pragma" content="no-cache"> <!-- Compatibilidad con navegadores antiguos -->
+    <meta http-equiv="Expires" content="0"> <!-- Expiración inmediata del contenido -->
+    
+    <title>Servicios - TEVP</title> <!-- Título específico de la página para SEO -->
+    
+    <!-- DEPENDENCIAS EXTERNAS CSS -->
+    <!-- Bootstrap CSS: Framework CSS para diseño responsivo y componentes UI -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome: Librería de iconos vectoriales escalables -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados: CSS específico de TEVP -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <!-- Navegación -->
+<body> <!-- Inicio del contenido visible de la página -->
+    <!-- BARRA DE NAVEGACIÓN PRINCIPAL -->
+    <!-- Navegación fija (sticky-top) que permanece visible al hacer scroll -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
+        <div class="container"> <!-- Contenedor Bootstrap para centrado y responsive -->
+            
+            <!-- LOGO Y MARCA DE TEVP -->
+            <!-- Enlace principal que redirige al inicio con icono de herramientas -->
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-tools me-2"></i>TEVP
+                <i class="fas fa-tools me-2"></i> <!-- Icono de herramientas que representa servicios técnicos -->
+                TEVP <!-- Nombre de la marca: Técnicos Especializados y Venta de Productos -->
             </a>
             
+            <!-- BOTÓN HAMBURGUESA PARA MÓVILES -->
+            <!-- Botón colapsible que se muestra solo en pantallas pequeñas -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span> <!-- Icono de tres líneas estándar -->
             </button>
             
+            <!-- MENÚ DE NAVEGACIÓN COLAPSIBLE -->
             <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <!-- ENLACES PRINCIPALES DEL SITIO -->
+                <!-- Lista de navegación principal (lado izquierdo) -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
+                        <a class="nav-link" href="index.html">Inicio</a> <!-- Página principal -->
                     </li>
                     <li class="nav-item">
+                        <!-- PÁGINA ACTUAL: marcada como 'active' para indicar ubicación del usuario -->
                         <a class="nav-link active" href="servicios.html">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                        <a class="nav-link" href="nosotros.html">Nosotros</a> <!-- Página de información corporativa -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="blogs.html">Blog</a>
+                        <a class="nav-link" href="blogs.html">Blog</a> <!-- Sección de artículos y noticias -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
+                        <a class="nav-link" href="contacto.html">Contacto</a> <!-- Formulario de contacto -->
                     </li>
                 </ul>
                 
+                <!-- ÁREA DE USUARIO Y CARRITO (lado derecho) -->
                 <ul class="navbar-nav">
+                    
+                    <!-- ICONO DEL CARRITO DE COMPRAS -->
+                    <!-- Elemento interactivo que muestra el modal del carrito -->
                     <li class="nav-item me-3">
                         <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
+                            <i class="fas fa-shopping-cart"></i> <!-- Icono de carrito de compras -->
+                            <span class="cart-count">0</span> <!-- Contador dinámico de items en el carrito -->
                         </a>
                     </li>
                     
-                    <!-- Información del usuario logueado -->
+                    <!-- MENÚ DESPLEGABLE DEL USUARIO AUTENTICADO -->
+                    <!-- Visible solo cuando hay un usuario logueado (clase d-none lo oculta inicialmente) -->
                     <li class="nav-item dropdown d-none" id="user-info">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle me-2"></i>
-                            <span id="user-name">Usuario</span>
+                            <i class="fas fa-user-circle me-2"></i> <!-- Icono de perfil de usuario -->
+                            <span id="user-name">Usuario</span> <!-- Nombre del usuario logueado (se actualiza dinámicamente) -->
                         </a>
+                        <!-- OPCIONES DEL MENÚ DE USUARIO -->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li> <!-- Información personal del usuario -->
+                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li> <!-- Historial de compras y servicios -->
+                            <li><hr class="dropdown-divider"></li> <!-- Separador visual -->
+                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li> <!-- Función de logout -->
                         </ul>
                     </li>
                     
-                    <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
+                    <!-- ENLACES DE AUTENTICACIÓN (NO LOGUEADO) -->
+                    <!-- Estos enlaces solo se muestran cuando NO hay usuario autenticado -->
                     <li class="nav-item" id="auth-link-register">
-                        <a class="nav-link" href="registro.html">Registro</a>
+                        <a class="nav-link" href="registro.html">Registro</a> <!-- Página de registro de nuevos usuarios -->
                     </li>
                     <li class="nav-item" id="auth-link-login">
-                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a> <!-- Página de autenticación -->
                     </li>
                 </ul>
-            </div>
-        </div>
-    </nav>
+            </div> <!-- Fin del menú colapsible -->
+        </div> <!-- Fin del contenedor de navegación -->
+    </nav> <!-- Fin de la barra de navegación -->
 
-    <!-- Contenido Principal -->
+    <!-- =================================================================== -->
+    <!-- CONTENIDO PRINCIPAL DE LA PÁGINA DE SERVICIOS -->
+    <!-- =================================================================== -->
     <div class="container my-5 main-content">
+        <!-- CLASES BOOTSTRAP:
+             - container: contenedor responsivo con márgenes automáticos
+             - my-5: margen vertical (top y bottom) de 5 unidades
+             - main-content: clase CSS personalizada -->
+        
         <div class="row">
             <div class="col-12">
-                <h1 class="section-title">Nuestros Servicios Profesionales</h1>
+                <!-- col-12: ocupa las 12 columnas (100% ancho) -->
                 
-                <!-- Filtros -->
+                <!-- =================================================================== -->
+                <!-- ENCABEZADO DE LA PÁGINA DE SERVICIOS -->
+                <!-- =================================================================== -->
+                <h1 class="section-title">Nuestros Servicios Profesionales</h1>
+                <!-- section-title: clase CSS personalizada para títulos principales -->
+                
+                <!-- =================================================================== -->
+                <!-- SISTEMA DE FILTROS Y BÚSQUEDA AVANZADA -->
+                <!-- =================================================================== -->
                 <div class="row mb-4">
+                    <!-- mb-4: margen inferior de 4 unidades -->
+                    
+                    <!-- FILTRO POR CATEGORÍA DE SERVICIO -->
                     <div class="col-md-4">
+                        <!-- col-md-4: 4 columnas (33.33% ancho) en pantallas medianas -->
+                        
                         <select class="form-select" id="category-filter">
+                            <!-- ATRIBUTOS SELECT:
+                                 - form-select: estilo Bootstrap para elementos select
+                                 - id="category-filter": identificador para JavaScript -->
+                            
                             <option value="">Todas las categorías</option>
+                            <!-- Opción por defecto que muestra todos los servicios -->
+                            
+                            <!-- Las opciones se cargan dinámicamente con JavaScript:
+                                 - displayServiceCategories() puebla este select
+                                 - Categorías: Plomería, Electricidad, Climatización, etc. -->
                         </select>
                     </div>
+                    
+                    <!-- BARRA DE BÚSQUEDA EN TIEMPO REAL -->
                     <div class="col-md-8">
+                        <!-- col-md-8: 8 columnas (66.67% ancho) para campo de búsqueda -->
+                        
                         <div class="input-group">
+                            <!-- input-group: agrupa input con botón Bootstrap -->
+                            
                             <input type="text" class="form-control" id="search-input" placeholder="Buscar servicios...">
+                            <!-- ATRIBUTOS INPUT BÚSQUEDA:
+                                 - type="text": campo de texto para búsqueda
+                                 - form-control: estilo Bootstrap para inputs
+                                 - id="search-input": identificador para JavaScript
+                                 - placeholder: texto guía para el usuario -->
+                            
+                            <!-- BOTÓN DE BÚSQUEDA -->
                             <button class="btn btn-outline-secondary" type="button" onclick="searchServices()">
-                                <i class="fas fa-search"></i>
+                                <!-- ATRIBUTOS BOTÓN:
+                                     - btn btn-outline-secondary: estilo Bootstrap con borde gris
+                                     - type="button": especifica que es botón clickeable
+                                     - onclick="searchServices()": ejecuta función JavaScript -->
+                                
+                                <i class="fas fa-search"></i> <!-- Icono de lupa Font Awesome -->
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Grid de Servicios -->
+                <!-- =================================================================== -->
+                <!-- CONTENEDOR DINÁMICO PARA GRID DE SERVICIOS -->
+                <!-- =================================================================== -->
                 <div class="row" id="services-grid">
-                    <!-- Los servicios se cargarán aquí con JavaScript -->
+                    <!-- ELEMENTOS IMPORTANTES:
+                         - row: sistema de grid Bootstrap para tarjetas responsivas
+                         - id="services-grid": identificador único para JavaScript
+                         - Este contenedor se puebla dinámicamente con displayServices() -->
+                    
+                    <!-- INDICADOR DE CARGA INICIAL -->
                     <div class="col-12 text-center">
+                        <!-- col-12: ocupa todo el ancho mientras carga -->
+                        <!-- text-center: centra el spinner y mensaje -->
+                        
                         <div class="loading">
+                            <!-- loading: clase CSS personalizada para estilos de carga -->
+                            
+                            <!-- SPINNER DE BOOTSTRAP -->
                             <div class="spinner-border" role="status">
+                                <!-- ATRIBUTOS SPINNER:
+                                     - spinner-border: componente Bootstrap de animación circular
+                                     - role="status": atributo de accesibilidad para lectores de pantalla -->
+                                
                                 <span class="visually-hidden">Cargando...</span>
+                                <!-- visually-hidden: texto solo para lectores de pantalla -->
                             </div>
+                            
                             <p class="mt-2">Cargando servicios...</p>
+                            <!-- mt-2: margen superior de 2 unidades -->
+                            <!-- Mensaje visible para indicar el proceso de carga -->
                         </div>
                     </div>
+                    <!-- NOTA: Las cards de servicios se generan dinámicamente con JavaScript -->
                 </div>
+                
             </div>
         </div>
     </div>

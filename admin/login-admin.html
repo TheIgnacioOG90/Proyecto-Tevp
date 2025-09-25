@@ -1,90 +1,118 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para formulario de acceso administrativo -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO del panel admin -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
     <title>Portal Administrativo - TEVP</title>
+    <!-- Título específico para el formulario de login administrativo -->
+    
+    <!-- Bootstrap CSS 5.3.2 - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6.4.0 - Iconos vectoriales para interfaz admin -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        /**
+         * ESTILOS PARA FORMULARIO DE LOGIN ADMINISTRATIVO
+         * Diseño específico para acceso al panel de administración
+         */
+        
+        /* CONFIGURACIÓN GENERAL DEL BODY */
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  /* Degradado púrpura */
+            min-height: 100vh;        /* Altura mínima completa de pantalla */
+            display: flex;            /* Flexbox para centrado */
+            align-items: center;      /* Centrado vertical */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* Tipografía moderna */
         }
         
+        /* TARJETA PRINCIPAL DEL FORMULARIO ADMIN */
         .admin-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);  /* Fondo blanco semi-transparente */
+            backdrop-filter: blur(20px);             /* Efecto de desenfoque de fondo */
+            border-radius: 20px;                     /* Bordes redondeados modernos */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Sombra profunda */
+            border: 1px solid rgba(255,255,255,0.2); /* Borde sutil */
+            overflow: hidden;                        /* Oculta contenido que sobresale */
         }
         
+        /* ENCABEZADO DEL FORMULARIO ADMIN */
         .admin-header {
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            padding: 2rem;
-            text-align: center;
-            color: white;
+            background: linear-gradient(45deg, #2c3e50, #3498db);  /* Degradado azul corporativo */
+            padding: 2rem;           /* Espaciado interno generoso */
+            text-align: center;      /* Texto centrado */
+            color: white;            /* Texto blanco sobre fondo azul */
         }
         
+        /* LOGO CIRCULAR DEL ADMIN */
         .admin-logo {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 2rem;
+            width: 80px;                             /* Ancho fijo del logo */
+            height: 80px;                            /* Alto fijo del logo */
+            background: rgba(255,255,255,0.2);       /* Fondo blanco semi-transparente */
+            border-radius: 50%;                      /* Forma circular perfecta */
+            display: flex;                           /* Flexbox para centrado */
+            align-items: center;                     /* Centrado vertical del ícono */
+            justify-content: center;                 /* Centrado horizontal del ícono */
+            margin: 0 auto 1rem;                     /* Centrado y margen inferior */
+            font-size: 2rem;                         /* Tamaño grande para el ícono */
         }
         
+        /* CONTENEDORES DE CAMPOS FLOTANTES */
         .form-floating {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.5rem;  /* Espaciado entre campos */
         }
         
+        /* CAMPOS DE ENTRADA DEL FORMULARIO */
         .form-control {
-            border-radius: 12px;
-            border: 2px solid #e9ecef;
-            padding: 1rem;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            border-radius: 12px;                     /* Bordes redondeados */
+            border: 2px solid #e9ecef;            /* Borde gris claro */
+            padding: 1rem;                        /* Espaciado interno */
+            font-size: 1.1rem;                    /* Tamaño de fuente legible */
+            transition: all 0.3s ease;            /* Transición suave para interacciones */
         }
         
+        /* ESTADO FOCUS DE LOS CAMPOS */
         .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+            border-color: #3498db;                 /* Borde azul al enfocar */
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);  /* Sombra azul sutil */
         }
         
+        /* BOTÓN PRINCIPAL DE LOGIN ADMIN */
         .btn-admin {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            border: none;
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #3498db, #2980b9);  /* Degradado azul */
+            border: none;                          /* Sin borde */
+            border-radius: 12px;                   /* Bordes redondeados */
+            padding: 1rem 2rem;                    /* Espaciado interno generoso */
+            font-size: 1.1rem;                     /* Texto legible */
+            font-weight: 600;                      /* Texto semi-bold */
+            text-transform: uppercase;             /* Texto en mayúsculas */
+            letter-spacing: 1px;                   /* Espaciado entre letras */
+            transition: all 0.3s ease;             /* Animación suave */
         }
         
+        /* EFECTO HOVER DEL BOTÓN ADMIN */
         .btn-admin:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);           /* Elevación al hacer hover */
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);  /* Sombra más intensa */
         }
         
+        /* PANEL DE INFORMACIÓN DE SEGURIDAD */
         .security-info {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            border-left: 4px solid #17a2b8;
+            background: #f8f9fa;                   /* Fondo gris claro */
+            border-radius: 12px;                   /* Bordes redondeados */
+            padding: 1rem;                         /* Espaciado interno */
+            margin-top: 1.5rem;                    /* Margen superior */
+            border-left: 4px solid #17a2b8;       /* Borde izquierdo azul cian */
         }
         
+        /* GRID DE CARACTERÍSTICAS ADMIN */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -115,41 +143,63 @@
     </style>
 </head>
 <body>
+    <!-- CONTENEDOR PRINCIPAL BOOTSTRAP -->
+    <!-- Utiliza el sistema de grid de Bootstrap para centrar el formulario -->
     <div class="container">
         <div class="row justify-content-center">
+            <!-- COLUMNA RESPONSIVE: XL=5/12, LG=6/12, MD=8/12 del ancho -->
             <div class="col-xl-5 col-lg-6 col-md-8">
+                <!-- TARJETA PRINCIPAL DEL FORMULARIO ADMINISTRATIVO -->
                 <div class="admin-card">
-                    <!-- Header -->
+                    <!-- ENCABEZADO DEL PORTAL ADMIN -->
+                    <!-- Sección superior con logo y título corporativo -->
                     <div class="admin-header">
+                        <!-- LOGO CIRCULAR CON ÍCONO DE ESCUDO -->
+                        <!-- Font Awesome shield-alt para representar seguridad -->
                         <div class="admin-logo">
                             <i class="fas fa-shield-alt"></i>
                         </div>
+                        <!-- TÍTULO PRINCIPAL DEL PORTAL -->
                         <h2 class="mb-1">Portal Administrativo</h2>
+                        <!-- SUBTÍTULO DESCRIPTIVO -->
                         <p class="mb-0 opacity-75">Sistema de Gestión TEVP</p>
                     </div>
                     
-                    <!-- Login Form -->
+                    <!-- CONTENEDOR DEL FORMULARIO DE LOGIN -->
+                    <!-- Padding de 1.5rem (24px) en todos los lados -->
                     <div class="p-4">
+                        <!-- ALERTA DE DEMOSTRACIÓN -->
+                        <!-- Muestra credenciales de prueba para facilitar testing -->
                         <div class="alert alert-demo" role="alert">
                             <i class="fas fa-info-circle me-2"></i>
                             <strong>Demo:</strong> Usuario: admin | Contraseña: admin123
                         </div>
                         
+                        <!-- FORMULARIO PRINCIPAL DE AUTENTICACIÓN ADMIN -->
+                        <!-- ID específico para JavaScript de validación -->
                         <form id="adminLoginForm">
+                            <!-- CAMPO DE USUARIO ADMINISTRATIVO -->
+                            <!-- Utiliza floating labels de Bootstrap 5 -->
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="adminUser" placeholder="Usuario">
+                                <input type="text" class="form-control" id="adminUser" placeholder="Usuario" required>
+                                <!-- ETIQUETA FLOTANTE CON ÍCONO -->
                                 <label for="adminUser">
                                     <i class="fas fa-user me-2"></i>Usuario Administrativo
                                 </label>
                             </div>
                             
+                            <!-- CAMPO DE CONTRASEÑA -->
+                            <!-- Input tipo password para ocultar caracteres -->
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="adminPassword" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="adminPassword" placeholder="Contraseña" required>
+                                <!-- ETIQUETA FLOTANTE CON ÍCONO DE CANDADO -->
                                 <label for="adminPassword">
                                     <i class="fas fa-lock me-2"></i>Contraseña
                                 </label>
                             </div>
                             
+                            <!-- CHECKBOX PARA MANTENER SESIÓN -->
+                            <!-- Funcionalidad de "recordarme" para administradores -->
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="rememberAdmin">
                                 <label class="form-check-label" for="rememberAdmin">
@@ -157,12 +207,15 @@
                                 </label>
                             </div>
                             
+                            <!-- BOTÓN DE ENVÍO DEL FORMULARIO -->
+                            <!-- Estilo personalizado con gradiente azul corporativo -->
                             <button type="submit" class="btn btn-admin btn-primary w-100">
                                 <i class="fas fa-sign-in-alt me-2"></i>Acceder al Sistema
                             </button>
                         </form>
                         
-                        <!-- Security Info -->
+                        <!-- PANEL DE INFORMACIÓN DE SEGURIDAD -->
+                        <!-- Comunica las medidas de seguridad implementadas -->
                         <div class="security-info">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fas fa-shield-alt text-info me-2"></i>

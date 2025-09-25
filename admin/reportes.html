@@ -1,51 +1,87 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para sistema de reportes y estadísticas administrativas -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
     <title>Reportes y Estadísticas - TEVP Admin</title>
-    <!-- Bootstrap CSS -->
+    <!-- Título específico para página de reportes y analytics -->
+    
+    <!-- Bootstrap CSS 5.3.2 - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome 6.4.0 - Iconos vectoriales para interfaz admin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
+    
+    <!-- Chart.js - Librería JavaScript para gráficos interactivos -->
+    <!-- IMPORTANTE: Permite crear gráficos de barras, líneas, dona, etc. -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados del proyecto TEVP -->
     <link rel="stylesheet" href="../css/styles.css">
+    
     <style>
+        /**
+         * ESTILOS ESPECÍFICOS PARA REPORTES Y ESTADÍSTICAS
+         * Dashboard analítico con gráficos Chart.js y métricas
+         */
+        
+        /* SIDEBAR DE NAVEGACIÓN ADMIN */
         .sidebar {
-            min-height: 100vh;
-            background-color: #f8f9fa;
+            min-height: 100vh;              /* Altura completa de la ventana */
+            background-color: #f8f9fa;      /* Fondo gris claro Bootstrap */
         }
+        
+        /* CONTENEDOR PRINCIPAL DEL CONTENIDO */
         .content-wrapper {
-            padding: 20px;
+            padding: 20px;                  /* Espaciado interno estándar */
         }
+        
+        /* TARJETAS DE REPORTES DESTACADOS */
         .report-card {
-            background: linear-gradient(45deg, #007bff, #0056b3);
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: linear-gradient(45deg, #007bff, #0056b3);  /* Degradado azul */
+            color: white;                   /* Texto blanco */
+            border-radius: 10px;            /* Bordes redondeados */
+            padding: 20px;                  /* Espaciado interno generoso */
+            margin-bottom: 20px;            /* Margen inferior */
         }
+        
+        /* CONTENEDORES DE GRÁFICOS CHART.JS */
         .chart-container {
-            position: relative;
-            height: 400px;
-            margin-bottom: 30px;
+            position: relative;             /* Posicionamiento relativo */
+            height: 400px;                  /* Altura fija para gráficos */
+            margin-bottom: 30px;            /* Margen inferior */
         }
+        
+        /* CAJAS DE ESTADÍSTICAS */
         .stat-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            border-left: 4px solid #007bff;
+            background: #f8f9fa;            /* Fondo gris claro */
+            border-radius: 8px;             /* Bordes redondeados */
+            padding: 20px;                  /* Espaciado interno */
+            text-align: center;             /* Texto centrado */
+            border-left: 4px solid #007bff; /* Borde izquierdo azul */
         }
-        .trend-up { color: #28a745; }
-        .trend-down { color: #dc3545; }
+        
+        /* INDICADORES DE TENDENCIA */
+        .trend-up { 
+            color: #28a745;                 /* Verde para tendencias positivas */
+        }
+        .trend-down { 
+            color: #dc3545;                 /* Rojo para tendencias negativas */
+        }
+        
+        /* SECCIÓN DE FILTROS DE REPORTES */
         .filter-section {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
+            background: #f8f9fa;            /* Fondo gris claro */
+            border-radius: 8px;             /* Bordes redondeados */
+            padding: 20px;                  /* Espaciado interno */
+            margin-bottom: 30px;            /* Margen inferior */
         }
     </style>
 </head>

@@ -1,100 +1,158 @@
-/* ===== ESTILOS GENERALES TEVP ===== */
+/**
+ * HOJA DE ESTILOS PRINCIPAL - TEVP
+ * Archivo CSS que define la apariencia visual de toda la aplicación
+ * Incluye: variables CSS, estilos generales, navegación, componentes, responsividad
+ */
+
+/* ===== VARIABLES CSS PERSONALIZADAS ===== */
+/**
+ * Definición de colores principales usando CSS Custom Properties (variables)
+ * Permite cambios consistentes de colores en toda la aplicación
+ */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --success-color: #27ae60;
-    --warning-color: #f39c12;
-    --light-bg: #ecf0f1;
-    --dark-text: #2c3e50;
-    --white: #ffffff;
+    /* Colores principales de la marca */
+    --primary-color: #2c3e50;      /* Azul oscuro para elementos principales */
+    --secondary-color: #3498db;    /* Azul claro para acentos */
+    --accent-color: #e74c3c;       /* Rojo para llamadas de atención */
+    --success-color: #27ae60;      /* Verde para estados exitosos */
+    --warning-color: #f39c12;      /* Amarillo/naranja para advertencias */
+    
+    /* Colores de fondo y texto */
+    --light-bg: #ecf0f1;          /* Fondo claro general */
+    --dark-text: #2c3e50;         /* Texto principal oscuro */
+    --white: #ffffff;             /* Blanco puro */
 }
 
+/* ===== RESET Y ESTILOS BASE ===== */
+/**
+ * Reset básico para eliminar márgenes y paddings por defecto
+ * box-sizing: border-box incluye padding y border en el ancho total
+ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/**
+ * Estilos base del body
+ * Establece fuente, colores, altura mínima y layout flexbox
+ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-bg);
     color: var(--dark-text);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.6;                /* Espaciado entre líneas para mejor legibilidad */
+    min-height: 100vh;               /* Altura mínima de toda la viewport */
+    display: flex;                   /* Flexbox para sticky footer */
+    flex-direction: column;          /* Dirección vertical */
 }
 
-/* ===== RESPONSIVIDAD MÓVIL ===== */
+/* ===== DISEÑO RESPONSIVO - DISPOSITIVOS MÓVILES ===== */
+/**
+ * Media queries para adaptar el diseño a pantallas pequeñas (tabletas y móviles)
+ * Breakpoint: 768px (estándar Bootstrap para md)
+ */
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 14px;  /* Texto más pequeño en móviles */
     }
     
     .container {
-        padding: 0 15px;
+        padding: 0 15px;  /* Padding lateral reducido */
     }
     
     .row {
-        margin: 0 -10px;
+        margin: 0 -10px;  /* Márgenes negativos ajustados */
     }
     
     .row > * {
-        padding: 0 10px;
+        padding: 0 10px;  /* Padding interno de columnas */
     }
 }
 
-/* ===== HEADER Y NAVEGACIÓN ===== */
+/* ===== HEADER Y NAVEGACIÓN PRINCIPAL ===== */
+/**
+ * Estilos para la barra de navegación superior
+ * Incluye logo, menú y elementos de usuario
+ */
+
+/**
+ * Logo/marca de la empresa en la navegación
+ * Tamaño y peso de fuente destacados
+ */
 .navbar-brand {
     font-size: 2rem;
     font-weight: bold;
     color: var(--white) !important;
 }
 
+/* Ajuste del logo en pantallas muy pequeñas */
 @media (max-width: 576px) {
     .navbar-brand {
         font-size: 1.5rem;
     }
 }
 
+/**
+ * Barra de navegación principal
+ * Gradiente de fondo y sombra para profundidad visual
+ */
 .navbar {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* Sombra sutil */
     padding: 1rem 0;
 }
 
+/* Media query: aplica estilos solo en pantallas menores a 768px (móviles) */
 @media (max-width: 768px) {
+    /* .navbar: selecciona la barra de navegación */
     .navbar {
+        /* padding: 0.5rem 0 = espacio interno de 8px arriba y abajo, 0 a los lados */
         padding: 0.5rem 0;
     }
 }
 
+/**
+ * Enlaces de navegación
+ * Color, peso y efectos de hover
+ */
 .navbar-nav .nav-link {
     color: var(--white) !important;
-    font-weight: 500;
-    margin: 0 0.5rem;
-    transition: all 0.3s ease;
+    font-weight: 500;                /* Peso medio para legibilidad */
+    margin: 0 0.5rem;               /* Espaciado horizontal */
+    transition: all 0.3s ease;     /* Transición suave para hover */
 }
 
+/* Comportamiento en móviles - menú vertical */
 @media (max-width: 768px) {
     .navbar-nav .nav-link {
-        margin: 0.2rem 0;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
+        margin: 0.2rem 0;           /* Espaciado vertical */
+        padding: 0.5rem 1rem;      /* Área de clic más grande */
+        border-radius: 5px;         /* Esquinas redondeadas */
     }
 }
 
+/**
+ * Efecto hover en los enlaces de navegación
+ * Cambio de color y animación de elevación
+ */
 .navbar-nav .nav-link:hover {
     color: var(--warning-color) !important;
-    transform: translateY(-2px);
+    transform: translateY(-2px);    /* Efecto de "levitar" */
 }
 
+/* .cart-icon: estilo del icono del carrito en la navegación */
 .cart-icon {
+    /* position: relative = permite posicionar elementos hijos de forma absoluta */
     position: relative;
+    /* color: blanco */
     color: var(--white);
+    /* font-size: 1.5rem = tamaño 24px */
     font-size: 1.5rem;
+    /* text-decoration: none = quita el subrayado de los enlaces */
     text-decoration: none;
+    /* transition: animación suave de 0.3 segundos para el transform */
     transition: transform 0.3s ease;
 }
 
@@ -103,29 +161,45 @@ body {
     transform: scale(1.1);
 }
 
+/* .cart-count: el número rojo que aparece sobre el carrito */
 .cart-count {
+    /* position: absolute = se posiciona respecto al elemento padre (cart-icon) */
     position: absolute;
+    /* top: -8px = 8 píxeles hacia arriba desde el borde superior */
     top: -8px;
+    /* right: -8px = 8 píxeles hacia la derecha desde el borde derecho */
     right: -8px;
+    /* background: rojo (color de alerta) */
     background: var(--accent-color);
+    /* color: texto blanco */
     color: white;
+    /* border-radius: 50% = hace un círculo perfecto */
     border-radius: 50%;
+    /* padding: 2px 6px = espaciado interno */
     padding: 2px 6px;
+    /* font-size: 0.8rem = texto pequeño (13px) */
     font-size: 0.8rem;
+    /* min-width: 18px = ancho mínimo para mantener forma circular */
     min-width: 18px;
+    /* text-align: center = centra el número */
     text-align: center;
+    /* font-weight: bold = texto en negrita */
     font-weight: bold;
+    /* box-shadow: sombra para darle profundidad */
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Animaciones para el carrito */
+/* @keyframes: define una animación de rebote */
 @keyframes bounce {
+    /* 0%, 20%, 50%, 80%, 100%: en estos momentos no se mueve */
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
     }
+    /* 40%: en este momento salta 10px hacia arriba */
     40% {
         transform: translateY(-10px);
     }
+    /* 60%: vuelve a 5px hacia arriba */
     60% {
         transform: translateY(-5px);
     }
@@ -392,29 +466,44 @@ body {
     }
 }
 
+/* .btn-primary: botón principal azul de la aplicación */
 .btn-primary {
+    /* background: gradiente de azul claro a azul medio */
     background: linear-gradient(45deg, var(--secondary-color), #5dade2);
+    /* border: none = sin borde */
     border: none;
+    /* border-radius: 25px = esquinas muy redondeadas */
     border-radius: 25px;
+    /* padding: 0.75rem 2rem = 12px arriba/abajo, 32px izquierda/derecha */
     padding: 0.75rem 2rem;
+    /* font-weight: 600 = texto semi-grueso */
     font-weight: 600;
+    /* transition: animación suave de 0.3 segundos para todos los cambios */
     transition: all 0.3s ease;
 }
 
+/* En pantallas móviles (menos de 768px) */
 @media (max-width: 768px) {
     .btn-primary {
+        /* padding más pequeño: 10px arriba/abajo, 24px izquierda/derecha */
         padding: 0.6rem 1.5rem;
+        /* esquinas menos redondeadas */
         border-radius: 20px;
     }
 }
 
+/* :hover = cuando el usuario pasa el mouse por encima */
 .btn-primary:hover {
+    /* transform: translateY(-2px) = mueve el botón 2px hacia arriba */
     transform: translateY(-2px);
+    /* box-shadow: sombra azul debajo del botón para efecto de "elevación" */
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
+/* En móviles: efecto hover más sutil */
 @media (max-width: 768px) {
     .btn-primary:hover {
+        /* solo se mueve 1px hacia arriba */
         transform: translateY(-1px);
     }
 }

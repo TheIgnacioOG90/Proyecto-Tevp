@@ -98,41 +98,73 @@
                     <h3><i class="fas fa-envelope me-2"></i>Envíanos un Mensaje</h3>
                     <p class="text-muted mb-4">Completa el formulario y te responderemos lo antes posible.</p>
 
+                    <!-- FORMULARIO DE CONTACTO -->
+                    <!-- id="contact-form": identificador para JavaScript -->
+                    <!-- novalidate: desactiva validación HTML5 por defecto para usar validación personalizada -->
                     <form id="contact-form" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
+                        
+                        <!-- PRIMERA FILA: Nombre y Email -->
+                        <div class="row"> <!-- row: fila del sistema Bootstrap grid -->
+                            
+                            <!-- CAMPO NOMBRE COMPLETO -->
+                            <div class="col-md-6 mb-3"> <!-- col-md-6: 50% ancho en pantallas medianas, mb-3: margen inferior -->
+                                <!-- label: etiqueta descriptiva del campo -->
+                                <!-- for="nombre": asocia label con input -->
                                 <label for="nombre" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
+                                <!-- input: campo de entrada de texto -->
+                                <!-- type="text": tipo texto simple -->
+                                <!-- class="form-control": estilo Bootstrap para inputs -->
+                                <!-- placeholder: texto de ayuda que aparece en el campo vacío -->
+                                <!-- maxlength="100": máximo 100 caracteres -->
+                                <!-- required: campo obligatorio -->
+                                <!-- autocomplete="name": ayuda al navegador a autocompletar -->
                                 <input type="text" class="form-control" id="nombre" name="nombre" 
                                        placeholder="Tu nombre completo" maxlength="100" required autocomplete="name">
+                                <!-- invalid-feedback: mensaje de error personalizado -->
                                 <div class="invalid-feedback"></div>
                             </div>
                             
+                            <!-- CAMPO EMAIL -->
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email</label>
+                                <!-- type="email": validación automática de formato email -->
+                                <!-- list="emailSuggestions": conecta con datalist para sugerencias -->
                                 <input type="email" class="form-control" id="email" name="email" 
                                        placeholder="tu@email.com (opcional)" maxlength="100" autocomplete="email" list="emailSuggestions">
+                                <!-- form-text: texto de ayuda debajo del campo -->
                                 <div class="form-text">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com</div>
                                 <div class="invalid-feedback"></div>
+                                
+                                <!-- DATALIST: lista de sugerencias para email -->
+                                <!-- datalist: elemento HTML5 que proporciona autocompletado -->
                                 <datalist id="emailSuggestions">
-                                    <option value="@duoc.cl">
-                                    <option value="@profesor.duoc.cl">
-                                    <option value="@gmail.com">
+                                    <option value="@duoc.cl">    <!-- Sugerencia 1 -->
+                                    <option value="@profesor.duoc.cl">    <!-- Sugerencia 2 -->
+                                    <option value="@gmail.com">    <!-- Sugerencia 3 -->
                                 </datalist>
                             </div>
                         </div>
 
+                        <!-- SEGUNDA FILA: Teléfono y Asunto -->
                         <div class="row">
+                            
+                            <!-- CAMPO TELÉFONO -->
                             <div class="col-md-6 mb-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
+                                <!-- type="tel": optimiza teclado para números de teléfono en móviles -->
                                 <input type="tel" class="form-control" id="telefono" name="telefono" 
                                        placeholder="+56 9 1234 5678 (opcional)" autocomplete="tel">
                                 <div class="invalid-feedback"></div>
                             </div>
                             
+                            <!-- CAMPO ASUNTO (SELECT) -->
                             <div class="col-md-6 mb-3">
                                 <label for="asunto" class="form-label">Asunto</label>
+                                <!-- select: campo de selección desplegable -->
+                                <!-- form-select: clase Bootstrap para selects -->
                                 <select class="form-select" id="asunto" name="asunto">
-                                    <option value="">Selecciona un asunto</option>
+                                    <option value="">Selecciona un asunto</option> <!-- Opción por defecto -->
+                                    <!-- value: valor que se envía al servidor -->
                                     <option value="consulta-general">Consulta General</option>
                                     <option value="solicitar-servicio">Solicitar Servicio</option>
                                     <option value="problema-tecnico">Problema Técnico</option>
@@ -144,27 +176,51 @@
                             </div>
                         </div>
 
+                        <!-- CAMPO MENSAJE (TEXTAREA) -->
                         <div class="mb-3">
                             <label for="comentario" class="form-label">Mensaje <span class="text-danger">*</span></label>
+                            <!-- textarea: campo de texto multilínea -->
+                            <!-- rows="5": altura de 5 líneas -->
+                            <!-- maxlength="500": máximo 500 caracteres -->
+                            <!-- required: campo obligatorio -->
                             <textarea class="form-control" id="comentario" name="comentario" rows="5" 
                                      placeholder="Describe tu consulta o mensaje..." maxlength="500" required></textarea>
+                            
+                            <!-- CONTADOR DE CARACTERES -->
+                            <!-- form-text: estilo Bootstrap para texto de ayuda -->
                             <div class="form-text">Máximo 500 caracteres. <span id="char-count">0/500</span></div>
                             <div class="invalid-feedback"></div>
                         </div>
 
+                        <!-- CHECKBOX NEWSLETTER OPCIONAL -->
                         <div class="mb-3">
-                            <div class="form-check">
+                            <div class="form-check"> <!-- form-check: contenedor Bootstrap para checkbox -->
+                                <!-- type="checkbox": casilla de verificación opcional -->
                                 <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                <!-- form-check-label: etiqueta para checkbox -->
                                 <label class="form-check-label" for="newsletter">
                                     Deseo recibir noticias y promociones de TEVP por email
                                 </label>
                             </div>
                         </div>
 
+                        <!-- BOTONES DEL FORMULARIO -->
+                        <!-- d-grid: Bootstrap utility para grid -->
+                        <!-- gap-2: espacio entre elementos -->
+                        <!-- d-md-flex: flex en pantallas medianas -->
+                        <!-- justify-content-md-end: justificar al final en pantallas medianas -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            
+                            <!-- BOTÓN LIMPIAR -->
+                            <!-- type="reset": limpia todos los campos del formulario -->
+                            <!-- btn-secondary: estilo Bootstrap para botón secundario -->
                             <button type="reset" class="btn btn-secondary">
                                 <i class="fas fa-times me-2"></i>Limpiar
                             </button>
+                            
+                            <!-- BOTÓN ENVIAR -->
+                            <!-- type="submit": envía el formulario -->
+                            <!-- btn-primary: estilo Bootstrap para botón principal -->
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
                             </button>

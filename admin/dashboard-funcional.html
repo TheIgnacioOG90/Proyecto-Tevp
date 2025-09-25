@@ -1,31 +1,51 @@
 <!DOCTYPE html>
+<!-- Declaración HTML5 para dashboard administrativo funcional avanzado -->
 <html lang="es">
+<!-- Idioma español para accesibilidad y SEO -->
 <head>
+    <!-- Meta etiquetas estándar para HTML5 -->
     <meta charset="UTF-8">
+    <!-- Codificación UTF-8 para caracteres especiales -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configuración responsive para dispositivos móviles -->
+    
+    <!-- Meta etiquetas para evitar caché durante desarrollo -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Panel Administrativo TEVP - FUNCIONAL</title>
+    <!-- Estas etiquetas aseguran que siempre se cargue la versión más reciente -->
     
-    <!-- Bootstrap CSS -->
+    <title>Panel Administrativo TEVP - FUNCIONAL</title>
+    <!-- Título específico para dashboard funcional completo -->
+    
+    <!-- Bootstrap CSS 5.3.2 - Framework de diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome 6.4.0 - Iconos vectoriales para interfaz admin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /**
+         * VARIABLES CSS PARA DASHBOARD FUNCIONAL AVANZADO
+         * Palette de colores específica para panel administrativo
+         */
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --danger-color: #e74c3c;
+            --primary-color: #3498db;      /* Azul principal para elementos destacados */
+            --secondary-color: #2c3e50;    /* Azul oscuro para textos y fondos */
+            --success-color: #27ae60;      /* Verde para estados exitosos */
+            --warning-color: #f39c12;      /* Amarillo para advertencias */
+            --danger-color: #e74c3c;       /* Rojo para errores o acciones peligrosas */
         }
 
+        /**
+         * RESET CSS UNIVERSAL
+         * Elimina márgenes y paddings por defecto del navegador
+         */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0;                     /* Sin margen por defecto */
+            padding: 0;                    /* Sin padding por defecto */
+            box-sizing: border-box;        /* Incluye padding y border en el ancho total */
         }
 
         body {

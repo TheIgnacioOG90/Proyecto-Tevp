@@ -104,29 +104,81 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
+    <!-- =================================================================== -->
+    <!-- CONTENIDO PRINCIPAL DE LA PÁGINA DE PROFESIONALES -->
+    <!-- =================================================================== -->
     <div class="container my-5 main-content">
-        <!-- Header con filtros -->
+        <!-- CLASES BOOTSTRAP:
+             - container: contenedor responsivo con márgenes automáticos
+             - my-5: margen vertical (top y bottom) de 5 unidades
+             - main-content: clase CSS personalizada -->
+        
+        <!-- =================================================================== -->
+        <!-- ENCABEZADO CON NAVEGACIÓN Y DESCRIPCIÓN -->
+        <!-- =================================================================== -->
         <div class="row mb-4">
+            <!-- mb-4: margen inferior de 4 unidades -->
+            
             <div class="col-12">
+                <!-- col-12: ocupa las 12 columnas (100% ancho) -->
+                
                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <!-- CLASES DE FLEXBOX:
+                         - d-flex: display flex
+                         - justify-content-between: espacia elementos en extremos
+                         - align-items-center: alineación vertical centrada -->
+                    
+                    <!-- INFORMACIÓN DEL TÍTULO Y DESCRIPCIÓN -->
                     <div>
                         <h2 id="page-title">Nuestros Profesionales</h2>
+                        <!-- id="page-title": se puede actualizar dinámicamente con JavaScript -->
+                        
                         <p class="text-muted" id="category-description">Encuentra al profesional perfecto para tu proyecto</p>
+                        <!-- text-muted: color gris suave Bootstrap -->
+                        <!-- id="category-description": descripción actualizable dinámicamente -->
                     </div>
+                    
+                    <!-- BOTÓN DE NAVEGACIÓN HACIA ATRÁS -->
                     <a href="servicios.html" class="btn btn-outline-primary">
+                        <!-- btn-outline-primary: botón con borde azul y fondo transparente -->
+                        
                         <i class="fas fa-arrow-left me-1"></i>Volver a Servicios
+                        <!-- fas fa-arrow-left: icono de flecha izquierda Font Awesome -->
+                        <!-- me-1: margen derecho de 1 unidad -->
                     </a>
                 </div>
                 
-                <!-- Filtros -->
+                <!-- =================================================================== -->
+                <!-- PANEL DE FILTROS AVANZADOS -->
+                <!-- =================================================================== -->
                 <div class="card">
+                    <!-- card: componente Bootstrap para contenido agrupado con sombra -->
+                    
                     <div class="card-body">
+                        <!-- card-body: contenedor interno de la tarjeta con padding -->
+                        
                         <div class="row align-items-center">
+                            <!-- align-items-center: alineación vertical centrada de los filtros -->
+                            
+                            <!-- =================================================================== -->
+                            <!-- FILTRO POR ESPECIALIDAD -->
+                            <!-- =================================================================== -->
                             <div class="col-md-3">
+                                <!-- col-md-3: 3 columnas (25% ancho) en pantallas medianas -->
+                                
                                 <label class="form-label">Especialidad</label>
+                                <!-- form-label: estilo Bootstrap para etiquetas -->
+                                
                                 <select class="form-select" id="filter-category" onchange="filterProfessionals()">
+                                    <!-- ATRIBUTOS SELECT:
+                                         - form-select: estilo Bootstrap para elementos select
+                                         - id="filter-category": identificador para JavaScript
+                                         - onchange="filterProfessionals()": ejecuta filtrado en tiempo real -->
+                                    
                                     <option value="">Todas las especialidades</option>
+                                    <!-- Opción por defecto que muestra todos los profesionales -->
+                                    
+                                    <!-- OPCIONES DE ESPECIALIDADES DISPONIBLES -->
                                     <option value="Plomería">Plomería</option>
                                     <option value="Electricidad">Electricidad</option>
                                     <option value="Climatización">Climatización</option>
@@ -135,19 +187,37 @@
                                     <option value="Soldadura">Soldadura</option>
                                 </select>
                             </div>
+                            
+                            <!-- =================================================================== -->
+                            <!-- FILTRO POR CALIFICACIÓN MÍNIMA -->
+                            <!-- =================================================================== -->
                             <div class="col-md-3">
                                 <label class="form-label">Calificación mínima</label>
+                                
                                 <select class="form-select" id="filter-rating" onchange="filterProfessionals()">
+                                    <!-- Filtro que permite mostrar solo profesionales con alta calificación -->
+                                    
                                     <option value="0">Cualquier calificación</option>
+                                    <!-- Valor 0 muestra todos los profesionales sin filtro de rating -->
+                                    
                                     <option value="4">4+ estrellas</option>
                                     <option value="4.5">4.5+ estrellas</option>
                                     <option value="4.8">4.8+ estrellas</option>
+                                    <!-- Opciones que filtran por puntuación mínima -->
                                 </select>
                             </div>
+                            
+                            <!-- =================================================================== -->
+                            <!-- FILTRO POR PRECIO MÁXIMO POR HORA -->
+                            <!-- =================================================================== -->
                             <div class="col-md-3">
                                 <label class="form-label">Precio máximo/hora</label>
+                                
                                 <select class="form-select" id="filter-price" onchange="filterProfessionals()">
+                                    <!-- Filtro para limitar profesionales por rango de precios -->
+                                    
                                     <option value="999999">Sin límite</option>
+                                    <!-- Valor alto que no filtra por precio -->
                                     <option value="10000">Hasta $10.000</option>
                                     <option value="15000">Hasta $15.000</option>
                                     <option value="20000">Hasta $20.000</option>
