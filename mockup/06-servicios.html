@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Servicios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding-bottom: 80px;
+            padding-top: 60px;
+        }
+
+        /* Navegación superior */
+        .navbar {
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Header de servicios */
+        .services-header {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .services-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 0.5rem;
+        }
+
+        .services-subtitle {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Filtros */
+        .filters-section {
+            background: white;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6c757d;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .filter-chip.active,
+        .filter-chip:hover {
+            background: #0056b3;
+            border-color: #0056b3;
+            color: white;
+        }
+
+        /* Categorías de servicios */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            color: inherit;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* Lista de servicios populares */
+        .popular-services {
+            background: white;
+            margin: 0 1.5rem 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .popular-services-header {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .popular-services-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #343a40;
+            margin: 0;
+        }
+
+        .service-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-item:hover {
+            background-color: #f8f9fa;
+            color: inherit;
+        }
+
+        .service-item-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0056b3;
+            font-size: 1.25rem;
+            margin-right: 1rem;
+        }
+
+        .service-item-info {
+            flex: 1;
+        }
+
+        .service-item-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-item-desc {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-item-price {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .service-item-rating {
+            text-align: right;
+            color: #ffc107;
+            font-size: 0.85rem;
+        }
+
+        /* Botón flotante de búsqueda */
+        .search-fab {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        /* Navegación inferior */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #dee2e6;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            height: 70px;
+            z-index: 1000;
+        }
+
+        .bottom-nav-container {
+            display: flex;
+            height: 100%;
+            padding: 0 0.5rem;
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .bottom-nav-item.active {
+            color: #0056b3;
+        }
+
+        .bottom-nav-item i {
+            font-size: 20px;
+        }
+
+        .central-button {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+            color: white !important;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            margin-top: -15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .central-button i {
+            font-size: 24px;
+        }
+
+        /* Stats cards */
+        .stats-section {
+            background: white;
+            margin: 0 1.5rem 1rem;
+            padding: 1rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación superior -->
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-arrow-left me-2"></i>
+                <span>Servicios</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-filter me-3" style="cursor: pointer;"></i>
+                <i class="fas fa-search" style="cursor: pointer;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header de servicios -->
+    <div class="services-header">
+        <h1 class="services-title">Nuestros Servicios</h1>
+        <p class="services-subtitle">Encuentra el servicio técnico que necesitas</p>
+        
+        <!-- Stats rápidas -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Servicios</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Profesionales</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.8</div>
+                <div class="stat-label">Calificación</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-section">
+        <div class="filter-chips">
+            <a href="#" class="filter-chip active">Todos</a>
+            <a href="#" class="filter-chip">Más populares</a>
+            <a href="#" class="filter-chip">Menor precio</a>
+            <a href="#" class="filter-chip">Mejor calificados</a>
+            <a href="#" class="filter-chip">Disponibles ahora</a>
+        </div>
+    </div>
+
+    <!-- Categorías principales -->
+    <div class="categories-grid">
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-wrench"></i>
+            </div>
+            <h3 class="category-name">Plomería</h3>
+            <p class="category-count">25 servicios</p>
+            <p class="category-price">Desde $20.000</p>
+        </a>
+
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="category-name">Electricidad</h3>
+            <p class="category-count">18 servicios</p>
+            <p class="category-price">Desde $25.000</p>
+        </a>
+
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-snowflake"></i>
+            </div>
+            <h3 class="category-name">Climatización</h3>
+            <p class="category-count">12 servicios</p>
+            <p class="category-price">Desde $35.000</p>
+        </a>
+
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-hard-hat"></i>
+            </div>
+            <h3 class="category-name">Construcción</h3>
+            <p class="category-count">30 servicios</p>
+            <p class="category-price">Desde $40.000</p>
+        </a>
+
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-tv"></i>
+            </div>
+            <h3 class="category-name">Electrodomésticos</h3>
+            <p class="category-count">15 servicios</p>
+            <p class="category-price">Desde $18.000</p>
+        </a>
+
+        <a href="#" class="category-card">
+            <div class="category-icon">
+                <i class="fas fa-fire"></i>
+            </div>
+            <h3 class="category-name">Soldadura</h3>
+            <p class="category-count">8 servicios</p>
+            <p class="category-price">Desde $30.000</p>
+        </a>
+    </div>
+
+    <!-- Servicios más solicitados -->
+    <div class="popular-services">
+        <div class="popular-services-header">
+            <h3 class="popular-services-title">Servicios más solicitados</h3>
+        </div>
+        
+        <a href="#" class="service-item">
+            <div class="service-item-icon">
+                <i class="fas fa-shower"></i>
+            </div>
+            <div class="service-item-info">
+                <h4 class="service-item-name">Reparación de llaves</h4>
+                <p class="service-item-desc">Cambio y reparación de griferías</p>
+                <p class="service-item-price">Desde $15.000</p>
+            </div>
+            <div class="service-item-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </a>
+
+        <a href="#" class="service-item">
+            <div class="service-item-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="service-item-info">
+                <h4 class="service-item-name">Instalación eléctrica</h4>
+                <p class="service-item-desc">Enchufes, interruptores y luminarias</p>
+                <p class="service-item-price">Desde $20.000</p>
+            </div>
+            <div class="service-item-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </a>
+
+        <a href="#" class="service-item">
+            <div class="service-item-icon">
+                <i class="fas fa-wind"></i>
+            </div>
+            <div class="service-item-info">
+                <h4 class="service-item-name">Mantención aire acondicionado</h4>
+                <p class="service-item-desc">Limpieza y revisión general</p>
+                <p class="service-item-price">Desde $25.000</p>
+            </div>
+            <div class="service-item-rating">
+                <i class="fas fa-star"></i> 4.7
+            </div>
+        </a>
+
+        <a href="#" class="service-item">
+            <div class="service-item-icon">
+                <i class="fas fa-hammer"></i>
+            </div>
+            <div class="service-item-info">
+                <h4 class="service-item-name">Reparaciones menores</h4>
+                <p class="service-item-desc">Arreglos y mantenciones del hogar</p>
+                <p class="service-item-price">Desde $12.000</p>
+            </div>
+            <div class="service-item-rating">
+                <i class="fas fa-star"></i> 4.6
+            </div>
+        </a>
+
+        <a href="#" class="service-item">
+            <div class="service-item-icon">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <div class="service-item-info">
+                <h4 class="service-item-name">Reparación electrodomésticos</h4>
+                <p class="service-item-desc">Lavadoras, refrigeradores, etc.</p>
+                <p class="service-item-price">Desde $18.000</p>
+            </div>
+            <div class="service-item-rating">
+                <i class="fas fa-star"></i> 4.5
+            </div>
+        </a>
+    </div>
+
+    <!-- Botón de búsqueda flotante -->
+    <button class="search-fab">
+        <i class="fas fa-search"></i>
+    </button>
+
+    <!-- Navegación inferior -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a class="bottom-nav-item active" href="#">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+            <a class="bottom-nav-item central-button" href="#">
+                <i class="fas fa-plus"></i>
+                <span>Solicitar</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Pedidos</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>

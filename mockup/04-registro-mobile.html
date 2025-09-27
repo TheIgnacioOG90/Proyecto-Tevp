@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Registro Móvil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="mobile-frame.css">
+    <style>
+        /* Registro específico */
+        .register-container {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* Header */
+        .register-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .register-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .register-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .register-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Formulario */
+        .register-form {
+            flex: 1;
+            background: white;
+            border-radius: 25px 25px 0 0;
+            padding: 2rem;
+            margin: 0 -20px;
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .form-floating {
+            margin-bottom: 1rem;
+        }
+
+        .form-floating input,
+        .form-floating select {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            height: 56px;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating input:focus,
+        .form-floating select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-floating label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Validación en tiempo real */
+        .input-group {
+            position: relative;
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .valid-feedback {
+            color: #28a745;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Selector de tipo de usuario */
+        .user-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-type-option {
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-type-option:hover {
+            background: #e9ecef;
+        }
+
+        .user-type-option.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .user-type-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-type-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Términos y condiciones */
+        .terms-checkbox {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-check-input {
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+        }
+
+        .form-check-input:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        /* Botones */
+        .btn-register {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn-register:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-register:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Indicador de fuerza de contraseña */
+        .password-strength {
+            margin-top: 0.5rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { 
+            background: #dc3545; 
+            width: 33%; 
+        }
+
+        .strength-medium { 
+            background: #ffc107; 
+            width: 66%; 
+        }
+
+        .strength-strong { 
+            background: #28a745; 
+            width: 100%; 
+        }
+
+        .strength-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Animaciones */
+        .slide-in {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Campo oculto para profesionales */
+        .professional-fields {
+            display: none;
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .professional-fields.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dispositivo móvil contenedor -->
+    <div class="mobile-device">
+        <!-- Status bar -->
+        <div class="mobile-status-bar">
+            <div class="status-left">
+                <div class="signal-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="wifi"></div>
+            </div>
+            <div class="status-center">9:41</div>
+            <div class="status-right">
+                <span>85%</span>
+                <div class="battery"></div>
+            </div>
+        </div>
+
+        <!-- Pantalla del dispositivo -->
+        <div class="mobile-screen">
+            <div class="screen-reflection"></div>
+            
+            <!-- Contenido de la app -->
+            <div class="app-content">
+                <div class="register-container">
+                    <!-- Botón de regreso -->
+                    <button class="back-button" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+
+                    <!-- Header -->
+                    <div class="register-header">
+                        <div class="register-logo">
+                            🔧
+                        </div>
+                        <h1 class="register-title">Crear Cuenta</h1>
+                        <p class="register-subtitle">Únete a la comunidad TEVP</p>
+                    </div>
+
+                    <!-- Formulario -->
+                    <div class="register-form slide-in">
+                        <form id="registerForm">
+                            <!-- Selector de tipo de usuario -->
+                            <div class="user-type-selector">
+                                <div class="user-type-option selected" data-type="client">
+                                    <div class="user-type-icon">👤</div>
+                                    <div class="user-type-title">Cliente</div>
+                                </div>
+                                <div class="user-type-option" data-type="professional">
+                                    <div class="user-type-icon">🔧</div>
+                                    <div class="user-type-title">Profesional</div>
+                                </div>
+                            </div>
+
+                            <!-- Información Personal -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <div class="section-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    Información Personal
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="firstName" placeholder="Nombre" required>
+                                    <label for="firstName">Nombre</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="lastName" placeholder="Apellido" required>
+                                    <label for="lastName">Apellido</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
+                                    <label for="email">Correo electrónico</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="phone" placeholder="Teléfono" required>
+                                    <label for="phone">Teléfono</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <!-- Información de Cuenta -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <div class="section-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    Información de Cuenta
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                                    <label for="password">Contraseña</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="password-strength">
+                                        <div class="strength-bar">
+                                            <div class="strength-fill"></div>
+                                        </div>
+                                        <div class="strength-text"></div>
+                                    </div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña" required>
+                                    <label for="confirmPassword">Confirmar contraseña</label>
+                                    <div class="validation-icon"></div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <!-- Campos adicionales para profesionales -->
+                            <div class="professional-fields">
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <div class="section-icon">
+                                            <i class="fas fa-briefcase"></i>
+                                        </div>
+                                        Información Profesional
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <select class="form-select" id="profession">
+                                            <option value="">Selecciona tu especialidad</option>
+                                            <option value="plomeria">Plomería</option>
+                                            <option value="electricidad">Electricidad</option>
+                                            <option value="construccion">Construcción</option>
+                                            <option value="pintura">Pintura</option>
+                                            <option value="carpinteria">Carpintería</option>
+                                            <option value="jardineria">Jardinería</option>
+                                        </select>
+                                        <label for="profession">Especialidad</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="experience" placeholder="Años de experiencia" min="0" max="50">
+                                        <label for="experience">Años de experiencia</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="description" placeholder="Descripción de servicios" style="height: 100px"></textarea>
+                                        <label for="description">Descripción de servicios</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Términos y condiciones -->
+                            <div class="terms-checkbox">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="termsAccepted" required>
+                                    <label class="form-check-label" for="termsAccepted">
+                                        Acepto los <a href="#" style="color: #667eea;">términos y condiciones</a> y la <a href="#" style="color: #667eea;">política de privacidad</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Botón de registro -->
+                            <button type="submit" class="btn-register" disabled>
+                                <i class="fas fa-user-plus me-2"></i>
+                                Crear Cuenta
+                            </button>
+                        </form>
+
+                        <!-- Link a login -->
+                        <div class="login-link">
+                            ¿Ya tienes cuenta? <a href="03-login-mobile.html">Inicia sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones físicos del dispositivo -->
+        <div class="side-button volume-up"></div>
+        <div class="side-button volume-down"></div>
+        <div class="side-button power-button"></div>
+        <div class="home-button"></div>
+    </div>
+
+    <script>
+        // Selector de tipo de usuario
+        document.querySelectorAll('.user-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const professionalFields = document.querySelector('.professional-fields');
+                if (this.dataset.type === 'professional') {
+                    professionalFields.classList.add('show');
+                } else {
+                    professionalFields.classList.remove('show');
+                }
+                
+                validateForm();
+            });
+        });
+
+        // Validación en tiempo real
+        const inputs = document.querySelectorAll('input, select, textarea');
+        const form = document.getElementById('registerForm');
+        const submitBtn = document.querySelector('.btn-register');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                validateField(this);
+                validateForm();
+            });
+
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+        });
+
+        function validateField(field) {
+            const validationIcon = field.parentNode.querySelector('.validation-icon');
+            const feedback = field.parentNode.querySelector('.invalid-feedback');
+            let isValid = true;
+            let message = '';
+
+            // Limpiar estados previos
+            field.classList.remove('is-valid', 'is-invalid');
+            if (validationIcon) validationIcon.innerHTML = '';
+            if (feedback) feedback.textContent = '';
+
+            // Validaciones específicas
+            switch (field.id) {
+                case 'firstName':
+                case 'lastName':
+                    if (field.value.trim().length < 2) {
+                        isValid = false;
+                        message = 'Debe tener al menos 2 caracteres';
+                    }
+                    break;
+
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value)) {
+                        isValid = false;
+                        message = 'Ingresa un email válido';
+                    }
+                    break;
+
+                case 'phone':
+                    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                    if (!phoneRegex.test(field.value.replace(/\s/g, ''))) {
+                        isValid = false;
+                        message = 'Ingresa un teléfono válido';
+                    }
+                    break;
+
+                case 'password':
+                    validatePasswordStrength(field.value);
+                    if (field.value.length < 6) {
+                        isValid = false;
+                        message = 'La contraseña debe tener al menos 6 caracteres';
+                    }
+                    break;
+
+                case 'confirmPassword':
+                    const password = document.getElementById('password').value;
+                    if (field.value !== password) {
+                        isValid = false;
+                        message = 'Las contraseñas no coinciden';
+                    }
+                    break;
+            }
+
+            // Aplicar estado visual
+            if (field.value.trim() !== '') {
+                if (isValid) {
+                    field.classList.add('is-valid');
+                    if (validationIcon) validationIcon.innerHTML = '<i class="fas fa-check text-success"></i>';
+                } else {
+                    field.classList.add('is-invalid');
+                    if (validationIcon) validationIcon.innerHTML = '<i class="fas fa-times text-danger"></i>';
+                    if (feedback) feedback.textContent = message;
+                }
+            }
+
+            return isValid;
+        }
+
+        function validatePasswordStrength(password) {
+            const strengthBar = document.querySelector('.strength-fill');
+            const strengthText = document.querySelector('.strength-text');
+            
+            let score = 0;
+            let feedback = '';
+
+            if (password.length >= 6) score++;
+            if (password.length >= 10) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            if (score <= 2) {
+                strengthBar.className = 'strength-fill strength-weak';
+                feedback = 'Débil';
+            } else if (score <= 3) {
+                strengthBar.className = 'strength-fill strength-medium';
+                feedback = 'Media';
+            } else {
+                strengthBar.className = 'strength-fill strength-strong';
+                feedback = 'Fuerte';
+            }
+
+            strengthText.textContent = feedback;
+            strengthText.className = `strength-text text-${score <= 2 ? 'danger' : score <= 3 ? 'warning' : 'success'}`;
+        }
+
+        function validateForm() {
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword'];
+            const termsAccepted = document.getElementById('termsAccepted').checked;
+            const userType = document.querySelector('.user-type-option.selected').dataset.type;
+
+            // Agregar campos requeridos para profesionales
+            if (userType === 'professional') {
+                requiredFields.push('profession', 'experience');
+            }
+
+            let allValid = true;
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim() || field.classList.contains('is-invalid')) {
+                    allValid = false;
+                }
+            });
+
+            submitBtn.disabled = !(allValid && termsAccepted);
+        }
+
+        // Manejo del envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simular registro
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creando cuenta...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                alert('¡Cuenta creada exitosamente! Bienvenido a TEVP.');
+                // Redirigir al dashboard
+                window.location.href = '05-home-mobile.html';
+            }, 2000);
+        });
+
+        // Auto-formatear teléfono
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            if (value.length <= 10) {
+                e.target.value = formattedValue;
+            }
+        });
+    </script>
+</body>
+</html>

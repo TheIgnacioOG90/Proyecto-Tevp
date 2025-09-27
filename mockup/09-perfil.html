@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding-bottom: 80px;
+            padding-top: 60px;
+        }
+
+        /* Navegación superior */
+        .navbar {
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Header del perfil */
+        .profile-header {
+            background: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .cover-gradient {
+            height: 120px;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            position: relative;
+        }
+
+        .cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info {
+            padding: 0 1.5rem 1.5rem;
+            position: relative;
+            margin-top: -50px;
+            z-index: 10;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .profile-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-member-since {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .edit-profile-btn {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            color: #6c757d;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .edit-profile-btn:hover {
+            background: #e9ecef;
+            border-color: #0056b3;
+            color: #0056b3;
+        }
+
+        .camera-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #0056b3;
+            border: 2px solid white;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Stats del usuario */
+        .user-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            background: white;
+            padding: 1.5rem;
+            margin: 0 1.5rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Menú de opciones */
+        .menu-section {
+            background: white;
+            margin: 0 1.5rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .menu-header {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .menu-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin: 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f8f9fa;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f9fa;
+            color: inherit;
+        }
+
+        .menu-item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-right: 1rem;
+            color: #0056b3;
+        }
+
+        .menu-item-content {
+            flex: 1;
+        }
+
+        .menu-item-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 0.25rem;
+        }
+
+        .menu-item-subtitle {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .menu-item-arrow {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .menu-item-badge {
+            background: #dc3545;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .toggle-switch.active {
+            background: #0056b3;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(20px);
+        }
+
+        /* Logout button */
+        .logout-section {
+            margin: 0 1.5rem 2rem;
+        }
+
+        .logout-btn {
+            width: 100%;
+            background: #fff5f5;
+            border: 2px solid #fed7d7;
+            color: #c53030;
+            padding: 1rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: #feb2b2;
+            border-color: #fc8181;
+            color: #9b2c2c;
+        }
+
+        /* Premium banner */
+        .premium-banner {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            margin: 0 1.5rem 1.5rem;
+            padding: 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .premium-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .premium-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .premium-subtitle {
+            font-size: 0.9rem;
+            color: #a0522d;
+            margin-bottom: 1rem;
+        }
+
+        .premium-btn {
+            background: #8b4513;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .premium-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 4rem;
+            color: rgba(139, 69, 19, 0.1);
+            transform: rotate(15deg);
+        }
+
+        /* Navegación inferior */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #dee2e6;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            height: 70px;
+            z-index: 1000;
+        }
+
+        .bottom-nav-container {
+            display: flex;
+            height: 100%;
+            padding: 0 0.5rem;
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .bottom-nav-item.active {
+            color: #0056b3;
+        }
+
+        .bottom-nav-item i {
+            font-size: 20px;
+        }
+
+        .central-button {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+            color: white !important;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            margin-top: -15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .central-button i {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación superior -->
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-user me-2"></i>
+                <span>Mi Perfil</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-cog me-3" style="cursor: pointer;"></i>
+                <i class="fas fa-bell" style="cursor: pointer;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header del perfil -->
+    <div class="profile-header">
+        <div class="cover-gradient">
+            <div class="cover-overlay"></div>
+        </div>
+        
+        <div class="profile-info">
+            <div class="profile-avatar">
+                👤
+                <div class="camera-btn">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            
+            <h1 class="profile-name">María González</h1>
+            <p class="profile-email">maria.gonzalez@email.com</p>
+            <p class="profile-member-since">
+                <i class="fas fa-calendar-alt me-1"></i>
+                Miembro desde enero 2023
+            </p>
+            
+            <a href="#" class="edit-profile-btn">
+                <i class="fas fa-edit me-2"></i>
+                Editar perfil
+            </a>
+        </div>
+    </div>
+
+    <!-- Premium Banner -->
+    <div class="premium-banner">
+        <div class="premium-content">
+            <h3 class="premium-title">¡Hazte Premium!</h3>
+            <p class="premium-subtitle">Accede a beneficios exclusivos y soporte prioritario</p>
+            <button class="premium-btn">
+                <i class="fas fa-crown me-2"></i>
+                Actualizar ahora
+            </button>
+        </div>
+        <i class="fas fa-crown premium-icon"></i>
+    </div>
+
+    <!-- Stats del usuario -->
+    <div class="user-stats">
+        <div class="stat-item">
+            <div class="stat-number">16</div>
+            <div class="stat-label">Servicios</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4.8</div>
+            <div class="stat-label">Calificación</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">$850k</div>
+            <div class="stat-label">Ahorrado</div>
+        </div>
+    </div>
+
+    <!-- Menú de cuenta -->
+    <div class="menu-section">
+        <div class="menu-header">
+            <h3 class="menu-title">Mi Cuenta</h3>
+        </div>
+        
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-user-edit"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Información personal</h4>
+                <p class="menu-item-subtitle">Actualiza tu información de contacto</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Direcciones</h4>
+                <p class="menu-item-subtitle">Gestiona tus direcciones guardadas</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-credit-card"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Métodos de pago</h4>
+                <p class="menu-item-subtitle">Tarjetas y métodos de pago</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Seguridad</h4>
+                <p class="menu-item-subtitle">Contraseña y autenticación</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+    </div>
+
+    <!-- Menú de actividad -->
+    <div class="menu-section">
+        <div class="menu-header">
+            <h3 class="menu-title">Mi Actividad</h3>
+        </div>
+        
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Historial de servicios</h4>
+                <p class="menu-item-subtitle">Todos tus servicios contratados</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Favoritos</h4>
+                <p class="menu-item-subtitle">Profesionales y servicios favoritos</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Mis reseñas</h4>
+                <p class="menu-item-subtitle">Reseñas y calificaciones dadas</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+    </div>
+
+    <!-- Menú de configuración -->
+    <div class="menu-section">
+        <div class="menu-header">
+            <h3 class="menu-title">Configuración</h3>
+        </div>
+        
+        <div class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Notificaciones</h4>
+                <p class="menu-item-subtitle">Alertas y avisos importantes</p>
+            </div>
+            <div class="toggle-switch active"></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Email marketing</h4>
+                <p class="menu-item-subtitle">Ofertas y promociones</p>
+            </div>
+            <div class="toggle-switch"></div>
+        </div>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Idioma</h4>
+                <p class="menu-item-subtitle">Español (Chile)</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Tema</h4>
+                <p class="menu-item-subtitle">Claro</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+    </div>
+
+    <!-- Menú de soporte -->
+    <div class="menu-section">
+        <div class="menu-header">
+            <h3 class="menu-title">Soporte</h3>
+        </div>
+        
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Centro de ayuda</h4>
+                <p class="menu-item-subtitle">Preguntas frecuentes y guías</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Contactar soporte</h4>
+                <p class="menu-item-subtitle">Chatea con nuestro equipo</p>
+            </div>
+            <span class="menu-item-badge">24/7</span>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+            <div class="menu-item-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="menu-item-content">
+                <h4 class="menu-item-title">Términos y condiciones</h4>
+                <p class="menu-item-subtitle">Políticas y términos de uso</p>
+            </div>
+            <i class="fas fa-chevron-right menu-item-arrow"></i>
+        </a>
+    </div>
+
+    <!-- Botón de logout -->
+    <div class="logout-section">
+        <button class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar sesión</span>
+        </button>
+    </div>
+
+    <!-- Navegación inferior -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+            <a class="bottom-nav-item central-button" href="#">
+                <i class="fas fa-plus"></i>
+                <span>Solicitar</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Pedidos</span>
+            </a>
+            <a class="bottom-nav-item active" href="#">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        // Toggle switches functionality
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Simple loading animation for profile avatar
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatar = document.querySelector('.profile-avatar');
+            avatar.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                avatar.style.transform = 'scale(1)';
+                avatar.style.transition = 'transform 0.3s ease';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

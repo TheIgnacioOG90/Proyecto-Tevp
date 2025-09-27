@@ -1,0 +1,365 @@
+/* 
+===========================================
+TEVP MOBILE FRAME CSS
+Simulador de dispositivo móvil físico
+===========================================
+*/
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    background: #2c3e50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Contenedor principal del dispositivo móvil */
+.mobile-device {
+    width: 375px;
+    height: 812px;
+    background: #1a1a1a;
+    border-radius: 40px;
+    padding: 8px;
+    box-shadow: 
+        0 0 0 2px #333,
+        0 0 0 4px #666,
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 100px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: scale(0.85);
+    transform-origin: center;
+}
+
+/* Pantalla del dispositivo */
+.mobile-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Marco superior del iPhone (notch) */
+.mobile-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #000;
+    border-radius: 0 0 15px 15px;
+    z-index: 1000;
+}
+
+/* Indicador de altavoz */
+.mobile-screen::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    z-index: 1001;
+}
+
+/* Contenido de la aplicación */
+.app-content {
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    position: relative;
+    z-index: 10;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Botón home físico del dispositivo */
+.home-button {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #666;
+    border-radius: 50%;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones laterales del dispositivo */
+.side-button {
+    position: absolute;
+    background: #333;
+    border-radius: 2px;
+}
+
+.volume-up {
+    top: 120px;
+    left: -4px;
+    width: 4px;
+    height: 30px;
+}
+
+.volume-down {
+    top: 160px;
+    left: -4px;
+    width: 4px;
+    height: 30px;
+}
+
+.power-button {
+    top: 140px;
+    right: -4px;
+    width: 4px;
+    height: 50px;
+}
+
+/* Animaciones de carga */
+@keyframes deviceAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.7) rotateY(30deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(0.85) rotateY(0deg);
+    }
+}
+
+.mobile-device {
+    animation: deviceAppear 0.8s ease-out;
+}
+
+/* Status bar móvil simulado */
+.mobile-status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: transparent;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+}
+
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.signal-bars {
+    display: flex;
+    gap: 2px;
+}
+
+.bar {
+    width: 3px;
+    background: white;
+    border-radius: 1px;
+}
+
+.bar:nth-child(1) { height: 4px; }
+.bar:nth-child(2) { height: 6px; }
+.bar:nth-child(3) { height: 8px; }
+.bar:nth-child(4) { height: 10px; }
+
+.battery {
+    width: 20px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 2px;
+    position: relative;
+}
+
+.battery::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 14px;
+    height: 6px;
+    background: white;
+    border-radius: 1px;
+}
+
+.battery::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    right: -3px;
+    width: 2px;
+    height: 4px;
+    background: white;
+    border-radius: 0 1px 1px 0;
+}
+
+/* Indicador de conexión WiFi */
+.wifi {
+    width: 12px;
+    height: 12px;
+    position: relative;
+}
+
+.wifi::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid white;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Estilos específicos para diferentes pantallas */
+.screen-splash .mobile-status-bar { background: linear-gradient(135deg, #0056b3 0%, #004494 100%); }
+.screen-login .mobile-status-bar { background: rgba(0, 0, 0, 0.1); color: #333; }
+.screen-home .mobile-status-bar { background: linear-gradient(135deg, #0056b3 0%, #004494 100%); }
+
+/* Responsive para pantallas más pequeñas */
+@media (max-height: 900px) {
+    .mobile-device {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-height: 700px) {
+    .mobile-device {
+        transform: scale(0.6);
+    }
+}
+
+@media (max-width: 500px) {
+    .mobile-device {
+        transform: scale(0.65);
+    }
+}
+
+/* Efectos de profundidad y realismo */
+.mobile-device::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #444, #222);
+    border-radius: 42px;
+    z-index: -1;
+}
+
+/* Reflejo de pantalla para mayor realismo */
+.screen-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.03) 30%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Indicador de carga de la app */
+.app-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    z-index: 1002;
+    opacity: 0;
+    animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Ajustes para el contenido de la app */
+.app-content {
+    padding-top: 44px; /* Espacio para status bar */
+}
+
+/* Scrollbar personalizado para móvil */
+.app-content::-webkit-scrollbar {
+    width: 2px;
+}
+
+.app-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.app-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 1px;
+}
+
+/* Prevenir selección de texto en el dispositivo */
+.mobile-device {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Permitir selección solo en el contenido de la app */
+.app-content {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}

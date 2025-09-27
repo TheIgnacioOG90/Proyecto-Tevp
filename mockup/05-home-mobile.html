@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Inicio Móvil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="mobile-frame.css">
+    <style>
+        /* Home screen específico */
+        .home-container {
+            height: 100%;
+            background: #f8f9fa;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            padding: 60px 20px 30px;
+            color: white;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 20px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .welcome-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Search bar */
+        .search-container {
+            position: relative;
+            margin: 0 -5px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 12px 45px 12px 20px;
+            color: white;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: white;
+        }
+
+        /* Quick stats */
+        .stats-section {
+            background: white;
+            margin: 0 20px 20px;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Services grid */
+        .services-section {
+            padding: 0 20px 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-all-btn {
+            font-size: 0.9rem;
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            color: inherit;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 15px;
+        }
+
+        .service-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 5px;
+        }
+
+        .service-count {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Recent orders */
+        .recent-section {
+            background: white;
+            margin: 0 20px 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .recent-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .recent-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin: 0;
+        }
+
+        .recent-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            align-items: center;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0056b3;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .recent-info {
+            flex: 1;
+        }
+
+        .recent-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 3px;
+        }
+
+        .recent-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .recent-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Professionals section */
+        .professionals-scroll {
+            display: flex;
+            gap: 15px;
+            padding: 0 20px 20px;
+            overflow-x: auto;
+        }
+
+        .professionals-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .professional-card {
+            min-width: 150px;
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .professional-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 10px;
+        }
+
+        .professional-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 3px;
+        }
+
+        .professional-rating {
+            font-size: 0.8rem;
+            color: #ffc107;
+        }
+
+        /* Bottom navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 375px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 32px 32px;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            height: 70px;
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .nav-item.active {
+            color: #0056b3;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+        }
+
+        .nav-item-center {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+            color: white !important;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-top: -10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item-center i {
+            font-size: 22px;
+        }
+
+        /* Padding para el bottom nav */
+        .home-container {
+            padding-bottom: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dispositivo móvil contenedor -->
+    <div class="mobile-device">
+        <!-- Status bar -->
+        <div class="mobile-status-bar screen-home">
+            <div class="status-left">
+                <div class="signal-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="wifi"></div>
+            </div>
+            <div class="status-center">9:41</div>
+            <div class="status-right">
+                <span>85%</span>
+                <div class="battery"></div>
+            </div>
+        </div>
+
+        <!-- Pantalla del dispositivo -->
+        <div class="mobile-screen">
+            <div class="screen-reflection"></div>
+            
+            <!-- Contenido de la app -->
+            <div class="app-content">
+                <div class="home-container">
+                    <!-- Header -->
+                    <div class="app-header">
+                        <div class="header-top">
+                            <div class="welcome-text">
+                                <h2>¡Hola, María! 👋</h2>
+                                <p>¿En qué te podemos ayudar hoy?</p>
+                            </div>
+                            <div class="header-actions">
+                                <button class="header-btn">
+                                    <i class="fas fa-bell"></i>
+                                </button>
+                                <button class="header-btn">
+                                    <i class="fas fa-user-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Barra de búsqueda -->
+                        <div class="search-container">
+                            <input type="text" class="search-input" placeholder="Buscar servicios, profesionales...">
+                            <button class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats rápidas -->
+                    <div class="stats-section">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Activos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Completados</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$45k</div>
+                                <div class="stat-label">Ahorrado</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Servicios principales -->
+                    <div class="services-section">
+                        <div class="section-title">
+                            <span>Servicios populares</span>
+                            <a href="#" class="view-all-btn">Ver todos</a>
+                        </div>
+                        <div class="services-grid">
+                            <a href="#" class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="service-name">Plomería</div>
+                                <div class="service-count">25 profesionales</div>
+                            </a>
+
+                            <a href="#" class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="service-name">Electricidad</div>
+                                <div class="service-count">18 profesionales</div>
+                            </a>
+
+                            <a href="#" class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-snowflake"></i>
+                                </div>
+                                <div class="service-name">Climatización</div>
+                                <div class="service-count">12 profesionales</div>
+                            </a>
+
+                            <a href="#" class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-hard-hat"></i>
+                                </div>
+                                <div class="service-name">Construcción</div>
+                                <div class="service-count">30 profesionales</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Profesionales destacados -->
+                    <div class="services-section">
+                        <div class="section-title">
+                            <span>Profesionales destacados</span>
+                            <a href="#" class="view-all-btn">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="professionals-scroll">
+                        <a href="#" class="professional-card">
+                            <div class="professional-avatar">👨‍🔧</div>
+                            <div class="professional-name">Carlos M.</div>
+                            <div class="professional-rating">
+                                <i class="fas fa-star"></i> 4.9
+                            </div>
+                        </a>
+
+                        <a href="#" class="professional-card">
+                            <div class="professional-avatar">⚡</div>
+                            <div class="professional-name">Roberto S.</div>
+                            <div class="professional-rating">
+                                <i class="fas fa-star"></i> 4.8
+                            </div>
+                        </a>
+
+                        <a href="#" class="professional-card">
+                            <div class="professional-avatar">❄️</div>
+                            <div class="professional-name">Miguel T.</div>
+                            <div class="professional-rating">
+                                <i class="fas fa-star"></i> 4.7
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Pedidos recientes -->
+                    <div class="recent-section">
+                        <div class="recent-header">
+                            <h3 class="recent-title">Actividad reciente</h3>
+                        </div>
+                        
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <div class="recent-info">
+                                <div class="recent-name">Reparación de cañerías</div>
+                                <div class="recent-date">Hoy, 14:30</div>
+                            </div>
+                            <span class="recent-status status-pending">Pendiente</span>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <div class="recent-info">
+                                <div class="recent-name">Mantención aire acondicionado</div>
+                                <div class="recent-date">Ayer, 16:45</div>
+                            </div>
+                            <span class="recent-status status-completed">Completado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-container">
+                <a class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a class="nav-item">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Servicios</span>
+                </a>
+                <a class="nav-item nav-item-center">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <a class="nav-item">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Pedidos</span>
+                </a>
+                <a class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Botones físicos del dispositivo -->
+        <div class="side-button volume-up"></div>
+        <div class="side-button volume-down"></div>
+        <div class="side-button power-button"></div>
+        <div class="home-button"></div>
+    </div>
+
+    <script>
+        // Simulación de datos en tiempo real
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de entrada suave
+            const cards = document.querySelectorAll('.service-card, .professional-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding-bottom: 80px;
+            padding-top: 60px;
+        }
+
+        /* Navegación superior */
+        .navbar {
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .notification-badge {
+            position: relative;
+            color: white;
+            padding: 0.5rem;
+        }
+
+        .notification-badge .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10px;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            margin: -10px -15px 2rem;
+        }
+
+        .greeting-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .greeting-subtitle {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container .input-group-text {
+            background-color: white;
+            border: none;
+        }
+
+        .search-container .form-control {
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Secciones */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        .view-all-link {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Grid de servicios */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .service-rating {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Banner de promoción */
+        .promotion-banner {
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 1.5rem 2rem;
+        }
+
+        .promotion-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .promotion-icon {
+            font-size: 1.5rem;
+        }
+
+        .promotion-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .promotion-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Profesionales */
+        .professionals-slider {
+            display: flex;
+            gap: 1rem;
+            padding: 0 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .professionals-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .professional-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 280px;
+            scroll-snap-align: start;
+        }
+
+        .professional-avatar {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #0056b3, #004494);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #28a745;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .professional-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 0.25rem;
+        }
+
+        .professional-specialty {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .rating-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Navegación inferior */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #dee2e6;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            height: 70px;
+            z-index: 1000;
+        }
+
+        .bottom-nav-container {
+            display: flex;
+            height: 100%;
+            padding: 0 0.5rem;
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .bottom-nav-item.active {
+            color: #0056b3;
+        }
+
+        .bottom-nav-item i {
+            font-size: 20px;
+        }
+
+        .central-button {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%) !important;
+            color: white !important;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            margin-top: -15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .central-button i {
+            font-size: 24px;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: 5px;
+            right: 20px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            min-width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación superior -->
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-tools me-2"></i>
+                <span>TEVP</span>
+            </a>
+            <div class="notification-badge">
+                <i class="fas fa-bell"></i>
+                <span class="badge bg-danger">3</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="greeting-text">¡Hola, Usuario!</h1>
+            <p class="greeting-subtitle">¿Qué servicio necesitas hoy?</p>
+            
+            <div class="search-container">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control" 
+                           placeholder="Buscar servicios o profesionales...">
+                    <button class="btn btn-light" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Destacados -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Servicios Destacados</h2>
+            <a href="#" class="view-all-link">Ver todos</a>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                <div class="service-info">
+                    <h3 class="service-name">Plomería</h3>
+                    <p class="service-desc">Reparaciones urgentes</p>
+                    <span class="service-price">Desde $25.000</span>
+                </div>
+                <div class="service-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.8</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="service-info">
+                    <h3 class="service-name">Electricidad</h3>
+                    <p class="service-desc">Instalaciones seguras</p>
+                    <span class="service-price">Desde $30.000</span>
+                </div>
+                <div class="service-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.9</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <div class="service-info">
+                    <h3 class="service-name">Climatización</h3>
+                    <p class="service-desc">AC y calefacción</p>
+                    <span class="service-price">Desde $45.000</span>
+                </div>
+                <div class="service-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.7</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <div class="service-info">
+                    <h3 class="service-name">Construcción</h3>
+                    <p class="service-desc">Obras y remodelaciones</p>
+                    <span class="service-price">Desde $50.000</span>
+                </div>
+                <div class="service-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.6</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner de promoción -->
+    <div class="promotion-banner">
+        <div class="promotion-content">
+            <div class="promotion-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="promotion-text">
+                <h3>¡Oferta Especial!</h3>
+                <p>20% OFF en tu primer servicio</p>
+            </div>
+            <button class="btn btn-light btn-sm">Usar cupón</button>
+        </div>
+    </div>
+
+    <!-- Profesionales Destacados -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Profesionales Destacados</h2>
+            <a href="#" class="view-all-link">Ver todos</a>
+        </div>
+
+        <div class="professionals-slider">
+            <div class="professional-card">
+                <div class="professional-avatar">
+                    <div class="avatar-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="professional-info">
+                    <h4 class="professional-name">Carlos Mendoza</h4>
+                    <p class="professional-specialty">Plomero Experto</p>
+                    <div class="professional-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-text">5.0 (127)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="professional-card">
+                <div class="professional-avatar">
+                    <div class="avatar-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="professional-info">
+                    <h4 class="professional-name">María González</h4>
+                    <p class="professional-specialty">Electricista Certificada</p>
+                    <div class="professional-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-text">4.9 (98)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="professional-card">
+                <div class="professional-avatar">
+                    <div class="avatar-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="online-status" style="background-color: #6c757d;"></div>
+                </div>
+                <div class="professional-info">
+                    <h4 class="professional-name">Roberto Silva</h4>
+                    <p class="professional-specialty">Técnico en Climatización</p>
+                    <div class="professional-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-text">4.7 (64)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navegación inferior -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a class="bottom-nav-item active" href="#">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+            <a class="bottom-nav-item central-button" href="#">
+                <i class="fas fa-plus"></i>
+                <span>Solicitar</span>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Pedidos</span>
+                <div class="nav-badge">2</div>
+            </a>
+            <a class="bottom-nav-item" href="#">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>
