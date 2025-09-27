@@ -295,3 +295,25 @@
     -- FIN DEL SCRIPT DE MODELO DE DATOS TEVP
     -- Para importar en Oracle Data Modeler y generar diagrama ER
     -- =====================================================
+
+
+    -- ===================================
+-- SCRIPT COMPLETO PARA CREAR USUARIO TEVP
+-- ===================================
+
+-- Conectar como SYSDBA
+--CONNECT / AS SYSDBA;
+
+-- PASO CRÍTICO: Habilitar script mode
+--ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+
+-- Crear usuario
+--CREATE USER tevp_user IDENTIFIED BY tevp_password_2024;
+
+-- Privilegios
+--GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO tevp_user;
+--GRANT CREATE TABLE, CREATE VIEW, CREATE SEQUENCE TO tevp_user;
+
+--SID: ORCL
+--Servicio: ORCL
+--Puerto: 1521

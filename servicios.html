@@ -1,154 +1,361 @@
 <!-- 
-SERVICIOS.HTML - PÁGINA DE CATÁLOGO DE SERVICIOS
+======================================================================================
+SERVICIOS.HTML - PÁGINA DE CATÁLOGO DE SERVICIOS DISPONIBLES EN TEVP
+======================================================================================
 Propósito: Página dedicada a mostrar todos los servicios disponibles en TEVP
 Funcionalidad principal: Catálogo filtrable de profesionales y sus servicios
 Conexión: Se integra con main.js para mostrar datos de profesionales
+======================================================================================
 -->
-<!DOCTYPE html> <!-- Declaración estándar HTML5 -->
-<html lang="es"> <!-- Documento en español para SEO y accesibilidad -->
-<head>
-    <!-- META TAGS PRINCIPALES -->
-    <meta charset="UTF-8"> <!-- Codificación Unicode para caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design para dispositivos móviles -->
+
+<!DOCTYPE html> <!-- Declaración del tipo de documento HTML5 estándar -->
+
+<!-- ELEMENTO RAÍZ HTML -->
+<!-- ATRIBUTO lang="es": Especifica el idioma español para SEO y accesibilidad -->
+<html lang="es">
+
+<head> <!-- Sección HEAD: contiene metadatos que no se muestran en la página -->
     
-    <!-- META TAGS PARA CONTROL DE CACHÉ -->
-    <!-- Estas etiquetas previenen el almacenamiento en caché del navegador -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> <!-- Control de caché HTTP -->
-    <meta http-equiv="Pragma" content="no-cache"> <!-- Compatibilidad con navegadores antiguos -->
-    <meta http-equiv="Expires" content="0"> <!-- Expiración inmediata del contenido -->
+    <!-- ================================================================== -->
+    <!-- META TAGS PRINCIPALES PARA CONFIGURACIÓN BÁSICA -->
+    <!-- ================================================================== -->
     
-    <title>Servicios - TEVP</title> <!-- Título específico de la página para SEO -->
+    <!-- CODIFICACIÓN DE CARACTERES -->
+    <!-- UTF-8: Codificación Unicode que soporta caracteres especiales y acentos -->
+    <meta charset="UTF-8">
     
-    <!-- DEPENDENCIAS EXTERNAS CSS -->
-    <!-- Bootstrap CSS: Framework CSS para diseño responsivo y componentes UI -->
+    <!-- CONFIGURACIÓN RESPONSIVE -->
+    <!-- viewport: Controla cómo se renderiza la página en dispositivos móviles -->
+    <!-- width=device-width: Hace que el ancho coincida con el dispositivo -->
+    <!-- initial-scale=1.0: Establece el zoom inicial al 100% -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ================================================================== -->
+    <!-- META TAGS PARA CONTROL DE CACHÉ DEL NAVEGADOR -->
+    <!-- ================================================================== -->
+    <!-- Estas etiquetas previenen que el navegador almacene versiones antiguas -->
+    
+    <!-- CONTROL DE CACHÉ HTTP -->
+    <!-- no-cache: El navegador debe revalidar con el servidor -->
+    <!-- no-store: No almacenar en caché local -->
+    <!-- must-revalidate: Debe revalidar cuando el caché expira -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    
+    <!-- PRAGMA: Compatibilidad con navegadores HTTP/1.0 antiguos -->
+    <meta http-equiv="Pragma" content="no-cache">
+    
+    <!-- EXPIRACIÓN: Establece que el contenido expira inmediatamente -->
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- TÍTULO DE LA PÁGINA -->
+    <!-- Aparece en la pestaña del navegador y es importante para SEO -->
+    <title>Servicios - TEVP</title>
+    
+    <!-- ================================================================== -->
+    <!-- HOJAS DE ESTILO EXTERNAS (CSS) -->
+    <!-- ================================================================== -->
+    
+    <!-- BOOTSTRAP CSS -->
+    <!-- Framework CSS que proporciona componentes pre-diseñados y sistema de grillas responsivo -->
+    <!-- Versión 5.3.2: Incluye componentes como navbar, cards, buttons, modal, etc. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome: Librería de iconos vectoriales escalables -->
+    <!-- FONT AWESOME -->
+    <!-- Biblioteca de iconos vectoriales escalables para UI -->
+    <!-- Versión 6.4.0: Incluye iconos como fa-tools, fa-home, fa-user, etc. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Estilos personalizados: CSS específico de TEVP -->
+    <!-- ESTILOS PERSONALIZADOS DE TEVP -->
+    <!-- CSS específico del proyecto que complementa Bootstrap -->
     <link rel="stylesheet" href="css/styles.css">
-</head>
-<body> <!-- Inicio del contenido visible de la página -->
+    
+</head> <!-- Fin de la sección HEAD -->
+
+<body> <!-- Inicio del cuerpo del documento - contenido visible de la página -->
+    
+    <!-- ================================================================== -->
     <!-- BARRA DE NAVEGACIÓN PRINCIPAL -->
-    <!-- Navegación fija (sticky-top) que permanece visible al hacer scroll -->
+    <!-- ================================================================== -->
+    
+    <!-- NAVEGACIÓN RESPONSIVA -->
+    <!-- CLASE: navbar - Componente de navegación de Bootstrap -->
+    <!-- CLASE: navbar-expand-lg - Se expande en pantallas grandes (≥992px) -->
+    <!-- CLASE: navbar-dark - Estilo para fondos oscuros (texto blanco) -->
+    <!-- CLASE: sticky-top - Se mantiene fijo en la parte superior al hacer scroll -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container"> <!-- Contenedor Bootstrap para centrado y responsive -->
+        
+        <!-- CONTENEDOR RESPONSIVO -->
+        <!-- CLASE: container - Contenedor Bootstrap que centra el contenido y aplica márgenes responsivos -->
+        <div class="container">
             
+            <!-- ============================================================== -->
             <!-- LOGO Y MARCA DE TEVP -->
-            <!-- Enlace principal que redirige al inicio con icono de herramientas -->
+            <!-- ============================================================== -->
+            
+            <!-- ENLACE DE LA MARCA/LOGO -->
+            <!-- CLASE: navbar-brand - Estilo especial Bootstrap para logos en navegación -->
+            <!-- ATRIBUTO href: Redirige a la página principal del sitio -->
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-tools me-2"></i> <!-- Icono de herramientas que representa servicios técnicos -->
-                TEVP <!-- Nombre de la marca: Técnicos Especializados y Venta de Productos -->
+                <!-- ICONO DE HERRAMIENTAS -->
+                <!-- CLASE: fas fa-tools - Font Awesome, icono sólido de herramientas -->
+                <!-- CLASE: me-2 - Margen derecho de 0.5rem (separación entre icono y texto) -->
+                <i class="fas fa-tools me-2"></i>
+                
+                <!-- NOMBRE DE LA MARCA -->
+                TEVP <!-- Acrónimo: Técnicos Especializados y Venta de Productos -->
             </a>
             
-            <!-- BOTÓN HAMBURGUESA PARA MÓVILES -->
-            <!-- Botón colapsible que se muestra solo en pantallas pequeñas -->
+            <!-- ============================================================== -->
+            <!-- BOTÓN HAMBURGUESA PARA NAVEGACIÓN MÓVIL -->
+            <!-- ============================================================== -->
+            
+            <!-- BOTÓN COLAPSIBLE -->
+            <!-- CLASE: navbar-toggler - Botón Bootstrap para colapsar/expandir navegación -->
+            <!-- ATRIBUTO type="button" - Especifica que es un botón clickeable -->
+            <!-- ATRIBUTO data-bs-toggle="collapse" - Bootstrap activa comportamiento de colapso -->
+            <!-- ATRIBUTO data-bs-target="#navbarNav" - ID del elemento que se colapsa/expande -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span> <!-- Icono de tres líneas estándar -->
+                <!-- ICONO DEL BOTÓN HAMBURGUESA -->
+                <!-- CLASE: navbar-toggler-icon - Icono predeterminado Bootstrap (tres líneas horizontales) -->
+                <span class="navbar-toggler-icon"></span>
             </button>
             
+            <!-- ============================================================== -->
             <!-- MENÚ DE NAVEGACIÓN COLAPSIBLE -->
+            <!-- ============================================================== -->
+            
+            <!-- CONTENEDOR COLAPSIBLE -->
+            <!-- CLASE: collapse - Bootstrap hace que el contenido sea ocultable/mostrable -->
+            <!-- CLASE: navbar-collapse - Específico para navegación colapsable -->
+            <!-- ID: navbarNav - Identificador referenciado por el botón hamburguesa -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 
-                <!-- ENLACES PRINCIPALES DEL SITIO -->
-                <!-- Lista de navegación principal (lado izquierdo) -->
+                <!-- ========================================================== -->
+                <!-- ENLACES PRINCIPALES DEL SITIO (LADO IZQUIERDO) -->
+                <!-- ========================================================== -->
+                
+                <!-- LISTA DE NAVEGACIÓN PRINCIPAL -->
+                <!-- CLASE: navbar-nav - Lista de navegación Bootstrap -->
+                <!-- CLASE: me-auto - Margen derecho automático (empuja el contenido hacia la izquierda) -->
                 <ul class="navbar-nav me-auto">
+                    
+                    <!-- ENLACE: INICIO -->
+                    <!-- CLASE: nav-item - Contenedor Bootstrap para elementos de navegación -->
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a> <!-- Página principal -->
+                        <!-- CLASE: nav-link - Estilo Bootstrap para enlaces de navegación -->
+                        <a class="nav-link" href="index.html">Inicio</a>
                     </li>
+                    
+                    <!-- ENLACE: SERVICIOS (PÁGINA ACTUAL) -->
                     <li class="nav-item">
-                        <!-- PÁGINA ACTUAL: marcada como 'active' para indicar ubicación del usuario -->
+                        <!-- CLASE: active - Indica que esta es la página actualmente visitada -->
+                        <!-- PROPÓSITO: Resalta visualmente dónde se encuentra el usuario -->
                         <a class="nav-link active" href="servicios.html">Servicios</a>
                     </li>
+                    
+                    <!-- ENLACE: NOSOTROS -->
                     <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a> <!-- Página de información corporativa -->
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
                     </li>
+                    
+                    <!-- ENLACE: BLOG -->
                     <li class="nav-item">
-                        <a class="nav-link" href="blogs.html">Blog</a> <!-- Sección de artículos y noticias -->
+                        <a class="nav-link" href="blogs.html">Blog</a>
                     </li>
+                    
+                    <!-- ENLACE: CONTACTO -->
                     <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a> <!-- Formulario de contacto -->
+                        <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
                 
-                <!-- ÁREA DE USUARIO Y CARRITO (lado derecho) -->
+                <!-- ========================================================== -->
+                <!-- ÁREA DE USUARIO Y CARRITO (LADO DERECHO) -->
+                <!-- ========================================================== -->
+                
+                <!-- LISTA DE NAVEGACIÓN SECUNDARIA -->
+                <!-- CLASE: navbar-nav - Lista de navegación Bootstrap -->
                 <ul class="navbar-nav">
                     
+                    <!-- ====================================================== -->
                     <!-- ICONO DEL CARRITO DE COMPRAS -->
-                    <!-- Elemento interactivo que muestra el modal del carrito -->
+                    <!-- ====================================================== -->
+                    
+                    <!-- ELEMENTO DEL CARRITO -->
+                    <!-- CLASE: me-3 - Margen derecho de 1rem para separación -->
                     <li class="nav-item me-3">
+                        
+                        <!-- ENLACE DEL CARRITO -->
+                        <!-- CLASE: cart-icon - Clase CSS personalizada para estilizar el carrito -->
+                        <!-- ATRIBUTO: data-bs-toggle="modal" - Bootstrap abrirá un modal al hacer clic -->
+                        <!-- ATRIBUTO: data-bs-target="#cartModal" - ID del modal que se abrirá -->
+                        <!-- ATRIBUTO: onclick="loadCartModal()" - Función JavaScript que carga el contenido del modal -->
                         <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
-                            <i class="fas fa-shopping-cart"></i> <!-- Icono de carrito de compras -->
-                            <span class="cart-count">0</span> <!-- Contador dinámico de items en el carrito -->
+                            
+                            <!-- ICONO DEL CARRITO -->
+                            <!-- CLASE: fas fa-shopping-cart - Font Awesome, icono sólido de carrito de compras -->
+                            <i class="fas fa-shopping-cart"></i>
+                            
+                            <!-- CONTADOR DE ARTÍCULOS -->
+                            <!-- CLASE: cart-count - Clase CSS personalizada para el contador -->
+                            <!-- CONTENIDO: "0" - Valor inicial, se actualiza dinámicamente con JavaScript -->
+                            <span class="cart-count">0</span>
                         </a>
                     </li>
                     
+                    <!-- ====================================================== -->
                     <!-- MENÚ DESPLEGABLE DEL USUARIO AUTENTICADO -->
-                    <!-- Visible solo cuando hay un usuario logueado (clase d-none lo oculta inicialmente) -->
+                    <!-- ====================================================== -->
+                    
+                    <!-- ELEMENTO DROPDOWN PARA USUARIO AUTENTICADO -->
+                    <!-- CLASE: dropdown - Componente Bootstrap para menú desplegable -->
+                    <!-- CLASE: d-none - Display none (oculto por defecto), se muestra via JavaScript -->
+                    <!-- ID: user-info - Identificador para mostrar/ocultar según estado de autenticación -->
                     <li class="nav-item dropdown d-none" id="user-info">
+                        
+                        <!-- ENLACE PRINCIPAL DEL DROPDOWN -->
+                        <!-- CLASE: dropdown-toggle - Añade la flecha indicadora del dropdown -->
+                        <!-- CLASE: d-flex - Display flex para alineación de elementos -->
+                        <!-- CLASE: align-items-center - Alinea elementos verticalmente al centro -->
+                        <!-- ATRIBUTO: role="button" - Accesibilidad, indica que actúa como botón -->
+                        <!-- ATRIBUTO: data-bs-toggle="dropdown" - Bootstrap activa el comportamiento dropdown -->
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle me-2"></i> <!-- Icono de perfil de usuario -->
-                            <span id="user-name">Usuario</span> <!-- Nombre del usuario logueado (se actualiza dinámicamente) -->
+                            
+                            <!-- ICONO DE PERFIL DE USUARIO -->
+                            <!-- CLASE: fas fa-user-circle - Font Awesome, icono circular de usuario -->
+                            <!-- CLASE: me-2 - Margen derecho de 0.5rem -->
+                            <i class="fas fa-user-circle me-2"></i>
+                            
+                            <!-- NOMBRE DEL USUARIO -->
+                            <!-- ID: user-name - Se actualiza dinámicamente con JavaScript al hacer login -->
+                            <!-- CONTENIDO: "Usuario" - Valor por defecto -->
+                            <span id="user-name">Usuario</span>
                         </a>
-                        <!-- OPCIONES DEL MENÚ DE USUARIO -->
+                        
+                        <!-- ================================================== -->
+                        <!-- MENÚ DESPLEGABLE DE OPCIONES DE USUARIO -->
+                        <!-- ================================================== -->
+                        
+                        <!-- CONTENEDOR DEL MENÚ -->
+                        <!-- CLASE: dropdown-menu - Estilo Bootstrap para menús desplegables -->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li> <!-- Información personal del usuario -->
-                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li> <!-- Historial de compras y servicios -->
-                            <li><hr class="dropdown-divider"></li> <!-- Separador visual -->
-                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li> <!-- Función de logout -->
+                            
+                            <!-- OPCIÓN: MI PERFIL -->
+                            <li>
+                                <!-- CLASE: dropdown-item - Estilo Bootstrap para elementos del dropdown -->
+                                <!-- ATRIBUTO: onclick - Ejecuta función JavaScript para mostrar perfil -->
+                                <a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a>
+                            </li>
+                            
+                            <!-- OPCIÓN: MIS PEDIDOS -->
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a>
+                            </li>
+                            
+                            <!-- SEPARADOR VISUAL -->
+                            <li>
+                                <!-- CLASE: dropdown-divider - Línea separadora Bootstrap -->
+                                <hr class="dropdown-divider">
+                            </li>
+                            
+                            <!-- OPCIÓN: CERRAR SESIÓN -->
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a>
+                            </li>
                         </ul>
                     </li>
                     
-                    <!-- ENLACES DE AUTENTICACIÓN (NO LOGUEADO) -->
-                    <!-- Estos enlaces solo se muestran cuando NO hay usuario autenticado -->
+                    <!-- ====================================================== -->
+                    <!-- ENLACES DE AUTENTICACIÓN (USUARIO NO LOGUEADO) -->
+                    <!-- ====================================================== -->
+                    <!-- NOTA: Estos enlaces solo se muestran cuando NO hay usuario autenticado -->
+                    
+                    <!-- ENLACE DE REGISTRO -->
+                    <!-- ID: auth-link-register - Para mostrar/ocultar según estado de autenticación -->
                     <li class="nav-item" id="auth-link-register">
-                        <a class="nav-link" href="registro.html">Registro</a> <!-- Página de registro de nuevos usuarios -->
+                        <a class="nav-link" href="registro.html">Registro</a>
                     </li>
+                    
+                    <!-- ENLACE DE INICIO DE SESIÓN -->
+                    <!-- ID: auth-link-login - Para mostrar/ocultar según estado de autenticación -->
                     <li class="nav-item" id="auth-link-login">
-                        <a class="nav-link" href="login.html">Iniciar Sesión</a> <!-- Página de autenticación -->
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
                     </li>
-                </ul>
-            </div> <!-- Fin del menú colapsible -->
-        </div> <!-- Fin del contenedor de navegación -->
-    </nav> <!-- Fin de la barra de navegación -->
+                    
+                </ul> <!-- Fin de navbar-nav secundaria -->
+            </div> <!-- Fin de collapse navbar-collapse -->
+        </div> <!-- Fin de container navegación -->
+    </nav> <!-- Fin de nav principal -->
 
     <!-- =================================================================== -->
     <!-- CONTENIDO PRINCIPAL DE LA PÁGINA DE SERVICIOS -->
     <!-- =================================================================== -->
+    
+    <!-- CONTENEDOR PRINCIPAL RESPONSIVO -->
+    <!-- CLASE: container - Contenedor Bootstrap que centra el contenido y aplica márgenes responsivos -->
+    <!-- CLASE: my-5 - Margen vertical (margin-top y margin-bottom) de 3rem cada uno -->
+    <!-- CLASE: main-content - Clase CSS personalizada definida en styles.css -->
     <div class="container my-5 main-content">
-        <!-- CLASES BOOTSTRAP:
+        
+        <!-- CLASES BOOTSTRAP EXPLICADAS:
              - container: contenedor responsivo con márgenes automáticos
              - my-5: margen vertical (top y bottom) de 5 unidades
              - main-content: clase CSS personalizada -->
         
+        <!-- FILA PRINCIPAL DEL CONTENIDO -->
+        <!-- CLASE: row - Sistema de grillas Bootstrap, crea una fila para distribuir columnas -->
         <div class="row">
+            
+            <!-- COLUMNA COMPLETA -->
+            <!-- CLASE: col-12 - Ocupa las 12 columnas disponibles (100% del ancho) -->
             <div class="col-12">
                 <!-- col-12: ocupa las 12 columnas (100% ancho) -->
                 
                 <!-- =================================================================== -->
                 <!-- ENCABEZADO DE LA PÁGINA DE SERVICIOS -->
                 <!-- =================================================================== -->
+                
+                <!-- TÍTULO PRINCIPAL -->
+                <!-- CLASE: section-title - Clase CSS personalizada para títulos principales -->
+                <!-- PROPÓSITO: Identifica claramente el contenido de la página -->
                 <h1 class="section-title">Nuestros Servicios Profesionales</h1>
-                <!-- section-title: clase CSS personalizada para títulos principales -->
                 
                 <!-- =================================================================== -->
                 <!-- SISTEMA DE FILTROS Y BÚSQUEDA AVANZADA -->
                 <!-- =================================================================== -->
+                
+                <!-- FILA PARA CONTROLES DE FILTRADO -->
+                <!-- CLASE: row - Sistema de grillas Bootstrap -->
+                <!-- CLASE: mb-4 - Margen inferior de 1.5rem para separación -->
                 <div class="row mb-4">
                     <!-- mb-4: margen inferior de 4 unidades -->
                     
+                    <!-- ====================================================== -->
                     <!-- FILTRO POR CATEGORÍA DE SERVICIO -->
+                    <!-- ====================================================== -->
+                    
+                    <!-- COLUMNA PARA FILTRO DE CATEGORÍA -->
+                    <!-- CLASE: col-md-4 - Ocupa 4 columnas (33.33% del ancho) en pantallas medianas -->
                     <div class="col-md-4">
                         <!-- col-md-4: 4 columnas (33.33% ancho) en pantallas medianas -->
                         
+                        <!-- ELEMENTO SELECT PARA FILTRAR CATEGORÍAS -->
+                        <!-- CLASE: form-select - Estilo Bootstrap para elementos de selección -->
+                        <!-- ID: category-filter - Identificador único para manipulación JavaScript -->
                         <select class="form-select" id="category-filter">
                             <!-- ATRIBUTOS SELECT:
                                  - form-select: estilo Bootstrap para elementos select
                                  - id="category-filter": identificador para JavaScript -->
                             
+                            <!-- OPCIÓN POR DEFECTO -->
+                            <!-- value="" - Valor vacío muestra todas las categorías sin filtro -->
                             <option value="">Todas las categorías</option>
                             <!-- Opción por defecto que muestra todos los servicios -->
+                            
+                            <!-- NOTA TÉCNICA: Las opciones se cargan dinámicamente con JavaScript:
+                                 - displayServiceCategories() puebla este select
+                                 - Categorías disponibles: Plomería, Electricidad, Climatización, 
+                                   Electrodomésticos, Construcción, Soldadura -->
                             
                             <!-- Las opciones se cargan dinámicamente con JavaScript:
                                  - displayServiceCategories() puebla este select

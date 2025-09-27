@@ -1,114 +1,229 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesionales - TEVP</title>
-    <!-- Bootstrap CSS -->
+<!DOCTYPE html> <!-- Declaración del tipo de documento HTML5 -->
+<html lang="es"> <!-- Elemento raíz del documento, idioma español para accesibilidad y SEO -->
+<head> <!-- Sección HEAD: contiene metadatos que no se muestran en la página -->
+    <!-- METADATOS BÁSICOS -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 para soportar acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuración responsiva para dispositivos móviles -->
+    <title>Profesionales - TEVP</title> <!-- Título que aparece en la pestaña del navegador -->
+    
+    <!-- HOJAS DE ESTILO EXTERNAS -->
+    <!-- Bootstrap CSS: Framework de CSS para componentes y diseño responsivo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- Font Awesome: Biblioteca de iconos vectoriales -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    
+    <!-- Estilos personalizados del proyecto TEVP -->
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- ESTILOS CSS INTERNOS ESPECÍFICOS PARA ESTA PÁGINA -->
     <style>
+        /* CLASE: professional-card - Estilo para las tarjetas de profesionales */
         .professional-card {
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border: none; /* Elimina el borde por defecto de Bootstrap */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil: desplazamiento X=0, Y=4px, difuminado=6px, opacidad=10% */
+            transition: all 0.3s ease; /* Transición suave de 0.3 segundos para todas las propiedades */
         }
         
+        /* PSEUDOCLASE: :hover - Efecto cuando el cursor pasa sobre la tarjeta */
         .professional-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px); /* Mueve la tarjeta 5px hacia arriba para efecto de elevación */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada en hover */
         }
         
+        /* SELECTOR DESCENDIENTE: Encabezado específico de las tarjetas de profesionales */
         .professional-card .card-header {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-bottom: 1px solid #dee2e6;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradiente diagonal de gris claro a gris medio */
+            border-bottom: 1px solid #dee2e6; /* Línea separadora en la parte inferior */
         }
         
+        /* CLASE: rating-stars - Estilo para las estrellas de calificación */
         .rating-stars {
-            color: #ffc107;
-            font-size: 0.9rem;
+            color: #ffc107; /* Color amarillo Bootstrap para las estrellas */
+            font-size: 0.9rem; /* Tamaño de fuente ligeramente más pequeño (0.9 veces el tamaño base) */
         }
         
+        /* CLASE: price-highlight - Estilo para destacar el precio */
         .price-highlight {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #28a745;
+            font-size: 1.1rem; /* Tamaño de fuente ligeramente mayor */
+            font-weight: bold; /* Texto en negrita */
+            color: #28a745; /* Color verde Bootstrap para indicar precio */
         }
     </style>
-</head>
-<body>
-    <!-- Navegación -->
+</head> <!-- Fin de la sección HEAD -->
+
+<body> <!-- Inicio del cuerpo del documento que contiene todo el contenido visible -->
+    
+    <!-- COMENTARIO ORIGINAL: Navegación -->
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <!-- CLASE: navbar - Componente de navegación de Bootstrap -->
+    <!-- CLASE: navbar-expand-lg - Hace que la navegación se expanda en pantallas grandes (≥992px) -->
+    <!-- CLASE: navbar-dark - Estilo para navegación con fondo oscuro -->
+    <!-- CLASE: sticky-top - Posición pegajosa en la parte superior al hacer scroll -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        
+        <!-- CLASE: container - Contenedor responsivo que centra y limita el ancho del contenido -->
         <div class="container">
+            
+            <!-- ENLACE DEL LOGOTIPO -->
+            <!-- CLASE: navbar-brand - Estilo especial para el logo/marca en la navegación -->
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-tools me-2"></i>TEVP
+                <!-- ICONO: fas fa-tools - Font Awesome, icono de herramientas -->
+                <!-- CLASE: me-2 - Margen derecho de 0.5rem (espacio entre icono y texto) -->
+                <i class="fas fa-tools me-2"></i>
+                TEVP <!-- Texto del logotipo -->
             </a>
             
+            <!-- BOTÓN HAMBURGUESA PARA MÓVILES -->
+            <!-- CLASE: navbar-toggler - Botón para colapsar/expandir menú en dispositivos móviles -->
+            <!-- ATRIBUTO: data-bs-toggle - Especifica que este botón controla un collapse de Bootstrap -->
+            <!-- ATRIBUTO: data-bs-target - ID del elemento que será colapsado/expandido -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <!-- CLASE: navbar-toggler-icon - Icono del botón hamburguesa (tres líneas) -->
                 <span class="navbar-toggler-icon"></span>
             </button>
             
+            <!-- CONTENEDOR DE ELEMENTOS DE NAVEGACIÓN COLAPSABLES -->
+            <!-- CLASE: collapse - Hace que el contenido sea colapsable -->
+            <!-- CLASE: navbar-collapse - Específico para collapsar elementos de navegación -->
+            <!-- ID: navbarNav - Identificador único referenciado por el botón hamburguesa -->
             <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <!-- LISTA DE NAVEGACIÓN IZQUIERDA -->
+                <!-- CLASE: navbar-nav - Lista de navegación de Bootstrap -->
+                <!-- CLASE: me-auto - Margen derecho automático (empuja contenido hacia la izquierda) -->
                 <ul class="navbar-nav me-auto">
+                    
+                    <!-- ELEMENTO DE NAVEGACIÓN: Inicio -->
+                    <!-- CLASE: nav-item - Elemento individual de navegación -->
                     <li class="nav-item">
+                        <!-- CLASE: nav-link - Estilo para enlaces de navegación -->
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
+                    
+                    <!-- ELEMENTO DE NAVEGACIÓN: Servicios (página activa) -->
                     <li class="nav-item">
+                        <!-- CLASE: active - Indica que esta es la página actual -->
                         <a class="nav-link active" href="servicios.html">Servicios</a>
                     </li>
+                    
+                    <!-- ELEMENTO DE NAVEGACIÓN: Nosotros -->
                     <li class="nav-item">
                         <a class="nav-link" href="nosotros.html">Nosotros</a>
                     </li>
+                    
+                    <!-- ELEMENTO DE NAVEGACIÓN: Blog -->
                     <li class="nav-item">
                         <a class="nav-link" href="blogs.html">Blog</a>
                     </li>
+                    
+                    <!-- ELEMENTO DE NAVEGACIÓN: Contacto -->
                     <li class="nav-item">
                         <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
                 
+                <!-- LISTA DE NAVEGACIÓN DERECHA -->
+                <!-- CLASE: navbar-nav - Lista de navegación de Bootstrap -->
                 <ul class="navbar-nav">
+                    
+                    <!-- ELEMENTO DEL CARRITO -->
+                    <!-- CLASE: me-3 - Margen derecho de 1rem para separar del siguiente elemento -->
                     <li class="nav-item me-3">
+                        <!-- ENLACE DEL CARRITO -->
+                        <!-- CLASE: cart-icon - Clase personalizada para el icono del carrito -->
+                        <!-- ATRIBUTO: data-bs-toggle - Especifica que abrirá un modal -->
+                        <!-- ATRIBUTO: data-bs-target - ID del modal que se abrirá -->
+                        <!-- ATRIBUTO: onclick - Función JavaScript que se ejecuta al hacer clic -->
                         <a href="#" class="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="loadCartModal()">
+                            <!-- ICONO: fas fa-shopping-cart - Font Awesome, icono de carrito de compras -->
                             <i class="fas fa-shopping-cart"></i>
+                            <!-- CONTADOR DE ARTÍCULOS EN EL CARRITO -->
+                            <!-- CLASE: cart-count - Clase personalizada para el contador del carrito -->
                             <span class="cart-count">0</span>
                         </a>
                     </li>
                     
-                    <!-- Información del usuario logueado -->
+                    <!-- INFORMACIÓN DEL USUARIO LOGUEADO -->
+                    <!-- CLASE: dropdown - Componente dropdown de Bootstrap -->
+                    <!-- CLASE: d-none - Display none (oculto por defecto), se muestra via JavaScript -->
+                    <!-- ID: user-info - Identificador para mostrar/ocultar información de usuario -->
                     <li class="nav-item dropdown d-none" id="user-info">
+                        
+                        <!-- ENLACE DROPDOWN -->
+                        <!-- CLASE: dropdown-toggle - Añade la flecha del dropdown -->
+                        <!-- CLASE: d-flex - Display flex para alinear elementos -->
+                        <!-- CLASE: align-items-center - Alinea elementos verticalmente al centro -->
+                        <!-- ATRIBUTO: role - Especifica el rol de accesibilidad -->
+                        <!-- ATRIBUTO: data-bs-toggle - Activa el comportamiento dropdown -->
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <!-- ICONO: fas fa-user-circle - Font Awesome, icono de usuario circular -->
+                            <!-- CLASE: me-2 - Margen derecho de 0.5rem -->
                             <i class="fas fa-user-circle me-2"></i>
+                            <!-- SPAN: Contenedor para el nombre de usuario -->
+                            <!-- ID: user-name - Se actualiza dinámicamente con JavaScript -->
                             <span id="user-name">Usuario</span>
                         </a>
+                        
+                        <!-- MENÚ DROPDOWN -->
+                        <!-- CLASE: dropdown-menu - Contenedor del menú desplegable -->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a></li>
+                            
+                            <!-- OPCIÓN: Mi Perfil -->
+                            <li>
+                                <!-- CLASE: dropdown-item - Estilo para elementos del dropdown -->
+                                <!-- ATRIBUTO: onclick - Función JavaScript al hacer clic -->
+                                <a class="dropdown-item" href="#" onclick="showUserProfile()">Mi Perfil</a>
+                            </li>
+                            
+                            <!-- OPCIÓN: Mis Pedidos -->
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="showUserOrders()">Mis Pedidos</a>
+                            </li>
+                            
+                            <!-- SEPARADOR -->
+                            <li>
+                                <!-- CLASE: dropdown-divider - Línea separadora en el dropdown -->
+                                <hr class="dropdown-divider">
+                            </li>
+                            
+                            <!-- OPCIÓN: Cerrar Sesión -->
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="logout()">Cerrar Sesión</a>
+                            </li>
                         </ul>
                     </li>
                     
-                    <!-- Enlaces de registro y login (solo visibles cuando NO esté logueado) -->
+                    <!-- ENLACES DE REGISTRO Y LOGIN -->
+                    <!-- Nota: Solo visibles cuando el usuario NO esté logueado -->
+                    
+                    <!-- ENLACE REGISTRO -->
+                    <!-- ID: auth-link-register - Para mostrar/ocultar según estado de autenticación -->
                     <li class="nav-item" id="auth-link-register">
                         <a class="nav-link" href="registro.html">Registro</a>
                     </li>
+                    
+                    <!-- ENLACE LOGIN -->
+                    <!-- ID: auth-link-login - Para mostrar/ocultar según estado de autenticación -->
                     <li class="nav-item" id="auth-link-login">
                         <a class="nav-link" href="login.html">Iniciar Sesión</a>
                     </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+                </ul> <!-- Fin de navbar-nav derecha -->
+            </div> <!-- Fin de collapse navbar-collapse -->
+        </div> <!-- Fin de container -->
+    </nav> <!-- Fin de navegación principal -->
 
     <!-- =================================================================== -->
     <!-- CONTENIDO PRINCIPAL DE LA PÁGINA DE PROFESIONALES -->
     <!-- =================================================================== -->
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <!-- CLASE: container - Contenedor responsivo que centra el contenido y aplica márgenes -->
+    <!-- CLASE: my-5 - Margen vertical (margin-top y margin-bottom) de 3rem cada uno -->
+    <!-- CLASE: main-content - Clase CSS personalizada definida en styles.css -->
     <div class="container my-5 main-content">
-        <!-- CLASES BOOTSTRAP:
+        
+        <!-- CLASES BOOTSTRAP EXPLICADAS:
              - container: contenedor responsivo con márgenes automáticos
              - my-5: margen vertical (top y bottom) de 5 unidades
              - main-content: clase CSS personalizada -->
@@ -116,32 +231,52 @@
         <!-- =================================================================== -->
         <!-- ENCABEZADO CON NAVEGACIÓN Y DESCRIPCIÓN -->
         <!-- =================================================================== -->
+        
+        <!-- FILA PARA EL ENCABEZADO -->
+        <!-- CLASE: row - Sistema de grillas de Bootstrap, crea una fila -->
+        <!-- CLASE: mb-4 - Margen inferior (margin-bottom) de 1.5rem -->
         <div class="row mb-4">
             <!-- mb-4: margen inferior de 4 unidades -->
             
+            <!-- COLUMNA COMPLETA -->
+            <!-- CLASE: col-12 - Ocupa las 12 columnas disponibles (100% del ancho) -->
             <div class="col-12">
                 <!-- col-12: ocupa las 12 columnas (100% ancho) -->
                 
+                <!-- CONTENEDOR FLEX PARA TÍTULO Y BOTÓN -->
+                <!-- CLASE: d-flex - Display flex, convierte el div en contenedor flexible -->
+                <!-- CLASE: justify-content-between - Distribuye espacio entre elementos (uno a cada extremo) -->
+                <!-- CLASE: align-items-center - Alinea elementos verticalmente al centro -->
+                <!-- CLASE: mb-3 - Margen inferior de 1rem -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <!-- CLASES DE FLEXBOX:
                          - d-flex: display flex
                          - justify-content-between: espacia elementos en extremos
                          - align-items-center: alineación vertical centrada -->
                     
-                    <!-- INFORMACIÓN DEL TÍTULO Y DESCRIPCIÓN -->
+                    <!-- SECCIÓN IZQUIERDA: INFORMACIÓN DEL TÍTULO Y DESCRIPCIÓN -->
                     <div>
+                        <!-- TÍTULO DE LA PÁGINA -->
+                        <!-- ID: page-title - Identificador para actualización dinámica con JavaScript -->
                         <h2 id="page-title">Nuestros Profesionales</h2>
                         <!-- id="page-title": se puede actualizar dinámicamente con JavaScript -->
                         
+                        <!-- DESCRIPCIÓN/SUBTÍTULO -->
+                        <!-- CLASE: text-muted - Color de texto gris/atenuado de Bootstrap -->
+                        <!-- ID: category-description - Para actualización dinámica del contenido -->
                         <p class="text-muted" id="category-description">Encuentra al profesional perfecto para tu proyecto</p>
                         <!-- text-muted: color gris suave Bootstrap -->
                         <!-- id="category-description": descripción actualizable dinámicamente -->
                     </div>
                     
-                    <!-- BOTÓN DE NAVEGACIÓN HACIA ATRÁS -->
+                    <!-- SECCIÓN DERECHA: BOTÓN DE NAVEGACIÓN HACIA ATRÁS -->
+                    <!-- CLASE: btn - Clase base para botones de Bootstrap -->
+                    <!-- CLASE: btn-outline-primary - Botón con borde azul y fondo transparente, texto azul -->
                     <a href="servicios.html" class="btn btn-outline-primary">
                         <!-- btn-outline-primary: botón con borde azul y fondo transparente -->
                         
+                        <!-- ICONO: fas fa-arrow-left - Font Awesome, flecha apuntando izquierda -->
+                        <!-- CLASE: me-1 - Margen derecho (margin-end) de 0.25rem -->
                         <i class="fas fa-arrow-left me-1"></i>Volver a Servicios
                         <!-- fas fa-arrow-left: icono de flecha izquierda Font Awesome -->
                         <!-- me-1: margen derecho de 1 unidad -->
@@ -151,34 +286,54 @@
                 <!-- =================================================================== -->
                 <!-- PANEL DE FILTROS AVANZADOS -->
                 <!-- =================================================================== -->
+                
+                <!-- TARJETA CONTENEDORA DE FILTROS -->
+                <!-- CLASE: card - Componente Bootstrap para contenido agrupado con bordes y sombra -->
                 <div class="card">
                     <!-- card: componente Bootstrap para contenido agrupado con sombra -->
                     
+                    <!-- CUERPO DE LA TARJETA -->
+                    <!-- CLASE: card-body - Contenedor interno de la tarjeta con padding estándar -->
                     <div class="card-body">
                         <!-- card-body: contenedor interno de la tarjeta con padding -->
                         
+                        <!-- FILA DE FILTROS -->
+                        <!-- CLASE: row - Sistema de grillas, crea una fila para elementos -->
+                        <!-- CLASE: align-items-center - Alinea elementos verticalmente al centro -->
                         <div class="row align-items-center">
                             <!-- align-items-center: alineación vertical centrada de los filtros -->
                             
                             <!-- =================================================================== -->
                             <!-- FILTRO POR ESPECIALIDAD -->
                             <!-- =================================================================== -->
+                            
+                            <!-- COLUMNA PARA FILTRO DE ESPECIALIDAD -->
+                            <!-- CLASE: col-md-3 - Ocupa 3 columnas (25% del ancho) en pantallas medianas o mayores -->
                             <div class="col-md-3">
                                 <!-- col-md-3: 3 columnas (25% ancho) en pantallas medianas -->
                                 
+                                <!-- ETIQUETA DEL FILTRO -->
+                                <!-- CLASE: form-label - Estilo Bootstrap para etiquetas de formulario -->
                                 <label class="form-label">Especialidad</label>
                                 <!-- form-label: estilo Bootstrap para etiquetas -->
                                 
+                                <!-- ELEMENTO SELECT PARA FILTRO -->
+                                <!-- CLASE: form-select - Estilo Bootstrap para elementos de selección -->
+                                <!-- ID: filter-category - Identificador único para manipulación JavaScript -->
+                                <!-- ATRIBUTO: onchange - Ejecuta función JavaScript cuando cambia la selección -->
                                 <select class="form-select" id="filter-category" onchange="filterProfessionals()">
                                     <!-- ATRIBUTOS SELECT:
                                          - form-select: estilo Bootstrap para elementos select
                                          - id="filter-category": identificador para JavaScript
                                          - onchange="filterProfessionals()": ejecuta filtrado en tiempo real -->
                                     
+                                    <!-- OPCIÓN POR DEFECTO -->
+                                    <!-- value="" - Valor vacío indica que no hay filtro aplicado -->
                                     <option value="">Todas las especialidades</option>
                                     <!-- Opción por defecto que muestra todos los profesionales -->
                                     
                                     <!-- OPCIONES DE ESPECIALIDADES DISPONIBLES -->
+                                    <!-- Cada value corresponde exactamente al campo "especialidad" de los profesionales -->
                                     <option value="Plomería">Plomería</option>
                                     <option value="Electricidad">Electricidad</option>
                                     <option value="Climatización">Climatización</option>
@@ -191,15 +346,25 @@
                             <!-- =================================================================== -->
                             <!-- FILTRO POR CALIFICACIÓN MÍNIMA -->
                             <!-- =================================================================== -->
+                            
+                            <!-- COLUMNA PARA FILTRO DE CALIFICACIÓN -->
+                            <!-- CLASE: col-md-3 - Ocupa 3 columnas (25% del ancho) en pantallas medianas -->
                             <div class="col-md-3">
+                                
+                                <!-- ETIQUETA DEL FILTRO -->
                                 <label class="form-label">Calificación mínima</label>
                                 
+                                <!-- SELECT PARA FILTRO DE CALIFICACIÓN -->
                                 <select class="form-select" id="filter-rating" onchange="filterProfessionals()">
                                     <!-- Filtro que permite mostrar solo profesionales con alta calificación -->
                                     
+                                    <!-- OPCIONES DE CALIFICACIÓN MÍNIMA -->
+                                    <!-- value="0" - No aplica filtro de calificación -->
                                     <option value="0">Cualquier calificación</option>
                                     <!-- Valor 0 muestra todos los profesionales sin filtro de rating -->
                                     
+                                    <!-- FILTROS PROGRESIVOS DE CALIFICACIÓN -->
+                                    <!-- Los valores son números que representan estrellas mínimas -->
                                     <option value="4">4+ estrellas</option>
                                     <option value="4.5">4.5+ estrellas</option>
                                     <option value="4.8">4.8+ estrellas</option>
@@ -210,35 +375,69 @@
                             <!-- =================================================================== -->
                             <!-- FILTRO POR PRECIO MÁXIMO POR HORA -->
                             <!-- =================================================================== -->
+                            
+                            <!-- COLUMNA PARA FILTRO DE PRECIO -->
                             <div class="col-md-3">
+                                
+                                <!-- ETIQUETA -->
                                 <label class="form-label">Precio máximo/hora</label>
                                 
+                                <!-- SELECT PARA FILTRO DE PRECIO -->
                                 <select class="form-select" id="filter-price" onchange="filterProfessionals()">
                                     <!-- Filtro para limitar profesionales por rango de precios -->
                                     
+                                    <!-- OPCIÓN SIN LÍMITE DE PRECIO -->
+                                    <!-- value="999999" - Número alto que efectivamente no filtra -->
                                     <option value="999999">Sin límite</option>
                                     <!-- Valor alto que no filtra por precio -->
+                                    
+                                    <!-- OPCIONES DE PRECIO MÁXIMO -->
+                                    <!-- Los valores son en pesos chilenos por hora -->
                                     <option value="10000">Hasta $10.000</option>
                                     <option value="15000">Hasta $15.000</option>
                                     <option value="20000">Hasta $20.000</option>
                                 </select>
                             </div>
+                            
+                            <!-- =================================================================== -->
+                            <!-- FILTRO POR EXPERIENCIA MÍNIMA -->
+                            <!-- =================================================================== -->
+                            
+                            <!-- COLUMNA PARA FILTRO DE EXPERIENCIA -->
                             <div class="col-md-3">
+                                
+                                <!-- ETIQUETA -->
                                 <label class="form-label">Experiencia</label>
+                                
+                                <!-- SELECT PARA FILTRO DE EXPERIENCIA -->
                                 <select class="form-select" id="filter-experience" onchange="filterProfessionals()">
+                                    
+                                    <!-- OPCIÓN PARA CUALQUIER NIVEL DE EXPERIENCIA -->
+                                    <!-- value="0" - No aplica filtro de experiencia -->
                                     <option value="0">Cualquier experiencia</option>
+                                    
+                                    <!-- OPCIONES DE AÑOS MÍNIMOS DE EXPERIENCIA -->
+                                    <!-- Los valores representan años mínimos de experiencia requerida -->
                                     <option value="5">5+ años</option>
                                     <option value="10">10+ años</option>
                                     <option value="15">15+ años</option>
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            </div> <!-- Fin columna filtro experiencia -->
+                            
+                        </div> <!-- Fin row filtros -->
+                    </div> <!-- Fin card-body -->
+                </div> <!-- Fin card filtros -->
+            </div> <!-- Fin col-12 -->
+        </div> <!-- Fin row encabezado -->
 
-        <!-- Lista de profesionales -->
+        <!-- =================================================================== -->
+        <!-- SECCIÓN PRINCIPAL: LISTA DE PROFESIONALES -->
+        <!-- =================================================================== -->
+        
+        <!-- COMENTARIO ORIGINAL: Lista de profesionales -->
+        <!-- CONTENEDOR DE LA GRILLA DE PROFESIONALES -->
+        <!-- CLASE: row - Sistema de grillas Bootstrap, permite distribuir profesionales en columnas -->
+        <!-- ID: productos-lista - Identificador para manipulación JavaScript (filtrado, actualización) -->
         <div class="row" id="productos-lista">
             <!-- Los profesionales se cargarán aquí -->
             <div class="col-12 text-center">
