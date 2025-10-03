@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Calificaciones y Reseñas | Mockup Android</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .android-phone {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .android-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Android Status Bar */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Rating Overview */
+        .rating-overview {
+            background: white;
+            margin: 20px;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .overall-rating {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1976D2;
+            margin: 0 0 10px 0;
+        }
+
+        .rating-stars {
+            font-size: 24px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .rating-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .rating-distribution {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .rating-label {
+            width: 30px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .rating-bar {
+            flex: 1;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: #FFD700;
+            transition: width 0.3s ease;
+        }
+
+        .rating-count {
+            width: 40px;
+            text-align: left;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Review Tabs */
+        .review-tabs {
+            margin: 0 20px 20px 20px;
+        }
+
+        .tabs-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .review-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .review-tab.active {
+            background: white;
+            color: #1976D2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Reviews Container */
+        .reviews-container {
+            padding: 0 20px 100px 20px;
+            max-height: calc(100vh - 350px);
+            overflow-y: auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Review Cards */
+        .review-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #ddd;
+        }
+
+        .review-card.positive {
+            border-left-color: #4CAF50;
+        }
+
+        .review-card.neutral {
+            border-left-color: #FF9800;
+        }
+
+        .review-card.negative {
+            border-left-color: #f44336;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .reviewer-details h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .review-stars {
+            color: #FFD700;
+            font-size: 16px;
+        }
+
+        .review-score {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .service-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 5px;
+        }
+
+        .service-details {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .review-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .review-tag {
+            background: #e3f2fd;
+            color: #1976D2;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .review-tag.positive {
+            background: #e8f5e8;
+            color: #4CAF50;
+        }
+
+        .review-tag.negative {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .review-action {
+            background: none;
+            border: none;
+            color: #1976D2;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .review-action:hover {
+            background: #e3f2fd;
+        }
+
+        .review-action.helpful {
+            color: #4CAF50;
+        }
+
+        .review-action.report {
+            color: #f44336;
+        }
+
+        /* Write Review Section */
+        .write-review {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .write-review h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+
+        .rating-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .star-input {
+            font-size: 32px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .star-input.active,
+        .star-input:hover {
+            color: #FFD700;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1976D2;
+        }
+
+        .form-control.textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .review-submit {
+            background: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .review-submit:hover {
+            background: #1565C0;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            margin: 0 20px 20px 20px;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .filter-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 6px 15px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tag.active {
+            background: #1976D2;
+            color: white;
+            border-color: #1976D2;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #1976D2;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: #1565C0;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="android-phone">
+        <div class="android-screen">
+            <!-- Android Status Bar -->
+            <div class="status-bar">
+                <div>
+                    <span>9:41</span>
+                </div>
+                <div>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi" style="margin: 0 8px;"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Calificaciones y Reseñas</h1>
+            </div>
+
+            <!-- Rating Overview -->
+            <div class="rating-overview">
+                <div class="overall-rating">4.9</div>
+                <div class="rating-stars">
+                    ⭐⭐⭐⭐⭐
+                </div>
+                <div class="rating-subtitle">Basado en 127 reseñas</div>
+                
+                <div class="rating-distribution">
+                    <div class="rating-row">
+                        <span class="rating-label">5</span>
+                        <div class="rating-bar">
+                            <div class="rating-fill" style="width: 85%"></div>
+                        </div>
+                        <span class="rating-count">108</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">4</span>
+                        <div class="rating-bar">
+                            <div class="rating-fill" style="width: 12%"></div>
+                        </div>
+                        <span class="rating-count">15</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">3</span>
+                        <div class="rating-bar">
+                            <div class="rating-fill" style="width: 2%"></div>
+                        </div>
+                        <span class="rating-count">3</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">2</span>
+                        <div class="rating-bar">
+                            <div class="rating-fill" style="width: 1%"></div>
+                        </div>
+                        <span class="rating-count">1</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">1</span>
+                        <div class="rating-bar">
+                            <div class="rating-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="rating-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-title">Filtrar por:</div>
+                <div class="filter-tags">
+                    <div class="filter-tag active" onclick="filterReviews('all')">Todas</div>
+                    <div class="filter-tag" onclick="filterReviews('recent')">Recientes</div>
+                    <div class="filter-tag" onclick="filterReviews('positive')">Positivas</div>
+                    <div class="filter-tag" onclick="filterReviews('photos')">Con fotos</div>
+                    <div class="filter-tag" onclick="filterReviews('verified')">Verificadas</div>
+                </div>
+            </div>
+
+            <!-- Review Tabs -->
+            <div class="review-tabs">
+                <div class="tabs-container">
+                    <div class="review-tab active" onclick="switchReviewTab('received')">Recibidas</div>
+                    <div class="review-tab" onclick="switchReviewTab('given')">Dadas</div>
+                    <div class="review-tab" onclick="switchReviewTab('write')">Escribir</div>
+                </div>
+            </div>
+
+            <!-- Reviews Container -->
+            <div class="reviews-container">
+                <!-- Received Reviews Tab -->
+                <div class="tab-content active" id="receivedTab">
+                    <div class="review-card positive">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">MG</div>
+                                <div class="reviewer-details">
+                                    <h4>María González</h4>
+                                    <p class="review-date">Hace 2 días</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-score">5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Cambiar enchufe cocina</div>
+                            <div class="service-details">15 Enero 2024 • $12.000</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Excelente trabajo de Carlos! Llegó puntual, fue muy profesional y solucionó el problema rápidamente. El enchufe quedó perfecto y me explicó todo el proceso. Definitivamente lo recomiendo y lo volvería a contratar."
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag positive">Puntual</span>
+                            <span class="review-tag positive">Profesional</span>
+                            <span class="review-tag positive">Limpio</span>
+                        </div>
+                        
+                        <div class="review-actions">
+                            <button class="review-action helpful">
+                                <i class="fas fa-thumbs-up"></i> Útil (12)
+                            </button>
+                            <button class="review-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="review-card positive">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">PS</div>
+                                <div class="reviewer-details">
+                                    <h4>Pedro Sánchez</h4>
+                                    <p class="review-date">Hace 5 días</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-score">5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Instalación luminarias LED</div>
+                            <div class="service-details">10 Enero 2024 • $45.000</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Carlos instaló 6 luminarias LED en mi casa. Trabajo impecable, muy ordenado y dejó todo limpio. Las luces quedaron perfectas y me enseñó cómo usar los dimmers. Súper recomendado!"
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag positive">Ordenado</span>
+                            <span class="review-tag positive">Explicativo</span>
+                            <span class="review-tag positive">Calidad</span>
+                        </div>
+                        
+                        <div class="review-actions">
+                            <button class="review-action helpful">
+                                <i class="fas fa-thumbs-up"></i> Útil (8)
+                            </button>
+                            <button class="review-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="review-card neutral">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">AM</div>
+                                <div class="reviewer-details">
+                                    <h4>Ana Morales</h4>
+                                    <p class="review-date">Hace 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐☆</div>
+                                <span class="review-score">4.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Revisión tablero eléctrico</div>
+                            <div class="service-details">5 Enero 2024 • $25.000</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Buen trabajo en general. Carlos revisó todo el tablero y encontró algunos problemas menores que solucionó. Se demoró un poco más de lo estimado pero el resultado fue bueno."
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag">Thorough</span>
+                            <span class="review-tag">Se demoró</span>
+                        </div>
+                        
+                        <div class="review-actions">
+                            <button class="review-action helpful">
+                                <i class="fas fa-thumbs-up"></i> Útil (3)
+                            </button>
+                            <button class="review-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="review-card positive">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">LH</div>
+                                <div class="reviewer-details">
+                                    <h4>Luis Herrera</h4>
+                                    <p class="review-date">Hace 2 semanas</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-score">5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Instalación interruptores</div>
+                            <div class="service-details">28 Diciembre 2023 • $28.000</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Servicio excepcional! Carlos instaló varios interruptores en mi casa nueva. Trabajo súper prolijo, materiales de calidad y precio justo. Lo recomiendo 100%."
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag positive">Prolijo</span>
+                            <span class="review-tag positive">Precio justo</span>
+                            <span class="review-tag positive">Materiales calidad</span>
+                        </div>
+                        
+                        <div class="review-actions">
+                            <button class="review-action helpful">
+                                <i class="fas fa-thumbs-up"></i> Útil (15)
+                            </button>
+                            <button class="review-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Given Reviews Tab -->
+                <div class="tab-content" id="givenTab">
+                    <div class="review-card positive">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">AR</div>
+                                <div class="reviewer-details">
+                                    <h4>Ana Rodríguez (Profesional)</h4>
+                                    <p class="review-date">Reseña para cliente - Hace 3 días</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-score">5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Cliente: Roberto Silva</div>
+                            <div class="service-details">Instalación aire acondicionado</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Excelente cliente. Muy respetuoso, preparó bien el espacio de trabajo y fue muy comprensivo con los tiempos. Comunicación fluida durante todo el proceso."
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag positive">Respetuoso</span>
+                            <span class="review-tag positive">Preparado</span>
+                            <span class="review-tag positive">Comunicativo</span>
+                        </div>
+                    </div>
+
+                    <div class="review-card positive">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">CL</div>
+                                <div class="reviewer-details">
+                                    <h4>Carmen López (Cliente)</h4>
+                                    <p class="review-date">Reseña para profesional - Hace 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                <span class="review-score">5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-info">
+                            <div class="service-name">Profesional: Miguel Torres</div>
+                            <div class="service-details">Reparación cortocircuito</div>
+                        </div>
+                        
+                        <div class="review-text">
+                            "Miguel fue excelente. Llegó rápido para la emergencia, diagnosticó el problema enseguida y lo solucionó eficientemente. Muy profesional y confiable."
+                        </div>
+                        
+                        <div class="review-tags">
+                            <span class="review-tag positive">Rápido</span>
+                            <span class="review-tag positive">Eficiente</span>
+                            <span class="review-tag positive">Confiable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Write Review Tab -->
+                <div class="tab-content" id="writeTab">
+                    <div class="write-review">
+                        <h3>Escribir nueva reseña</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Selecciona el servicio a calificar:</label>
+                            <select class="form-control" id="serviceSelect">
+                                <option value="">Selecciona un servicio...</option>
+                                <option value="1">Instalación aire acondicionado - Roberto Silva</option>
+                                <option value="2">Reparación cortocircuito - Carmen López</option>
+                                <option value="3">Cambio de enchufe - María González</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Calificación general:</label>
+                            <div class="rating-input" id="ratingInput">
+                                <span class="star-input" data-rating="1" onclick="setRating(1)">⭐</span>
+                                <span class="star-input" data-rating="2" onclick="setRating(2)">⭐</span>
+                                <span class="star-input" data-rating="3" onclick="setRating(3)">⭐</span>
+                                <span class="star-input" data-rating="4" onclick="setRating(4)">⭐</span>
+                                <span class="star-input" data-rating="5" onclick="setRating(5)">⭐</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Título de la reseña:</label>
+                            <input type="text" class="form-control" placeholder="Ej: Excelente servicio y muy profesional" id="reviewTitle">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Describe tu experiencia:</label>
+                            <textarea class="form-control textarea" placeholder="Comparte los detalles de tu experiencia con este servicio..." id="reviewText"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Aspectos destacados (opcional):</label>
+                            <div class="filter-tags">
+                                <div class="filter-tag" onclick="toggleTag(this)">Puntual</div>
+                                <div class="filter-tag" onclick="toggleTag(this)">Profesional</div>
+                                <div class="filter-tag" onclick="toggleTag(this)">Limpio</div>
+                                <div class="filter-tag" onclick="toggleTag(this)">Precio justo</div>
+                                <div class="filter-tag" onclick="toggleTag(this)">Comunicativo</div>
+                                <div class="filter-tag" onclick="toggleTag(this)">Eficiente</div>
+                            </div>
+                        </div>
+                        
+                        <button class="review-submit" onclick="submitReview()">Publicar Reseña</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="android-busqueda-servicios.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </a>
+                <a href="android-gestion-servicio.html" class="nav-item">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Mis Servicios</span>
+                </a>
+                <a href="android-profesional-trabajos.html" class="nav-item">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Profesional</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-star"></i>
+                    <span>Reseñas</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="android-profesional-trabajos.html" class="nav-btn">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
+        <a href="android-busqueda-servicios.html" class="nav-btn">
+            Inicio <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <script>
+        let currentReviewTab = 'received';
+        let currentRating = 0;
+
+        function switchReviewTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.review-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+            
+            currentReviewTab = tab;
+        }
+
+        function filterReviews(filter) {
+            // Update filter buttons
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // In a real app, this would filter the reviews based on the selected criteria
+            console.log('Filtering reviews by:', filter);
+        }
+
+        function setRating(rating) {
+            currentRating = rating;
+            
+            // Update star display
+            document.querySelectorAll('.star-input').forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function toggleTag(tagElement) {
+            tagElement.classList.toggle('active');
+        }
+
+        function submitReview() {
+            const serviceSelect = document.getElementById('serviceSelect').value;
+            const reviewTitle = document.getElementById('reviewTitle').value;
+            const reviewText = document.getElementById('reviewText').value;
+            
+            if (!serviceSelect) {
+                alert('Por favor selecciona un servicio para calificar');
+                return;
+            }
+            
+            if (currentRating === 0) {
+                alert('Por favor asigna una calificación');
+                return;
+            }
+            
+            if (!reviewTitle.trim()) {
+                alert('Por favor escribe un título para tu reseña');
+                return;
+            }
+            
+            if (!reviewText.trim()) {
+                alert('Por favor describe tu experiencia');
+                return;
+            }
+            
+            // Get selected tags
+            const selectedTags = Array.from(document.querySelectorAll('.filter-tag.active'))
+                .map(tag => tag.textContent);
+            
+            alert(`¡Reseña enviada exitosamente!
+            
+Calificación: ${currentRating} estrellas
+Título: ${reviewTitle}
+Aspectos destacados: ${selectedTags.join(', ') || 'Ninguno'}
+
+Tu reseña será publicada después de su revisión.`);
+            
+            // Reset form
+            currentRating = 0;
+            document.getElementById('serviceSelect').value = '';
+            document.getElementById('reviewTitle').value = '';
+            document.getElementById('reviewText').value = '';
+            document.querySelectorAll('.star-input').forEach(star => star.classList.remove('active'));
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize page
+        window.addEventListener('load', function() {
+            console.log('Reviews page loaded');
+        });
+    </script>
+</body>
+</html>

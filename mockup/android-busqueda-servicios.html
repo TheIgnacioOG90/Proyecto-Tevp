@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Búsqueda de Servicios | Mockup Android</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .android-phone {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .android-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Android Status Bar */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Material Design Header */
+        .header {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+
+        /* Search Section */
+        .search-container {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Service Categories */
+        .categories-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #1976D2;
+        }
+
+        .service-card.selected {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+        }
+
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #1976D2;
+        }
+
+        .service-card.selected .service-icon {
+            color: white;
+        }
+
+        .service-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .service-count {
+            font-size: 12px;
+            opacity: 0.7;
+            margin: 5px 0 0 0;
+        }
+
+        /* Specific Services */
+        .specific-services {
+            background: white;
+            border-radius: 15px 15px 0 0;
+            margin-top: 20px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .specific-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .specific-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .specific-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .specific-item:hover {
+            background: #f8f9fa;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .specific-item-text {
+            flex: 1;
+        }
+
+        .specific-item-price {
+            color: #1976D2;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #1976D2;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: #1565C0;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .floating-search {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 100;
+            width: 90%;
+            max-width: 320px;
+        }
+
+        .floating-search.show {
+            display: block;
+        }
+
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="android-phone">
+        <div class="android-screen">
+            <!-- Android Status Bar -->
+            <div class="status-bar">
+                <div>
+                    <span>9:41</span>
+                </div>
+                <div>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi" style="margin: 0 8px;"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <h1 class="header-title">
+                    <i class="fas fa-tools"></i> TEVP
+                </h1>
+                <p class="header-subtitle">¿Qué servicio necesitas hoy?</p>
+            </div>
+
+            <!-- Search Container -->
+            <div class="search-container">
+                <!-- Search Box -->
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Buscar: cambiar enchufe, reparar caldera..." id="searchInput">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+
+                <!-- Service Categories -->
+                <h3 class="categories-title">Servicios Disponibles</h3>
+                <div class="service-grid">
+                    <div class="service-card" data-service="plomeria">
+                        <i class="fas fa-wrench service-icon"></i>
+                        <p class="service-name">Plomería</p>
+                        <p class="service-count">24 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="electricidad">
+                        <i class="fas fa-bolt service-icon"></i>
+                        <p class="service-name">Electricidad</p>
+                        <p class="service-count">31 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="climatizacion">
+                        <i class="fas fa-snowflake service-icon"></i>
+                        <p class="service-name">Climatización</p>
+                        <p class="service-count">18 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="electrodomesticos">
+                        <i class="fas fa-tv service-icon"></i>
+                        <p class="service-name">Electrodomésticos</p>
+                        <p class="service-count">27 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="construccion">
+                        <i class="fas fa-hammer service-icon"></i>
+                        <p class="service-name">Construcción</p>
+                        <p class="service-count">15 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="soldadura">
+                        <i class="fas fa-fire service-icon"></i>
+                        <p class="service-name">Soldadura</p>
+                        <p class="service-count">12 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="jardineria">
+                        <i class="fas fa-leaf service-icon"></i>
+                        <p class="service-name">Jardinería</p>
+                        <p class="service-count">20 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="limpieza">
+                        <i class="fas fa-broom service-icon"></i>
+                        <p class="service-name">Limpieza</p>
+                        <p class="service-count">33 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="carpinteria">
+                        <i class="fas fa-saw-blade service-icon"></i>
+                        <p class="service-name">Carpintería</p>
+                        <p class="service-count">16 trabajos</p>
+                    </div>
+                    <div class="service-card" data-service="cerrajeria">
+                        <i class="fas fa-key service-icon"></i>
+                        <p class="service-name">Cerrajería</p>
+                        <p class="service-count">22 trabajos</p>
+                    </div>
+                </div>
+
+                <!-- Specific Services -->
+                <div class="specific-services" id="specificServices">
+                    <h4 class="specific-title">
+                        <i class="fas fa-list-ul" style="margin-right: 10px;"></i>
+                        Selecciona una categoría
+                    </h4>
+                    <p style="color: #666; text-align: center; margin: 40px 0;">
+                        Toca una categoría arriba para ver los trabajos específicos disponibles
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </a>
+                <a href="android-gestion-servicio.html" class="nav-item">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Mis Servicios</span>
+                </a>
+                <a href="android-profesional-trabajos.html" class="nav-item">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Profesional</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+            </div>
+
+            <!-- Floating Search Results -->
+            <div class="floating-search" id="floatingSearch">
+                <h5 style="margin-bottom: 15px;">Resultados de búsqueda</h5>
+                <div class="search-results" id="searchResults">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+                <button class="btn btn-sm btn-secondary w-100 mt-2" onclick="closeSearch()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="galeria-mobile.html" class="nav-btn">
+            <i class="fas fa-arrow-left"></i> Galería
+        </a>
+        <a href="android-profesionales-disponibles.html" class="nav-btn">
+            Profesionales <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        // Service data
+        const servicesData = {
+            plomeria: [
+                { name: "Cambiar llave de cocina", price: "15.000 - 25.000" },
+                { name: "Destape de cañerías", price: "20.000 - 35.000" },
+                { name: "Instalación de WC", price: "25.000 - 40.000" },
+                { name: "Reparación de ducha", price: "18.000 - 30.000" },
+                { name: "Cambio de flotador", price: "12.000 - 20.000" },
+                { name: "Instalación de lavamanos", price: "22.000 - 35.000" }
+            ],
+            electricidad: [
+                { name: "Cambiar enchufe", price: "8.000 - 15.000" },
+                { name: "Instalación de lámpara", price: "15.000 - 25.000" },
+                { name: "Arreglo de tablero", price: "30.000 - 50.000" },
+                { name: "Instalación de timbre", price: "12.000 - 20.000" },
+                { name: "Cambio de interruptor", price: "10.000 - 18.000" },
+                { name: "Instalación eléctrica completa", price: "80.000 - 150.000" }
+            ],
+            climatizacion: [
+                { name: "Mantención aire acondicionado", price: "25.000 - 40.000" },
+                { name: "Instalación de split", price: "60.000 - 100.000" },
+                { name: "Reparación de caldera", price: "35.000 - 60.000" },
+                { name: "Limpieza de conductos", price: "30.000 - 50.000" },
+                { name: "Instalación de ventilador", price: "20.000 - 35.000" }
+            ],
+            electrodomesticos: [
+                { name: "Reparación de lavadora", price: "25.000 - 45.000" },
+                { name: "Arreglo de refrigerador", price: "30.000 - 55.000" },
+                { name: "Reparación de microondas", price: "20.000 - 35.000" },
+                { name: "Instalación de horno", price: "25.000 - 40.000" },
+                { name: "Reparación de lavavajillas", price: "28.000 - 48.000" }
+            ],
+            construccion: [
+                { name: "Pintura de habitación", price: "40.000 - 80.000" },
+                { name: "Instalación de cerámica", price: "15.000 - 25.000/m²" },
+                { name: "Construcción de tabique", price: "8.000 - 15.000/m²" },
+                { name: "Reparación de muros", price: "20.000 - 40.000" },
+                { name: "Instalación de piso flotante", price: "12.000 - 20.000/m²" }
+            ],
+            soldadura: [
+                { name: "Soldadura de rejas", price: "25.000 - 45.000" },
+                { name: "Reparación de estructura metálica", price: "30.000 - 60.000" },
+                { name: "Fabricación de escalera", price: "80.000 - 150.000" },
+                { name: "Soldadura de portón", price: "35.000 - 65.000" },
+                { name: "Reparación de barandas", price: "20.000 - 40.000" }
+            ],
+            jardineria: [
+                { name: "Poda de árboles", price: "15.000 - 30.000" },
+                { name: "Mantención de jardín", price: "20.000 - 40.000" },
+                { name: "Instalación de riego", price: "40.000 - 80.000" },
+                { name: "Diseño paisajístico", price: "60.000 - 120.000" },
+                { name: "Plantación de césped", price: "8.000 - 15.000/m²" }
+            ],
+            limpieza: [
+                { name: "Limpieza profunda casa", price: "30.000 - 60.000" },
+                { name: "Limpieza de alfombras", price: "8.000 - 15.000/m²" },
+                { name: "Desinfección completa", price: "25.000 - 45.000" },
+                { name: "Limpieza de vidrios", price: "15.000 - 25.000" },
+                { name: "Encerado de pisos", price: "10.000 - 18.000/m²" }
+            ],
+            carpinteria: [
+                { name: "Fabricación de mueble", price: "50.000 - 120.000" },
+                { name: "Reparación de puerta", price: "20.000 - 35.000" },
+                { name: "Instalación de closet", price: "80.000 - 150.000" },
+                { name: "Barnizado de madera", price: "15.000 - 25.000/m²" },
+                { name: "Fabricación de estantería", price: "35.000 - 70.000" }
+            ],
+            cerrajeria: [
+                { name: "Cambio de chapa", price: "18.000 - 30.000" },
+                { name: "Duplicado de llaves", price: "3.000 - 8.000" },
+                { name: "Apertura de puerta", price: "15.000 - 25.000" },
+                { name: "Instalación de cerradura", price: "20.000 - 35.000" },
+                { name: "Reparación de caja fuerte", price: "40.000 - 80.000" }
+            ]
+        };
+
+        // All services for search
+        const allServices = [];
+        Object.keys(servicesData).forEach(category => {
+            servicesData[category].forEach(service => {
+                allServices.push({
+                    ...service,
+                    category: category
+                });
+            });
+        });
+
+        // Service card click handlers
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove selected class from all cards
+                document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+                
+                // Add selected class to clicked card
+                this.classList.add('selected');
+                
+                // Get service type
+                const serviceType = this.dataset.service;
+                
+                // Update specific services
+                showSpecificServices(serviceType);
+            });
+        });
+
+        function showSpecificServices(serviceType) {
+            const container = document.getElementById('specificServices');
+            const services = servicesData[serviceType] || [];
+            
+            const categoryNames = {
+                plomeria: 'Plomería',
+                electricidad: 'Electricidad',
+                climatizacion: 'Climatización',
+                electrodomesticos: 'Electrodomésticos',
+                construccion: 'Construcción',
+                soldadura: 'Soldadura',
+                jardineria: 'Jardinería',
+                limpieza: 'Limpieza',
+                carpinteria: 'Carpintería',
+                cerrajeria: 'Cerrajería'
+            };
+            
+            container.innerHTML = `
+                <h4 class="specific-title">
+                    <i class="fas fa-list-ul" style="margin-right: 10px;"></i>
+                    ${categoryNames[serviceType]}
+                </h4>
+                <ul class="specific-list">
+                    ${services.map(service => `
+                        <li class="specific-item" onclick="selectService('${service.name}', '${service.price}')">
+                            <div class="specific-item-text">
+                                <strong>${service.name}</strong>
+                            </div>
+                            <div class="specific-item-price">$${service.price}</div>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
+        function selectService(serviceName, price) {
+            // Store selected service
+            localStorage.setItem('selectedService', JSON.stringify({
+                name: serviceName,
+                price: price
+            }));
+            
+            // Navigate to professionals page
+            window.location.href = 'android-profesionales-disponibles.html';
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const floatingSearch = document.getElementById('floatingSearch');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length > 2) {
+                const results = allServices.filter(service => 
+                    service.name.toLowerCase().includes(query)
+                );
+                
+                showSearchResults(results);
+                floatingSearch.classList.add('show');
+            } else {
+                floatingSearch.classList.remove('show');
+            }
+        });
+
+        function showSearchResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<p style="text-align: center; color: #666;">No se encontraron resultados</p>';
+                return;
+            }
+            
+            searchResults.innerHTML = results.map(service => `
+                <div class="search-result-item" onclick="selectService('${service.name}', '${service.price}')">
+                    <strong>${service.name}</strong><br>
+                    <small style="color: #666;">Categoría: ${service.category}</small><br>
+                    <span style="color: #1976D2; font-weight: 600;">$${service.price}</span>
+                </div>
+            `).join('');
+        }
+
+        function closeSearch() {
+            floatingSearch.classList.remove('show');
+            searchInput.value = '';
+        }
+
+        // Close search when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!floatingSearch.contains(e.target) && e.target !== searchInput) {
+                closeSearch();
+            }
+        });
+    </script>
+</body>
+</html>

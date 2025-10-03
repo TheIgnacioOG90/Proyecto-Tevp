@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Ganancias y Dinero | Mockup Android</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .android-phone {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .android-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Android Status Bar */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+        }
+
+        /* Hamburger Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hamburger Menu Sidebar */
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .hamburger-menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .menu-user-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+        }
+
+        .menu-user-info p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .menu-content {
+            padding: 0;
+        }
+
+        .menu-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+        }
+
+        .menu-nav-item:hover {
+            background: linear-gradient(90deg, #f8f9fa 0%, #e8f5e8 100%);
+            color: #4CAF50;
+            transform: translateX(5px);
+        }
+
+        .menu-nav-item:active {
+            transform: translateX(5px) scale(0.98);
+        }
+
+        .menu-nav-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 15px;
+            color: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav-item:hover .menu-nav-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-nav-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-nav-arrow {
+            color: #999;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav-item:hover .menu-nav-arrow {
+            color: #4CAF50;
+            transform: translateX(3px);
+        }
+
+        .menu-divider {
+            height: 8px;
+            background: #f8f9fa;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            margin: 20px;
+            border-radius: 20px;
+            padding: 30px 25px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .balance-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .balance-amount {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .balance-period {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .balance-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .balance-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .balance-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            color: white;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #ddd;
+        }
+
+        .stat-card.earnings {
+            border-left-color: #4CAF50;
+        }
+
+        .stat-card.pending {
+            border-left-color: #FF9800;
+        }
+
+        .stat-card.withdrawn {
+            border-left-color: #2196F3;
+        }
+
+        .stat-card.commissions {
+            border-left-color: #9C27B0;
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin: 0 0 5px 0;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Period Tabs */
+        .period-tabs {
+            margin: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 4px;
+            display: flex;
+        }
+
+        .period-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .period-tab.active {
+            background: white;
+            color: #4CAF50;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Earnings List */
+        .earnings-container {
+            padding: 0 20px 100px 20px;
+            max-height: calc(100vh - 450px);
+            overflow-y: auto;
+        }
+
+        .earnings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .earnings-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .earnings-filter {
+            background: none;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 15px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .earning-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #4CAF50;
+        }
+
+        .earning-card.pending {
+            border-left-color: #FF9800;
+        }
+
+        .earning-card.commission {
+            border-left-color: #f44336;
+        }
+
+        .earning-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .earning-service {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .earning-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .earning-amount.pending {
+            color: #FF9800;
+        }
+
+        .earning-amount.negative {
+            color: #f44336;
+        }
+
+        .earning-details {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .earning-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .earning-status {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-completed {
+            background: #e8f5e8;
+            color: #4CAF50;
+        }
+
+        .status-pending {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .status-commission {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #4CAF50;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Chart Placeholder */
+        .chart-container {
+            background: white;
+            margin: 20px;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .chart-placeholder {
+            height: 120px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="android-phone">
+        <div class="android-screen">
+            <!-- Android Status Bar -->
+            <div class="status-bar">
+                <div>
+                    <span>9:41</span>
+                </div>
+                <div>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi" style="margin: 0 8px;"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <button class="hamburger-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-content">
+                    <h1 class="header-title">Mis Ganancias</h1>
+                    <p class="header-subtitle">Carlos Mendoza - Electricista</p>
+                </div>
+            </div>
+
+            <!-- Balance Card -->
+            <div class="balance-card">
+                <div class="balance-label">Saldo Disponible</div>
+                <div class="balance-amount">$1.850.000</div>
+                <div class="balance-period">Enero 2024</div>
+                <div class="balance-actions">
+                    <a href="android-retiro-dinero.html" class="balance-btn">
+                        <i class="fas fa-arrow-down"></i>
+                        Retirar
+                    </a>
+                    <button class="balance-btn" onclick="viewDetails()">
+                        <i class="fas fa-chart-line"></i>
+                        Detalles
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card earnings">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">$2.450.000</div>
+                    <div class="stat-label">Total Ganado</div>
+                </div>
+                
+                <div class="stat-card pending">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value">$485.000</div>
+                    <div class="stat-label">Pendiente</div>
+                </div>
+                
+                <div class="stat-card withdrawn">
+                    <div class="stat-icon">📤</div>
+                    <div class="stat-value">$600.000</div>
+                    <div class="stat-label">Retirado</div>
+                </div>
+                
+                <div class="stat-card commissions">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value">$115.000</div>
+                    <div class="stat-label">Comisiones</div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-container">
+                <div class="chart-title">Ganancias por Semana</div>
+                <div class="chart-placeholder">
+                    📈 Gráfico de ganancias semanales
+                </div>
+            </div>
+
+            <!-- Period Tabs -->
+            <div class="period-tabs">
+                <div class="period-tab active" onclick="changePeriod('week')">Semana</div>
+                <div class="period-tab" onclick="changePeriod('month')">Mes</div>
+                <div class="period-tab" onclick="changePeriod('year')">Año</div>
+            </div>
+
+            <!-- Earnings List -->
+            <div class="earnings-container">
+                <div class="earnings-header">
+                    <h3 class="earnings-title">Movimientos Recientes</h3>
+                    <button class="earnings-filter" onclick="showFilters()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="earning-card">
+                    <div class="earning-header">
+                        <span class="earning-service">Cambiar enchufe cocina</span>
+                        <span class="earning-amount">+$12.000</span>
+                    </div>
+                    <div class="earning-details">
+                        <span class="earning-date">
+                            <i class="fas fa-calendar"></i> Ayer, 17:30
+                        </span>
+                        <span class="earning-status status-completed">Completado</span>
+                    </div>
+                </div>
+
+                <div class="earning-card pending">
+                    <div class="earning-header">
+                        <span class="earning-service">Instalación luminarias</span>
+                        <span class="earning-amount pending">+$45.000</span>
+                    </div>
+                    <div class="earning-details">
+                        <span class="earning-date">
+                            <i class="fas fa-calendar"></i> Hoy, 14:00
+                        </span>
+                        <span class="earning-status status-pending">Pendiente</span>
+                    </div>
+                </div>
+
+                <div class="earning-card commission">
+                    <div class="earning-header">
+                        <span class="earning-service">Comisión plataforma</span>
+                        <span class="earning-amount negative">-$2.500</span>
+                    </div>
+                    <div class="earning-details">
+                        <span class="earning-date">
+                            <i class="fas fa-calendar"></i> Ayer, 18:00
+                        </span>
+                        <span class="earning-status status-commission">Comisión</span>
+                    </div>
+                </div>
+
+                <div class="earning-card">
+                    <div class="earning-header">
+                        <span class="earning-service">Reparación cortocircuito</span>
+                        <span class="earning-amount">+$35.000</span>
+                    </div>
+                    <div class="earning-details">
+                        <span class="earning-date">
+                            <i class="fas fa-calendar"></i> Hace 2 días
+                        </span>
+                        <span class="earning-status status-completed">Completado</span>
+                    </div>
+                </div>
+
+                <div class="earning-card">
+                    <div class="earning-header">
+                        <span class="earning-service">Instalación interruptores</span>
+                        <span class="earning-amount">+$28.000</span>
+                    </div>
+                    <div class="earning-details">
+                        <span class="earning-date">
+                            <i class="fas fa-calendar"></i> Hace 3 días
+                        </span>
+                        <span class="earning-status status-completed">Completado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="android-profesional-trabajos.html" class="nav-item">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Trabajos</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Ganancias</span>
+                </a>
+                <a href="android-perfil-profesional.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="android-calificaciones-resenas.html" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Reseñas</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu Overlay -->
+    <div class="menu-overlay" onclick="closeMenu()"></div>
+
+    <!-- Hamburger Menu Sidebar -->
+    <div class="hamburger-menu">
+        <div class="menu-header">
+            <div class="menu-avatar">CM</div>
+            <div class="menu-user-info">
+                <h3>Carlos Mendoza</h3>
+                <p>Electricista Certificado</p>
+            </div>
+        </div>
+        
+        <div class="menu-content">
+            <!-- Dashboard Section -->
+            <a href="android-profesional-trabajos.html" class="menu-nav-item">
+                <i class="fas fa-tachometer-alt menu-nav-icon"></i>
+                <span class="menu-nav-text">Dashboard</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Trabajos Section -->
+            <a href="android-profesional-trabajos.html" class="menu-nav-item">
+                <i class="fas fa-tasks menu-nav-icon"></i>
+                <span class="menu-nav-text">Mis Trabajos</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Ganancias Section -->
+            <a href="android-ganancias-dinero.html" class="menu-nav-item" style="background: linear-gradient(90deg, #f8f9fa 0%, #e8f5e8 100%); color: #4CAF50;">
+                <i class="fas fa-chart-line menu-nav-icon"></i>
+                <span class="menu-nav-text">Ganancias</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Retiros Section -->
+            <a href="android-retiro-dinero.html" class="menu-nav-item">
+                <i class="fas fa-money-bill-wave menu-nav-icon"></i>
+                <span class="menu-nav-text">Retiros</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Historial Section -->
+            <a href="android-trabajos-realizados.html" class="menu-nav-item">
+                <i class="fas fa-history menu-nav-icon"></i>
+                <span class="menu-nav-text">Historial de Trabajos</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <div class="menu-divider"></div>
+
+            <!-- Perfil Section -->
+            <a href="android-perfil-profesional.html" class="menu-nav-item">
+                <i class="fas fa-user menu-nav-icon"></i>
+                <span class="menu-nav-text">Mi Perfil</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Configuración Section -->
+            <a href="#" class="menu-nav-item" onclick="openSettings(); closeMenu();">
+                <i class="fas fa-cog menu-nav-icon"></i>
+                <span class="menu-nav-text">Configuración</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Notificaciones Section -->
+            <a href="#" class="menu-nav-item" onclick="openNotifications(); closeMenu();">
+                <i class="fas fa-bell menu-nav-icon"></i>
+                <span class="menu-nav-text">Notificaciones</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Ayuda Section -->
+            <a href="#" class="menu-nav-item" onclick="openSupport(); closeMenu();">
+                <i class="fas fa-question-circle menu-nav-icon"></i>
+                <span class="menu-nav-text">Ayuda y Soporte</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <div class="menu-divider"></div>
+
+            <!-- Cerrar Sesión -->
+            <a href="#" class="menu-nav-item" onclick="logout(); closeMenu();" style="color: #f44336;">
+                <i class="fas fa-sign-out-alt menu-nav-icon" style="color: #f44336;"></i>
+                <span class="menu-nav-text">Cerrar Sesión</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Functions
+        function toggleMenu() {
+            const overlay = document.querySelector('.menu-overlay');
+            const menu = document.querySelector('.hamburger-menu');
+            
+            overlay.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const overlay = document.querySelector('.menu-overlay');
+            const menu = document.querySelector('.hamburger-menu');
+            
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+        }
+
+        function openSettings() {
+            alert('Configuración de Ganancias:\n\n💰 Configurar tarifas\n📊 Preferencias de reportes\n🔔 Notificaciones de pagos\n🏦 Cuentas bancarias\n📈 Métricas personalizadas');
+        }
+
+        function openNotifications() {
+            alert('Notificaciones:\n\n💰 Nuevos pagos recibidos\n📊 Reportes mensuales\n🎯 Metas de ingresos\n⚠️ Alertas importantes');
+        }
+
+        function openSupport() {
+            alert('Ayuda y Soporte:\n\n❓ Preguntas sobre pagos\n💬 Chat con soporte\n📞 Contacto directo\n📋 Reportar problema');
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres cerrar sesión?')) {
+                alert('Sesión cerrada exitosamente.\n\nRedirigiendo al login...');
+            }
+        }
+
+        let currentPeriod = 'week';
+
+        function changePeriod(period) {
+            currentPeriod = period;
+            
+            // Update tab appearance
+            document.querySelectorAll('.period-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update data based on period
+            updateEarningsData(period);
+        }
+
+        function updateEarningsData(period) {
+            const periodData = {
+                week: {
+                    available: '$1.850.000',
+                    total: '$2.450.000',
+                    pending: '$485.000',
+                    chart: 'Ganancias por Semana'
+                },
+                month: {
+                    available: '$7.200.000',
+                    total: '$9.800.000',
+                    pending: '$1.200.000',
+                    chart: 'Ganancias por Mes'
+                },
+                year: {
+                    available: '$84.500.000',
+                    total: '$112.000.000',
+                    pending: '$8.500.000',
+                    chart: 'Ganancias por Año'
+                }
+            };
+
+            const data = periodData[period];
+            document.querySelector('.balance-amount').textContent = data.available;
+            document.querySelector('.chart-title').textContent = data.chart;
+            
+            // Simulate data update
+            document.querySelectorAll('.stat-value')[0].textContent = data.total;
+            document.querySelectorAll('.stat-value')[1].textContent = data.pending;
+        }
+
+        function viewDetails() {
+            alert('Detalles de Ganancias:\n\n📊 Estadísticas detalladas\n📈 Gráficos interactivos\n📋 Reportes exportables\n💳 Historial de pagos\n🔍 Análisis de tendencias');
+        }
+
+        function showFilters() {
+            alert('Filtros Disponibles:\n\n📅 Por fecha\n💰 Por monto\n🏷️ Por tipo de servicio\n📊 Por estado\n🔢 Por cliente');
+        }
+
+        function goBack() {
+            window.location.href = 'android-profesional-trabajos.html';
+        }
+
+        // Initialize page
+        window.addEventListener('load', function() {
+            console.log('Earnings page loaded');
+        });
+    </script>
+</body>
+</html>

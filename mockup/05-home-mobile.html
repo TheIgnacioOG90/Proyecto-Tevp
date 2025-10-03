@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEVP - Inicio Móvil</title>
+    <title>TEVP - Explora Servicios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="mobile-frame.css">
@@ -419,42 +419,48 @@
                     <div class="app-header">
                         <div class="header-top">
                             <div class="welcome-text">
-                                <h2>¡Hola, María! 👋</h2>
-                                <p>¿En qué te podemos ayudar hoy?</p>
+                                <h2>¡Bienvenido a TEVP! 👋</h2>
+                                <p>Explora servicios sin registrarte</p>
                             </div>
                             <div class="header-actions">
-                                <button class="header-btn">
-                                    <i class="fas fa-bell"></i>
+                                <button class="header-btn" onclick="openLogin()">
+                                    <i class="fas fa-sign-in-alt"></i>
                                 </button>
-                                <button class="header-btn">
-                                    <i class="fas fa-user-circle"></i>
+                                <button class="header-btn" onclick="openRegister()">
+                                    <i class="fas fa-user-plus"></i>
                                 </button>
                             </div>
                         </div>
                         
                         <!-- Barra de búsqueda -->
                         <div class="search-container">
-                            <input type="text" class="search-input" placeholder="Buscar servicios, profesionales...">
-                            <button class="search-btn">
+                            <input type="text" class="search-input" placeholder="Buscar servicios, profesionales..." id="searchInput">
+                            <button class="search-btn" onclick="performGuestSearch()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
+                    </div>
+
+                    <!-- Indicador Modo Invitado -->
+                    <div class="guest-indicator" style="background: rgba(255,193,7,0.1); border: 1px solid rgba(255,193,7,0.3); border-radius: 15px; padding: 12px 20px; margin: 0 20px 20px; text-align: center;">
+                        <i class="fas fa-eye" style="color: #ffc107; margin-right: 8px;"></i>
+                        <span style="color: #333; font-size: 14px; font-weight: 500;">Explorando como invitado • Regístrate para solicitar servicios</span>
                     </div>
 
                     <!-- Stats rápidas -->
                     <div class="stats-section">
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <div class="stat-number">3</div>
-                                <div class="stat-label">Activos</div>
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Profesionales</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">12</div>
-                                <div class="stat-label">Completados</div>
+                                <div class="stat-number">10</div>
+                                <div class="stat-label">Categorías</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">$45k</div>
-                                <div class="stat-label">Ahorrado</div>
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Disponible</div>
                             </div>
                         </div>
                     </div>
@@ -463,39 +469,55 @@
                     <div class="services-section">
                         <div class="section-title">
                             <span>Servicios populares</span>
-                            <a href="#" class="view-all-btn">Ver todos</a>
+                            <a href="#" class="view-all-btn" onclick="exploreAllServices()">Ver todos</a>
                         </div>
                         <div class="services-grid">
-                            <a href="#" class="service-card">
+                            <a href="#" class="service-card" onclick="exploreService('plomeria')">
                                 <div class="service-icon">
                                     <i class="fas fa-wrench"></i>
                                 </div>
                                 <div class="service-name">Plomería</div>
-                                <div class="service-count">25 profesionales</div>
+                                <div class="service-count">89 profesionales</div>
                             </a>
 
-                            <a href="#" class="service-card">
+                            <a href="#" class="service-card" onclick="exploreService('electricidad')">
                                 <div class="service-icon">
                                     <i class="fas fa-bolt"></i>
                                 </div>
                                 <div class="service-name">Electricidad</div>
-                                <div class="service-count">18 profesionales</div>
+                                <div class="service-count">125 profesionales</div>
                             </a>
 
-                            <a href="#" class="service-card">
+                            <a href="#" class="service-card" onclick="exploreService('limpieza')">
                                 <div class="service-icon">
-                                    <i class="fas fa-snowflake"></i>
+                                    <i class="fas fa-broom"></i>
                                 </div>
-                                <div class="service-name">Climatización</div>
-                                <div class="service-count">12 profesionales</div>
+                                <div class="service-name">Limpieza</div>
+                                <div class="service-count">154 profesionales</div>
                             </a>
 
-                            <a href="#" class="service-card">
+                            <a href="#" class="service-card" onclick="exploreService('carpinteria')">
                                 <div class="service-icon">
-                                    <i class="fas fa-hard-hat"></i>
+                                    <i class="fas fa-hammer"></i>
                                 </div>
-                                <div class="service-name">Construcción</div>
-                                <div class="service-count">30 profesionales</div>
+                                <div class="service-name">Carpintería</div>
+                                <div class="service-count">67 profesionales</div>
+                            </a>
+
+                            <a href="#" class="service-card" onclick="exploreService('jardineria')">
+                                <div class="service-icon" style="background: linear-gradient(135deg, #2ecc71 0%, #28b463 100%);">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="service-name">Jardinería</div>
+                                <div class="service-count">73 profesionales</div>
+                            </a>
+
+                            <a href="#" class="service-card" onclick="exploreService('pintura')">
+                                <div class="service-icon" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                                    <i class="fas fa-paint-roller"></i>
+                                </div>
+                                <div class="service-name">Pintura</div>
+                                <div class="service-count">91 profesionales</div>
                             </a>
                         </div>
                     </div>
@@ -533,32 +555,43 @@
                         </a>
                     </div>
 
-                    <!-- Pedidos recientes -->
+                    <!-- Profesionales destacados -->
                     <div class="recent-section">
                         <div class="recent-header">
-                            <h3 class="recent-title">Actividad reciente</h3>
+                            <h3 class="recent-title">Profesionales destacados</h3>
                         </div>
                         
-                        <div class="recent-item">
-                            <div class="recent-icon">
-                                <i class="fas fa-wrench"></i>
+                        <div class="recent-item" onclick="viewProfessionalGuest('carlos')">
+                            <div class="recent-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                CM
                             </div>
                             <div class="recent-info">
-                                <div class="recent-name">Reparación de cañerías</div>
-                                <div class="recent-date">Hoy, 14:30</div>
+                                <div class="recent-name">Carlos Mendoza</div>
+                                <div class="recent-date">Electricista • ⭐ 4.9 (127 reseñas)</div>
                             </div>
-                            <span class="recent-status status-pending">Pendiente</span>
+                            <span class="recent-status" style="background: #e3f2fd; color: #1976d2;">Verificado</span>
                         </div>
 
-                        <div class="recent-item">
-                            <div class="recent-icon">
-                                <i class="fas fa-snowflake"></i>
+                        <div class="recent-item" onclick="viewProfessionalGuest('ana')">
+                            <div class="recent-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white;">
+                                AR
                             </div>
                             <div class="recent-info">
-                                <div class="recent-name">Mantención aire acondicionado</div>
-                                <div class="recent-date">Ayer, 16:45</div>
+                                <div class="recent-name">Ana Ramírez</div>
+                                <div class="recent-date">Plomera • ⭐ 4.8 (95 reseñas)</div>
                             </div>
-                            <span class="recent-status status-completed">Completado</span>
+                            <span class="recent-status" style="background: #e8f5e8; color: #2e7d32;">Destacado</span>
+                        </div>
+
+                        <div class="recent-item" onclick="viewProfessionalGuest('miguel')">
+                            <div class="recent-icon" style="background: linear-gradient(135deg, #8b4513 0%, #654321 100%); color: white;">
+                                MT
+                            </div>
+                            <div class="recent-info">
+                                <div class="recent-name">Miguel Torres</div>
+                                <div class="recent-date">Carpintero • ⭐ 5.0 (82 reseñas)</div>
+                            </div>
+                            <span class="recent-status" style="background: #fff3e0; color: #f57c00;">Maestro</span>
                         </div>
                     </div>
                 </div>
@@ -572,20 +605,20 @@
                     <i class="fas fa-home"></i>
                     <span>Inicio</span>
                 </a>
-                <a class="nav-item">
-                    <i class="fas fa-concierge-bell"></i>
-                    <span>Servicios</span>
+                <a class="nav-item" onclick="exploreAllServices()">
+                    <i class="fas fa-search"></i>
+                    <span>Explorar</span>
                 </a>
-                <a class="nav-item nav-item-center">
-                    <i class="fas fa-plus"></i>
+                <a class="nav-item nav-item-center" onclick="showRegisterPrompt()">
+                    <i class="fas fa-user-plus"></i>
                 </a>
-                <a class="nav-item">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Pedidos</span>
+                <a class="nav-item" onclick="showRegisterPrompt()">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Entrar</span>
                 </a>
-                <a class="nav-item">
+                <a class="nav-item" onclick="showRegisterPrompt()">
                     <i class="fas fa-user"></i>
-                    <span>Perfil</span>
+                    <span>Cuenta</span>
                 </a>
             </div>
         </div>
@@ -598,8 +631,67 @@
     </div>
 
     <script>
+        // Guest Mode Functions
+        function performGuestSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchText = searchInput.value;
+            
+            if (searchText.trim() === '') {
+                return; // No message, just exit silently
+            }
+            
+            // Simple visual feedback instead of alert
+            searchInput.placeholder = `Buscando "${searchText}"...`;
+            searchInput.value = '';
+            
+            setTimeout(() => {
+                searchInput.placeholder = 'Buscar servicios, profesionales...';
+                // Optional: could show a subtle notification instead of alert
+            }, 1500);
+        }
+
+        function exploreService(serviceType) {
+            // Simple visual feedback instead of alerts
+            console.log(`Exploring ${serviceType} service`);
+            // Could add visual feedback here like highlighting the card temporarily
+        }
+
+        function exploreAllServices() {
+            console.log('Exploring all services');
+            // Could redirect to services page or show services overlay
+        }
+
+        function viewProfessionalGuest(professionalId) {
+            console.log(`Viewing professional: ${professionalId}`);
+            // Could show professional preview card
+        }
+
+        function openLogin() {
+            console.log('Opening login');
+            // In real app: window.location.href = 'android-login.html';
+        }
+
+        function openRegister() {
+            console.log('Opening register');
+            // In real app: window.location.href = 'android-bienvenida.html';
+        }
+
+        function showRegisterPrompt() {
+            console.log('Showing register prompt');
+            // Could show a subtle overlay instead of confirm dialog
+        }
+
+        // Initialize search functionality
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performGuestSearch();
+            }
+        });
+
         // Simulación de datos en tiempo real
         document.addEventListener('DOMContentLoaded', function() {
+            // Removed automatic welcome message - only show when user interacts
+            
             // Animación de entrada suave
             const cards = document.querySelectorAll('.service-card, .professional-card');
             cards.forEach((card, index) => {

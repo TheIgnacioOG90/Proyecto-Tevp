@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Dashboard Profesional | Mockup Android</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .android-phone {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .android-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Android Status Bar */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Hamburger Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hamburger Menu Sidebar */
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .hamburger-menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .menu-user-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+        }
+
+        .menu-user-info p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .menu-content {
+            padding: 0;
+        }
+
+        .menu-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+        }
+
+        .menu-nav-item:hover {
+            background: linear-gradient(90deg, #f8f9fa 0%, #e3f2fd 100%);
+            color: #1976D2;
+            transform: translateX(5px);
+        }
+
+        .menu-nav-item:active {
+            transform: translateX(5px) scale(0.98);
+        }
+
+        .menu-nav-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 15px;
+            color: #1976D2;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav-item:hover .menu-nav-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-nav-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-nav-arrow {
+            color: #999;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav-item:hover .menu-nav-arrow {
+            color: #1976D2;
+            transform: translateX(3px);
+        }
+
+        .menu-divider {
+            height: 8px;
+            background: #f8f9fa;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 12px;
+            height: 12px;
+            background: #f44336;
+            border-radius: 50%;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .professional-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .prof-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .prof-details h3 {
+            font-size: 16px;
+            margin: 0 0 5px 0;
+        }
+
+        .prof-details p {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 3px solid #ddd;
+        }
+
+        .stat-card.earnings {
+            border-left-color: #4CAF50;
+        }
+
+        .stat-card.rating {
+            border-left-color: #FFD700;
+        }
+
+        .stat-card.jobs {
+            border-left-color: #2196F3;
+        }
+
+        .stat-card.pending {
+            border-left-color: #FF9800;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin: 0 0 3px 0;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            font-size: 14px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        /* Job Tabs */
+        .job-tabs {
+            padding: 0 15px;
+            margin-bottom: 15px;
+            position: sticky;
+            top: 0;
+            background: #f5f5f5;
+            z-index: 10;
+            padding-top: 10px;
+        }
+
+        .tabs-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 3px;
+        }
+
+        .job-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 4px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .job-tab.active {
+            background: white;
+            color: #1976D2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: scale(1.02);
+        }
+
+        .job-tab:hover {
+            background: rgba(255,255,255,0.7);
+            transform: scale(1.01);
+        }
+
+        .tab-count {
+            display: inline-block;
+            background: #666;
+            color: white;
+            border-radius: 10px;
+            padding: 1px 5px;
+            font-size: 9px;
+            margin-left: 3px;
+            min-width: 14px;
+            text-align: center;
+        }
+
+        .job-tab.active .tab-count {
+            background: #1976D2;
+        }
+
+        .job-tab.active .tab-count {
+            background: #1976D2;
+        }
+
+        /* Job Cards */
+        .jobs-container {
+            padding: 0 15px 100px 15px;
+            max-height: calc(100vh - 320px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #ddd;
+        }
+
+        .job-card.new {
+            border-left-color: #2196F3;
+        }
+
+        .job-card.in-progress {
+            border-left-color: #FF9800;
+        }
+
+        .job-card.completed {
+            border-left-color: #4CAF50;
+        }
+
+        .job-card.quoted {
+            border-left-color: #9C27B0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .job-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            color: #333;
+        }
+
+        .job-id {
+            font-size: 10px;
+            color: #666;
+            margin: 0 0 3px 0;
+        }
+
+        .client-name {
+            font-size: 12px;
+            color: #1976D2;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .job-status {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-new {
+            background: #e3f2fd;
+            color: #2196F3;
+        }
+
+        .status-in-progress {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .status-completed {
+            background: #e8f5e8;
+            color: #4CAF50;
+        }
+
+        .status-quoted {
+            background: #f3e5f5;
+            color: #9C27B0;
+        }
+
+        .job-details {
+            margin-bottom: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
+        .detail-label {
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .price-value {
+            color: #4CAF50;
+            font-size: 14px;
+        }
+
+        .urgent-badge {
+            background: #ff5722;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .job-description {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1565C0;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1976D2;
+            border: 2px solid #1976D2;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #1976D2;
+            color: white;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-warning {
+            background: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #1976D2;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="android-phone">
+        <div class="android-screen">
+            <!-- Android Status Bar -->
+            <div class="status-bar">
+                <div>
+                    <span>9:41</span>
+                </div>
+                <div>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi" style="margin: 0 8px;"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <div class="header-top">
+                    <div class="header-left">
+                        <button class="hamburger-btn" onclick="toggleMenu()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="header-title">Dashboard Profesional</h1>
+                    </div>
+                    <button class="notification-btn" onclick="showNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+                
+                <div class="professional-info">
+                    <div class="prof-avatar">CM</div>
+                    <div class="prof-details">
+                        <h3>Carlos Mendoza</h3>
+                        <p>Electricista Certificado • ⭐ 4.9 (127 reseñas)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-container">
+                <div class="stat-card earnings">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">$2.450.000</div>
+                    <div class="stat-label">Ganancias este mes</div>
+                </div>
+                
+                <div class="stat-card rating">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">4.9</div>
+                    <div class="stat-label">Calificación promedio</div>
+                </div>
+                
+                <div class="stat-card jobs">
+                    <div class="stat-icon">🔧</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-label">Trabajos completados</div>
+                </div>
+                
+                <div class="stat-card pending">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Trabajos pendientes</div>
+                </div>
+            </div>
+
+            <!-- Job Tabs -->
+            <div class="job-tabs">
+                <div class="tabs-container">
+                    <div class="job-tab active" onclick="switchJobTab('new')">
+                        Nuevos
+                        <span class="tab-count">3</span>
+                    </div>
+                    <div class="job-tab" onclick="switchJobTab('progress')">
+                        En Curso
+                        <span class="tab-count">2</span>
+                    </div>
+                    <div class="job-tab" onclick="switchJobTab('completed')">
+                        Completados
+                        <span class="tab-count">47</span>
+                    </div>
+                    <div class="job-tab" onclick="switchJobTab('quotes')">
+                        Cotizaciones
+                        <span class="tab-count">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Container -->
+            <div class="jobs-container">
+                <!-- New Jobs Tab -->
+                <div class="tab-content active" id="newTab">
+                    <div class="job-card new">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-156</p>
+                                <h3>Cambiar enchufe cocina
+                                    <span class="urgent-badge">URGENTE</span>
+                                </h3>
+                                <p class="client-name">María González</p>
+                            </div>
+                            <span class="job-status status-new">Nuevo</span>
+                        </div>
+                        
+                        <div class="job-description">
+                            "El enchufe de la cocina no funciona y salta el disyuntor. Necesito que revisen el problema y lo solucionen hoy si es posible."
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">Las Condes (2.3 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Fecha solicitada
+                                </span>
+                                <span class="detail-value">Hoy, 16:00</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Precio ofrecido
+                                </span>
+                                <span class="detail-value price-value">$15.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-primary" onclick="acceptJob(156)">Aceptar</button>
+                            <button class="btn-secondary" onclick="viewJobDetails(156)">Ver más</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card new">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-157</p>
+                                <h3>Instalación luminarias LED</h3>
+                                <p class="client-name">Pedro Sánchez</p>
+                            </div>
+                            <span class="job-status status-new">Nuevo</span>
+                        </div>
+                        
+                        <div class="job-description">
+                            "Necesito instalar 6 luminarias LED en el living y comedor. Tengo todos los materiales listos."
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">Providencia (1.8 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Fecha solicitada
+                                </span>
+                                <span class="detail-value">Mañana, 09:00</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Precio ofrecido
+                                </span>
+                                <span class="detail-value price-value">$45.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-primary" onclick="acceptJob(157)">Aceptar</button>
+                            <button class="btn-secondary" onclick="viewJobDetails(157)">Ver más</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card new">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-158</p>
+                                <h3>Revisión tablero eléctrico</h3>
+                                <p class="client-name">Ana Morales</p>
+                            </div>
+                            <span class="job-status status-new">Nuevo</span>
+                        </div>
+                        
+                        <div class="job-description">
+                            "El tablero eléctrico hace ruidos extraños y quiero que un profesional lo revise por seguridad."
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">Ñuñoa (3.2 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Fecha solicitada
+                                </span>
+                                <span class="detail-value">Pasado mañana, 14:00</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Precio ofrecido
+                                </span>
+                                <span class="detail-value price-value">$25.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-primary" onclick="acceptJob(158)">Aceptar</button>
+                            <button class="btn-secondary" onclick="viewJobDetails(158)">Ver más</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- In Progress Jobs Tab -->
+                <div class="tab-content" id="progressTab">
+                    <div class="job-card in-progress">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-145</p>
+                                <h3>Instalación aire acondicionado</h3>
+                                <p class="client-name">Roberto Silva</p>
+                            </div>
+                            <span class="job-status status-in-progress">En Curso</span>
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">Las Condes (2.1 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Iniciado
+                                </span>
+                                <span class="detail-value">Hoy, 09:30</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-hourglass-half"></i> Progreso
+                                </span>
+                                <span class="detail-value">75% completado</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Precio
+                                </span>
+                                <span class="detail-value price-value">$120.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-success" onclick="completeJob(145)">Finalizar</button>
+                            <button class="btn-secondary" onclick="updateProgress(145)">Actualizar</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card in-progress">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-149</p>
+                                <h3>Reparación cortocircuito</h3>
+                                <p class="client-name">Carmen López</p>
+                            </div>
+                            <span class="job-status status-in-progress">En Curso</span>
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">Providencia (1.5 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Iniciado
+                                </span>
+                                <span class="detail-value">Ayer, 15:00</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-hourglass-half"></i> Progreso
+                                </span>
+                                <span class="detail-value">45% completado</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Precio
+                                </span>
+                                <span class="detail-value price-value">$35.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-warning" onclick="continueJob(149)">Continuar</button>
+                            <button class="btn-secondary" onclick="contactClient(149)">Contactar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Jobs Tab -->
+                <div class="tab-content" id="completedTab">
+                    <div class="job-card completed">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-143</p>
+                                <h3>Cambio de enchufe baño</h3>
+                                <p class="client-name">Sofía Martínez</p>
+                            </div>
+                            <span class="job-status status-completed">Completado</span>
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-calendar-check"></i> Completado
+                                </span>
+                                <span class="detail-value">Ayer, 17:30</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-star"></i> Calificación
+                                </span>
+                                <span class="detail-value">⭐⭐⭐⭐⭐ 5.0</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Ganancia
+                                </span>
+                                <span class="detail-value price-value">$12.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-secondary" onclick="viewReceipt(143)">Ver Recibo</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card completed">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-140</p>
+                                <h3>Instalación interruptores</h3>
+                                <p class="client-name">Luis Herrera</p>
+                            </div>
+                            <span class="job-status status-completed">Completado</span>
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-calendar-check"></i> Completado
+                                </span>
+                                <span class="detail-value">Hace 2 días, 16:15</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-star"></i> Calificación
+                                </span>
+                                <span class="detail-value">⭐⭐⭐⭐⭐ 5.0</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Ganancia
+                                </span>
+                                <span class="detail-value price-value">$28.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-secondary" onclick="viewReceipt(140)">Ver Recibo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quotes Tab -->
+                <div class="tab-content" id="quotesTab">
+                    <div class="job-card quoted">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <p class="job-id">#TEVP-2024-159</p>
+                                <h3>Proyecto cableado completo</h3>
+                                <p class="client-name">Empresa Constructora XYZ</p>
+                            </div>
+                            <span class="job-status status-quoted">Cotizando</span>
+                        </div>
+                        
+                        <div class="job-description">
+                            "Necesitamos cotización para cableado eléctrico completo de casa de 150m². Incluye instalación de tableros, enchufes, y luminarias."
+                        </div>
+                        
+                        <div class="job-details">
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i> Ubicación
+                                </span>
+                                <span class="detail-value">La Reina (8.5 km)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-clock"></i> Plazo respuesta
+                                </span>
+                                <span class="detail-value">2 días restantes</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">
+                                    <i class="fas fa-dollar-sign"></i> Presupuesto
+                                </span>
+                                <span class="detail-value price-value">$800.000 - 1.200.000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn-primary" onclick="submitQuote(159)">Enviar Cotización</button>
+                            <button class="btn-secondary" onclick="scheduleVisit(159)">Agendar Visita</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="android-busqueda-servicios.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </a>
+                <a href="android-gestion-servicio.html" class="nav-item">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Mis Servicios</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Profesional</span>
+                </a>
+                <a href="android-calificaciones-resenas.html" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Reseñas</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu Overlay -->
+    <div class="menu-overlay" onclick="closeMenu()"></div>
+
+    <!-- Hamburger Menu Sidebar -->
+    <div class="hamburger-menu">
+        <div class="menu-header">
+            <div class="menu-avatar">CM</div>
+            <div class="menu-user-info">
+                <h3>Carlos Mendoza</h3>
+                <p>Electricista Certificado</p>
+            </div>
+        </div>
+        
+        <div class="menu-content">
+            <!-- Dashboard Section -->
+            <a href="android-profesional-trabajos.html" class="menu-nav-item" style="background: linear-gradient(90deg, #f8f9fa 0%, #e3f2fd 100%); color: #1976D2;">
+                <i class="fas fa-tachometer-alt menu-nav-icon"></i>
+                <span class="menu-nav-text">Dashboard</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Trabajos Section -->
+            <a href="#" class="menu-nav-item" onclick="scrollToSection('jobs'); closeMenu();">
+                <i class="fas fa-tasks menu-nav-icon"></i>
+                <span class="menu-nav-text">Mis Trabajos</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Ganancias Section -->
+            <a href="android-ganancias-dinero.html" class="menu-nav-item">
+                <i class="fas fa-chart-line menu-nav-icon"></i>
+                <span class="menu-nav-text">Ganancias</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Retiros Section -->
+            <a href="android-retiro-dinero.html" class="menu-nav-item">
+                <i class="fas fa-money-bill-wave menu-nav-icon"></i>
+                <span class="menu-nav-text">Retiros</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Historial Section -->
+            <a href="android-trabajos-realizados.html" class="menu-nav-item">
+                <i class="fas fa-history menu-nav-icon"></i>
+                <span class="menu-nav-text">Historial de Trabajos</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <div class="menu-divider"></div>
+
+            <!-- Perfil Section -->
+            <a href="android-perfil-profesional.html" class="menu-nav-item">
+                <i class="fas fa-user menu-nav-icon"></i>
+                <span class="menu-nav-text">Mi Perfil</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Configuración Section -->
+            <a href="#" class="menu-nav-item" onclick="openSettings(); closeMenu();">
+                <i class="fas fa-cog menu-nav-icon"></i>
+                <span class="menu-nav-text">Configuración</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Notificaciones Section -->
+            <a href="#" class="menu-nav-item" onclick="showNotifications(); closeMenu();">
+                <i class="fas fa-bell menu-nav-icon"></i>
+                <span class="menu-nav-text">Notificaciones</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <!-- Ayuda Section -->
+            <a href="#" class="menu-nav-item" onclick="openSupport(); closeMenu();">
+                <i class="fas fa-question-circle menu-nav-icon"></i>
+                <span class="menu-nav-text">Ayuda y Soporte</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+
+            <div class="menu-divider"></div>
+
+            <!-- Cerrar Sesión -->
+            <a href="#" class="menu-nav-item" onclick="logout(); closeMenu();" style="color: #f44336;">
+                <i class="fas fa-sign-out-alt menu-nav-icon" style="color: #f44336;"></i>
+                <span class="menu-nav-text">Cerrar Sesión</span>
+                <i class="fas fa-chevron-right menu-nav-arrow"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Functions
+        function toggleMenu() {
+            const overlay = document.querySelector('.menu-overlay');
+            const menu = document.querySelector('.hamburger-menu');
+            
+            overlay.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const overlay = document.querySelector('.menu-overlay');
+            const menu = document.querySelector('.hamburger-menu');
+            
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openSettings() {
+            alert('Configuración Profesional:\n\n⚙️ Configurar perfil\n🔔 Notificaciones\n📍 Zona de trabajo\n💰 Tarifas\n📅 Horarios\n🔒 Privacidad');
+        }
+
+        function openSupport() {
+            alert('Ayuda y Soporte:\n\n❓ Preguntas frecuentes\n💬 Chat con soporte\n📞 Teléfono de contacto\n📧 Email de asistencia\n📋 Reportar problema');
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres cerrar sesión?')) {
+                alert('Sesión cerrada exitosamente.\n\nRedirigiendo al login...');
+                // In real app: window.location.href = 'login.html';
+            }
+        }
+
+        let currentJobTab = 'new';
+
+        function switchJobTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.job-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+            
+            // Scroll to top of jobs container
+            const jobsContainer = document.querySelector('.jobs-container');
+            if (jobsContainer) {
+                jobsContainer.scrollTop = 0;
+            }
+            
+            // Scroll to tabs section smoothly
+            const tabsSection = document.querySelector('.job-tabs');
+            if (tabsSection) {
+                setTimeout(() => {
+                    tabsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+            
+            currentJobTab = tab;
+        }
+
+        function showNotifications() {
+            alert('Notificaciones:\n\n🔔 Nueva solicitud de María González\n🔔 Roberto calificó tu servicio con 5 ⭐\n🔔 Recordatorio: Visita programada mañana 9:00 AM');
+        }
+
+        function acceptJob(jobId) {
+            if (confirm(`¿Confirmas que aceptas el trabajo #TEVP-2024-${jobId}?\n\nAl aceptar te comprometes a realizar el servicio en la fecha y hora acordada.`)) {
+                alert(`¡Trabajo #TEVP-2024-${jobId} aceptado!\n\nSe ha notificado al cliente y se han compartido los datos de contacto.\n\nRecuerda llegar puntual a la cita.`);
+                
+                // Simulate moving job to in-progress
+                updateTabCounts();
+            }
+        }
+
+        function viewJobDetails(jobId) {
+            alert(`Detalles completos del trabajo #TEVP-2024-${jobId}:\n\n📍 Dirección exacta con GPS\n📞 Contacto del cliente\n📋 Lista de materiales\n🛠️ Herramientas requeridas\n💰 Desglose de precios\n📅 Disponibilidad de fechas alternativas`);
+        }
+
+        function completeJob(jobId) {
+            if (confirm(`¿Confirmas que el trabajo #TEVP-2024-${jobId} está completado?\n\nEl cliente recibirá una notificación para confirmar y calificar el servicio.`)) {
+                alert(`¡Trabajo #TEVP-2024-${jobId} marcado como completado!\n\nEl cliente puede ahora:\n- Confirmar la finalización\n- Calificar tu servicio\n- Procesar el pago\n\nRecibirás tu pago en 24-48 horas.`);
+                updateTabCounts();
+            }
+        }
+
+        function updateProgress(jobId) {
+            const progress = prompt('Actualizar progreso del trabajo (0-100%):', '75');
+            if (progress !== null) {
+                alert(`Progreso actualizado: ${progress}%\n\nEl cliente ha sido notificado del avance del trabajo.`);
+            }
+        }
+
+        function continueJob(jobId) {
+            alert(`Continuando trabajo #TEVP-2024-${jobId}\n\n✓ Materiales verificados\n✓ Cliente contactado\n✓ Fecha de continuación: Hoy 14:00\n\n¡Recuerda actualizar el progreso!`);
+        }
+
+        function contactClient(jobId) {
+            alert('Opciones de contacto:\n\n📞 Llamada directa\n💬 WhatsApp\n📨 Chat interno\n📧 Email\n\nSelecciona el método preferido para contactar al cliente.');
+        }
+
+        function viewReceipt(jobId) {
+            alert(`Recibo #TEVP-2024-${jobId}\n\n💰 Ganancia neta: Mostrada\n🧾 Factura: Disponible para descarga\n📊 Detalles fiscales\n📈 Estadísticas del servicio\n\n¿Descargar PDF?`);
+        }
+
+        function submitQuote(jobId) {
+            alert(`Enviar cotización para #TEVP-2024-${jobId}\n\nFormulario incluye:\n💰 Precio total\n⏱️ Tiempo estimado\n🛠️ Materiales incluidos\n📅 Disponibilidad\n✅ Garantía ofrecida\n\n¿Continuar con el envío?`);
+        }
+
+        function scheduleVisit(jobId) {
+            alert(`Agendar visita técnica para #TEVP-2024-${jobId}\n\n📅 Seleccionar fecha disponible\n⏰ Definir horario\n📍 Confirmar dirección\n💵 Costo de visita: $5.000\n\n(Se descuenta del trabajo si se acepta la cotización)`);
+        }
+
+        function updateTabCounts() {
+            // Simulate updating tab counts after job status changes
+            // In a real app, this would fetch updated data from the server
+        }
+
+        // Initialize data on page load
+        window.addEventListener('load', function() {
+            console.log('Professional dashboard loaded');
+            
+            // Add smooth scroll behavior to all tab navigation
+            document.querySelectorAll('.job-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Small delay to ensure content is updated
+                    setTimeout(() => {
+                        scrollToTop();
+                    }, 100);
+                });
+            });
+        });
+
+        function scrollToTop() {
+            // Scroll jobs container to top
+            const jobsContainer = document.querySelector('.jobs-container');
+            if (jobsContainer) {
+                jobsContainer.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Also scroll page to show tabs clearly
+            const tabsSection = document.querySelector('.job-tabs');
+            if (tabsSection) {
+                tabsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

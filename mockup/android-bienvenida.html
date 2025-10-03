@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Bienvenido | Mockup Android</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .android-phone {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .android-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Android Status Bar */
+        .status-bar {
+            height: 44px;
+            background: rgba(0,0,0,0.1);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Welcome Content */
+        .welcome-content {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            margin-top: 40px;
+        }
+
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 48px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .app-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .app-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .app-description {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.6;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.2s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1976D2;
+            box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.4);
+            color: #1976D2;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            opacity: 0.7;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Quick Access */
+        .quick-access {
+            margin-top: 20px;
+        }
+
+        .quick-access-title {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .quick-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .quick-option {
+            flex: 1;
+            padding: 12px 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .quick-option:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .quick-option i {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .quick-option span {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        /* Professional Mode Toggle */
+        .mode-toggle {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .mode-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+
+        .mode-toggle i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="android-phone">
+        <div class="android-screen">
+            <!-- Android Status Bar -->
+            <div class="status-bar">
+                <div>
+                    <span>9:41</span>
+                </div>
+                <div>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi" style="margin: 0 8px;"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- Professional Mode Toggle -->
+            <div class="mode-toggle" onclick="toggleMode()">
+                <i class="fas fa-briefcase"></i>
+                Modo Profesional
+            </div>
+
+            <!-- Welcome Content -->
+            <div class="welcome-content">
+                <div>
+                    <!-- Logo Section -->
+                    <div class="logo-section">
+                        <div class="app-logo">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h1 class="app-title">TEVP</h1>
+                        <p class="app-subtitle">Conectamos talento con necesidades</p>
+                        <p class="app-description">
+                            Encuentra profesionales calificados para cualquier servicio que necesites, rápido y confiable.
+                        </p>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="features-section">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="feature-text">
+                                <div class="feature-title">Búsqueda Inteligente</div>
+                                <div class="feature-desc">Encuentra el profesional perfecto en segundos</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <div class="feature-title">Profesionales Verificados</div>
+                                <div class="feature-desc">Todos nuestros expertos están certificados</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="feature-text">
+                                <div class="feature-title">Disponibilidad 24/7</div>
+                                <div class="feature-desc">Servicios de emergencia siempre disponibles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Action Buttons -->
+                    <div class="action-section">
+                        <a href="android-registro.html" class="action-btn btn-primary">
+                            Crear Cuenta Gratis
+                        </a>
+                        
+                        <div class="divider">
+                            <span>o</span>
+                        </div>
+                        
+                        <a href="android-login.html" class="action-btn btn-secondary">
+                            Iniciar Sesión
+                        </a>
+                    </div>
+
+                    <!-- Quick Access -->
+                    <div class="quick-access">
+                        <div class="quick-access-title">Acceso rápido</div>
+                        <div class="quick-options">
+                            <a href="android-busqueda-servicio.html" class="quick-option">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </a>
+                            <a href="android-servicios-emergencia.html" class="quick-option">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Emergencia</span>
+                            </a>
+                            <a href="android-como-funciona.html" class="quick-option">
+                                <i class="fas fa-question-circle"></i>
+                                <span>¿Cómo funciona?</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <div class="footer-text">
+                            Al continuar, aceptas nuestros términos y condiciones
+                        </div>
+                        <div class="footer-links">
+                            <a href="#" class="footer-link" onclick="showTerms()">Términos</a>
+                            <a href="#" class="footer-link" onclick="showPrivacy()">Privacidad</a>
+                            <a href="#" class="footer-link" onclick="showSupport()">Soporte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Toggle
+        function toggleMode() {
+            if (confirm('¿Quieres acceder como profesional?\n\nSerás redirigido al portal de profesionales donde podrás registrarte para ofrecer tus servicios.')) {
+                alert('Redirigiendo al Portal de Profesionales...\n\n👨‍💼 Registro de profesionales\n📋 Crear perfil profesional\n💼 Gestionar servicios');
+                // In real app: window.location.href = 'android-registro-profesional.html';
+            }
+        }
+
+        // Navigation Functions
+        function navigateToRegister() {
+            alert('Redirigiendo a Registro de Usuario...\n\n📝 Crear cuenta gratuita\n👤 Configurar perfil\n🔍 Comenzar a buscar servicios');
+            // In real app: window.location.href = 'android-registro.html';
+        }
+
+        function navigateToLogin() {
+            alert('Redirigiendo a Inicio de Sesión...\n\n📧 Ingresa tu email\n🔑 Contraseña\n🏠 Accede a tu dashboard');
+            // In real app: window.location.href = 'android-login.html';
+        }
+
+        function navigateToSearch() {
+            alert('Acceso rápido a Búsqueda...\n\n🔍 Buscar sin registro\n⚡ Resultados inmediatos\n💡 Crear cuenta para contactar');
+            // In real app: window.location.href = 'android-busqueda-servicio.html';
+        }
+
+        function navigateToEmergency() {
+            alert('Servicios de Emergencia 24/7:\n\n🚨 Contacto inmediato\n⚡ Respuesta en minutos\n📞 Llamada directa\n💬 Chat urgente');
+            // In real app: window.location.href = 'android-servicios-emergencia.html';
+        }
+
+        function navigateToHowItWorks() {
+            alert('¿Cómo funciona TEVP?\n\n1️⃣ Busca el servicio que necesitas\n2️⃣ Compara profesionales\n3️⃣ Contacta y agenda\n4️⃣ Califica tu experiencia');
+            // In real app: window.location.href = 'android-como-funciona.html';
+        }
+
+        // Footer Functions
+        function showTerms() {
+            alert('Términos y Condiciones:\n\n📋 Uso de la plataforma\n🔒 Responsabilidades\n⚖️ Derechos y obligaciones\n📞 Contacto legal');
+        }
+
+        function showPrivacy() {
+            alert('Política de Privacidad:\n\n🔐 Protección de datos\n👤 Información personal\n🍪 Uso de cookies\n📊 Compartir información');
+        }
+
+        function showSupport() {
+            alert('Centro de Soporte:\n\n❓ Preguntas frecuentes\n💬 Chat en vivo\n📧 Email: soporte@tevp.cl\n📞 Teléfono: +56 2 1234 5678');
+        }
+
+        // Animation on load
+        window.addEventListener('load', function() {
+            console.log('Welcome screen loaded');
+            
+            // Add entrance animations
+            setTimeout(() => {
+                document.querySelector('.app-logo').style.animation = 'logoFloat 3s ease-in-out infinite';
+            }, 1000);
+        });
+
+        // Add click handlers to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Primary button click handler
+            const primaryBtn = document.querySelector('.btn-primary');
+            if (primaryBtn) {
+                primaryBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navigateToRegister();
+                });
+            }
+
+            // Secondary button click handler
+            const secondaryBtn = document.querySelector('.btn-secondary');
+            if (secondaryBtn) {
+                secondaryBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navigateToLogin();
+                });
+            }
+
+            // Quick options click handlers
+            const quickOptions = document.querySelectorAll('.quick-option');
+            quickOptions.forEach((option, index) => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switch(index) {
+                        case 0: navigateToSearch(); break;
+                        case 1: navigateToEmergency(); break;
+                        case 2: navigateToHowItWorks(); break;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
