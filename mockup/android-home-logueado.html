@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Home Logueado</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mobile Frame CSS -->
+    <link rel="stylesheet" href="css/mobile-frame.css">
+</head>
+<body>
+    <!-- Phone Frame Container -->
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="signal-bars">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                    <span class="carrier">Movistar</span>
+                    <span class="wifi-icon">📶</span>
+                </div>
+                <div class="status-center">
+                    <span class="time">14:32</span>
+                </div>
+                <div class="status-right">
+                    <span class="battery-percentage">85%</span>
+                    <span class="battery-icon">🔋</span>
+                </div>
+            </div>
+
+            <!-- App Content -->
+            <div class="app-content">
+                <!-- Header -->
+                <div class="app-header">
+                    <button class="menu-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title">Mi Dashboard</h1>
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+
+                <!-- Welcome Card -->
+                <div class="card welcome-card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/60x60/007bff/ffffff?text=JD" alt="Usuario" class="profile-avatar me-3">
+                            <div>
+                                <h5 class="card-title mb-1">¡Hola, Juan!</h5>
+                                <p class="card-text text-muted mb-0">Bienvenido de vuelta</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="section-title">
+                    <h6>Acciones Rápidas</h6>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <div class="quick-action-card" onclick="navigateTo('buscar-servicios')">
+                            <i class="fas fa-search icon"></i>
+                            <span>Buscar Servicios</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="quick-action-card" onclick="navigateTo('mis-contrataciones')">
+                            <i class="fas fa-history icon"></i>
+                            <span>Mis Servicios</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Services -->
+                <div class="section-title">
+                    <h6>Servicios Activos</h6>
+                </div>
+                <div class="service-card mb-3">
+                    <div class="d-flex">
+                        <img src="https://via.placeholder.com/50x50/28a745/ffffff?text=🔧" alt="Técnico" class="service-avatar me-3">
+                        <div class="flex-grow-1">
+                            <h6 class="service-title">Reparación de Calefón</h6>
+                            <p class="service-professional">Carlos Mendez - Plomero</p>
+                            <div class="service-status active">
+                                <i class="fas fa-clock me-1"></i>
+                                En progreso - Llegada: 15:30
+                            </div>
+                        </div>
+                        <button class="contact-btn">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section-title">
+                    <h6>Actividad Reciente</h6>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p class="activity-title">Servicio de Electricidad completado</p>
+                        <p class="activity-date">Hace 2 días</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p class="activity-title">Pago pendiente - Servicio de Plomería</p>
+                        <p class="activity-date">Hace 1 semana</p>
+                    </div>
+                </div>
+
+                <!-- Recommended Services -->
+                <div class="section-title">
+                    <h6>Recomendados para ti</h6>
+                </div>
+                <div class="recommended-service">
+                    <div class="d-flex align-items-center">
+                        <div class="service-category">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1">Pintura y Decoración</h6>
+                            <p class="text-muted mb-0">Renovación de espacios</p>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm">Ver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </button>
+                <button class="nav-item" onclick="navigateTo('buscar')">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </button>
+                <button class="nav-item" onclick="navigateTo('servicios')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Servicios</span>
+                </button>
+                <button class="nav-item" onclick="navigateTo('perfil')">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>TEVP</h3>
+            <button class="close-btn" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="android-home-logueado.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>
+            <li><a href="android-mis-contrataciones.html"><i class="fas fa-history"></i> Mis Contrataciones</a></li>
+            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Favoritos</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Pagos</a></li>
+            <li><a href="#"><i class="fas fa-headset"></i> Soporte</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+            <li><a href="galeria-mobile.html"><i class="fas fa-arrow-left"></i> Volver a Galería</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Navigation JS -->
+    <script src="js/navigation.js"></script>
+
+    <style>
+        .welcome-card {
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            color: white;
+            border: none;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .section-title {
+            margin: 20px 0 10px 0;
+        }
+
+        .section-title h6 {
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quick-action-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-color: #0056b3;
+        }
+
+        .quick-action-card .icon {
+            font-size: 24px;
+            color: #0056b3;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .quick-action-card span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .service-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .service-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .service-professional {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .service-status {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .service-status.active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .contact-btn {
+            background: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+
+        .activity-icon.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .activity-icon.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .activity-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+            color: #333;
+        }
+
+        .activity-date {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .recommended-service {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .service-category {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0056b3, #004494);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+
+    <script>
+        function navigateTo(page) {
+            console.log('Navegando a:', page);
+            // Simular navegación
+            switch(page) {
+                case 'buscar-servicios':
+                    window.location.href = 'android-busqueda-servicios.html';
+                    break;
+                case 'mis-contrataciones':
+                    window.location.href = 'android-mis-contrataciones.html';
+                    break;
+                case 'perfil':
+                    window.location.href = 'android-perfil-usuario.html';
+                    break;
+                default:
+                    console.log('Página no encontrada:', page);
+            }
+        }
+    </script>
+</body>
+</html>

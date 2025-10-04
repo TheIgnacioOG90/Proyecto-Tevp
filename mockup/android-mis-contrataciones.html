@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Mis Contrataciones</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mobile Frame CSS -->
+    <link rel="stylesheet" href="css/mobile-frame.css">
+</head>
+<body>
+    <!-- Phone Frame Container -->
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="signal-bars">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                    <span class="carrier">Movistar</span>
+                    <span class="wifi-icon">📶</span>
+                </div>
+                <div class="status-center">
+                    <span class="time">14:38</span>
+                </div>
+                <div class="status-right">
+                    <span class="battery-percentage">83%</span>
+                    <span class="battery-icon">🔋</span>
+                </div>
+            </div>
+
+            <!-- App Content -->
+            <div class="app-content">
+                <!-- Header -->
+                <div class="app-header">
+                    <button class="menu-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title">Mis Contrataciones</h1>
+                    <button class="filter-btn" onclick="showFilters()">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterServices('all')">Todos</button>
+                    <button class="tab-btn" onclick="filterServices('active')">Activos</button>
+                    <button class="tab-btn" onclick="filterServices('completed')">Completados</button>
+                    <button class="tab-btn" onclick="filterServices('cancelled')">Cancelados</button>
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Activos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Completados</div>
+                    </div>
+                </div>
+
+                <!-- Services List -->
+                <div class="services-list">
+                    <!-- Active Service -->
+                    <div class="service-item active" data-status="active">
+                        <div class="service-header">
+                            <div class="service-status-badge active">
+                                <i class="fas fa-clock"></i>
+                                En Progreso
+                            </div>
+                            <div class="service-date">Hoy, 15:30</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/50x50/0056b3/ffffff?text=CM" alt="Carlos Mendez" class="service-professional-avatar">
+                                <div class="service-details flex-grow-1">
+                                    <h6 class="service-title">Reparación de Calefón</h6>
+                                    <p class="service-professional">Carlos Méndez - Plomero</p>
+                                    <div class="service-address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Av. Corrientes 1234, CABA</span>
+                                    </div>
+                                </div>
+                                <div class="service-price">$10,500</div>
+                            </div>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-outline-primary btn-sm" onclick="contactProfessional()">
+                                <i class="fas fa-phone"></i> Contactar
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="trackService()">
+                                <i class="fas fa-map-marked-alt"></i> Seguir
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pending Service -->
+                    <div class="service-item pending" data-status="active">
+                        <div class="service-header">
+                            <div class="service-status-badge pending">
+                                <i class="fas fa-hourglass-half"></i>
+                                Pendiente
+                            </div>
+                            <div class="service-date">Mañana, 09:00</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/50x50/28a745/ffffff?text=LR" alt="Luis Rodriguez" class="service-professional-avatar">
+                                <div class="service-details flex-grow-1">
+                                    <h6 class="service-title">Instalación Eléctrica</h6>
+                                    <p class="service-professional">Luis Rodríguez - Electricista</p>
+                                    <div class="service-address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>San Martín 567, Vicente López</span>
+                                    </div>
+                                </div>
+                                <div class="service-price">$15,800</div>
+                            </div>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-outline-danger btn-sm" onclick="cancelService()">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="rescheduleService()">
+                                <i class="fas fa-calendar-alt"></i> Reprogramar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Completed Service -->
+                    <div class="service-item completed" data-status="completed">
+                        <div class="service-header">
+                            <div class="service-status-badge completed">
+                                <i class="fas fa-check"></i>
+                                Completado
+                            </div>
+                            <div class="service-date">15 Nov, 2024</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/50x50/dc3545/ffffff?text=MG" alt="Mario Gonzalez" class="service-professional-avatar">
+                                <div class="service-details flex-grow-1">
+                                    <h6 class="service-title">Reparación de Grifo</h6>
+                                    <p class="service-professional">Mario González - Plomero</p>
+                                    <div class="service-address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Rivadavia 890, Caballito</span>
+                                    </div>
+                                </div>
+                                <div class="service-price">$6,200</div>
+                            </div>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-outline-warning btn-sm" onclick="rateService()">
+                                <i class="fas fa-star"></i> Calificar
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" onclick="rehire()">
+                                <i class="fas fa-redo"></i> Contratar otra vez
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Another Completed Service -->
+                    <div class="service-item completed" data-status="completed">
+                        <div class="service-header">
+                            <div class="service-status-badge completed">
+                                <i class="fas fa-check"></i>
+                                Completado
+                            </div>
+                            <div class="service-date">10 Nov, 2024</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/50x50/17a2b8/ffffff?text=AP" alt="Ana Perez" class="service-professional-avatar">
+                                <div class="service-details flex-grow-1">
+                                    <h6 class="service-title">Limpieza Profunda</h6>
+                                    <p class="service-professional">Ana Pérez - Limpieza</p>
+                                    <div class="service-address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Belgrano 445, Núñez</span>
+                                    </div>
+                                </div>
+                                <div class="service-price">$12,000</div>
+                            </div>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-outline-warning btn-sm" onclick="rateService()">
+                                <i class="fas fa-star"></i> Calificar
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" onclick="rehire()">
+                                <i class="fas fa-redo"></i> Contratar otra vez
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cancelled Service -->
+                    <div class="service-item cancelled" data-status="cancelled">
+                        <div class="service-header">
+                            <div class="service-status-badge cancelled">
+                                <i class="fas fa-ban"></i>
+                                Cancelado
+                            </div>
+                            <div class="service-date">8 Nov, 2024</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/50x50/6c757d/ffffff?text=JS" alt="Juan Silva" class="service-professional-avatar">
+                                <div class="service-details flex-grow-1">
+                                    <h6 class="service-title">Pintura Interior</h6>
+                                    <p class="service-professional">Juan Silva - Pintor</p>
+                                    <div class="service-address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Lavalle 223, Microcentro</span>
+                                    </div>
+                                </div>
+                                <div class="service-price">$18,500</div>
+                            </div>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-outline-primary btn-sm" onclick="contactSupport()">
+                                <i class="fas fa-headset"></i> Soporte
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" onclick="rehire()">
+                                <i class="fas fa-search"></i> Buscar otro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-item" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </button>
+                <button class="nav-item" onclick="navigateTo('buscar')">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </button>
+                <button class="nav-item active">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Servicios</span>
+                </button>
+                <button class="nav-item" onclick="navigateTo('perfil')">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>TEVP</h3>
+            <button class="close-btn" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="android-home-logueado.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>
+            <li><a href="android-detalle-profesional.html"><i class="fas fa-user-tie"></i> Detalle Profesional</a></li>
+            <li><a href="android-mis-contrataciones.html" class="active"><i class="fas fa-history"></i> Mis Contrataciones</a></li>
+            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Favoritos</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Pagos</a></li>
+            <li><a href="#"><i class="fas fa-headset"></i> Soporte</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+            <li><a href="galeria-mobile.html"><i class="fas fa-arrow-left"></i> Volver a Galería</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Navigation JS -->
+    <script src="js/navigation.js"></script>
+
+    <style>
+        .filter-tabs {
+            display: flex;
+            background: white;
+            margin: 15px;
+            border-radius: 12px;
+            padding: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #0056b3;
+            color: white;
+        }
+
+        .summary-stats {
+            display: flex;
+            gap: 10px;
+            margin: 0 15px 20px 15px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0056b3;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .services-list {
+            margin: 0 15px;
+        }
+
+        .service-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .service-status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .service-status-badge.active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .service-status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .service-status-badge.completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .service-status-badge.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .service-date {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .service-professional-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .service-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .service-professional {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .service-address {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .service-address i {
+            margin-right: 5px;
+        }
+
+        .service-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #0056b3;
+            align-self: flex-start;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f8f9fa;
+        }
+
+        .service-actions .btn {
+            flex: 1;
+            font-size: 0.8rem;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Ajuste para la navegación inferior */
+        .app-content {
+            padding-bottom: 80px;
+        }
+
+        /* Ocultar elementos según filtro */
+        .service-item.hidden {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function filterServices(status) {
+            // Remover clase active de todos los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Agregar clase active al botón clickeado
+            event.target.classList.add('active');
+            
+            // Mostrar/ocultar servicios según el filtro
+            const services = document.querySelectorAll('.service-item');
+            services.forEach(service => {
+                if (status === 'all') {
+                    service.classList.remove('hidden');
+                } else {
+                    const serviceStatus = service.getAttribute('data-status');
+                    if (serviceStatus === status) {
+                        service.classList.remove('hidden');
+                    } else {
+                        service.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function contactProfessional() {
+            alert('Contactando profesional...');
+        }
+
+        function trackService() {
+            alert('Abriendo seguimiento en tiempo real...');
+        }
+
+        function cancelService() {
+            if (confirm('¿Estás seguro de que quieres cancelar este servicio?')) {
+                alert('Servicio cancelado');
+            }
+        }
+
+        function rescheduleService() {
+            alert('Abriendo calendario para reprogramar...');
+        }
+
+        function rateService() {
+            alert('Abriendo sistema de calificación...');
+        }
+
+        function rehire() {
+            alert('Redirigiendo para contratar nuevamente...');
+        }
+
+        function contactSupport() {
+            alert('Contactando soporte técnico...');
+        }
+
+        function showFilters() {
+            alert('Mostrando filtros avanzados...');
+        }
+
+        function navigateTo(page) {
+            switch(page) {
+                case 'home':
+                    window.location.href = 'android-home-logueado.html';
+                    break;
+                case 'buscar':
+                    window.location.href = 'android-busqueda-servicios.html';
+                    break;
+                case 'perfil':
+                    window.location.href = 'android-perfil-usuario.html';
+                    break;
+                default:
+                    console.log('Página no encontrada:', page);
+            }
+        }
+    </script>
+</body>
+</html>

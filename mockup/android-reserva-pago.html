@@ -1,0 +1,1316 @@
+<!DOCTYPE html><!DOCTYPE html>
+
+<html lang="es"><html lang="es">
+
+<head><head>
+
+    <meta charset="UTF-8">    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TEVP - Reserva y Pago</title>    <title>TEVP - Reserva y Pago</title>
+
+        
+
+    <!-- Bootstrap CSS -->    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mobile Frame CSS -->    <!-- Mobile Frame CSS -->
+
+    <link rel="stylesheet" href="css/mobile-frame.css">    <link rel="stylesheet" href="css/mobile-frame.css">
+
+</head></head>
+
+<body><body>
+
+    <!-- Phone Frame Container -->    <!-- Phone Frame Container -->
+
+    <div class="phone-frame">    <div class="phone-frame">
+
+        <div class="phone-screen">        <div class="phone-screen">
+
+            <!-- Status Bar -->            <!-- Status Bar -->
+
+            <div class="status-bar">            <div class="status-bar">
+
+                <div class="status-left">                <div class="status-left">
+
+                    <span class="signal-bars">                    <span class="signal-bars">
+
+                        <span class="bar"></span>                        <span class="bar"></span>
+
+                        <span class="bar"></span>                        <span class="bar"></span>
+
+                        <span class="bar"></span>                        <span class="bar"></span>
+
+                        <span class="bar"></span>                        <span class="bar"></span>
+
+                    </span>                    </span>
+
+                    <span class="carrier">Movistar</span>                    <span class="carrier">Movistar</span>
+
+                    <span class="wifi-icon">📶</span>                    <span class="wifi-icon">📶</span>
+
+                </div>                </div>
+
+                <div class="status-center">                <div class="status-center">
+
+                    <span class="time">14:50</span>                    <span class="time">14:50</span>
+
+                </div>                </div>
+
+                <div class="status-right">                <div class="status-right">
+
+                    <span class="battery-percentage">78%</span>                    <span class="battery-percentage">78%</span>
+
+                    <span class="battery-icon">🔋</span>                    <span class="battery-icon">🔋</span>
+
+                </div>                </div>
+
+            </div>            </div>
+
+
+
+            <!-- App Content -->            <!-- App Content -->
+
+            <div class="app-content">            <div class="app-content">
+
+                <!-- Header -->
+
+                <div class="app-header">        .header-nav {
+
+                    <div class="header-content">            display: flex;
+
+                        <button class="menu-btn" onclick="toggleSidebar()">            align-items: center;
+
+                            <i class="fas fa-bars"></i>            justify-content: space-between;
+
+                        </button>            margin-bottom: 1rem;
+
+                        <h1 class="header-title">Reserva y Pago</h1>        }
+
+                        <button class="notification-btn">
+
+                            <i class="fas fa-bell"></i>        .menu-btn, .back-btn {
+
+                            <span class="notification-badge">3</span>            background: rgba(255, 255, 255, 0.2);
+
+                        </button>            border: none;
+
+                    </div>            color: white;
+
+                </div>            border-radius: 50%;
+
+            width: 40px;
+
+                <!-- Sidebar Overlay -->            height: 40px;
+
+                <div class="sidebar-overlay" onclick="toggleSidebar()"></div>            font-size: 1.1rem;
+
+            backdrop-filter: blur(10px);
+
+                <!-- Sidebar -->            cursor: pointer;
+
+                <div class="sidebar" id="sidebar">        }
+
+                    <div class="sidebar-header">
+
+                        <div class="user-info">        .header-title {
+
+                            <div class="user-avatar">            font-size: 1.3rem;
+
+                                <i class="fas fa-user"></i>            font-weight: 700;
+
+                            </div>            margin: 0;
+
+                            <div class="user-details">        }
+
+                                <div class="user-name">Juan Carlos</div>
+
+                                <div class="user-email">juan@email.com</div>        /* Progress indicator */
+
+                            </div>        .progress-section {
+
+                        </div>            background: rgba(255, 255, 255, 0.15);
+
+                        <button class="close-sidebar" onclick="toggleSidebar()">            border-radius: 15px;
+
+                            <i class="fas fa-times"></i>            padding: 15px;
+
+                        </button>            margin-bottom: 15px;
+
+                    </div>        }
+
+                    <nav class="sidebar-nav">
+
+                        <ul>        .progress-steps {
+
+                            <li><a href="android-home-logueado.html"><i class="fas fa-home"></i> Inicio</a></li>            display: flex;
+
+                            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>            justify-content: space-between;
+
+                            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>            align-items: center;
+
+                            <li><a href="android-mis-contrataciones.html"><i class="fas fa-clipboard-list"></i> Mis Contrataciones</a></li>        }
+
+                            <li><a href="android-calificaciones-resenas.html"><i class="fas fa-star"></i> Calificaciones</a></li>
+
+                            <li class="active"><a href="android-reserva-pago.html"><i class="fas fa-credit-card"></i> Reserva y Pago</a></li>        .step {
+
+                            <li><a href="android-ganancias-dinero.html"><i class="fas fa-dollar-sign"></i> Ganancias</a></li>            flex: 1;
+
+                            <li><a href="android-retiro-dinero.html"><i class="fas fa-money-bill-wave"></i> Retiros</a></li>            text-align: center;
+
+                            <li><a href="android-trabajos-realizados.html"><i class="fas fa-check-circle"></i> Trabajos</a></li>            color: rgba(255, 255, 255, 0.6);
+
+                            <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Salir</a></li>            font-size: 0.8rem;
+
+                        </ul>        }
+
+                    </nav>
+
+                </div>        .step.active {
+
+            color: white;
+
+                <!-- Main Content -->            font-weight: 600;
+
+                <div class="main-content">        }
+
+                    <!-- Reserva y pago específico -->
+
+                    <div class="booking-container">        .step-icon {
+
+                        <div class="booking-section">            width: 30px;
+
+                            <h3 class="section-title">Confirmar Reserva</h3>            height: 30px;
+
+                            <div class="service-summary-card">            border-radius: 50%;
+
+                                <div class="service-info">            background: rgba(255, 255, 255, 0.2);
+
+                                    <div class="service-image">            display: flex;
+
+                                        <img src="images/servicio1.jpg" alt="Servicio" class="img-fluid">            align-items: center;
+
+                                    </div>            justify-content: center;
+
+                                    <div class="service-details">            margin: 0 auto 5px;
+
+                                        <h4>Plomería Residencial</h4>            font-size: 0.9rem;
+
+                                        <p class="service-provider">Carlos Mendoza</p>        }
+
+                                        <div class="service-rating">
+
+                                            <i class="fas fa-star text-warning"></i>        .step.active .step-icon {
+
+                                            <i class="fas fa-star text-warning"></i>            background: rgba(255, 255, 255, 0.4);
+
+                                            <i class="fas fa-star text-warning"></i>        }
+
+                                            <i class="fas fa-star text-warning"></i>
+
+                                            <i class="fas fa-star text-warning"></i>        /* Contenido principal */
+
+                                            <span class="rating-text">4.8 (124 reseñas)</span>        .booking-content {
+
+                                        </div>            flex: 1;
+
+                                    </div>            padding: 20px;
+
+                                </div>        }
+
+                                <div class="service-price">
+
+                                    <span class="price">$35/hora</span>        /* Resumen del profesional */
+
+                                </div>        .professional-summary {
+
+                            </div>            background: white;
+
+                        </div>            border-radius: 15px;
+
+            padding: 20px;
+
+                        <div class="booking-section">            margin-bottom: 20px;
+
+                            <h3 class="section-title">Detalles de la Reserva</h3>            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+                            <div class="booking-details-card">        }
+
+                                <div class="detail-item">
+
+                                    <i class="fas fa-calendar-alt"></i>        .professional-info {
+
+                                    <span class="detail-label">Fecha:</span>            display: flex;
+
+                                    <span class="detail-value">15 de Marzo, 2024</span>            align-items: center;
+
+                                </div>            gap: 15px;
+
+                                <div class="detail-item">        }
+
+                                    <i class="fas fa-clock"></i>
+
+                                    <span class="detail-label">Hora:</span>        .professional-avatar {
+
+                                    <span class="detail-value">10:00 AM - 12:00 PM</span>            width: 60px;
+
+                                </div>            height: 60px;
+
+                                <div class="detail-item">            border-radius: 50%;
+
+                                    <i class="fas fa-map-marker-alt"></i>            object-fit: cover;
+
+                                    <span class="detail-label">Ubicación:</span>        }
+
+                                    <span class="detail-value">Av. Principal 123, Ciudad</span>
+
+                                </div>        .professional-details h3 {
+
+                                <div class="detail-item">            font-size: 1.1rem;
+
+                                    <i class="fas fa-tools"></i>            font-weight: 600;
+
+                                    <span class="detail-label">Descripción:</span>            color: #333;
+
+                                    <span class="detail-value">Reparación de tubería con fuga en cocina</span>            margin: 0 0 5px 0;
+
+                                </div>        }
+
+                            </div>
+
+                        </div>        .professional-details p {
+
+            font-size: 0.9rem;
+
+                        <div class="booking-section">            color: #666;
+
+                            <h3 class="section-title">Resumen de Costos</h3>            margin: 0 0 8px 0;
+
+                            <div class="cost-summary-card">        }
+
+                                <div class="cost-item">
+
+                                    <span class="cost-label">Servicio (2 horas)</span>        .rating {
+
+                                    <span class="cost-value">$70.00</span>            display: flex;
+
+                                </div>            align-items: center;
+
+                                <div class="cost-item">            gap: 5px;
+
+                                    <span class="cost-label">Comisión de servicio</span>            font-size: 0.85rem;
+
+                                    <span class="cost-value">$7.00</span>        }
+
+                                </div>
+
+                                <div class="cost-item">        .stars {
+
+                                    <span class="cost-label">Materiales estimados</span>            color: #ffc107;
+
+                                    <span class="cost-value">$15.00</span>        }
+
+                                </div>
+
+                                <div class="cost-item total">        /* Secciones principales */
+
+                                    <span class="cost-label">Total</span>        .section {
+
+                                    <span class="cost-value">$92.00</span>            background: white;
+
+                                </div>            border-radius: 15px;
+
+                            </div>            padding: 20px;
+
+                        </div>            margin-bottom: 20px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+                        <div class="booking-section">        }
+
+                            <h3 class="section-title">Método de Pago</h3>
+
+                            <div class="payment-methods">        .section-title {
+
+                                <div class="payment-method active">            font-size: 1.1rem;
+
+                                    <i class="fas fa-credit-card"></i>            font-weight: 600;
+
+                                    <span>Tarjeta terminada en 4532</span>            color: #333;
+
+                                    <span class="payment-selected">✓</span>            margin: 0 0 15px 0;
+
+                                </div>        }
+
+                                <div class="payment-method">
+
+                                    <i class="fab fa-paypal"></i>        /* Servicio seleccionado */
+
+                                    <span>PayPal</span>        .service-item {
+
+                                </div>            display: flex;
+
+                                <div class="payment-method">            align-items: center;
+
+                                    <i class="fas fa-wallet"></i>            gap: 15px;
+
+                                    <span>Efectivo</span>            padding: 15px;
+
+                                </div>            background: #f8f9fa;
+
+                            </div>            border-radius: 12px;
+
+                        </div>            margin-bottom: 15px;
+
+        }
+
+                        <div class="booking-actions">
+
+                            <button class="btn btn-outline-secondary btn-cancel">        .service-icon {
+
+                                <i class="fas fa-times"></i> Cancelar            width: 50px;
+
+                            </button>            height: 50px;
+
+                            <button class="btn btn-primary btn-confirm">            background: linear-gradient(135deg, #0056b3, #004494);
+
+                                <i class="fas fa-check"></i> Confirmar y Pagar            border-radius: 12px;
+
+                            </button>            display: flex;
+
+                        </div>            align-items: center;
+
+                    </div>            justify-content: center;
+
+                </div>            color: white;
+
+            font-size: 1.3rem;
+
+                <!-- Bottom Navigation -->        }
+
+                <div class="bottom-nav">
+
+                    <a href="android-home-logueado.html" class="nav-item">        .service-info h4 {
+
+                        <i class="fas fa-home"></i>            font-size: 1rem;
+
+                        <span>Inicio</span>            font-weight: 600;
+
+                    </a>            color: #333;
+
+                    <a href="android-busqueda-servicios.html" class="nav-item">            margin: 0 0 5px 0;
+
+                        <i class="fas fa-search"></i>        }
+
+                        <span>Buscar</span>
+
+                    </a>        .service-info p {
+
+                    <a href="android-mis-contrataciones.html" class="nav-item">            font-size: 0.85rem;
+
+                        <i class="fas fa-clipboard-list"></i>            color: #666;
+
+                        <span>Servicios</span>            margin: 0;
+
+                    </a>        }
+
+                    <a href="android-reserva-pago.html" class="nav-item active">
+
+                        <i class="fas fa-credit-card"></i>        .service-price {
+
+                        <span>Pago</span>            font-size: 1.1rem;
+
+                    </a>            font-weight: 700;
+
+                    <a href="android-perfil-usuario.html" class="nav-item">            color: #0056b3;
+
+                        <i class="fas fa-user"></i>        }
+
+                        <span>Perfil</span>
+
+                    </a>        /* Fecha y hora */
+
+                </div>        .datetime-grid {
+
+            </div>            display: grid;
+
+        </div>            grid-template-columns: 1fr 1fr;
+
+    </div>            gap: 15px;
+
+        }
+
+    <!-- Scripts -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>        .datetime-item label {
+
+    <script src="js/navigation.js"></script>            display: block;
+
+            font-size: 0.9rem;
+
+    <style>            font-weight: 500;
+
+        /* Reserva y pago específico */            color: #666;
+
+        .booking-container {            margin-bottom: 5px;
+
+            padding: 20px;        }
+
+            height: 100%;
+
+            overflow-y: auto;        .form-control, .form-select {
+
+            padding-bottom: 100px;            border-radius: 10px;
+
+        }            border: 1px solid #ddd;
+
+            font-size: 0.9rem;
+
+        .booking-section {            padding: 10px;
+
+            margin-bottom: 25px;        }
+
+        }
+
+        /* Dirección */
+
+        .section-title {        .address-input {
+
+            font-size: 1.1rem;            position: relative;
+
+            font-weight: 600;            margin-bottom: 10px;
+
+            color: #333;        }
+
+            margin-bottom: 15px;
+
+            display: flex;        .address-input i {
+
+            align-items: center;            position: absolute;
+
+        }            left: 12px;
+
+            top: 50%;
+
+        .section-title:before {            transform: translateY(-50%);
+
+            content: '';            color: #666;
+
+            width: 4px;        }
+
+            height: 20px;
+
+            background: linear-gradient(135deg, #0056b3, #004494);        .address-input .form-control {
+
+            margin-right: 10px;            padding-left: 40px;
+
+            border-radius: 2px;        }
+
+        }
+
+        .btn-map {
+
+        .service-summary-card {            background: #f8f9fa;
+
+            background: white;            border: 1px solid #ddd;
+
+            border-radius: 12px;            color: #666;
+
+            padding: 20px;            padding: 8px 15px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);            border-radius: 10px;
+
+            margin-bottom: 20px;            font-size: 0.85rem;
+
+        }            display: flex;
+
+            align-items: center;
+
+        .service-info {            gap: 8px;
+
+            display: flex;        }
+
+            align-items: center;
+
+            margin-bottom: 15px;        /* Resumen de costos */
+
+        }        .cost-item {
+
+            display: flex;
+
+        .service-image {            justify-content: space-between;
+
+            width: 60px;            align-items: center;
+
+            height: 60px;            padding: 10px 0;
+
+            border-radius: 10px;            border-bottom: 1px solid #f0f0f0;
+
+            overflow: hidden;        }
+
+            margin-right: 15px;
+
+        }        .cost-item:last-child {
+
+            border-bottom: none;
+
+        .service-image img {        }
+
+            width: 100%;
+
+            height: 100%;        .cost-total {
+
+            object-fit: cover;            display: flex;
+
+        }            justify-content: space-between;
+
+            align-items: center;
+
+        .service-details h4 {            padding: 15px 0 0 0;
+
+            font-size: 1.1rem;            font-size: 1.1rem;
+
+            font-weight: 600;            font-weight: 700;
+
+            color: #333;            color: #0056b3;
+
+            margin-bottom: 5px;            border-top: 2px solid #0056b3;
+
+        }            margin-top: 10px;
+
+        }
+
+        .service-provider {
+
+            color: #666;        /* Métodos de pago */
+
+            font-size: 0.9rem;        .payment-methods {
+
+            margin-bottom: 5px;            display: flex;
+
+        }            flex-direction: column;
+
+            gap: 10px;
+
+        .service-rating {            margin-bottom: 15px;
+
+            display: flex;        }
+
+            align-items: center;
+
+            gap: 2px;        .payment-method {
+
+        }            display: flex;
+
+            align-items: center;
+
+        .rating-text {            gap: 15px;
+
+            font-size: 0.8rem;            padding: 15px;
+
+            color: #666;            border: 2px solid #f0f0f0;
+
+            margin-left: 8px;            border-radius: 12px;
+
+        }            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+        .service-price {        }
+
+            text-align: right;
+
+        }        .payment-method.active {
+
+            border-color: #0056b3;
+
+        .price {            background: rgba(0, 86, 179, 0.05);
+
+            font-size: 1.3rem;        }
+
+            font-weight: 700;
+
+            color: #0056b3;        .payment-method i {
+
+        }            font-size: 1.5rem;
+
+            color: #666;
+
+        .booking-details-card {            width: 30px;
+
+            background: white;            text-align: center;
+
+            border-radius: 12px;        }
+
+            padding: 20px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);        .payment-method.active i {
+
+        }            color: #0056b3;
+
+        }
+
+        .detail-item {
+
+            display: flex;        .payment-info {
+
+            align-items: center;            flex: 1;
+
+            padding: 12px 0;        }
+
+            border-bottom: 1px solid #f0f0f0;
+
+        }        .payment-info span {
+
+            display: block;
+
+        .detail-item:last-child {            font-weight: 500;
+
+            border-bottom: none;            color: #333;
+
+        }        }
+
+
+
+        .detail-item i {        .payment-info small {
+
+            width: 20px;            color: #666;
+
+            color: #0056b3;            font-size: 0.8rem;
+
+            margin-right: 15px;        }
+
+        }
+
+        .payment-check {
+
+        .detail-label {            color: #0056b3;
+
+            font-weight: 600;            font-size: 1.2rem;
+
+            color: #333;        }
+
+            min-width: 80px;
+
+            margin-right: 10px;        /* Términos */
+
+        }        .terms-section {
+
+            background: white;
+
+        .detail-value {            border-radius: 15px;
+
+            color: #666;            padding: 20px;
+
+            flex: 1;            margin-bottom: 20px;
+
+        }            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        }
+
+        .cost-summary-card {
+
+            background: white;        .terms-checkbox {
+
+            border-radius: 12px;            display: flex;
+
+            padding: 20px;            align-items: flex-start;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);            gap: 10px;
+
+        }            cursor: pointer;
+
+        }
+
+        .cost-item {
+
+            display: flex;        .terms-checkbox input[type="checkbox"] {
+
+            justify-content: space-between;            margin: 0;
+
+            padding: 10px 0;        }
+
+            border-bottom: 1px solid #f0f0f0;
+
+        }        .terms-checkbox span {
+
+            font-size: 0.9rem;
+
+        .cost-item:last-child {            color: #666;
+
+            border-bottom: none;            line-height: 1.4;
+
+        }        }
+
+
+
+        .cost-item.total {        .terms-checkbox a {
+
+            font-weight: 700;            color: #0056b3;
+
+            font-size: 1.1rem;            text-decoration: none;
+
+            color: #0056b3;        }
+
+            border-top: 2px solid #0056b3;
+
+            margin-top: 10px;        /* Botón de confirmación */
+
+            padding-top: 15px;        .confirmation-section {
+
+        }            background: white;
+
+            border-radius: 15px;
+
+        .cost-label {            padding: 20px;
+
+            color: #333;            margin-bottom: 20px;
+
+        }            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        }
+
+        .cost-value {
+
+            color: #0056b3;        .btn-confirm {
+
+            font-weight: 600;            width: 100%;
+
+        }            background: linear-gradient(135deg, #0056b3, #004494);
+
+            color: white;
+
+        .payment-methods {            border: none;
+
+            background: white;            padding: 15px;
+
+            border-radius: 12px;            border-radius: 12px;
+
+            padding: 15px;            font-size: 1rem;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);            font-weight: 600;
+
+        }            display: flex;
+
+            align-items: center;
+
+        .payment-method {            justify-content: center;
+
+            display: flex;            gap: 10px;
+
+            align-items: center;            cursor: pointer;
+
+            padding: 15px;            transition: all 0.3s ease;
+
+            border: 2px solid #f0f0f0;        }
+
+            border-radius: 8px;
+
+            margin-bottom: 10px;        .btn-confirm:hover {
+
+            cursor: pointer;            transform: translateY(-2px);
+
+            transition: all 0.3s ease;            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+
+        }        }
+
+
+
+        .payment-method:last-child {        .btn-confirm:disabled {
+
+            margin-bottom: 0;            opacity: 0.7;
+
+        }            cursor: not-allowed;
+
+            transform: none;
+
+        .payment-method.active {        }
+
+            border-color: #0056b3;
+
+            background: #f8fbff;        .confirmation-note {
+
+        }            text-align: center;
+
+            font-size: 0.8rem;
+
+        .payment-method i {            color: #666;
+
+            font-size: 1.2rem;            margin: 15px 0 0 0;
+
+            margin-right: 15px;            display: flex;
+
+            color: #0056b3;            align-items: center;
+
+        }            justify-content: center;
+
+            gap: 8px;
+
+        .payment-method span {        }
+
+            flex: 1;
+
+            color: #333;        .confirmation-note i {
+
+        }            color: #28a745;
+
+        }
+
+        .payment-selected {
+
+            color: #0056b3;        /* Sidebar y navegación */
+
+            font-weight: 700;        .sidebar {
+
+        }            position: fixed;
+
+            top: 0;
+
+        .booking-actions {            left: -300px;
+
+            display: flex;            width: 300px;
+
+            gap: 15px;            height: 100%;
+
+            margin-top: 30px;            background: white;
+
+        }            z-index: 1000;
+
+            transition: left 0.3s ease;
+
+        .btn-cancel {            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+
+            flex: 1;        }
+
+            padding: 15px;
+
+            border-radius: 10px;        .sidebar.open {
+
+            font-weight: 600;            left: 0;
+
+        }        }
+
+
+
+        .btn-confirm {        .sidebar-header {
+
+            flex: 2;            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+
+            padding: 15px;            color: white;
+
+            border-radius: 10px;            padding: 30px 20px 20px;
+
+            font-weight: 600;        }
+
+            background: linear-gradient(135deg, #0056b3, #004494);
+
+            border: none;        .sidebar-title {
+
+        }            font-size: 1.2rem;
+
+            font-weight: 700;
+
+        .btn-confirm:hover {            margin: 0;
+
+            background: linear-gradient(135deg, #004494, #003875);        }
+
+        }
+
+    </style>        .sidebar-menu {
+
+            padding: 20px 0;
+
+</body>        }
+
+</html>
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #f8f9fa;
+            color: #0056b3;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Bottom navigation */
+        .bottom-nav {
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.7rem;
+            padding: 5px;
+        }
+
+        .nav-item.active {
+            color: #0056b3;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <div class="mobile-content">
+            <div class="booking-container">
+                <!-- Header con navegación -->
+                <div class="booking-header">
+                    <div class="header-nav">
+                        <button class="menu-btn" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="header-title">Confirmar Reserva</h1>
+                        <button class="back-btn" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Progress indicator -->
+                    <div class="progress-section">
+                        <div class="progress-steps">
+                            <div class="step">
+                                <div class="step-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span>Servicio</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span>Profesional</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <span>Pago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido principal -->
+                <div class="booking-content">
+                    <!-- Resumen del profesional -->
+                    <div class="professional-summary">
+                        <div class="professional-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Carlos Mendez" class="professional-avatar">
+                            <div class="professional-details">
+                                <h3>Carlos Méndez</h3>
+                                <p>Electricista Certificado</p>
+                                <div class="rating">
+                                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                                    <span>4.9 (156 reseñas)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles del servicio -->
+                    <div class="section">
+                        <h3 class="section-title">Servicio Seleccionado</h3>
+                        
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="service-info">
+                                <h4>Instalación Eléctrica</h4>
+                                <p>Instalación de tomacorrientes y switches</p>
+                            </div>
+                            <div class="service-price">
+                                $450
+                            </div>
+                        </div>
+
+                        <!-- Fecha y hora -->
+                        <h4 style="margin: 20px 0 10px 0; font-size: 1rem; font-weight: 600;">Fecha y Hora</h4>
+                        <div class="datetime-grid">
+                            <div class="datetime-item">
+                                <label>Fecha</label>
+                                <input type="date" class="form-control" value="2024-01-15">
+                            </div>
+                            <div class="datetime-item">
+                                <label>Hora</label>
+                                <select class="form-select">
+                                    <option>09:00 AM</option>
+                                    <option selected>10:00 AM</option>
+                                    <option>11:00 AM</option>
+                                    <option>02:00 PM</option>
+                                    <option>03:00 PM</option>
+                                    <option>04:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dirección -->
+                        <h4 style="margin: 20px 0 10px 0; font-size: 1rem; font-weight: 600;">Dirección del Servicio</h4>
+                        <div class="address-input">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" class="form-control" placeholder="Ingresa la dirección completa" value="Av. Principal 123, San José">
+                        </div>
+                        <button class="btn-map">
+                            <i class="fas fa-map"></i>
+                            Ver en mapa
+                        </button>
+
+                        <!-- Notas adicionales -->
+                        <h4 style="margin: 20px 0 10px 0; font-size: 1rem; font-weight: 600;">Notas Adicionales</h4>
+                        <textarea class="form-control" rows="3" placeholder="Describe detalles específicos del trabajo...">Necesito instalar 3 tomacorrientes nuevos en la sala principal</textarea>
+                    </div>
+
+                    <!-- Resumen de costos -->
+                    <div class="section">
+                        <h3 class="section-title">Resumen de Costos</h3>
+                        
+                        <div class="cost-item">
+                            <span>Servicio de Instalación</span>
+                            <span>$450</span>
+                        </div>
+                        
+                        <div class="cost-item">
+                            <span>Materiales (estimado)</span>
+                            <span>$120</span>
+                        </div>
+                        
+                        <div class="cost-item">
+                            <span>Tarifa de plataforma</span>
+                            <span>$30</span>
+                        </div>
+                        
+                        <div class="cost-total">
+                            <span>Total</span>
+                            <span>$600</span>
+                        </div>
+                    </div>
+
+                    <!-- Método de pago -->
+                    <div class="section">
+                        <h3 class="section-title">Método de Pago</h3>
+                        
+                        <div class="payment-methods">
+                            <div class="payment-method active">
+                                <i class="fas fa-credit-card"></i>
+                                <div class="payment-info">
+                                    <span>Tarjeta de Crédito</span>
+                                    <small>**** **** **** 1234</small>
+                                </div>
+                                <i class="fas fa-check-circle payment-check"></i>
+                            </div>
+                            
+                            <div class="payment-method">
+                                <i class="fas fa-university"></i>
+                                <div class="payment-info">
+                                    <span>Transferencia Bancaria</span>
+                                    <small>Pago directo al profesional</small>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div class="payment-info">
+                                    <span>Efectivo</span>
+                                    <small>Pago al completar el servicio</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Términos y condiciones -->
+                    <div class="terms-section">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" checked>
+                            <span>Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a></span>
+                        </label>
+                    </div>
+
+                    <!-- Botón de confirmación -->
+                    <div class="confirmation-section">
+                        <button class="btn-confirm" onclick="confirmBooking()">
+                            <i class="fas fa-check"></i>
+                            Confirmar Reserva y Pagar
+                        </button>
+                        
+                        <p class="confirmation-note">
+                            <i class="fas fa-shield-alt"></i>
+                            Tu pago está protegido. Solo se libera cuando el servicio esté completado.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navegación inferior -->
+                <div class="bottom-nav">
+                    <div class="nav-items">
+                        <a href="#" class="nav-item" onclick="navigateTo('05-home-mobile.html')">
+                            <i class="fas fa-home"></i>
+                            <span>Inicio</span>
+                        </a>
+                        <a href="#" class="nav-item" onclick="navigateTo('android-busqueda-servicios.html')">
+                            <i class="fas fa-search"></i>
+                            <span>Buscar</span>
+                        </a>
+                        <a href="#" class="nav-item active">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Pago</span>
+                        </a>
+                        <a href="#" class="nav-item" onclick="navigateTo('09-perfil-mobile.html')">
+                            <i class="fas fa-user"></i>
+                            <span>Perfil</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar menú hamburguesa -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">TEVP</h2>
+                <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem;">Servicios Técnicos</p>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item" onclick="navigateTo('05-home-mobile.html')">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('06-servicios-mobile.html')">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Servicios</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('android-busqueda-servicios.html')">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('android-profesionales-disponibles.html')">
+                    <i class="fas fa-users"></i>
+                    <span>Profesionales</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('08-pedidos-mobile.html')">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Mis Pedidos</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('09-perfil-mobile.html')">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Mi Perfil</span>
+                </a>
+                <hr style="margin: 10px 20px; border-color: #eee;">
+                <a href="#" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Ayuda</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Configuración</span>
+                </a>
+                <a href="#" class="menu-item" onclick="navigateTo('03-login-mobile.html')">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Overlay para cerrar sidebar -->
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    </div>
+
+    <script>
+        // Funciones del menú hamburguesa
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        // Función de confirmación de reserva
+        function confirmBooking() {
+            const btn = document.querySelector('.btn-confirm');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('¡Reserva confirmada! Te hemos enviado un email con los detalles.');
+                navigateTo('08-pedidos-mobile.html');
+            }, 2000);
+        }
+        
+        // Selección de método de pago
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Actualizar el icono de check
+                document.querySelectorAll('.payment-check').forEach(check => check.style.display = 'none');
+                this.querySelector('.payment-check').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

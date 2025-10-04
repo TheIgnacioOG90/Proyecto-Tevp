@@ -1,478 +1,952 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEVP - Calificaciones y Reseñas | Mockup Android</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
+<!DOCTYPE html><!DOCTYPE html>
 
-        .android-phone {
-            width: 375px;
-            height: 812px;
-            background: #000;
-            border-radius: 25px;
-            padding: 8px;
-            margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            position: relative;
-        }
+<html lang="es"><html lang="es">
 
-        .android-screen {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
+<head><head>
 
-        /* Android Status Bar */
+    <meta charset="UTF-8">    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TEVP - Calificaciones y Reseñas</title>    <title>TEVP - Calificaciones y Reseñas | Mockup Android</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">    <style>
+
+    <!-- Font Awesome -->        body {
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    <!-- Mobile Frame CSS -->            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    <link rel="stylesheet" href="css/mobile-frame.css">            margin: 0;
+
+</head>            padding: 20px;
+
+<body>            min-height: 100vh;
+
+    <!-- Phone Frame Container -->        }
+
+    <div class="phone-frame">
+
+        <div class="phone-screen">        .android-phone {
+
+            <!-- Status Bar -->            width: 375px;
+
+            <div class="status-bar">            height: 812px;
+
+                <div class="status-left">            background: #000;
+
+                    <span class="signal-bars">            border-radius: 25px;
+
+                        <span class="bar"></span>            padding: 8px;
+
+                        <span class="bar"></span>            margin: 0 auto;
+
+                        <span class="bar"></span>            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+
+                        <span class="bar"></span>            position: relative;
+
+                    </span>        }
+
+                    <span class="carrier">Movistar</span>
+
+                    <span class="wifi-icon">📶</span>        .android-screen {
+
+                </div>            width: 100%;
+
+                <div class="status-center">            height: 100%;
+
+                    <span class="time">14:35</span>            background: #fff;
+
+                </div>            border-radius: 20px;
+
+                <div class="status-right">            overflow: hidden;
+
+                    <span class="battery-percentage">82%</span>            position: relative;
+
+                    <span class="battery-icon">🔋</span>        }
+
+                </div>
+
+            </div>        /* Android Status Bar */
+
         .status-bar {
-            height: 44px;
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-            font-size: 14px;
-            font-weight: 500;
-        }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-            color: white;
+            <!-- App Content -->            height: 44px;
+
+            <div class="app-content">            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                <!-- Header -->            color: white;
+
+                <div class="app-header">            display: flex;
+
+                    <div class="header-content">            justify-content: space-between;
+
+                        <button class="menu-btn" onclick="toggleSidebar()">            align-items: center;
+
+                            <i class="fas fa-bars"></i>            padding: 0 15px;
+
+                        </button>            font-size: 14px;
+
+                        <h1 class="header-title">Calificaciones</h1>            font-weight: 500;
+
+                        <button class="notification-btn">        }
+
+                            <i class="fas fa-bell"></i>
+
+                            <span class="notification-badge">2</span>        /* Header */
+
+                        </button>        .header {
+
+                    </div>            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                </div>            color: white;
+
             padding: 15px 20px;
-            display: flex;
-            align-items: center;
+
+                <!-- Sidebar Overlay -->            display: flex;
+
+                <div class="sidebar-overlay" onclick="toggleSidebar()"></div>            align-items: center;
+
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
 
-        .back-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            margin-right: 15px;
-            cursor: pointer;
-        }
+                <!-- Sidebar -->        }
 
-        .header-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-        }
+                <div class="sidebar" id="sidebar">
 
-        /* Rating Overview */
-        .rating-overview {
-            background: white;
-            margin: 20px;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+                    <div class="sidebar-header">        .back-btn {
 
-        .overall-rating {
-            font-size: 48px;
-            font-weight: 700;
-            color: #1976D2;
+                        <div class="user-info">            background: none;
+
+                            <div class="user-avatar">            border: none;
+
+                                <i class="fas fa-user"></i>            color: white;
+
+                            </div>            font-size: 20px;
+
+                            <div class="user-details">            margin-right: 15px;
+
+                                <div class="user-name">Juan Carlos</div>            cursor: pointer;
+
+                                <div class="user-email">juan@email.com</div>        }
+
+                            </div>
+
+                        </div>        .header-title {
+
+                        <button class="close-sidebar" onclick="toggleSidebar()">            font-size: 18px;
+
+                            <i class="fas fa-times"></i>            font-weight: 600;
+
+                        </button>            margin: 0;
+
+                    </div>        }
+
+                    <nav class="sidebar-nav">
+
+                        <ul>        /* Rating Overview */
+
+                            <li><a href="android-home-logueado.html"><i class="fas fa-home"></i> Inicio</a></li>        .rating-overview {
+
+                            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>            background: white;
+
+                            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>            margin: 20px;
+
+                            <li><a href="android-mis-contrataciones.html"><i class="fas fa-clipboard-list"></i> Mis Contrataciones</a></li>            border-radius: 15px;
+
+                            <li class="active"><a href="android-calificaciones-resenas.html"><i class="fas fa-star"></i> Calificaciones</a></li>            padding: 25px;
+
+                            <li><a href="android-reserva-pago.html"><i class="fas fa-credit-card"></i> Reserva y Pago</a></li>            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+                            <li><a href="android-ganancias-dinero.html"><i class="fas fa-dollar-sign"></i> Ganancias</a></li>            text-align: center;
+
+                            <li><a href="android-retiro-dinero.html"><i class="fas fa-money-bill-wave"></i> Retiros</a></li>        }
+
+                            <li><a href="android-trabajos-realizados.html"><i class="fas fa-check-circle"></i> Trabajos</a></li>
+
+                            <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Salir</a></li>        .overall-rating {
+
+                        </ul>            font-size: 48px;
+
+                    </nav>            font-weight: 700;
+
+                </div>            color: #1976D2;
+
             margin: 0 0 10px 0;
-        }
 
-        .rating-stars {
-            font-size: 24px;
-            color: #FFD700;
-            margin-bottom: 10px;
-        }
+                <!-- Main Content -->        }
 
-        .rating-subtitle {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+                <div class="main-content">
 
-        .rating-distribution {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+                    <div class="ratings-container">        .rating-stars {
 
-        .rating-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
+                        <!-- Summary Stats -->            font-size: 24px;
+
+                        <div class="stats-section">            color: #FFD700;
+
+                            <div class="stats-card">            margin-bottom: 10px;
+
+                                <div class="stat-item">        }
+
+                                    <div class="stat-number">4.8</div>
+
+                                    <div class="stat-label">Promedio</div>        .rating-subtitle {
+
+                                    <div class="stat-stars">            color: #666;
+
+                                        <i class="fas fa-star"></i>            font-size: 16px;
+
+                                        <i class="fas fa-star"></i>            margin-bottom: 20px;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>        .rating-distribution {
+
+                                    </div>            display: flex;
+
+                                </div>            flex-direction: column;
+
+                                <div class="stat-item">            gap: 8px;
+
+                                    <div class="stat-number">127</div>        }
+
+                                    <div class="stat-label">Reseñas</div>
+
+                                </div>        .rating-row {
+
+                                <div class="stat-item">            display: flex;
+
+                                    <div class="stat-number">98%</div>            align-items: center;
+
+                                    <div class="stat-label">Satisfacción</div>            gap: 10px;
+
+                                </div>            font-size: 14px;
+
+                            </div>        }
+
+                        </div>
 
         .rating-label {
-            width: 30px;
-            text-align: right;
-            font-weight: 600;
-        }
 
-        .rating-bar {
-            flex: 1;
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
+                        <!-- Rating Breakdown -->            width: 30px;
 
-        .rating-fill {
-            height: 100%;
-            background: #FFD700;
-            transition: width 0.3s ease;
-        }
+                        <div class="breakdown-section">            text-align: right;
 
-        .rating-count {
-            width: 40px;
-            text-align: left;
-            color: #666;
-            font-size: 12px;
-        }
+                            <h3 class="section-title">Desglose de Calificaciones</h3>            font-weight: 600;
 
-        /* Review Tabs */
-        .review-tabs {
-            margin: 0 20px 20px 20px;
-        }
+                            <div class="breakdown-card">        }
 
-        .tabs-container {
-            display: flex;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 4px;
-        }
+                                <div class="rating-bar">
 
-        .review-tab {
-            flex: 1;
-            text-align: center;
+                                    <span class="rating-level">5★</span>        .rating-bar {
+
+                                    <div class="progress">            flex: 1;
+
+                                        <div class="progress-bar" style="width: 78%"></div>            height: 8px;
+
+                                    </div>            background: #f0f0f0;
+
+                                    <span class="rating-count">99</span>            border-radius: 4px;
+
+                                </div>            overflow: hidden;
+
+                                <div class="rating-bar">        }
+
+                                    <span class="rating-level">4★</span>
+
+                                    <div class="progress">        .rating-fill {
+
+                                        <div class="progress-bar" style="width: 15%"></div>            height: 100%;
+
+                                    </div>            background: #FFD700;
+
+                                    <span class="rating-count">19</span>            transition: width 0.3s ease;
+
+                                </div>        }
+
+                                <div class="rating-bar">
+
+                                    <span class="rating-level">3★</span>        .rating-count {
+
+                                    <div class="progress">            width: 40px;
+
+                                        <div class="progress-bar" style="width: 5%"></div>            text-align: left;
+
+                                    </div>            color: #666;
+
+                                    <span class="rating-count">6</span>            font-size: 12px;
+
+                                </div>        }
+
+                                <div class="rating-bar">
+
+                                    <span class="rating-level">2★</span>        /* Review Tabs */
+
+                                    <div class="progress">        .review-tabs {
+
+                                        <div class="progress-bar" style="width: 2%"></div>            margin: 0 20px 20px 20px;
+
+                                    </div>        }
+
+                                    <span class="rating-count">2</span>
+
+                                </div>        .tabs-container {
+
+                                <div class="rating-bar">            display: flex;
+
+                                    <span class="rating-level">1★</span>            background: #f8f9fa;
+
+                                    <div class="progress">            border-radius: 12px;
+
+                                        <div class="progress-bar" style="width: 1%"></div>            padding: 4px;
+
+                                    </div>        }
+
+                                    <span class="rating-count">1</span>
+
+                                </div>        .review-tab {
+
+                            </div>            flex: 1;
+
+                        </div>            text-align: center;
+
             padding: 12px 8px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #666;
-        }
 
-        .review-tab.active {
+                        <!-- Recent Reviews -->            border-radius: 8px;
+
+                        <div class="reviews-section">            font-size: 14px;
+
+                            <h3 class="section-title">Reseñas Recientes</h3>            font-weight: 600;
+
+                                        cursor: pointer;
+
+                            <div class="review-card">            transition: all 0.3s ease;
+
+                                <div class="review-header">            color: #666;
+
+                                    <div class="user-info">        }
+
+                                        <div class="user-avatar">
+
+                                            <img src="images/avatar1.jpg" alt="Usuario">        .review-tab.active {
+
+                                        </div>            background: white;
+
+                                        <div class="user-details">            color: #1976D2;
+
+                                            <div class="user-name">María González</div>            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+                                            <div class="review-date">15 Mar 2024</div>        }
+
+                                        </div>
+
+                                    </div>        /* Reviews Container */
+
+                                    <div class="review-rating">        .reviews-container {
+
+                                        <i class="fas fa-star"></i>            padding: 0 20px 100px 20px;
+
+                                        <i class="fas fa-star"></i>            max-height: calc(100vh - 350px);
+
+                                        <i class="fas fa-star"></i>            overflow-y: auto;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                    </div>        .tab-content {
+
+                                </div>            display: none;
+
+                                <div class="review-content">        }
+
+                                    <p>Excelente servicio de plomería. Carlos llegó puntual y resolvió el problema rápidamente. Muy profesional y limpio en su trabajo.</p>
+
+                                </div>        .tab-content.active {
+
+                                <div class="review-service">            display: block;
+
+                                    <i class="fas fa-tools"></i>        }
+
+                                    <span>Plomería Residencial</span>
+
+                                </div>        /* Review Cards */
+
+                            </div>        .review-card {
+
             background: white;
-            color: #1976D2;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
 
-        /* Reviews Container */
-        .reviews-container {
-            padding: 0 20px 100px 20px;
-            max-height: calc(100vh - 350px);
-            overflow-y: auto;
-        }
+                            <div class="review-card">            border-radius: 15px;
 
-        .tab-content {
-            display: none;
-        }
+                                <div class="review-header">            padding: 20px;
 
-        .tab-content.active {
-            display: block;
-        }
+                                    <div class="user-info">            margin-bottom: 15px;
 
-        /* Review Cards */
-        .review-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-left: 5px solid #ddd;
-        }
+                                        <div class="user-avatar">            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 
-        .review-card.positive {
-            border-left-color: #4CAF50;
-        }
+                                            <img src="images/avatar2.jpg" alt="Usuario">            border-left: 5px solid #ddd;
 
-        .review-card.neutral {
-            border-left-color: #FF9800;
-        }
+                                        </div>        }
 
-        .review-card.negative {
-            border-left-color: #f44336;
-        }
+                                        <div class="user-details">
 
-        .review-header {
+                                            <div class="user-name">Roberto Silva</div>        .review-card.positive {
+
+                                            <div class="review-date">12 Mar 2024</div>            border-left-color: #4CAF50;
+
+                                        </div>        }
+
+                                    </div>
+
+                                    <div class="review-rating">        .review-card.neutral {
+
+                                        <i class="fas fa-star"></i>            border-left-color: #FF9800;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>        .review-card.negative {
+
+                                        <i class="fas fa-star"></i>            border-left-color: #f44336;
+
+                                    </div>        }
+
+                                </div>
+
+                                <div class="review-content">        .review-header {
+
+                                    <p>Muy satisfecho con el servicio de electricidad. Ana es muy competente y explicó todo el proceso claramente.</p>            display: flex;
+
+                                </div>            justify-content: space-between;
+
+                                <div class="review-service">            align-items: flex-start;
+
+                                    <i class="fas fa-bolt"></i>            margin-bottom: 15px;
+
+                                    <span>Electricidad Doméstica</span>        }
+
+                                </div>
+
+                            </div>        .reviewer-info {
+
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
 
-        .reviewer-info {
+                            <div class="review-card">            align-items: center;
+
+                                <div class="review-header">        }
+
+                                    <div class="user-info">
+
+                                        <div class="user-avatar">        .reviewer-avatar {
+
+                                            <img src="images/avatar3.jpg" alt="Usuario">            width: 40px;
+
+                                        </div>            height: 40px;
+
+                                        <div class="user-details">            border-radius: 50%;
+
+                                            <div class="user-name">Laura Martínez</div>            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                                            <div class="review-date">10 Mar 2024</div>            display: flex;
+
+                                        </div>            align-items: center;
+
+                                    </div>            justify-content: center;
+
+                                    <div class="review-rating">            color: white;
+
+                                        <i class="fas fa-star"></i>            font-size: 16px;
+
+                                        <i class="fas fa-star"></i>            font-weight: bold;
+
+                                        <i class="fas fa-star"></i>            margin-right: 12px;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="far fa-star"></i>
+
+                                    </div>        .reviewer-details h4 {
+
+                                </div>            font-size: 14px;
+
+                                <div class="review-content">            font-weight: 600;
+
+                                    <p>Buen trabajo de jardinería. El jardín quedó hermoso, aunque tardó un poco más de lo esperado.</p>            margin: 0 0 5px 0;
+
+                                </div>            color: #333;
+
+                                <div class="review-service">        }
+
+                                    <i class="fas fa-leaf"></i>
+
+                                    <span>Jardinería</span>        .review-date {
+
+                                </div>            font-size: 12px;
+
+                            </div>            color: #666;
+
+                        </div>        }
+
+                    </div>
+
+                </div>        .review-rating {
+
             display: flex;
-            align-items: center;
-        }
 
-        .reviewer-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            margin-right: 12px;
-        }
+                <!-- Bottom Navigation -->            align-items: center;
 
-        .reviewer-details h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin: 0 0 5px 0;
-            color: #333;
-        }
+                <div class="bottom-nav">            gap: 5px;
 
-        .review-date {
-            font-size: 12px;
-            color: #666;
-        }
+                    <a href="android-home-logueado.html" class="nav-item">        }
 
-        .review-rating {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+                        <i class="fas fa-home"></i>
 
-        .review-stars {
-            color: #FFD700;
-            font-size: 16px;
-        }
+                        <span>Inicio</span>        .review-stars {
 
-        .review-score {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-        }
+                    </a>            color: #FFD700;
 
-        .service-info {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
+                    <a href="android-busqueda-servicios.html" class="nav-item">            font-size: 16px;
 
-        .service-name {
-            font-weight: 600;
-            color: #1976D2;
+                        <i class="fas fa-search"></i>        }
+
+                        <span>Buscar</span>
+
+                    </a>        .review-score {
+
+                    <a href="android-mis-contrataciones.html" class="nav-item">            font-size: 14px;
+
+                        <i class="fas fa-clipboard-list"></i>            font-weight: 600;
+
+                        <span>Servicios</span>            color: #333;
+
+                    </a>        }
+
+                    <a href="android-calificaciones-resenas.html" class="nav-item active">
+
+                        <i class="fas fa-star"></i>        .service-info {
+
+                        <span>Reseñas</span>            background: #f8f9fa;
+
+                    </a>            border-radius: 8px;
+
+                    <a href="android-perfil-usuario.html" class="nav-item">            padding: 12px;
+
+                        <i class="fas fa-user"></i>            margin-bottom: 15px;
+
+                        <span>Perfil</span>            font-size: 14px;
+
+                    </a>        }
+
+                </div>
+
+            </div>        .service-name {
+
+        </div>            font-weight: 600;
+
+    </div>            color: #1976D2;
+
             margin-bottom: 5px;
-        }
 
-        .service-details {
+    <!-- Scripts -->        }
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/navigation.js"></script>        .service-details {
+
             color: #666;
-            font-size: 12px;
+
+    <style>            font-size: 12px;
+
+        /* Calificaciones específicas */        }
+
+        .ratings-container {
+
+            padding: 20px;        .review-text {
+
+            height: 100%;            font-size: 14px;
+
+            overflow-y: auto;            line-height: 1.5;
+
+            padding-bottom: 100px;            color: #333;
+
+        }            margin-bottom: 15px;
+
         }
 
-        .review-text {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #333;
-            margin-bottom: 15px;
-        }
+        .stats-section {
 
-        .review-tags {
-            display: flex;
+            margin-bottom: 25px;        .review-tags {
+
+        }            display: flex;
+
             gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
 
-        .review-tag {
-            background: #e3f2fd;
-            color: #1976D2;
-            padding: 4px 12px;
-            border-radius: 12px;
+        .stats-card {            flex-wrap: wrap;
+
+            background: white;            margin-bottom: 15px;
+
+            border-radius: 15px;        }
+
+            padding: 25px;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);        .review-tag {
+
+            display: flex;            background: #e3f2fd;
+
+            justify-content: space-around;            color: #1976D2;
+
+            text-align: center;            padding: 4px 12px;
+
+        }            border-radius: 12px;
+
             font-size: 12px;
-            font-weight: 500;
+
+        .stat-item {            font-weight: 500;
+
+            flex: 1;        }
+
         }
 
         .review-tag.positive {
-            background: #e8f5e8;
-            color: #4CAF50;
-        }
 
-        .review-tag.negative {
-            background: #ffebee;
+        .stat-number {            background: #e8f5e8;
+
+            font-size: 2rem;            color: #4CAF50;
+
+            font-weight: 700;        }
+
+            color: #0056b3;
+
+            margin-bottom: 5px;        .review-tag.negative {
+
+        }            background: #ffebee;
+
             color: #f44336;
-        }
 
-        .review-actions {
-            display: flex;
-            gap: 10px;
+        .stat-label {        }
+
+            font-size: 0.9rem;
+
+            color: #666;        .review-actions {
+
+            margin-bottom: 8px;            display: flex;
+
+        }            gap: 10px;
+
             justify-content: flex-end;
-        }
 
-        .review-action {
+        .stat-stars {        }
+
+            color: #ffc107;
+
+        }        .review-action {
+
             background: none;
-            border: none;
-            color: #1976D2;
-            font-size: 12px;
+
+        .breakdown-section {            border: none;
+
+            margin-bottom: 25px;            color: #1976D2;
+
+        }            font-size: 12px;
+
             cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 15px;
-            transition: background 0.3s ease;
-        }
 
-        .review-action:hover {
-            background: #e3f2fd;
-        }
+        .section-title {            padding: 5px 10px;
 
-        .review-action.helpful {
-            color: #4CAF50;
-        }
+            font-size: 1.1rem;            border-radius: 15px;
 
-        .review-action.report {
-            color: #f44336;
+            font-weight: 600;            transition: background 0.3s ease;
+
+            color: #333;        }
+
+            margin-bottom: 15px;
+
+            display: flex;        .review-action:hover {
+
+            align-items: center;            background: #e3f2fd;
+
+        }        }
+
+
+
+        .section-title:before {        .review-action.helpful {
+
+            content: '';            color: #4CAF50;
+
+            width: 4px;        }
+
+            height: 20px;
+
+            background: linear-gradient(135deg, #0056b3, #004494);        .review-action.report {
+
+            margin-right: 10px;            color: #f44336;
+
+            border-radius: 2px;        }
+
         }
 
         /* Write Review Section */
-        .write-review {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .breakdown-card {        .write-review {
+
+            background: white;            background: white;
+
+            border-radius: 12px;            border-radius: 15px;
+
+            padding: 20px;            padding: 20px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);            margin-bottom: 20px;
+
+        }            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
         }
 
-        .write-review h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0 0 20px 0;
+        .rating-bar {
+
+            display: flex;        .write-review h3 {
+
+            align-items: center;            font-size: 16px;
+
+            margin-bottom: 12px;            font-weight: 600;
+
+        }            margin: 0 0 20px 0;
+
             color: #333;
-        }
 
-        .rating-input {
+        .rating-bar:last-child {        }
+
+            margin-bottom: 0;
+
+        }        .rating-input {
+
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
 
-        .star-input {
+        .rating-level {            justify-content: center;
+
+            width: 40px;            gap: 10px;
+
+            font-size: 0.9rem;            margin-bottom: 20px;
+
+            color: #333;        }
+
+            font-weight: 500;
+
+        }        .star-input {
+
             font-size: 32px;
-            color: #ddd;
-            cursor: pointer;
-            transition: color 0.3s ease;
+
+        .progress {            color: #ddd;
+
+            flex: 1;            cursor: pointer;
+
+            height: 8px;            transition: color 0.3s ease;
+
+            background: #f0f0f0;        }
+
+            border-radius: 4px;
+
+            margin: 0 15px;        .star-input.active,
+
+            overflow: hidden;        .star-input:hover {
+
+        }            color: #FFD700;
+
         }
 
-        .star-input.active,
-        .star-input:hover {
-            color: #FFD700;
-        }
+        .progress-bar {
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+            height: 100%;        .form-group {
 
-        .form-label {
+            background: linear-gradient(135deg, #0056b3, #004494);            margin-bottom: 15px;
+
+            border-radius: 4px;        }
+
+            transition: width 0.3s ease;
+
+        }        .form-label {
+
             font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            display: block;
+
+        .rating-count {            font-weight: 600;
+
+            width: 30px;            color: #333;
+
+            text-align: right;            margin-bottom: 8px;
+
+            font-size: 0.9rem;            display: block;
+
+            color: #666;        }
+
         }
 
         .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
+
+        .reviews-section {            width: 100%;
+
+            margin-bottom: 20px;            padding: 12px;
+
+        }            border: 2px solid #ddd;
+
             border-radius: 10px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
+
+        .review-card {            font-size: 14px;
+
+            background: white;            transition: border-color 0.3s ease;
+
+            border-radius: 12px;        }
+
+            padding: 20px;
+
+            margin-bottom: 15px;        .form-control:focus {
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);            outline: none;
+
+        }            border-color: #1976D2;
+
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: #1976D2;
-        }
+        .review-header {
 
-        .form-control.textarea {
-            min-height: 100px;
-            resize: vertical;
+            display: flex;        .form-control.textarea {
+
+            justify-content: space-between;            min-height: 100px;
+
+            align-items: center;            resize: vertical;
+
+            margin-bottom: 15px;        }
+
         }
 
         .review-submit {
-            background: #1976D2;
-            color: white;
-            border: none;
-            border-radius: 25px;
+
+        .user-info {            background: #1976D2;
+
+            display: flex;            color: white;
+
+            align-items: center;            border: none;
+
+        }            border-radius: 25px;
+
             padding: 12px 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            width: 100%;
-        }
 
-        .review-submit:hover {
+        .user-avatar {            font-weight: 600;
+
+            width: 45px;            cursor: pointer;
+
+            height: 45px;            transition: background 0.3s ease;
+
+            border-radius: 50%;            width: 100%;
+
+            overflow: hidden;        }
+
+            margin-right: 12px;
+
+        }        .review-submit:hover {
+
             background: #1565C0;
-        }
 
-        /* Filter Section */
-        .filter-section {
-            background: white;
+        .user-avatar img {        }
+
+            width: 100%;
+
+            height: 100%;        /* Filter Section */
+
+            object-fit: cover;        .filter-section {
+
+        }            background: white;
+
             margin: 0 20px 20px 20px;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .user-name {            border-radius: 15px;
+
+            font-weight: 600;            padding: 15px;
+
+            color: #333;            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+            font-size: 0.95rem;        }
+
         }
 
         .filter-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+
+        .review-date {            font-size: 14px;
+
+            font-size: 0.8rem;            font-weight: 600;
+
+            color: #666;            color: #333;
+
+        }            margin-bottom: 10px;
+
         }
 
-        .filter-tags {
-            display: flex;
-            gap: 8px;
+        .review-rating {
+
+            color: #ffc107;        .filter-tags {
+
+            font-size: 0.9rem;            display: flex;
+
+        }            gap: 8px;
+
             flex-wrap: wrap;
-        }
 
-        .filter-tag {
+        .review-content {        }
+
+            margin-bottom: 15px;
+
+        }        .filter-tag {
+
             padding: 6px 15px;
-            background: #f8f9fa;
-            border: 2px solid #ddd;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
+
+        .review-content p {            background: #f8f9fa;
+
+            color: #333;            border: 2px solid #ddd;
+
+            line-height: 1.5;            border-radius: 20px;
+
+            margin: 0;            font-size: 12px;
+
+            font-size: 0.9rem;            font-weight: 500;
+
+        }            cursor: pointer;
+
             transition: all 0.3s ease;
-        }
 
-        .filter-tag.active {
-            background: #1976D2;
-            color: white;
-            border-color: #1976D2;
-        }
+        .review-service {        }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
+            display: flex;
+
+            align-items: center;        .filter-tag.active {
+
+            color: #0056b3;            background: #1976D2;
+
+            font-size: 0.85rem;            color: white;
+
+            font-weight: 500;            border-color: #1976D2;
+
+        }        }
+
+
+
+        .review-service i {        /* Empty State */
+
+            margin-right: 8px;        .empty-state {
+
+        }            text-align: center;
+
+    </style>            padding: 40px 20px;
+
             color: #666;
-        }
 
+</body>        }
+
+</html>
         .empty-state i {
             font-size: 48px;
             margin-bottom: 20px;

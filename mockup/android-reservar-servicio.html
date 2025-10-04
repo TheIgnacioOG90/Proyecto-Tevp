@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - Reservar Servicio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mobile Frame CSS -->
+    <link rel="stylesheet" href="css/mobile-frame.css">
+</head>
+<body>
+    <!-- Phone Frame Container -->
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="signal-bars">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                    <span class="carrier">Movistar</span>
+                    <span class="wifi-icon">📶</span>
+                </div>
+                <div class="status-center">
+                    <span class="time">14:45</span>
+                </div>
+                <div class="status-right">
+                    <span class="battery-percentage">81%</span>
+                    <span class="battery-icon">🔋</span>
+                </div>
+            </div>
+
+            <!-- App Content -->
+            <div class="app-content">
+                <!-- Header -->
+                <div class="app-header">
+                    <button class="back-btn" onclick="history.back()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h1 class="header-title">Reservar Servicio</h1>
+                    <button class="help-btn" onclick="showHelp()">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+
+                <!-- Professional Summary -->
+                <div class="professional-summary">
+                    <div class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/60x60/0056b3/ffffff?text=CM" alt="Carlos Mendez" class="professional-avatar">
+                        <div class="professional-info">
+                            <h5 class="professional-name">Carlos Méndez</h5>
+                            <p class="professional-service">Reparación de Calefón</p>
+                            <div class="professional-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.8</span>
+                            </div>
+                        </div>
+                        <div class="price-estimate">
+                            <span class="price-label">Estimado</span>
+                            <span class="price-value">$10,500</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Details Form -->
+                <div class="form-section">
+                    <h6 class="section-title">Detalles del Servicio</h6>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Descripción del problema</label>
+                        <textarea class="form-control" rows="3" placeholder="Describe qué necesitas reparar o el problema que tienes..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Urgencia</label>
+                        <div class="urgency-options">
+                            <button class="urgency-btn" data-urgency="normal">
+                                <i class="fas fa-clock"></i>
+                                <span>Normal</span>
+                                <small>2-3 días</small>
+                            </button>
+                            <button class="urgency-btn active" data-urgency="urgent">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Urgente</span>
+                                <small>Hoy</small>
+                            </button>
+                            <button class="urgency-btn" data-urgency="emergency">
+                                <i class="fas fa-fire"></i>
+                                <span>Emergencia</span>
+                                <small>1-2 horas</small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date and Time -->
+                <div class="form-section">
+                    <h6 class="section-title">Fecha y Hora Preferida</h6>
+                    
+                    <div class="date-time-selector">
+                        <div class="date-section">
+                            <label class="form-label">Fecha</label>
+                            <div class="date-options">
+                                <button class="date-btn active">
+                                    <span class="day">Hoy</span>
+                                    <span class="date">4 Oct</span>
+                                </button>
+                                <button class="date-btn">
+                                    <span class="day">Mañana</span>
+                                    <span class="date">5 Oct</span>
+                                </button>
+                                <button class="date-btn">
+                                    <span class="day">Lun</span>
+                                    <span class="date">7 Oct</span>
+                                </button>
+                                <button class="date-btn">
+                                    <span class="day">Mar</span>
+                                    <span class="date">8 Oct</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="time-section">
+                            <label class="form-label">Horario</label>
+                            <div class="time-slots">
+                                <button class="time-slot">09:00</button>
+                                <button class="time-slot">11:00</button>
+                                <button class="time-slot">14:00</button>
+                                <button class="time-slot active">16:00</button>
+                                <button class="time-slot">18:00</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="form-section">
+                    <h6 class="section-title">Dirección del Servicio</h6>
+                    
+                    <div class="address-card">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="address-info">
+                                <h6 class="address-title">Mi Dirección Principal</h6>
+                                <p class="address-text">Av. Corrientes 1234, Piso 5, Depto A<br>CABA, Buenos Aires</p>
+                                <p class="address-note">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Portero las 24hs
+                                </p>
+                            </div>
+                            <button class="change-address-btn" onclick="changeAddress()">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Instrucciones adicionales</label>
+                        <input type="text" class="form-control" placeholder="Ej: Tocar timbre 5A, preguntar por Juan">
+                    </div>
+                </div>
+
+                <!-- Contact Preference -->
+                <div class="form-section">
+                    <h6 class="section-title">Contacto Preferido</h6>
+                    
+                    <div class="contact-options">
+                        <label class="contact-option">
+                            <input type="radio" name="contact" value="phone" checked>
+                            <div class="contact-content">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <div class="contact-text">
+                                    <span class="contact-method">Llamada telefónica</span>
+                                    <small class="contact-note">+54 11 1234-5678</small>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <label class="contact-option">
+                            <input type="radio" name="contact" value="whatsapp">
+                            <div class="contact-content">
+                                <i class="fab fa-whatsapp contact-icon"></i>
+                                <div class="contact-text">
+                                    <span class="contact-method">WhatsApp</span>
+                                    <small class="contact-note">Mensajes y ubicación</small>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="form-section">
+                    <h6 class="section-title">Resumen de Costos</h6>
+                    
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span class="price-label">Servicio base</span>
+                            <span class="price-amount">$8,500</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Urgencia (Hoy)</span>
+                            <span class="price-amount">$1,500</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Tarifa de plataforma</span>
+                            <span class="price-amount">$500</span>
+                        </div>
+                        <div class="price-row total">
+                            <span class="price-label">Total estimado</span>
+                            <span class="price-amount">$10,500</span>
+                        </div>
+                    </div>
+                    
+                    <p class="price-note">
+                        <i class="fas fa-info-circle me-1"></i>
+                        El precio final puede variar según la complejidad del trabajo
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sticky Bottom Actions -->
+            <div class="bottom-actions">
+                <div class="action-summary">
+                    <div class="summary-text">
+                        <span class="service-name">Reparación Calefón</span>
+                        <span class="service-date">Hoy 16:00</span>
+                    </div>
+                    <div class="summary-price">$10,500</div>
+                </div>
+                <button class="btn btn-primary confirm-btn" onclick="confirmReservation()">
+                    <i class="fas fa-check me-2"></i>
+                    Confirmar Reserva
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>TEVP</h3>
+            <button class="close-btn" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="android-home-logueado.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>
+            <li><a href="android-detalle-profesional.html"><i class="fas fa-user-tie"></i> Detalle Profesional</a></li>
+            <li><a href="android-reservar-servicio.html" class="active"><i class="fas fa-calendar-check"></i> Reservar Servicio</a></li>
+            <li><a href="android-mis-contrataciones.html"><i class="fas fa-history"></i> Mis Contrataciones</a></li>
+            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Favoritos</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Pagos</a></li>
+            <li><a href="#"><i class="fas fa-headset"></i> Soporte</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+            <li><a href="galeria-mobile.html"><i class="fas fa-arrow-left"></i> Volver a Galería</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Navigation JS -->
+    <script src="js/navigation.js"></script>
+
+    <style>
+        .professional-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .professional-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .professional-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .professional-service {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .rating-text {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .price-estimate {
+            text-align: right;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: #999;
+            display: block;
+        }
+
+        .price-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+
+        .urgency-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .urgency-btn {
+            flex: 1;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .urgency-btn.active {
+            background: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .urgency-btn i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .urgency-btn span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .urgency-btn small {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .date-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .date-btn {
+            flex: 1;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-btn.active {
+            background: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .date-btn .day {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .date-btn .date {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .time-slots {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-slot {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot.active {
+            background: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .address-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .address-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .address-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .address-note {
+            font-size: 0.75rem;
+            color: #0056b3;
+            margin: 0;
+        }
+
+        .change-address-btn {
+            background: none;
+            border: none;
+            color: #0056b3;
+            font-size: 18px;
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:has(input:checked) {
+            background: #e3f2fd;
+            border-color: #0056b3;
+        }
+
+        .contact-option input {
+            margin-right: 15px;
+        }
+
+        .contact-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: #0056b3;
+            margin-right: 15px;
+        }
+
+        .contact-method {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .contact-note {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .price-breakdown {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-row.total {
+            border-top: 2px solid #0056b3;
+            margin-top: 10px;
+            padding-top: 15px;
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .bottom-actions {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-top: 1px solid #e9ecef;
+            padding: 15px;
+            width: 100%;
+            max-width: 375px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .action-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .service-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .summary-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .help-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Ajuste para el contenido con botones fijos */
+        .app-content {
+            padding-bottom: 120px;
+        }
+    </style>
+
+    <script>
+        function confirmReservation() {
+            alert('¡Reserva confirmada! Te contactaremos pronto.');
+            // Aquí iría la lógica para confirmar la reserva
+            window.location.href = 'android-mis-contrataciones.html';
+        }
+
+        function changeAddress() {
+            alert('Abriendo selector de direcciones...');
+        }
+
+        function showHelp() {
+            alert('Mostrando ayuda para reservar servicios...');
+        }
+
+        // Funcionalidad de botones de urgencia
+        document.querySelectorAll('.urgency-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.urgency-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Funcionalidad de fechas
+        document.querySelectorAll('.date-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Funcionalidad de horarios
+        document.querySelectorAll('.time-slot').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

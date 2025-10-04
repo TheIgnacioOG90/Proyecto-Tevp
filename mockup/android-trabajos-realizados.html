@@ -1,547 +1,1090 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEVP - Trabajos Realizados | Mockup Android</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
+<!DOCTYPE html><!DOCTYPE html>
 
-        .android-phone {
-            width: 375px;
-            height: 812px;
-            background: #000;
-            border-radius: 25px;
-            padding: 8px;
-            margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            position: relative;
-        }
+<html lang="es"><html lang="es">
 
-        .android-screen {
-            width: 100%;
-            height: 100%;
-            background: #f5f5f5;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
+<head><head>
 
-        /* Android Status Bar */
+    <meta charset="UTF-8">    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TEVP - Trabajos Realizados</title>    <title>TEVP - Trabajos Realizados | Mockup Android</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">    <style>
+
+    <!-- Font Awesome -->        body {
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    <!-- Mobile Frame CSS -->            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    <link rel="stylesheet" href="css/mobile-frame.css">            margin: 0;
+
+</head>            padding: 20px;
+
+<body>            min-height: 100vh;
+
+    <!-- Phone Frame Container -->        }
+
+    <div class="phone-frame">
+
+        <div class="phone-screen">        .android-phone {
+
+            <!-- Status Bar -->            width: 375px;
+
+            <div class="status-bar">            height: 812px;
+
+                <div class="status-left">            background: #000;
+
+                    <span class="signal-bars">            border-radius: 25px;
+
+                        <span class="bar"></span>            padding: 8px;
+
+                        <span class="bar"></span>            margin: 0 auto;
+
+                        <span class="bar"></span>            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+
+                        <span class="bar"></span>            position: relative;
+
+                    </span>        }
+
+                    <span class="carrier">Movistar</span>
+
+                    <span class="wifi-icon">📶</span>        .android-screen {
+
+                </div>            width: 100%;
+
+                <div class="status-center">            height: 100%;
+
+                    <span class="time">17:05</span>            background: #f5f5f5;
+
+                </div>            border-radius: 20px;
+
+                <div class="status-right">            overflow: hidden;
+
+                    <span class="battery-percentage">62%</span>            position: relative;
+
+                    <span class="battery-icon">🔋</span>        }
+
+                </div>
+
+            </div>        /* Android Status Bar */
+
         .status-bar {
-            height: 44px;
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-            font-size: 14px;
-            font-weight: 500;
-        }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-            color: white;
+            <!-- App Content -->            height: 44px;
+
+            <div class="app-content">            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                <!-- Header -->            color: white;
+
+                <div class="app-header">            display: flex;
+
+                    <div class="header-content">            justify-content: space-between;
+
+                        <button class="menu-btn" onclick="toggleSidebar()">            align-items: center;
+
+                            <i class="fas fa-bars"></i>            padding: 0 15px;
+
+                        </button>            font-size: 14px;
+
+                        <h1 class="header-title">Trabajos Realizados</h1>            font-weight: 500;
+
+                        <button class="notification-btn">        }
+
+                            <i class="fas fa-bell"></i>
+
+                            <span class="notification-badge">4</span>        /* Header */
+
+                        </button>        .header {
+
+                    </div>            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                </div>            color: white;
+
             padding: 15px 20px;
-        }
+
+                <!-- Sidebar Overlay -->        }
+
+                <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
         .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
 
-        .back-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
+                <!-- Sidebar -->            display: flex;
 
-        .hamburger-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
+                <div class="sidebar" id="sidebar">            justify-content: space-between;
 
-        .hamburger-btn:hover {
-            background: rgba(255,255,255,0.1);
-        }
+                    <div class="sidebar-header">            align-items: center;
 
-        .filter-btn {
-            background: rgba(255,255,255,0.2);
+                        <div class="user-info">            margin-bottom: 15px;
+
+                            <div class="user-avatar">        }
+
+                                <i class="fas fa-user"></i>
+
+                            </div>        .back-btn {
+
+                            <div class="user-details">            background: none;
+
+                                <div class="user-name">Juan Carlos</div>            border: none;
+
+                                <div class="user-email">juan@email.com</div>            color: white;
+
+                            </div>            font-size: 20px;
+
+                        </div>            cursor: pointer;
+
+                        <button class="close-sidebar" onclick="toggleSidebar()">        }
+
+                            <i class="fas fa-times"></i>
+
+                        </button>        .hamburger-btn {
+
+                    </div>            background: none;
+
+                    <nav class="sidebar-nav">            border: none;
+
+                        <ul>            color: white;
+
+                            <li><a href="android-home-logueado.html"><i class="fas fa-home"></i> Inicio</a></li>            font-size: 20px;
+
+                            <li><a href="android-perfil-usuario.html"><i class="fas fa-user"></i> Mi Perfil</a></li>            cursor: pointer;
+
+                            <li><a href="android-busqueda-servicios.html"><i class="fas fa-search"></i> Buscar Servicios</a></li>            padding: 8px;
+
+                            <li><a href="android-mis-contrataciones.html"><i class="fas fa-clipboard-list"></i> Mis Contrataciones</a></li>            border-radius: 8px;
+
+                            <li><a href="android-calificaciones-resenas.html"><i class="fas fa-star"></i> Calificaciones</a></li>            transition: background 0.3s ease;
+
+                            <li><a href="android-reserva-pago.html"><i class="fas fa-credit-card"></i> Reserva y Pago</a></li>        }
+
+                            <li><a href="android-ganancias-dinero.html"><i class="fas fa-dollar-sign"></i> Ganancias</a></li>
+
+                            <li><a href="android-retiro-dinero.html"><i class="fas fa-money-bill-wave"></i> Retiros</a></li>        .hamburger-btn:hover {
+
+                            <li class="active"><a href="android-trabajos-realizados.html"><i class="fas fa-check-circle"></i> Trabajos</a></li>            background: rgba(255,255,255,0.1);
+
+                            <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Salir</a></li>        }
+
+                        </ul>
+
+                    </nav>        .filter-btn {
+
+                </div>            background: rgba(255,255,255,0.2);
+
             border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-        }
 
-        /* Hamburger Menu Overlay */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
+                <!-- Main Content -->            color: white;
 
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+                <div class="main-content">            border-radius: 20px;
 
-        /* Hamburger Menu Sidebar */
-        .hamburger-menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
-            background: white;
-            z-index: 1001;
+                    <div class="jobs-container">            padding: 8px 16px;
+
+                        <!-- Stats Summary -->            font-size: 12px;
+
+                        <div class="stats-section">            font-weight: 600;
+
+                            <div class="stats-grid">        }
+
+                                <div class="stat-card">
+
+                                    <div class="stat-icon">        /* Hamburger Menu Overlay */
+
+                                        <i class="fas fa-check-circle"></i>        .menu-overlay {
+
+                                    </div>            position: fixed;
+
+                                    <div class="stat-info">            top: 0;
+
+                                        <div class="stat-number">47</div>            left: 0;
+
+                                        <div class="stat-label">Completados</div>            width: 100%;
+
+                                    </div>            height: 100%;
+
+                                </div>            background: rgba(0,0,0,0.5);
+
+                                <div class="stat-card">            z-index: 1000;
+
+                                    <div class="stat-icon">            opacity: 0;
+
+                                        <i class="fas fa-star"></i>            visibility: hidden;
+
+                                    </div>            transition: all 0.3s ease;
+
+                                    <div class="stat-info">        }
+
+                                        <div class="stat-number">4.8</div>
+
+                                        <div class="stat-label">Promedio</div>        .menu-overlay.active {
+
+                                    </div>            opacity: 1;
+
+                                </div>            visibility: visible;
+
+                                <div class="stat-card">        }
+
+                                    <div class="stat-icon">
+
+                                        <i class="fas fa-calendar"></i>        /* Hamburger Menu Sidebar */
+
+                                    </div>        .hamburger-menu {
+
+                                    <div class="stat-info">            position: fixed;
+
+                                        <div class="stat-number">6</div>            top: 0;
+
+                                        <div class="stat-label">Este mes</div>            left: -300px;
+
+                                    </div>            width: 280px;
+
+                                </div>            height: 100%;
+
+                            </div>            background: white;
+
+                        </div>            z-index: 1001;
+
             transition: left 0.3s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
-        }
 
-        .hamburger-menu.active {
-            left: 0;
-        }
+                        <!-- Filter Tabs -->            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
 
-        .menu-header {
+                        <div class="filter-section">        }
+
+                            <div class="filter-tabs">
+
+                                <button class="filter-tab active">Todos</button>        .hamburger-menu.active {
+
+                                <button class="filter-tab">Esta semana</button>            left: 0;
+
+                                <button class="filter-tab">Este mes</button>        }
+
+                            </div>
+
+                        </div>        .menu-header {
+
             background: linear-gradient(135deg, #1976D2, #1565C0);
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
 
-        .menu-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-        }
+                        <!-- Jobs List -->            color: white;
 
-        .menu-user-info h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0 0 5px 0;
-        }
+                        <div class="jobs-section">            padding: 20px;
 
-        .menu-user-info p {
-            font-size: 12px;
-            opacity: 0.8;
-            margin: 0;
-        }
+                            <div class="job-card">            display: flex;
 
-        .menu-content {
-            padding: 0;
-        }
+                                <div class="job-header">            align-items: center;
 
-        .menu-nav-item {
-            display: flex;
-            align-items: center;
+                                    <div class="job-info">            gap: 15px;
+
+                                        <div class="job-title">Plomería Residencial</div>        }
+
+                                        <div class="job-client">María González</div>
+
+                                        <div class="job-date">15 Mar 2024 - 14:30</div>        .menu-avatar {
+
+                                    </div>            width: 50px;
+
+                                    <div class="job-status completed">            height: 50px;
+
+                                        <i class="fas fa-check-circle"></i>            border-radius: 50%;
+
+                                        Completado            background: rgba(255,255,255,0.2);
+
+                                    </div>            display: flex;
+
+                                </div>            align-items: center;
+
+                                <div class="job-details">            justify-content: center;
+
+                                    <div class="job-description">            font-size: 20px;
+
+                                        <i class="fas fa-tools"></i>            font-weight: bold;
+
+                                        Reparación de tubería con fuga en cocina        }
+
+                                    </div>
+
+                                    <div class="job-location">        .menu-user-info h3 {
+
+                                        <i class="fas fa-map-marker-alt"></i>            font-size: 16px;
+
+                                        Av. Principal 123, Ciudad            font-weight: 600;
+
+                                    </div>            margin: 0 0 5px 0;
+
+                                </div>        }
+
+                                <div class="job-footer">
+
+                                    <div class="job-rating">        .menu-user-info p {
+
+                                        <i class="fas fa-star"></i>            font-size: 12px;
+
+                                        <i class="fas fa-star"></i>            opacity: 0.8;
+
+                                        <i class="fas fa-star"></i>            margin: 0;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <span class="rating-text">5.0</span>        .menu-content {
+
+                                    </div>            padding: 0;
+
+                                    <div class="job-payment">        }
+
+                                        <span class="amount">$75.00</span>
+
+                                    </div>        .menu-nav-item {
+
+                                </div>            display: flex;
+
+                            </div>            align-items: center;
+
             padding: 15px 20px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #333;
-            position: relative;
-        }
 
-        .menu-nav-item:hover {
-            background: linear-gradient(90deg, #f8f9fa 0%, #e3f2fd 100%);
-            color: #1976D2;
-            transform: translateX(5px);
-        }
+                            <div class="job-card">            border-bottom: 1px solid #f0f0f0;
 
-        .menu-nav-item:active {
-            transform: translateX(5px) scale(0.98);
-        }
+                                <div class="job-header">            cursor: pointer;
 
-        .menu-nav-icon {
-            width: 20px;
-            text-align: center;
-            margin-right: 15px;
-            color: #1976D2;
-            transition: all 0.3s ease;
-        }
+                                    <div class="job-info">            transition: all 0.3s ease;
 
-        .menu-nav-item:hover .menu-nav-icon {
-            transform: scale(1.1);
-        }
+                                        <div class="job-title">Electricidad Doméstica</div>            text-decoration: none;
 
-        .menu-nav-text {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 500;
-        }
+                                        <div class="job-client">Roberto Silva</div>            color: #333;
+
+                                        <div class="job-date">14 Mar 2024 - 16:45</div>            position: relative;
+
+                                    </div>        }
+
+                                    <div class="job-status completed">
+
+                                        <i class="fas fa-check-circle"></i>        .menu-nav-item:hover {
+
+                                        Completado            background: linear-gradient(90deg, #f8f9fa 0%, #e3f2fd 100%);
+
+                                    </div>            color: #1976D2;
+
+                                </div>            transform: translateX(5px);
+
+                                <div class="job-details">        }
+
+                                    <div class="job-description">
+
+                                        <i class="fas fa-bolt"></i>        .menu-nav-item:active {
+
+                                        Instalación de tomacorrientes y revisión eléctrica            transform: translateX(5px) scale(0.98);
+
+                                    </div>        }
+
+                                    <div class="job-location">
+
+                                        <i class="fas fa-map-marker-alt"></i>        .menu-nav-icon {
+
+                                        Calle Secundaria 456, Ciudad            width: 20px;
+
+                                    </div>            text-align: center;
+
+                                </div>            margin-right: 15px;
+
+                                <div class="job-footer">            color: #1976D2;
+
+                                    <div class="job-rating">            transition: all 0.3s ease;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>        .menu-nav-item:hover .menu-nav-icon {
+
+                                        <i class="fas fa-star"></i>            transform: scale(1.1);
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <span class="rating-text">5.0</span>
+
+                                    </div>        .menu-nav-text {
+
+                                    <div class="job-payment">            flex: 1;
+
+                                        <span class="amount">$120.00</span>            font-size: 14px;
+
+                                    </div>            font-weight: 500;
+
+                                </div>        }
+
+                            </div>
 
         .menu-nav-arrow {
-            color: #999;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
 
-        .menu-nav-item:hover .menu-nav-arrow {
-            color: #1976D2;
-            transform: translateX(3px);
-        }
+                            <div class="job-card">            color: #999;
 
-        .menu-divider {
-            height: 8px;
-            background: #f8f9fa;
-        }
+                                <div class="job-header">            font-size: 12px;
 
-        .header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-        }
+                                    <div class="job-info">            transition: all 0.3s ease;
 
-        .header-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            opacity: 0.9;
-        }
+                                        <div class="job-title">Jardinería</div>        }
 
-        /* Search Bar */
-        .search-section {
-            background: white;
-            padding: 15px 20px;
-            border-bottom: 1px solid #eee;
-        }
+                                        <div class="job-client">Laura Martínez</div>
 
-        .search-bar {
+                                        <div class="job-date">13 Mar 2024 - 09:20</div>        .menu-nav-item:hover .menu-nav-arrow {
+
+                                    </div>            color: #1976D2;
+
+                                    <div class="job-status completed">            transform: translateX(3px);
+
+                                        <i class="fas fa-check-circle"></i>        }
+
+                                        Completado
+
+                                    </div>        .menu-divider {
+
+                                </div>            height: 8px;
+
+                                <div class="job-details">            background: #f8f9fa;
+
+                                    <div class="job-description">        }
+
+                                        <i class="fas fa-leaf"></i>
+
+                                        Poda de árboles y mantenimiento de jardín        .header h1 {
+
+                                    </div>            font-size: 22px;
+
+                                    <div class="job-location">            font-weight: 700;
+
+                                        <i class="fas fa-map-marker-alt"></i>            margin: 0 0 10px 0;
+
+                                        Barrio Norte 789, Ciudad        }
+
+                                    </div>
+
+                                </div>        .header-stats {
+
+                                <div class="job-footer">            display: flex;
+
+                                    <div class="job-rating">            justify-content: space-between;
+
+                                        <i class="fas fa-star"></i>            font-size: 14px;
+
+                                        <i class="fas fa-star"></i>            opacity: 0.9;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="far fa-star"></i>        /* Search Bar */
+
+                                        <span class="rating-text">4.0</span>        .search-section {
+
+                                    </div>            background: white;
+
+                                    <div class="job-payment">            padding: 15px 20px;
+
+                                        <span class="amount">$90.00</span>            border-bottom: 1px solid #eee;
+
+                                    </div>        }
+
+                                </div>
+
+                            </div>        .search-bar {
+
             position: relative;
-        }
 
-        .search-input {
-            width: 100%;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 25px;
-            padding: 12px 45px 12px 20px;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
+                            <div class="job-card">        }
 
-        .search-input:focus {
-            border-color: #1976D2;
-        }
+                                <div class="job-header">
 
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            font-size: 16px;
-        }
+                                    <div class="job-info">        .search-input {
 
-        /* Filter Tabs */
-        .filter-tabs {
-            background: white;
-            padding: 0 20px;
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            border-bottom: 1px solid #eee;
-        }
+                                        <div class="job-title">Limpieza de Hogar</div>            width: 100%;
+
+                                        <div class="job-client">Ana Castro</div>            background: #f8f9fa;
+
+                                        <div class="job-date">12 Mar 2024 - 11:00</div>            border: 2px solid #e9ecef;
+
+                                    </div>            border-radius: 25px;
+
+                                    <div class="job-status completed">            padding: 12px 45px 12px 20px;
+
+                                        <i class="fas fa-check-circle"></i>            font-size: 14px;
+
+                                        Completado            outline: none;
+
+                                    </div>            transition: border-color 0.3s ease;
+
+                                </div>        }
+
+                                <div class="job-details">
+
+                                    <div class="job-description">        .search-input:focus {
+
+                                        <i class="fas fa-broom"></i>            border-color: #1976D2;
+
+                                        Limpieza profunda de casa completa        }
+
+                                    </div>
+
+                                    <div class="job-location">        .search-icon {
+
+                                        <i class="fas fa-map-marker-alt"></i>            position: absolute;
+
+                                        Centro 321, Ciudad            right: 15px;
+
+                                    </div>            top: 50%;
+
+                                </div>            transform: translateY(-50%);
+
+                                <div class="job-footer">            color: #666;
+
+                                    <div class="job-rating">            font-size: 16px;
+
+                                        <i class="fas fa-star"></i>        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>        /* Filter Tabs */
+
+                                        <i class="fas fa-star"></i>        .filter-tabs {
+
+                                        <i class="fas fa-star"></i>            background: white;
+
+                                        <span class="rating-text">5.0</span>            padding: 0 20px;
+
+                                    </div>            display: flex;
+
+                                    <div class="job-payment">            gap: 10px;
+
+                                        <span class="amount">$65.00</span>            overflow-x: auto;
+
+                                    </div>            border-bottom: 1px solid #eee;
+
+                                </div>        }
+
+                            </div>
 
         .filter-tab {
-            background: #f8f9fa;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 15px;
+
+                            <div class="job-card">            background: #f8f9fa;
+
+                                <div class="job-header">            border: none;
+
+                                    <div class="job-info">            border-radius: 20px;
+
+                                        <div class="job-title">Carpintería</div>            padding: 8px 16px;
+
+                                        <div class="job-client">Carlos Mendoza</div>            font-size: 12px;
+
+                                        <div class="job-date">10 Mar 2024 - 15:30</div>            font-weight: 600;
+
+                                    </div>            white-space: nowrap;
+
+                                    <div class="job-status completed">            cursor: pointer;
+
+                                        <i class="fas fa-check-circle"></i>            transition: all 0.3s ease;
+
+                                        Completado            margin-bottom: 15px;
+
+                                    </div>        }
+
+                                </div>
+
+                                <div class="job-details">        .filter-tab.active {
+
+                                    <div class="job-description">            background: #1976D2;
+
+                                        <i class="fas fa-hammer"></i>            color: white;
+
+                                        Reparación de puertas y ventanas        }
+
+                                    </div>
+
+                                    <div class="job-location">        /* Content */
+
+                                        <i class="fas fa-map-marker-alt"></i>        .content {
+
+                                        Zona Sur 654, Ciudad            padding: 20px;
+
+                                    </div>            padding-bottom: 100px;
+
+                                </div>            max-height: calc(100vh - 280px);
+
+                                <div class="job-footer">            overflow-y: auto;
+
+                                    <div class="job-rating">        }
+
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>        /* Summary Cards */
+
+                                        <i class="fas fa-star"></i>        .summary-grid {
+
+                                        <i class="fas fa-star"></i>            display: grid;
+
+                                        <i class="fas fa-star"></i>            grid-template-columns: 1fr 1fr;
+
+                                        <span class="rating-text">5.0</span>            gap: 15px;
+
+                                    </div>            margin-bottom: 25px;
+
+                                    <div class="job-payment">        }
+
+                                        <span class="amount">$150.00</span>
+
+                                    </div>        .summary-card {
+
+                                </div>            background: white;
+
+                            </div>            border-radius: 12px;
+
+                        </div>            padding: 15px;
+
+                    </div>            text-align: center;
+
+                </div>            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+
         }
 
-        .filter-tab.active {
-            background: #1976D2;
-            color: white;
+                <!-- Bottom Navigation -->
+
+                <div class="bottom-nav">        .summary-icon {
+
+                    <a href="android-home-logueado.html" class="nav-item">            width: 35px;
+
+                        <i class="fas fa-home"></i>            height: 35px;
+
+                        <span>Inicio</span>            border-radius: 50%;
+
+                    </a>            margin: 0 auto 8px auto;
+
+                    <a href="android-busqueda-servicios.html" class="nav-item">            display: flex;
+
+                        <i class="fas fa-search"></i>            align-items: center;
+
+                        <span>Buscar</span>            justify-content: center;
+
+                    </a>            font-size: 14px;
+
+                    <a href="android-mis-contrataciones.html" class="nav-item">            color: white;
+
+                        <i class="fas fa-clipboard-list"></i>        }
+
+                        <span>Servicios</span>
+
+                    </a>        .summary-icon.blue {
+
+                    <a href="android-trabajos-realizados.html" class="nav-item active">            background: linear-gradient(135deg, #1976D2, #1565C0);
+
+                        <i class="fas fa-check-circle"></i>        }
+
+                        <span>Trabajos</span>
+
+                    </a>        .summary-icon.green {
+
+                    <a href="android-perfil-usuario.html" class="nav-item">            background: linear-gradient(135deg, #4CAF50, #45a049);
+
+                        <i class="fas fa-user"></i>        }
+
+                        <span>Perfil</span>
+
+                    </a>        .summary-value {
+
+                </div>            font-size: 18px;
+
+            </div>            font-weight: 700;
+
+        </div>            margin-bottom: 3px;
+
+    </div>            color: #333;
+
         }
 
-        /* Content */
-        .content {
-            padding: 20px;
-            padding-bottom: 100px;
-            max-height: calc(100vh - 280px);
-            overflow-y: auto;
-        }
+    <!-- Scripts -->
 
-        /* Summary Cards */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>        .summary-label {
 
-        .summary-card {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
+    <script src="js/navigation.js"></script>            font-size: 11px;
 
-        .summary-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            margin: 0 auto 8px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: white;
-        }
-
-        .summary-icon.blue {
-            background: linear-gradient(135deg, #1976D2, #1565C0);
-        }
-
-        .summary-icon.green {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-        }
-
-        .summary-value {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 3px;
-            color: #333;
-        }
-
-        .summary-label {
-            font-size: 11px;
             color: #666;
-            margin-bottom: 6px;
+
+    <style>            margin-bottom: 6px;
+
+        /* Trabajos realizados específico */        }
+
+        .jobs-container {
+
+            padding: 20px;        .summary-change {
+
+            height: 100%;            font-size: 10px;
+
+            overflow-y: auto;            font-weight: 600;
+
+            padding-bottom: 100px;            padding: 2px 6px;
+
+        }            border-radius: 8px;
+
         }
 
-        .summary-change {
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 8px;
-        }
+        .stats-section {
 
-        .summary-change.positive {
-            background: #e8f5e8;
+            margin-bottom: 25px;        .summary-change.positive {
+
+        }            background: #e8f5e8;
+
             color: #4CAF50;
-        }
 
-        /* Work History List */
-        .work-item {
-            background: white;
+        .stats-grid {        }
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);        /* Work History List */
+
+            gap: 12px;        .work-item {
+
+        }            background: white;
+
             border-radius: 15px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
 
-        .work-header {
-            padding: 20px;
+        .stat-card {            margin-bottom: 15px;
+
+            background: white;            overflow: hidden;
+
+            border-radius: 12px;            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+            padding: 15px;        }
+
+            text-align: center;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);        .work-header {
+
+        }            padding: 20px;
+
             border-bottom: 1px solid #f0f0f0;
-        }
 
-        .work-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
+        .stat-icon {        }
 
-        .work-name {
-            font-size: 16px;
+            width: 40px;
+
+            height: 40px;        .work-title {
+
+            background: linear-gradient(135deg, #0056b3, #004494);            display: flex;
+
+            color: white;            justify-content: space-between;
+
+            border-radius: 10px;            align-items: flex-start;
+
+            display: flex;            margin-bottom: 10px;
+
+            align-items: center;        }
+
+            justify-content: center;
+
+            margin: 0 auto 10px;        .work-name {
+
+        }            font-size: 16px;
+
             font-weight: 600;
+
+        .stat-number {            color: #333;
+
+            font-size: 1.5rem;            margin-bottom: 5px;
+
+            font-weight: 700;        }
+
             color: #333;
-            margin-bottom: 5px;
-        }
 
-        .work-status {
-            padding: 4px 12px;
+            margin-bottom: 5px;        .work-status {
+
+        }            padding: 4px 12px;
+
             border-radius: 15px;
-            font-size: 11px;
-            font-weight: 600;
+
+        .stat-label {            font-size: 11px;
+
+            font-size: 0.8rem;            font-weight: 600;
+
+            color: #666;        }
+
         }
 
         .status-completed {
-            background: #e8f5e8;
-            color: #4CAF50;
-        }
 
-        .status-new {
-            background: #fff3cd;
-            color: #856404;
-        }
+        .filter-section {            background: #e8f5e8;
 
-        .status-in-progress {
-            background: #d1ecf1;
+            margin-bottom: 20px;            color: #4CAF50;
+
+        }        }
+
+
+
+        .filter-tabs {        .status-new {
+
+            display: flex;            background: #fff3cd;
+
+            background: white;            color: #856404;
+
+            border-radius: 12px;        }
+
+            padding: 5px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);        .status-in-progress {
+
+        }            background: #d1ecf1;
+
             color: #0c5460;
-        }
 
-        .status-quote {
-            background: #f8d7da;
-            color: #721c24;
-        }
+        .filter-tab {        }
 
-        .work-client {
-            font-size: 14px;
-            color: #666;
+            flex: 1;
+
+            background: none;        .status-quote {
+
+            border: none;            background: #f8d7da;
+
+            padding: 12px 16px;            color: #721c24;
+
+            border-radius: 8px;        }
+
+            font-weight: 500;
+
+            color: #666;        .work-client {
+
+            transition: all 0.3s ease;            font-size: 14px;
+
+        }            color: #666;
+
             margin-bottom: 8px;
-        }
 
-        .work-location {
-            font-size: 13px;
+        .filter-tab.active {        }
+
+            background: linear-gradient(135deg, #0056b3, #004494);
+
+            color: white;        .work-location {
+
+        }            font-size: 13px;
+
             color: #888;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+
+        .jobs-section {            display: flex;
+
+            margin-bottom: 20px;            align-items: center;
+
+        }            gap: 5px;
+
         }
 
-        .work-details {
-            padding: 0 20px 20px 20px;
-        }
+        .job-card {
 
-        .work-meta {
-            display: flex;
-            justify-content: space-between;
+            background: white;        .work-details {
+
+            border-radius: 15px;            padding: 0 20px 20px 20px;
+
+            padding: 20px;        }
+
             margin-bottom: 15px;
-        }
 
-        .work-date {
-            font-size: 12px;
-            color: #666;
-        }
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);        .work-meta {
 
-        .work-duration {
-            font-size: 12px;
-            color: #666;
-        }
+            border-left: 4px solid #0056b3;            display: flex;
 
-        .work-description {
+        }            justify-content: space-between;
+
+            margin-bottom: 15px;
+
+        .job-header {        }
+
+            display: flex;
+
+            justify-content: space-between;        .work-date {
+
+            align-items: flex-start;            font-size: 12px;
+
+            margin-bottom: 15px;            color: #666;
+
+        }        }
+
+
+
+        .job-title {        .work-duration {
+
+            font-weight: 700;            font-size: 12px;
+
+            color: #333;            color: #666;
+
+            font-size: 1.1rem;        }
+
+            margin-bottom: 5px;
+
+        }        .work-description {
+
             font-size: 14px;
-            color: #555;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
 
-        .work-footer {
+        .job-client {            color: #555;
+
+            font-weight: 600;            margin-bottom: 15px;
+
+            color: #0056b3;            line-height: 1.5;
+
+            font-size: 0.9rem;        }
+
+            margin-bottom: 3px;
+
+        }        .work-footer {
+
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .job-date {            justify-content: space-between;
+
+            font-size: 0.8rem;            align-items: center;
+
+            color: #666;        }
+
         }
 
         .work-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #4CAF50;
-        }
 
-        .work-rating {
-            display: flex;
-            align-items: center;
+        .job-status {            font-size: 18px;
+
+            display: flex;            font-weight: 700;
+
+            align-items: center;            color: #4CAF50;
+
+            font-size: 0.85rem;        }
+
+            font-weight: 600;
+
+            padding: 6px 12px;        .work-rating {
+
+            border-radius: 20px;            display: flex;
+
+        }            align-items: center;
+
             gap: 8px;
-        }
 
-        .rating-stars {
-            color: #FFD700;
+        .job-status.completed {        }
+
+            background: #e8f5e8;
+
+            color: #4caf50;        .rating-stars {
+
+        }            color: #FFD700;
+
             font-size: 14px;
-        }
 
-        .rating-text {
+        .job-status i {        }
+
+            margin-right: 5px;
+
+        }        .rating-text {
+
             font-size: 12px;
-            color: #666;
+
+        .job-details {            color: #666;
+
+            margin-bottom: 15px;        }
+
         }
 
         .work-actions {
-            display: flex;
-            gap: 10px;
-        }
 
-        .action-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
+        .job-description, .job-location {            display: flex;
+
+            display: flex;            gap: 10px;
+
+            align-items: center;        }
+
+            font-size: 0.9rem;
+
+            color: #666;        .action-btn {
+
+            margin-bottom: 8px;            background: #f8f9fa;
+
+        }            border: 1px solid #dee2e6;
+
             border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+
+        .job-description i, .job-location i {            padding: 6px 12px;
+
+            width: 20px;            font-size: 11px;
+
+            margin-right: 10px;            font-weight: 600;
+
+            color: #0056b3;            cursor: pointer;
+
+        }            transition: all 0.3s ease;
+
         }
 
-        .action-btn.primary {
-            background: #1976D2;
-            color: white;
-            border-color: #1976D2;
+        .job-footer {
+
+            display: flex;        .action-btn.primary {
+
+            justify-content: space-between;            background: #1976D2;
+
+            align-items: center;            color: white;
+
+            padding-top: 15px;            border-color: #1976D2;
+
+            border-top: 1px solid #f0f0f0;        }
+
         }
 
         .action-btn:hover {
-            transform: translateY(-1px);
-        }
 
-        /* Load More Button */
-        .load-more {
+        .job-rating {            transform: translateY(-1px);
+
+            display: flex;        }
+
+            align-items: center;
+
+            color: #ffc107;        /* Load More Button */
+
+        }        .load-more {
+
             background: #1976D2;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 15px 30px;
-            font-weight: 600;
-            cursor: pointer;
+
+        .rating-text {            color: white;
+
+            margin-left: 8px;            border: none;
+
+            color: #666;            border-radius: 25px;
+
+            font-weight: 600;            padding: 15px 30px;
+
+            font-size: 0.9rem;            font-weight: 600;
+
+        }            cursor: pointer;
+
             display: block;
-            margin: 30px auto;
-            transition: all 0.3s ease;
+
+        .job-payment {            margin: 30px auto;
+
+            text-align: right;            transition: all 0.3s ease;
+
+        }        }
+
+
+
+        .amount {        .load-more:hover {
+
+            font-size: 1.2rem;            background: #1565C0;
+
+            font-weight: 700;            transform: translateY(-2px);
+
+            color: #4caf50;        }
+
         }
 
-        .load-more:hover {
-            background: #1565C0;
-            transform: translateY(-2px);
-        }
+    </style>        /* Bottom Navigation */
 
-        /* Bottom Navigation */
         .bottom-nav {
-            position: absolute;
-            bottom: 0;
+
+</body>            position: absolute;
+
+</html>            bottom: 0;
             left: 0;
             right: 0;
             background: white;

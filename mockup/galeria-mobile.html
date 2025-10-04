@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEVP - Galería de Mockups Móviles</title>
+    <title>TEVP - Galería Android Mockups</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -14,720 +15,603 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 2rem 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: white;
         }
 
         .gallery-header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
         }
 
         .gallery-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .gallery-subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
 
-        .mockup-grid {
+        .platform-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 4rem 0 2rem 0;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .mockups-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
         }
 
         .mockup-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            padding: 25px;
+            padding: 2rem;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.4s ease;
             cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .mockup-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.6s ease;
         }
 
         .mockup-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
         }
 
         .mockup-card:hover::before {
-            left: 100%;
+            opacity: 1;
+            animation: shimmer 1s ease-in-out;
         }
 
-        .mockup-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .mockup-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .mockup-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        .mockup-card:hover .mockup-icon {
-            transform: rotateY(360deg) scale(1.1);
+        .mockup-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .mockup-type {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-type.android {
+            background: linear-gradient(45deg, #3DDC84, #4285F4);
+            color: white;
+        }
+
+        .mockup-type.mobile {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
         }
 
         .mockup-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
         }
 
         .mockup-description {
-            font-size: 0.95rem;
-            color: #4a5568;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
             line-height: 1.5;
-            position: relative;
-            z-index: 2;
         }
 
         .mockup-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            border: none;
-            border-radius: 25px;
-            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
+            padding: 0.7rem 2rem;
+            border-radius: 25px;
             font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .mockup-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
-            color: white;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
         }
 
         .status-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            text-transform: uppercase;
-            z-index: 3;
+            margin-left: 0.5rem;
         }
 
-        .status-ready {
-            background: rgba(40, 167, 69, 0.8);
-            color: white;
+        .status-nuevo {
+            color: #4CAF50;
         }
 
-        .status-demo {
-            background: rgba(255, 193, 7, 0.8);
-            color: #333;
+        .status-actualizado {
+            color: #2196F3;
         }
 
-        /* Section Headers */
-        .section-header {
+        .gallery-footer {
             text-align: center;
-            margin: 60px 0 40px 0;
             color: white;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .section-title {
-            font-size: 2.5rem;
+        .gallery-footer h4 {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
         }
 
-        .section-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
-        /* Updated status badges */
-        .status-ready {
-            background: rgba(40, 167, 69, 0.9);
-            color: white;
+        .footer-stat {
+            text-align: center;
         }
 
-        .status-demo {
-            background: rgba(255, 193, 7, 0.9);
-            color: #333;
+        .footer-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            display: block;
         }
 
-        .status-badge:contains("Android") {
-            background: rgba(76, 175, 80, 0.9);
-            color: white;
+        .footer-stat .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
-        .status-badge:contains("Web") {
-            background: rgba(33, 150, 243, 0.9);
-            color: white;
-        }
-
-        /* Android specific styling */
-        .mockup-card:has(.status-badge:contains("Android")) {
-            border: 2px solid rgba(76, 175, 80, 0.3);
-        }
-
-        .mockup-card:has(.status-badge:contains("Android")):hover {
-            border-color: rgba(76, 175, 80, 0.6);
-            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.2);
-        }
-
-        /* Animaciones de entrada */
-        .mockup-card {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: cardAppear 0.6s ease-out forwards;
-        }
-
-        .mockup-card:nth-child(1) { animation-delay: 0.1s; }
-        .mockup-card:nth-child(2) { animation-delay: 0.2s; }
-        .mockup-card:nth-child(3) { animation-delay: 0.3s; }
-        .mockup-card:nth-child(4) { animation-delay: 0.4s; }
-        .mockup-card:nth-child(5) { animation-delay: 0.5s; }
-        .mockup-card:nth-child(6) { animation-delay: 0.6s; }
-        .mockup-card:nth-child(7) { animation-delay: 0.7s; }
-        .mockup-card:nth-child(8) { animation-delay: 0.8s; }
-        .mockup-card:nth-child(9) { animation-delay: 0.9s; }
-        .mockup-card:nth-child(10) { animation-delay: 1.0s; }
-        .mockup-card:nth-child(11) { animation-delay: 1.1s; }
-        .mockup-card:nth-child(12) { animation-delay: 1.2s; }
-        .mockup-card:nth-child(13) { animation-delay: 1.3s; }
-        .mockup-card:nth-child(14) { animation-delay: 1.4s; }
-        .mockup-card:nth-child(15) { animation-delay: 1.5s; }
-        .mockup-card:nth-child(16) { animation-delay: 1.6s; }
-        .mockup-card:nth-child(17) { animation-delay: 1.7s; }
-        .mockup-card:nth-child(18) { animation-delay: 1.8s; }
-        .mockup-card:nth-child(19) { animation-delay: 1.9s; }
-
-        @keyframes cardAppear {
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Footer */
-        .gallery-footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 50px;
-            font-size: 0.9rem;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .gallery-title {
                 font-size: 2rem;
             }
             
-            .mockup-grid {
+            .mockups-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 10px;
+                gap: 1.5rem;
             }
-        }
+            
+            .mockup-card {
+                padding: 1.5rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
 
-        /* Efecto de partículas */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: float 8s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10px) rotate(360deg);
-                opacity: 0;
+            .platform-badges {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Partículas de fondo -->
-    <div class="particles">
-        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
-        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
-        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
-        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
-        <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
-        <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
-    </div>
-
-    <!-- Header -->
-    <div class="gallery-header">
-        <h1 class="gallery-title">📱 TEVP Mobile Gallery</h1>
-        <p class="gallery-subtitle">19 Mockups Android Studio + Web organizados por funcionalidad</p>
-        <div class="text-white-50">
-            <i class="fas fa-mobile-alt me-2"></i>
-            Experiencia completa: Usuarios, Profesionales y Money Management con navegación real
-        </div>
-    </div>
-
-    <!-- Sección Principal -->
-    <div class="section-header">
-        <h2 class="section-title">🚀 FLUJO COMPLETO DE USUARIO</h2>
-        <p class="section-subtitle">Desde visitante sin registro hasta usuario logueado</p>
-    </div>
-    
-    <div class="mockup-grid">
-        <!-- Splash Screen -->
-        <div class="mockup-card" onclick="openMockup('01-splash.html')">
-            <div class="status-badge status-ready">Listo</div>
-            <div class="mockup-icon">🚀</div>
-            <h3 class="mockup-title">Splash Screen</h3>
-            <p class="mockup-description">
-                Pantalla de bienvenida con logo animado, partículas flotantes y indicador de carga
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="gallery-header">
+            <h1 class="gallery-title">
+                <i class="fab fa-android me-3"></i>
+                TEVP Android Mockups
+            </h1>
+            <p class="gallery-subtitle">
+                Galería completa de mockups móviles organizados por experiencia
             </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Mockup
-            </a>
+            <div class="platform-badges">
+                <span class="platform-badge">
+                    <i class="fab fa-android me-2"></i>Android Nativo
+                </span>
+                <span class="platform-badge">
+                    <i class="fas fa-mobile-alt me-2"></i>Mobile Frame
+                </span>
+            </div>
         </div>
 
-        <!-- Onboarding -->
-        <div class="mockup-card" onclick="openMockup('02-onboarding-mobile.html')">
-            <div class="status-badge status-ready">Listo</div>
-            <div class="mockup-icon">👋</div>
-            <h3 class="mockup-title">Onboarding</h3>
-            <p class="mockup-description">
-                Presentación de características con slides interactivos, gestos táctiles y navegación fluida
+        <!-- Sección: Pantallas Principales -->
+        <div class="section-header">
+            <h2><i class="fas fa-home me-2"></i>Pantallas Principales</h2>
+            <p class="section-description">
+                Flujo de bienvenida, registro y acceso a la aplicación
             </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Mockup
-            </a>
         </div>
 
-        <!-- Login Móvil -->
-        <div class="mockup-card" onclick="openMockup('03-login-mobile.html')">
-            <div class="status-badge status-ready">Listo</div>
-            <div class="mockup-icon">🔐</div>
-            <h3 class="mockup-title">Login Móvil</h3>
-            <p class="mockup-description">
-                Formulario de inicio de sesión con diseño móvil optimizado y login social
+        <div class="mockups-grid">
+            <!-- Nosotros -->
+            <div class="mockup-card" onclick="openMockup('01-nosotros-mobile.html')">
+                <div class="mockup-number">01</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">👥</div>
+                <h3 class="mockup-title">Nosotros</h3>
+                <p class="mockup-description">Información corporativa y presentación de la empresa</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Profesionales -->
+            <div class="mockup-card" onclick="openMockup('02-profesionales-mobile.html')">
+                <div class="mockup-number">02</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">👨‍💼</div>
+                <h3 class="mockup-title">Profesionales</h3>
+                <p class="mockup-description">Directorio completo de profesionales disponibles</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Login -->
+            <div class="mockup-card" onclick="openMockup('03-login-mobile.html')">
+                <div class="mockup-number">03</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">🔐</div>
+                <h3 class="mockup-title">Login</h3>
+                <p class="mockup-description">Acceso seguro para usuarios registrados</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Registro -->
+            <div class="mockup-card" onclick="openMockup('04-registro-mobile.html')">
+                <div class="mockup-number">04</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">📝</div>
+                <h3 class="mockup-title">Registro</h3>
+                <p class="mockup-description">Creación de nuevas cuentas de usuario</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Home -->
+            <div class="mockup-card" onclick="openMockup('05-home-mobile.html')">
+                <div class="mockup-number">05</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">🏠</div>
+                <h3 class="mockup-title">Home</h3>
+                <p class="mockup-description">Página principal con accesos rápidos</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Servicios -->
+            <div class="mockup-card" onclick="openMockup('06-servicios-mobile.html')">
+                <div class="mockup-number">06</div>
+                <div class="mockup-type mobile">Mobile</div>
+                <div class="mockup-icon">🔧</div>
+                <h3 class="mockup-title">Servicios</h3>
+                <p class="mockup-description">Catálogo completo de servicios disponibles</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+        </div>
+
+        <!-- Sección: Experiencia del Usuario -->
+        <div class="section-header">
+            <h2><i class="fas fa-user-circle me-2"></i>Experiencia del Usuario</h2>
+            <p class="section-description">
+                Pantallas completas para clientes en formato Android Mockup (11 pantallas)
             </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Mockup
-            </a>
         </div>
 
-        <!-- Registro -->
-        <div class="mockup-card" onclick="openMockup('04-registro-mobile.html')">
-            <div class="status-badge status-ready">Listo</div>
-            <div class="mockup-icon">📝</div>
-            <h3 class="mockup-title">Registro Móvil</h3>
-            <p class="mockup-description">
-                Formulario de registro con validación en tiempo real, campos dinámicos y selección de usuario
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Mockup
-            </a>
+        <div class="mockups-grid">
+            <!-- Home Logueado -->
+            <div class="mockup-card" onclick="openMockup('android-home-logueado.html')">
+                <div class="mockup-number">07</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">🏡</div>
+                <h3 class="mockup-title">
+                    Home Logueado
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Dashboard principal del cliente con navegación</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Búsqueda Servicios -->
+            <div class="mockup-card" onclick="openMockup('android-busqueda-servicios.html')">
+                <div class="mockup-number">08</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">🔍</div>
+                <h3 class="mockup-title">Búsqueda de Servicios</h3>
+                <p class="mockup-description">Motor de búsqueda con filtros avanzados</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Detalle Profesional -->
+            <div class="mockup-card" onclick="openMockup('android-detalle-profesional.html')">
+                <div class="mockup-number">09</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">👨‍💼</div>
+                <h3 class="mockup-title">
+                    Detalle Profesional
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Perfil completo con reseñas y contacto</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Reservar Servicio -->
+            <div class="mockup-card" onclick="openMockup('android-reservar-servicio.html')">
+                <div class="mockup-number">10</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">📅</div>
+                <h3 class="mockup-title">Reservar Servicio</h3>
+                <p class="mockup-description">Formulario de reserva y confirmación</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Mi Perfil -->
+            <div class="mockup-card" onclick="openMockup('android-perfil-usuario.html')">
+                <div class="mockup-number">11</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">👤</div>
+                <h3 class="mockup-title">
+                    Mi Perfil
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Configuración personal del usuario</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Mis Contrataciones -->
+            <div class="mockup-card" onclick="openMockup('android-mis-contrataciones.html')">
+                <div class="mockup-number">12</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">📋</div>
+                <h3 class="mockup-title">
+                    Mis Contrataciones
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Gestión de servicios contratados</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Reserva y Pago -->
+            <div class="mockup-card" onclick="openMockup('android-reserva-pago.html')">
+                <div class="mockup-number">13</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">💳</div>
+                <h3 class="mockup-title">
+                    Reserva y Pago
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Proceso de pago y confirmación de reserva</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Calificaciones y Reseñas -->
+            <div class="mockup-card" onclick="openMockup('android-calificaciones-resenas.html')">
+                <div class="mockup-number">14</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">⭐</div>
+                <h3 class="mockup-title">
+                    Calificaciones y Reseñas
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Sistema de valoraciones y comentarios</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Ganancias y Dinero -->
+            <div class="mockup-card" onclick="openMockup('android-ganancias-dinero.html')">
+                <div class="mockup-number">15</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">💰</div>
+                <h3 class="mockup-title">
+                    Ganancias y Dinero
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Panel de ingresos y finanzas personales</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Retiro de Dinero -->
+            <div class="mockup-card" onclick="openMockup('android-retiro-dinero.html')">
+                <div class="mockup-number">16</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">🏦</div>
+                <h3 class="mockup-title">
+                    Retiro de Dinero
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Proceso de retiro de fondos</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
+
+            <!-- Trabajos Realizados -->
+            <div class="mockup-card" onclick="openMockup('android-trabajos-realizados.html')">
+                <div class="mockup-number">17</div>
+                <div class="mockup-type android">Android</div>
+                <div class="mockup-icon">✅</div>
+                <h3 class="mockup-title">
+                    Trabajos Realizados
+                    <span class="status-badge status-nuevo">✓ NUEVO</span>
+                </h3>
+                <p class="mockup-description">Historial de servicios completados</p>
+                <button class="mockup-btn">Ver Mockup</button>
+            </div>
         </div>
 
-        <!-- Home Móvil -->
-        <div class="mockup-card" onclick="openMockup('05-home-mobile.html')">
-            <div class="status-badge status-ready">Listo</div>
-            <div class="mockup-icon">🏠</div>
-            <h3 class="mockup-title">HOME Visitantes</h3>
-            <p class="mockup-description">
-                Pantalla principal para usuarios NO REGISTRADOS con búsqueda, exploración de servicios y profesionales destacados
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Mockup
-            </a>
+        <!-- Footer -->
+        <div class="gallery-footer">
+            <h4><i class="fab fa-android me-2"></i>TEVP Android Gallery</h4>
+            <p>Mockups móviles optimizados para la mejor experiencia de usuario</p>
+            
+            <div class="footer-stats">
+                <div class="footer-stat">
+                    <span class="number">6</span>
+                    <span class="label">Pantallas Principales</span>
+                </div>
+                <div class="footer-stat">
+                    <span class="number">11</span>
+                    <span class="label">Experiencia Usuario</span>
+                </div>
+                <div class="footer-stat">
+                    <span class="number">17</span>
+                    <span class="label">Total Mockups</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1rem; background: rgba(76, 175, 80, 0.1); border-radius: 10px; border-left: 4px solid #4CAF50;">
+                <h5 style="color: #4CAF50; margin-bottom: 0.5rem;">
+                    <i class="fas fa-check-circle me-2"></i>Estado: Actualizado
+                </h5>
+                <p style="margin: 0; font-size: 0.9rem;">
+                    Todas las pantallas de experiencia del usuario convertidas al formato Android Mockup con navegación unificada
+                </p>
+            </div>
         </div>
-
-        <!-- Dashboard Usuario Android -->
-        <div class="mockup-card" onclick="openMockup('android-dashboard-usuario.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">📱</div>
-            <h3 class="mockup-title">Dashboard Usuario Logueado</h3>
-            <p class="mockup-description">
-                Dashboard POST-LOGIN con búsqueda, servicios, profesionales destacados y actividad reciente
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Bienvenida Android -->
-        <div class="mockup-card" onclick="openMockup('android-bienvenida.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">👋</div>
-            <h3 class="mockup-title">Pantalla de Bienvenida</h3>
-            <p class="mockup-description">
-                Bienvenida para usuarios nuevos con introducción a la app, registro/login y modo profesional
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-    </div>
-
-    <!-- Sección Usuario -->
-    <div class="section-header">
-        <h2 class="section-title">👤 EXPERIENCIA DEL USUARIO</h2>
-        <p class="section-subtitle">Bienvenida, búsqueda, contratación y gestión completa de servicios</p>
-    </div>
-    
-    <div class="mockup-grid">
-        <!-- Android: Búsqueda de Servicios -->
-        <div class="mockup-card" onclick="openMockup('android-busqueda-servicios.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">🔍</div>
-            <h3 class="mockup-title">Búsqueda de Servicios</h3>
-            <p class="mockup-description">
-                Interfaz Android con 10 categorías de servicios, búsqueda en tiempo real y navegación inferior
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Profesionales Disponibles -->
-        <div class="mockup-card" onclick="openMockup('android-profesionales-disponibles.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">👥</div>
-            <h3 class="mockup-title">Profesionales Disponibles</h3>
-            <p class="mockup-description">
-                Lista de profesionales con filtros, ratings, ubicación y sistema de contacto Material Design
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Gestión de Servicios -->
-        <div class="mockup-card" onclick="openMockup('android-gestion-servicio.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">�</div>
-            <h3 class="mockup-title">Gestión de Servicios</h3>
-            <p class="mockup-description">
-                Formulario de solicitud, métodos de pago, seguimiento de servicios activos e historial completo
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Servicios Web -->
-        <div class="mockup-card" onclick="openMockup('06-servicios-mobile.html')">
-            <div class="status-badge status-ready">Web</div>
-            <div class="mockup-icon">🔧</div>
-            <h3 class="mockup-title">Catálogo Servicios Web</h3>
-            <p class="mockup-description">
-                Lista completa de servicios con filtros, búsqueda en tiempo real y navegación táctil
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Web
-            </a>
-        </div>
-
-        <!-- Profesional Web -->
-        <div class="mockup-card" onclick="openMockup('07-profesional-mobile.html')">
-            <div class="status-badge status-ready">Web</div>
-            <div class="mockup-icon">👨‍🔧</div>
-            <h3 class="mockup-title">Perfil Profesional Web</h3>
-            <p class="mockup-description">
-                Información completa del profesional con galería, reseñas y modal de contacto
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Web
-            </a>
-        </div>
-
-        <!-- Pedidos Web -->
-        <div class="mockup-card" onclick="openMockup('08-pedidos-mobile.html')">
-            <div class="status-badge status-ready">Web</div>
-            <div class="mockup-icon">�</div>
-            <h3 class="mockup-title">Gestión Pedidos Web</h3>
-            <p class="mockup-description">
-                Historial completo de pedidos con tracking en tiempo real y modal de detalles
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Web
-            </a>
-        </div>
-
-        <!-- Perfil Usuario Web -->
-        <div class="mockup-card" onclick="openMockup('09-perfil-mobile.html')">
-            <div class="status-badge status-ready">Web</div>
-            <div class="mockup-icon">⚙️</div>
-            <h3 class="mockup-title">Perfil Usuario Web</h3>
-            <p class="mockup-description">
-                Configuración completa de cuenta, estadísticas y opciones de personalización
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fas fa-eye"></i>
-                Ver Web
-            </a>
-        </div>
-    </div>
-
-    <!-- Sección Profesional -->
-    <div class="section-header">
-        <h2 class="section-title">� PANEL DEL PROFESIONAL</h2>
-        <p class="section-subtitle">Dashboard, gestión de trabajos y sistema de reseñas</p>
-    </div>
-    
-    <div class="mockup-grid">
-        <!-- Android: Dashboard Profesional -->
-        <div class="mockup-card" onclick="openMockup('android-profesional-trabajos.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">👨‍💼</div>
-            <h3 class="mockup-title">Dashboard Profesional</h3>
-            <p class="mockup-description">
-                Panel de control con estadísticas, trabajos nuevos, en curso, completados y cotizaciones
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Ganancias y Dinero -->
-        <div class="mockup-card" onclick="openMockup('android-ganancias-dinero.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">💰</div>
-            <h3 class="mockup-title">Ganancias y Dinero</h3>
-            <p class="mockup-description">
-                Gestión completa de ingresos, estadísticas financieras, gráficos y período de ganancias
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Retiro de Dinero -->
-        <div class="mockup-card" onclick="openMockup('android-retiro-dinero.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">🏦</div>
-            <h3 class="mockup-title">Retiro de Dinero</h3>
-            <p class="mockup-description">
-                Sistema de retiros con cuentas bancarias, comisiones, historial y confirmación de transacciones
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Trabajos Realizados -->
-        <div class="mockup-card" onclick="openMockup('android-trabajos-realizados.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">📋</div>
-            <h3 class="mockup-title">Trabajos Realizados</h3>
-            <p class="mockup-description">
-                Historial completo de trabajos con filtros, búsqueda avanzada, detalles y facturación
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Perfil Profesional -->
-        <div class="mockup-card" onclick="openMockup('android-perfil-profesional.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">👤</div>
-            <h3 class="mockup-title">Perfil Profesional</h3>
-            <p class="mockup-description">
-                Configuración completa del perfil, servicios, certificaciones, horarios y ajustes de cuenta
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-
-        <!-- Android: Calificaciones y Reseñas -->
-        <div class="mockup-card" onclick="openMockup('android-calificaciones-resenas.html')">
-            <div class="status-badge status-ready">Android</div>
-            <div class="mockup-icon">⭐</div>
-            <h3 class="mockup-title">Calificaciones y Reseñas</h3>
-            <p class="mockup-description">
-                Sistema completo de reseñas: recibidas, dadas, formulario de escritura y filtros avanzados
-            </p>
-            <a href="#" class="mockup-btn">
-                <i class="fab fa-android"></i>
-                Ver Android
-            </a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="gallery-footer">
-        <p><strong>TEVP Mobile Gallery</strong> - Mockups organizados por funcionalidad</p>
-        <p>🚀 Flujo Completo (7 pantallas) | 👤 Usuario (7 pantallas) | 🔧 Profesional (6 pantallas)</p>
-        <p>📱 Total: 20 pantallas Android Studio + Web | 🎯 Navegación completa entre screens</p>
-        <p>✨ Flujo: HOME Visitante → Bienvenida → Login/Registro → Dashboard Usuario → Profesionales</p>
     </div>
 
     <script>
         function openMockup(filename) {
-            // Abre el mockup en una nueva ventana/pestaña
-            window.open(filename, '_blank', 'width=400,height=800,scrollbars=yes,resizable=yes');
+            // Verificar si el archivo existe antes de abrirlo
+            const link = document.createElement('a');
+            link.href = filename;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            
+            // Añadir efecto visual al hacer clic
+            const card = event.currentTarget;
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 150);
+            
+            // Abrir en nueva pestaña
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
-        // Efectos adicionales
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animación de título
-            const title = document.querySelector('.gallery-title');
-            title.style.transform = 'scale(0.5)';
-            title.style.opacity = '0';
-            
-            setTimeout(() => {
-                title.style.transition = 'all 1s ease-out';
-                title.style.transform = 'scale(1)';
-                title.style.opacity = '1';
-            }, 100);
-
-            // Animación de títulos de sección
-            const sectionTitles = document.querySelectorAll('.section-title');
-            sectionTitles.forEach((title, index) => {
-                title.style.transform = 'translateY(30px)';
-                title.style.opacity = '0';
-                
-                setTimeout(() => {
-                    title.style.transition = 'all 0.8s ease-out';
-                    title.style.transform = 'translateY(0)';
-                    title.style.opacity = '1';
-                }, 500 + (index * 200));
-            });
-
-            // Efecto hover mejorado en las tarjetas
+        // Añadir animaciones al scroll
+        window.addEventListener('scroll', () => {
             const cards = document.querySelectorAll('.mockup-card');
             cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02) rotateX(5deg)';
-                    
-                    // Efecto especial para mockups Android
-                    const badge = this.querySelector('.status-badge');
-                    if (badge && badge.textContent === 'Android') {
-                        this.style.boxShadow = '0 15px 35px rgba(76, 175, 80, 0.3)';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
-                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-                });
-            });
-
-            // Efecto de aparición al hacer scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observar las secciones
-            document.querySelectorAll('.section-header').forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(50px)';
-                section.style.transition = 'all 0.8s ease-out';
-                observer.observe(section);
-            });
-        });
-
-        // Prevenir el comportamiento por defecto del enlace
-        document.querySelectorAll('.mockup-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
             });
         });
     </script>
