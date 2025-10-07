@@ -1,0 +1,149 @@
+/* TEVP MOCKUP - CSS ULTRA SIMPLE */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CUERPO DE LA PÁGINA ===== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+    text-align: center;
+    color: #2E86AB;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* ===== NAVEGACIÓN DE ETAPAS ===== */
+.stage-nav {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+/* ===== BOTONES DE ETAPAS ===== */
+.stage-btn {
+    background: #F24236;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.stage-btn.active {
+    background: #2E86AB;
+    transform: scale(1.1);
+}
+
+.stage-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ===== CONTENIDO DE ETAPAS (MUY IMPORTANTE) ===== */
+.stage-content {
+    display: none;
+}
+
+.stage-content.active {
+    display: block;
+}
+
+/* ===== GRID DE 3 COLUMNAS (MUY IMPORTANTE) ===== */
+.screens-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== TARJETAS DE PANTALLAS ===== */
+.screen-card {
+    border: 2px solid #2E86AB;
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.screen-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.3);
+}
+
+/* ===== TÍTULOS DE PANTALLAS ===== */
+.screen-card h3 {
+    color: #2E86AB;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ===== IMÁGENES DE PANTALLAS ===== */
+.screen-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== RESPONSIVE PARA MÓVILES ===== */
+@media (max-width: 768px) {
+    .screens-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .stage-btn {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+}
+
+/* ===== RESPONSIVE PARA TABLETS ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .screens-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+/* ===== PARA DESKTOP: FORZAR 3 COLUMNAS ===== */
+@media (min-width: 1025px) {
+    .screens-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}

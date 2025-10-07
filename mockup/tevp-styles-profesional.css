@@ -1,0 +1,1031 @@
+/* ===== TEVP MOCKUP - DISEÑO PROFESIONAL COMPLETO ===== */
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== PALETA DE COLORES TEVP ===== */
+:root {
+    /* Colores principales TEVP */
+    --tevp-azul-primario: #3B82F6;          /* Azul suave profesional */
+    --tevp-azul-oscuro: #2563EB;            /* Azul más oscuro */
+    --tevp-azul-claro: #60A5FA;             /* Azul claro */
+    
+    --tevp-verde-exito: #10B981;            /* Verde para servicios exitosos */
+    --tevp-verde-oscuro: #059669;           /* Verde oscuro */
+    --tevp-verde-claro: #34D399;            /* Verde claro */
+    
+    --tevp-naranja-accion: #F59E0B;         /* Naranja para acciones importantes */
+    --tevp-naranja-oscuro: #D97706;         /* Naranja oscuro */
+    --tevp-naranja-claro: #FBBF24;          /* Naranja claro */
+    
+    /* Colores de fondo TEVP */
+    --tevp-fondo-principal: #FFFFFF;        /* Fondo principal */
+    --tevp-fondo-secundario: #F8FAFC;       /* Fondo secundario */
+    --tevp-fondo-terciario: #F1F5F9;        /* Fondo terciario */
+    
+    /* Colores de texto TEVP */
+    --tevp-texto-principal: #1E293B;        /* Texto principal */
+    --tevp-texto-secundario: #475569;       /* Texto secundario */
+    --tevp-texto-claro: #94A3B8;            /* Texto claro */
+    --tevp-texto-blanco: #FFFFFF;           /* Texto blanco */
+    
+    /* Sombras profesionales */
+    --tevp-sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --tevp-sombra-media: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --tevp-sombra-fuerte: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Bordes redondeados */
+    --tevp-radio-pequeno: 8px;
+    --tevp-radio-medio: 12px;
+    --tevp-radio-grande: 16px;
+    --tevp-radio-completo: 50px;
+}
+
+/* ===== CONFIGURACIÓN GENERAL ===== */
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--tevp-fondo-secundario) 0%, var(--tevp-fondo-terciario) 100%);
+    color: var(--tevp-texto-principal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--tevp-fondo-principal);
+    border-radius: var(--tevp-radio-grande);
+    padding: 20px;
+    box-shadow: var(--tevp-sombra-fuerte);
+    min-height: 100vh;
+}
+
+/* ===== CABECERA PRINCIPAL TEVP ===== */
+.mockup-navigation {
+    background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-oscuro));
+    color: var(--tevp-texto-blanco);
+    padding: 40px 20px 30px 20px;
+    border-radius: var(--tevp-radio-grande);
+    box-shadow: var(--tevp-sombra-media);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mockup-navigation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    opacity: 0.3;
+}
+
+.mockup-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.mockup-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.mockup-header h1 i {
+    background: var(--tevp-naranja-accion);
+    padding: 15px;
+    border-radius: var(--tevp-radio-medio);
+    box-shadow: var(--tevp-sombra-suave);
+    font-size: 24px;
+}
+
+.mockup-header p {
+    font-size: 18px;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* ===== CONTADOR DE PANTALLAS TEVP ===== */
+.screen-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--tevp-naranja-accion), var(--tevp-naranja-oscuro));
+    color: var(--tevp-texto-blanco);
+    padding: 12px 20px;
+    border-radius: var(--tevp-radio-completo);
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: var(--tevp-sombra-suave);
+    z-index: 10;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.screen-counter:hover {
+    transform: scale(1.05);
+    box-shadow: var(--tevp-sombra-media);
+}
+
+/* ===== NAVEGACIÓN DE ETAPAS TEVP ===== */
+.stage-nav {
+    text-align: center;
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, var(--tevp-fondo-principal), var(--tevp-fondo-secundario));
+    border-radius: var(--tevp-radio-grande);
+    box-shadow: var(--tevp-sombra-suave);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+/* ===== BOTONES DE ETAPAS TEVP ===== */
+.stage-btn {
+    background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro));
+    color: var(--tevp-texto-blanco);
+    border: 2px solid transparent;
+    padding: 15px 35px;
+    margin: 0 12px 10px 12px;
+    border-radius: var(--tevp-radio-completo);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    box-shadow: var(--tevp-sombra-suave);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.stage-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.stage-btn:hover::before {
+    left: 100%;
+}
+
+.stage-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--tevp-sombra-media);
+    background: linear-gradient(135deg, var(--tevp-azul-oscuro), var(--tevp-azul-primario));
+}
+
+.stage-btn.active {
+    background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--tevp-sombra-media);
+    border-color: var(--tevp-verde-oscuro);
+}
+
+.stage-btn.active::after {
+    content: '✓';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+/* ===== CONTENEDORES DE ETAPAS ===== */
+.stage-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.stage-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== GRID DE 3 COLUMNAS TEVP ===== */
+.screens-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* ===== TARJETAS DE PANTALLAS TEVP ===== */
+.screen-card {
+    width: 100%;
+    border: 3px solid var(--tevp-azul-primario);
+    border-radius: var(--tevp-radio-medio);
+    padding: 20px;
+    background: linear-gradient(135deg, var(--tevp-fondo-principal), #f8fbff);
+    text-align: center;
+    transition: all 0.4s ease;
+    box-shadow: var(--tevp-sombra-suave);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.screen-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--tevp-naranja-accion), var(--tevp-azul-primario), var(--tevp-verde-exito));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.screen-card:hover::before {
+    transform: scaleX(1);
+}
+
+.screen-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--tevp-sombra-fuerte);
+    border-color: var(--tevp-naranja-accion);
+}
+
+/* ===== TÍTULOS DE PANTALLAS TEVP ===== */
+.screen-card h3 {
+    color: var(--tevp-azul-primario);
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #E8F4FD, #F0F8FF);
+    border-radius: var(--tevp-radio-pequeno);
+    border: 2px solid var(--tevp-azul-primario);
+    box-shadow: var(--tevp-sombra-suave);
+    position: relative;
+    line-height: 1.3;
+}
+
+/* ===== ICONOS ESPECIALES POR TIPO DE PANTALLA ===== */
+.screen-card[data-screen*="1."] h3::after { content: '🏠'; }
+.screen-card[data-screen*="2."] h3::after { content: '👤'; }
+.screen-card[data-screen*="3."] h3::after { content: '🔧'; }
+
+.screen-card h3::after {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+/* ===== IMÁGENES DE PANTALLAS TEVP ===== */
+.screen-card img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: var(--tevp-radio-pequeno);
+    box-shadow: var(--tevp-sombra-suave);
+    transition: transform 0.4s ease;
+    border: 2px solid #e0e7ff;
+}
+
+.screen-card img:hover {
+    transform: scale(1.05);
+    border-color: var(--tevp-azul-primario);
+}
+
+/* ===== EFECTOS ESPECIALES POR ETAPA ===== */
+
+/* Etapa 1 - Acceso General */
+.stage-content[id="stage1"] .screen-card {
+    border-color: var(--tevp-azul-primario);
+}
+
+.stage-content[id="stage1"] .screen-card h3 {
+    background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+    color: var(--tevp-azul-oscuro);
+    border-color: var(--tevp-azul-primario);
+}
+
+/* Etapa 2 - Cliente Logueado */
+.stage-content[id="stage2"] .screen-card {
+    border-color: var(--tevp-verde-exito);
+}
+
+.stage-content[id="stage2"] .screen-card h3 {
+    background: linear-gradient(135deg, #d1fae5, #dcfce7);
+    color: var(--tevp-verde-oscuro);
+    border-color: var(--tevp-verde-exito);
+}
+
+/* Etapa 3 - Profesional Logueado */
+.stage-content[id="stage3"] .screen-card {
+    border-color: var(--tevp-naranja-accion);
+}
+
+.stage-content[id="stage3"] .screen-card h3 {
+    background: linear-gradient(135deg, #fef3c7, #fef9e7);
+    color: var(--tevp-naranja-oscuro);
+    border-color: var(--tevp-naranja-accion);
+}
+
+/* ===== RESPONSIVE DESIGN TEVP ===== */
+@media (max-width: 1024px) {
+    .screens-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .stage-btn {
+        padding: 12px 25px;
+        margin: 5px;
+        font-size: 14px;
+        min-width: 180px;
+    }
+    
+    .mockup-header h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .screens-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .stage-nav {
+        margin: 15px 0;
+        padding: 20px;
+    }
+    
+    .stage-btn {
+        display: block;
+        width: 90%;
+        margin: 8px auto;
+        padding: 15px;
+        min-width: auto;
+    }
+    
+    .screen-card {
+        min-height: 280px;
+        padding: 15px;
+    }
+    
+    .screen-counter {
+        top: 10px;
+        right: 10px;
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+    
+    .mockup-header h1 {
+        font-size: 24px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .mockup-header p {
+        font-size: 16px;
+    }
+}
+
+/* ===== ANIMACIONES ADICIONALES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.screen-card:hover {
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* ===== MOCKUPS MÓVILES TEVP PROFESIONALES ===== */
+
+/* Marco del móvil mejorado */
+.mobile-frame-tevp {
+    width: 280px;
+    height: 500px;
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border-radius: 25px;
+    padding: 8px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    position: relative;
+}
+
+.mobile-frame-tevp::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #666;
+    border-radius: 2px;
+}
+
+.mobile-frame-tevp::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+}
+
+/* Pantalla del móvil TEVP */
+.mobile-screen-tevp {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Barra de estado TEVP */
+.status-bar-tevp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background: linear-gradient(90deg, var(--tevp-azul-primario), var(--tevp-azul-claro));
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.time-tevp {
+    font-weight: bold;
+}
+
+.status-icons-tevp {
+    display: flex;
+    gap: 6px;
+}
+
+.status-icons-tevp i {
+    font-size: 12px;
+}
+
+/* Contenido principal del mockup */
+.screen-content-tevp {
+    padding: 20px 15px;
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Logo y marca TEVP */
+.tevp-logo-section {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.tevp-logo-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-verde-exito));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.tevp-logo-circle i {
+    font-size: 32px;
+    color: white;
+}
+
+.tevp-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--tevp-azul-primario);
+    margin: 0 0 5px 0;
+    letter-spacing: 2px;
+}
+
+.tevp-subtitle {
+    font-size: 12px;
+    color: var(--tevp-texto-secundario);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Servicios preview */
+.tevp-services-preview {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.tevp-services-preview h2 {
+    font-size: 16px;
+    color: var(--tevp-azul-primario);
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.services-grid-mini {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.service-mini {
+    background: linear-gradient(135deg, var(--tevp-verde-claro), var(--tevp-verde-exito));
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+/* Botones de acción TEVP */
+.tevp-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-tevp {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-tevp.primary {
+    background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro));
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-tevp.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.btn-tevp.secondary {
+    background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro));
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-tevp.outline {
+    background: transparent;
+    color: var(--tevp-azul-primario);
+    border: 2px solid var(--tevp-azul-primario);
+}
+
+/* Mensaje para invitados */
+.guest-message {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    padding: 12px;
+    border-radius: 10px;
+    border-left: 4px solid var(--tevp-naranja-accion);
+    margin-top: auto;
+}
+
+.guest-message p {
+    font-size: 11px;
+    color: var(--tevp-naranja-oscuro);
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ===== MEJORAS GENERALES PARA MOCKUPS ===== */
+
+/* Estilos para la navegación inferior en mockups */
+.bottom-nav-tevp {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-item-tevp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--tevp-texto-claro);
+    font-size: 10px;
+}
+
+.nav-item-tevp.active {
+    color: var(--tevp-azul-primario);
+}
+
+.nav-item-tevp i {
+    font-size: 16px;
+}
+
+/* Estilos para listas en mockups */
+.list-item-tevp {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--tevp-azul-primario);
+}
+
+.list-item-tevp .icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--tevp-azul-claro), var(--tevp-azul-primario));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 12px;
+}
+
+.list-item-tevp .content {
+    flex: 1;
+}
+
+.list-item-tevp .title {
+    font-weight: 600;
+    color: var(--tevp-texto-principal);
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.list-item-tevp .subtitle {
+    font-size: 12px;
+    color: var(--tevp-texto-secundario);
+}
+
+/* Estilos para formularios en mockups */
+.form-group-tevp {
+    margin-bottom: 15px;
+}
+
+.form-label-tevp {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tevp-texto-principal);
+    margin-bottom: 5px;
+}
+
+.form-input-tevp {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-input-tevp:focus {
+    border-color: var(--tevp-azul-primario);
+    outline: none;
+}
+
+/* Estilos para cards de profesional */
+.professional-card-tevp {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    margin-bottom: 12px;
+}
+
+.professional-header-tevp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.professional-avatar-tevp {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+.professional-info-tevp .name {
+    font-weight: 600;
+    color: var(--tevp-texto-principal);
+    font-size: 14px;
+}
+
+.professional-info-tevp .rating {
+    font-size: 12px;
+    color: var(--tevp-naranja-accion);
+}
+
+.professional-services-tevp {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.service-tag-tevp {
+    background: linear-gradient(135deg, var(--tevp-azul-claro), var(--tevp-azul-primario));
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+/* ===== ESTILOS ADICIONALES PARA MOCKUPS MEJORADOS ===== */
+
+/* Header con búsqueda mejorado */
+.search-header-tevp {
+    margin-bottom: 20px;
+}
+
+.search-bar-tevp {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid var(--tevp-azul-primario);
+    border-radius: 25px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.search-bar-tevp i:first-child {
+    color: var(--tevp-azul-primario);
+    margin-right: 10px;
+}
+
+.search-bar-tevp input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: var(--tevp-texto-principal);
+}
+
+.search-bar-tevp input::placeholder {
+    color: var(--tevp-texto-claro);
+}
+
+.search-bar-tevp i:last-child {
+    color: var(--tevp-texto-claro);
+    margin-left: 10px;
+}
+
+.location-bar-tevp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--tevp-verde-claro), var(--tevp-verde-exito));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.location-bar-tevp i {
+    margin-right: 6px;
+    font-size: 10px;
+}
+
+/* Sección de categorías mejorada */
+.categories-section-tevp {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.categories-section-tevp h3 {
+    font-size: 16px;
+    color: var(--tevp-azul-primario);
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.categories-grid-tevp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.category-card-tevp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 12px 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-card-tevp:hover {
+    border-color: var(--tevp-azul-primario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.category-icon-tevp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.category-icon-tevp.air {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.category-icon-tevp.electric {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.category-icon-tevp.plumb {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.category-icon-tevp.repair {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+}
+
+.category-card-tevp span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tevp-texto-principal);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Sección de profesionales mejorada */
+.professionals-section-tevp {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.professionals-section-tevp h3 {
+    font-size: 16px;
+    color: var(--tevp-azul-primario);
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.price-badge-tevp {
+    background: linear-gradient(135deg, var(--tevp-naranja-accion), var(--tevp-naranja-oscuro));
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.contact-disabled-tevp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: var(--tevp-naranja-oscuro);
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.contact-disabled-tevp i {
+    margin-right: 6px;
+    font-size: 10px;
+}
+
+/* Responsive para mockups */
+@media (max-width: 768px) {
+    .mobile-frame-tevp {
+        width: 250px;
+        height: 450px;
+    }
+    
+    .screen-content-tevp {
+        padding: 15px 12px;
+        gap: 15px;
+    }
+    
+    .tevp-logo-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .tevp-logo-circle i {
+        font-size: 24px;
+    }
+    
+    .tevp-title {
+        font-size: 24px;
+    }
+}

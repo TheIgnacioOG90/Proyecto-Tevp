@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - ETAPA 1: Pantallas Principales</title>
+    <link rel="stylesheet" href="tevp-styles-shared.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-etapa">
+        <!-- Header de Etapa 1 -->
+        <div class="header-etapa">
+            <h1><i class="fas fa-home"></i> ETAPA 1: Pantallas Principales</h1>
+            <p>Acceso y Navegación General (No logueado o invitado)</p>
+            <div class="etapa-info">
+                <div class="info-item">
+                    <div class="info-number">8</div>
+                    <div class="info-label">Pantallas</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">👤</div>
+                    <div class="info-label">Usuario Invitado</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">🔓</div>
+                    <div class="info-label">Sin Login</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de Mockups -->
+        <div class="mockups-grid">
+            <!-- Pantalla 1.1: Bienvenida -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.1</div>
+                    <div class="mockup-tipo">Bienvenida</div>
+                </div>
+                <h3 class="mockup-titulo">Pantalla de Bienvenida / Exploración sin iniciar sesión</h3>
+                <p class="mockup-descripcion">Introducción a TEVP para usuarios invitados con preview de servicios</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Logo TEVP -->
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div class="tevp-logo">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2 style="color: var(--tevp-azul-primario); margin: 0 0 5px 0; font-size: 24px;">TEVP</h2>
+                                <p style="color: var(--tevp-texto-secundario); font-size: 12px; margin: 0;">Técnicos Expertos Verificados Profesionales</p>
+                            </div>
+                            
+                            <!-- Descripción de servicios -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 10px 0; font-size: 14px; text-align: center;">🔧 Servicios Disponibles</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <div style="background: linear-gradient(135deg, var(--tevp-azul-claro), var(--tevp-azul-primario)); color: white; padding: 8px; border-radius: 6px; text-align: center; font-size: 10px;">⚡ Electricidad</div>
+                                    <div style="background: linear-gradient(135deg, var(--tevp-verde-claro), var(--tevp-verde-exito)); color: white; padding: 8px; border-radius: 6px; text-align: center; font-size: 10px;">🔧 Plomería</div>
+                                    <div style="background: linear-gradient(135deg, var(--tevp-naranja-claro), var(--tevp-naranja-accion)); color: white; padding: 8px; border-radius: 6px; text-align: center; font-size: 10px;">❄️ Refrigeración</div>
+                                    <div style="background: linear-gradient(135deg, var(--tevp-morado-premium), #a855f7); color: white; padding: 8px; border-radius: 6px; text-align: center; font-size: 10px;">🏠 Hogar</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Botones de acción -->
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <button class="btn-primary" style="font-size: 12px;">🔍 Explorar la App</button>
+                                <button class="btn-secondary" style="font-size: 12px;">👤 Iniciar Sesión</button>
+                                <button class="btn-outline" style="font-size: 12px;">📝 Registrarse</button>
+                            </div>
+                            
+                            <!-- Mensaje para invitados -->
+                            <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 10px; border-radius: 8px; border-left: 4px solid var(--tevp-naranja-accion); margin-top: auto;">
+                                <p style="font-size: 10px; color: var(--tevp-naranja-oscuro); margin: 0; text-align: center;">💡 Explora servicios sin registro, pero necesitas cuenta para contratar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.2: Inicio / Exploración -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.2</div>
+                    <div class="mockup-tipo">Exploración</div>
+                </div>
+                <h3 class="mockup-titulo">Pantalla de Inicio / Exploración</h3>
+                <p class="mockup-descripcion">Búsqueda de servicios y profesionales sin estar logueado</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Barra de búsqueda -->
+                            <div style="background: white; border: 2px solid var(--tevp-azul-primario); border-radius: 20px; padding: 10px; display: flex; align-items: center; margin-bottom: 15px;">
+                                <i class="fas fa-search" style="color: var(--tevp-azul-primario); margin-right: 8px;"></i>
+                                <input type="text" placeholder="¿Qué servicio necesitas?" style="flex: 1; border: none; outline: none; font-size: 12px;">
+                                <i class="fas fa-microphone" style="color: var(--tevp-texto-claro); margin-left: 8px;"></i>
+                            </div>
+                            
+                            <!-- Ubicación -->
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <div style="background: linear-gradient(135deg, var(--tevp-verde-claro), var(--tevp-verde-exito)); color: white; display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 15px; font-size: 11px;">
+                                    <i class="fas fa-map-marker-alt" style="margin-right: 5px; font-size: 9px;"></i>
+                                    Santiago, Las Condes
+                                </div>
+                            </div>
+                            
+                            <!-- Categorías -->
+                            <div style="background: white; border-radius: 10px; padding: 12px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 10px 0; font-size: 13px; text-align: center;">🛠️ Servicios Populares</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 16px; margin-bottom: 4px;">❄️</div>
+                                        <span style="font-size: 9px; font-weight: 600;">Aire Acondicionado</span>
+                                    </div>
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 16px; margin-bottom: 4px;">⚡</div>
+                                        <span style="font-size: 9px; font-weight: 600;">Electricidad</span>
+                                    </div>
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 16px; margin-bottom: 4px;">🔧</div>
+                                        <span style="font-size: 9px; font-weight: 600;">Fontanería</span>
+                                    </div>
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 16px; margin-bottom: 4px;">🛠️</div>
+                                        <span style="font-size: 9px; font-weight: 600;">Reparaciones</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Profesional destacado -->
+                            <div style="background: white; border-radius: 10px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 10px 0; font-size: 13px; text-align: center;">⭐ Profesional Destacado</h4>
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 10px;">
+                                        <i class="fas fa-user-tie" style="font-size: 16px;"></i>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">Juan Pérez</div>
+                                        <div style="font-size: 10px; color: var(--tevp-naranja-accion);">⭐ 4.8 (127 reseñas)</div>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, var(--tevp-naranja-accion), var(--tevp-naranja-oscuro)); color: white; padding: 4px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">$25.000</div>
+                                </div>
+                                <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                    <div style="background: linear-gradient(135deg, var(--tevp-azul-claro), var(--tevp-azul-primario)); color: white; padding: 3px 6px; border-radius: 8px; font-size: 8px;">Refrigeración</div>
+                                    <div style="background: linear-gradient(135deg, var(--tevp-azul-claro), var(--tevp-azul-primario)); color: white; padding: 3px 6px; border-radius: 8px; font-size: 8px;">A/C</div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 6px; border-radius: 6px; text-align: center;">
+                                    <span style="font-size: 9px; color: var(--tevp-naranja-oscuro);">🔒 Inicia sesión para contactar</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.3: Resultados de Búsqueda -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.3</div>
+                    <div class="mockup-tipo">Búsqueda</div>
+                </div>
+                <h3 class="mockup-titulo">Pantalla de Resultados de Búsqueda</h3>
+                <p class="mockup-descripcion">Listado de profesionales con filtros básicos para invitados</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header de búsqueda -->
+                            <div style="background: var(--tevp-azul-primario); color: white; padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                                    <span style="font-size: 14px; font-weight: 600;">Resultados: "Aire Acondicionado"</span>
+                                </div>
+                                <p style="font-size: 11px; margin: 0; opacity: 0.9;">3 profesionales encontrados</p>
+                            </div>
+                            
+                            <!-- Filtros -->
+                            <div style="background: white; border-radius: 8px; padding: 10px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+                                <div style="display: flex; gap: 6px; overflow-x: auto;">
+                                    <div style="background: var(--tevp-azul-primario); color: white; padding: 6px 10px; border-radius: 15px; font-size: 10px; white-space: nowrap;">📍 Ubicación</div>
+                                    <div style="background: #f1f5f9; color: var(--tevp-texto-secundario); padding: 6px 10px; border-radius: 15px; font-size: 10px; white-space: nowrap;">⭐ Calificación</div>
+                                    <div style="background: #f1f5f9; color: var(--tevp-texto-secundario); padding: 6px 10px; border-radius: 15px; font-size: 10px; white-space: nowrap;">💰 Precio</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Lista de profesionales -->
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <!-- Profesional 1 -->
+                                <div style="background: white; border-radius: 10px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-user-tie" style="font-size: 18px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--tevp-texto-principal); margin-bottom: 2px;">Carlos Mendoza</div>
+                                            <div style="font-size: 10px; color: var(--tevp-naranja-accion); margin-bottom: 2px;">⭐ 4.9 (89 reseñas)</div>
+                                            <div style="font-size: 9px; color: var(--tevp-texto-claro);">📍 Las Condes, 2km</div>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <div style="background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); color: white; padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-bottom: 4px;">$30.000</div>
+                                            <div style="font-size: 8px; color: var(--tevp-texto-claro);">por servicio</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                        <span style="background: #e0f2fe; color: #0284c7; padding: 3px 6px; border-radius: 6px; font-size: 8px;">Instalación A/C</span>
+                                        <span style="background: #e0f2fe; color: #0284c7; padding: 3px 6px; border-radius: 6px; font-size: 8px;">Mantenimiento</span>
+                                    </div>
+                                    <div style="background: #fef3c7; color: var(--tevp-naranja-oscuro); padding: 6px; border-radius: 6px; text-align: center; border: 1px solid #fde68a;">
+                                        <span style="font-size: 9px;">🔒 Inicia sesión para ver detalles completos</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Profesional 2 -->
+                                <div style="background: white; border-radius: 10px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-hard-hat" style="font-size: 18px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--tevp-texto-principal); margin-bottom: 2px;">Ana López</div>
+                                            <div style="font-size: 10px; color: var(--tevp-naranja-accion); margin-bottom: 2px;">⭐ 4.7 (156 reseñas)</div>
+                                            <div style="font-size: 9px; color: var(--tevp-texto-claro);">📍 Providencia, 3km</div>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <div style="background: linear-gradient(135deg, var(--tevp-naranja-accion), var(--tevp-naranja-oscuro)); color: white; padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-bottom: 4px;">$25.000</div>
+                                            <div style="font-size: 8px; color: var(--tevp-texto-claro);">por servicio</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                        <span style="background: #dcfce7; color: #059669; padding: 3px 6px; border-radius: 6px; font-size: 8px;">Reparación A/C</span>
+                                        <span style="background: #dcfce7; color: #059669; padding: 3px 6px; border-radius: 6px; font-size: 8px;">Limpieza</span>
+                                    </div>
+                                    <div style="background: #fef3c7; color: var(--tevp-naranja-oscuro); padding: 6px; border-radius: 6px; text-align: center; border: 1px solid #fde68a;">
+                                        <span style="font-size: 9px;">🔒 Inicia sesión para contactar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.4: Detalle del Profesional (No logueado) -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.4</div>
+                    <div class="mockup-tipo">Detalle Pro</div>
+                </div>
+                <h3 class="mockup-titulo">Detalle del Profesional (No logueado)</h3>
+                <p class="mockup-descripcion">Información básica con contacto bloqueado para invitados</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header de perfil -->
+                            <div style="background: var(--tevp-azul-primario); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 15px; font-size: 16px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">Perfil del Profesional</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Información del profesional -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                                        <i class="fas fa-user-tie" style="font-size: 24px;"></i>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 18px; font-weight: 600; color: var(--tevp-texto-principal); margin-bottom: 3px;">Carlos Mendoza</div>
+                                        <div style="font-size: 12px; color: var(--tevp-naranja-accion); margin-bottom: 3px;">⭐ 4.9 (127 reseñas)</div>
+                                        <div style="font-size: 11px; color: var(--tevp-texto-claro);">📍 Las Condes</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Especialidades -->
+                                <div style="margin-bottom: 12px;">
+                                    <h5 style="font-size: 12px; color: var(--tevp-azul-primario); margin: 0 0 6px 0;">🔧 Especialidades</h5>
+                                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                        <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-size: 10px;">Aire Acondicionado</span>
+                                        <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-size: 10px;">Refrigeración</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Precio -->
+                                <div style="background: #f8fafc; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 10px; color: var(--tevp-texto-secundario);">Precio aproximado</div>
+                                        <div style="font-size: 18px; font-weight: 600; color: var(--tevp-verde-exito);">$30.000</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Información resumida -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h5 style="font-size: 12px; color: var(--tevp-azul-primario); margin: 0 0 8px 0;">👨‍🔧 Experiencia</h5>
+                                <p style="font-size: 11px; color: var(--tevp-texto-principal); line-height: 1.4; margin: 0;">
+                                    Técnico especializado en refrigeración con más de 8 años de experiencia. Certificado y con garantía en trabajos.
+                                </p>
+                            </div>
+                            
+                            <!-- Botón bloqueado -->
+                            <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 15px; border-radius: 10px; border-left: 4px solid var(--tevp-naranja-accion); text-align: center;">
+                                <div style="margin-bottom: 10px;">
+                                    <i class="fas fa-lock" style="font-size: 24px; color: var(--tevp-naranja-oscuro);"></i>
+                                </div>
+                                <h4 style="color: var(--tevp-naranja-oscuro); margin: 0 0 8px 0; font-size: 14px;">¡Inicia sesión para contactar!</h4>
+                                <p style="font-size: 11px; color: var(--tevp-naranja-oscuro); margin: 0 0 12px 0;">
+                                    Para contactar a este profesional y solicitar servicios necesitas crear una cuenta gratuita.
+                                </p>
+                                <div style="display: flex; gap: 8px;">
+                                    <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 10px 15px; border-radius: 8px; font-size: 11px; font-weight: 600; flex: 1;">🔑 Iniciar Sesión</button>
+                                    <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 10px 15px; border-radius: 8px; font-size: 11px; font-weight: 600; flex: 1;">📝 Registrarse</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.5: Login -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.5</div>
+                    <div class="mockup-tipo">Login</div>
+                </div>
+                <h3 class="mockup-titulo">Pantalla de Login</h3>
+                <p class="mockup-descripcion">Inicio de sesión para usuarios registrados</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header -->
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <div style="background: var(--tevp-azul-primario); color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                    <i class="fas fa-arrow-left" style="position: absolute; left: 30px; font-size: 16px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">Iniciar Sesión</span>
+                                </div>
+                                
+                                <!-- Logo TEVP -->
+                                <div class="tevp-logo" style="margin-bottom: 15px;">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2 style="color: var(--tevp-azul-primario); margin: 0 0 5px 0; font-size: 28px;">TEVP</h2>
+                                <p style="color: var(--tevp-texto-secundario); font-size: 12px; margin: 0;">¡Bienvenido de vuelta!</p>
+                            </div>
+                            
+                            <!-- Formulario de login -->
+                            <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <!-- Email -->
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 12px; color: var(--tevp-texto-secundario); margin-bottom: 5px; display: block;">📧 Correo Electrónico</label>
+                                    <input type="email" placeholder="Ingresa tu correo" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Contraseña -->
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 12px; color: var(--tevp-texto-secundario); margin-bottom: 5px; display: block;">🔒 Contraseña</label>
+                                    <div style="position: relative;">
+                                        <input type="password" placeholder="Ingresa tu contraseña" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; box-sizing: border-box; padding-right: 40px;">
+                                        <i class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--tevp-texto-claro);"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Recordar y olvidé contraseña -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <label style="display: flex; align-items: center; font-size: 11px; color: var(--tevp-texto-secundario);">
+                                        <input type="checkbox" style="margin-right: 5px;">
+                                        Recordarme
+                                    </label>
+                                    <a href="#" style="font-size: 11px; color: var(--tevp-azul-primario); text-decoration: none;">¿Olvidaste tu contraseña?</a>
+                                </div>
+                                
+                                <!-- Botón iniciar sesión -->
+                                <button style="background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-size: 14px; font-weight: 600; margin-bottom: 15px;">
+                                    🔑 Iniciar Sesión
+                                </button>
+                                
+                                <!-- Divider -->
+                                <div style="text-align: center; margin: 15px 0; position: relative;">
+                                    <span style="background: white; padding: 0 10px; color: var(--tevp-texto-claro); font-size: 11px;">O inicia sesión con</span>
+                                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #e2e8f0; z-index: -1;"></div>
+                                </div>
+                                
+                                <!-- Botones sociales -->
+                                <div style="display: flex; gap: 10px;">
+                                    <button style="background: #1877f2; color: white; border: none; padding: 10px; border-radius: 8px; flex: 1; font-size: 12px;">
+                                        <i class="fab fa-facebook-f"></i> Facebook
+                                    </button>
+                                    <button style="background: #dd4b39; color: white; border: none; padding: 10px; border-radius: 8px; flex: 1; font-size: 12px;">
+                                        <i class="fab fa-google"></i> Google
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Registro -->
+                            <div style="text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px;">
+                                <p style="font-size: 12px; color: var(--tevp-texto-secundario); margin: 0 0 8px 0;">¿No tienes cuenta?</p>
+                                <button style="background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                                    📝 Crear Cuenta Gratuita
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.6: Registro -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.6</div>
+                    <div class="mockup-tipo">Registro</div>
+                </div>
+                <h3 class="mockup-titulo">Pantalla de Registro</h3>
+                <p class="mockup-descripcion">Registro para nuevos usuarios: Cliente o Profesional</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header -->
+                            <div style="background: var(--tevp-verde-exito); color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">Crear Cuenta</span>
+                                </div>
+                                <p style="font-size: 11px; margin: 0; opacity: 0.9;">Únete a la comunidad TEVP</p>
+                            </div>
+                            
+                            <!-- Selección de tipo de usuario -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 12px 0; font-size: 14px;">🎯 ¿Qué tipo de cuenta necesitas?</h4>
+                                <div style="display: flex; gap: 10px;">
+                                    <button style="background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); color: white; border: none; padding: 15px; border-radius: 8px; flex: 1; font-size: 11px; font-weight: 600;">
+                                        <div style="font-size: 20px; margin-bottom: 5px;">👤</div>
+                                        Soy Cliente
+                                        <div style="font-size: 9px; opacity: 0.9; margin-top: 3px;">Busco servicios</div>
+                                    </button>
+                                    <button style="background: #f1f5f9; color: var(--tevp-texto-secundario); border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; flex: 1; font-size: 11px;">
+                                        <div style="font-size: 20px; margin-bottom: 5px;">🔧</div>
+                                        Soy Profesional
+                                        <div style="font-size: 9px; margin-top: 3px;">Ofrezco servicios</div>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Formulario de registro (Cliente) -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <!-- Nombre -->
+                                <div style="margin-bottom: 12px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">👤 Nombre Completo</label>
+                                    <input type="text" placeholder="Ej: María González" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Email -->
+                                <div style="margin-bottom: 12px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">📧 Correo Electrónico</label>
+                                    <input type="email" placeholder="ejemplo@correo.com" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Teléfono -->
+                                <div style="margin-bottom: 12px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">📱 Teléfono</label>
+                                    <input type="tel" placeholder="+56 9 1234 5678" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Dirección -->
+                                <div style="margin-bottom: 12px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">📍 Dirección</label>
+                                    <input type="text" placeholder="Av. Las Condes 1234" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Contraseña -->
+                                <div style="margin-bottom: 12px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">🔒 Contraseña</label>
+                                    <input type="password" placeholder="Mínimo 8 caracteres" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Confirmar contraseña -->
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">🔒 Confirmar Contraseña</label>
+                                    <input type="password" placeholder="Repite tu contraseña" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                                
+                                <!-- Términos -->
+                                <div style="margin-bottom: 15px;">
+                                    <label style="display: flex; align-items: flex-start; font-size: 10px; color: var(--tevp-texto-secundario);">
+                                        <input type="checkbox" style="margin-right: 8px; margin-top: 2px;">
+                                        <span>Acepto los <a href="#" style="color: var(--tevp-azul-primario);">Términos y Condiciones</a> y la <a href="#" style="color: var(--tevp-azul-primario);">Política de Privacidad</a></span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Botón registrarse -->
+                                <button style="background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-size: 13px; font-weight: 600;">
+                                    🎉 Crear Mi Cuenta
+                                </button>
+                            </div>
+                            
+                            <!-- Ya tienes cuenta -->
+                            <div style="text-align: center; background: #f8fafc; padding: 12px; border-radius: 8px;">
+                                <p style="font-size: 11px; color: var(--tevp-texto-secundario); margin: 0 0 8px 0;">¿Ya tienes cuenta?</p>
+                                <button style="background: none; border: 1px solid var(--tevp-azul-primario); color: var(--tevp-azul-primario); padding: 8px 15px; border-radius: 6px; font-size: 11px; font-weight: 600;">
+                                    🔑 Iniciar Sesión
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.7: Términos y Condiciones -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.7</div>
+                    <div class="mockup-tipo">Términos</div>
+                </div>
+                <h3 class="mockup-titulo">Términos y Condiciones / Política de Privacidad</h3>
+                <p class="mockup-descripcion">Información legal y políticas de uso de la aplicación</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header -->
+                            <div style="background: var(--tevp-azul-primario); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">Términos Legales</span>
+                                </div>
+                                <p style="font-size: 11px; margin: 0; opacity: 0.9;">Información importante sobre el uso de TEVP</p>
+                            </div>
+                            
+                            <!-- Tabs -->
+                            <div style="background: white; border-radius: 8px; padding: 10px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+                                <div style="display: flex; gap: 4px;">
+                                    <button style="background: var(--tevp-azul-primario); color: white; padding: 8px 12px; border-radius: 6px; border: none; font-size: 10px; flex: 1;">📋 Términos</button>
+                                    <button style="background: #f1f5f9; color: var(--tevp-texto-secundario); padding: 8px 12px; border-radius: 6px; border: none; font-size: 10px; flex: 1;">🛡️ Privacidad</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Contenido de términos -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-height: 350px; overflow-y: auto;">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 12px 0; font-size: 14px;">📋 Términos y Condiciones de Uso</h4>
+                                
+                                <div style="font-size: 10px; color: var(--tevp-texto-principal); line-height: 1.4;">
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">1. Aceptación de Términos</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        Al acceder y utilizar la aplicación TEVP, usted acepta estar sujeto a estos términos y condiciones de uso, todas las leyes y regulaciones aplicables.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">2. Descripción del Servicio</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        TEVP es una plataforma que conecta clientes con profesionales técnicos verificados para servicios de mantenimiento y reparación.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">3. Registro de Usuario</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        Los usuarios deben proporcionar información precisa y actualizada durante el registro. Cada usuario es responsable de mantener la confidencialidad de su cuenta.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">4. Responsabilidades</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        Los profesionales son responsables de la calidad de sus servicios. Los clientes deben proporcionar acceso seguro y información precisa sobre el trabajo requerido.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">5. Pagos y Tarifas</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        Los pagos se procesan de forma segura a través de la plataforma. TEVP retiene una comisión por cada transacción completada.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">6. Política de Cancelación</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        Las cancelaciones deben realizarse con al menos 24 horas de anticipación. Se pueden aplicar cargos por cancelaciones tardías.
+                                    </p>
+                                    
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 10px 0 5px 0; font-size: 11px;">7. Limitación de Responsabilidad</h5>
+                                    <p style="margin: 0 0 10px 0;">
+                                        TEVP actúa como intermediario y no se hace responsable por daños directos o indirectos derivados del uso de los servicios contratados.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Botones de acción -->
+                            <div style="display: flex; gap: 10px;">
+                                <button style="background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-size: 12px; font-weight: 600;">
+                                    ✅ Acepto los Términos
+                                </button>
+                                <button style="background: #ef4444; color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-size: 12px; font-weight: 600;">
+                                    ❌ Rechazar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Registro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 1.8: Confirmación de Registro -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">1.8</div>
+                    <div class="mockup-tipo">Confirmación</div>
+                </div>
+                <h3 class="mockup-titulo">Confirmación de Registro</h3>
+                <p class="mockup-descripcion">Confirmación exitosa del proceso de registro</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Animación de éxito -->
+                            <div style="text-align: center; margin-bottom: 30px; margin-top: 30px;">
+                                <div style="background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                                    <i class="fas fa-check" style="font-size: 35px; color: white;"></i>
+                                </div>
+                                
+                                <h2 style="color: var(--tevp-azul-primario); margin: 0 0 10px 0; font-size: 24px; font-weight: 600;">¡Registro Exitoso!</h2>
+                                <p style="color: var(--tevp-texto-secundario); font-size: 14px; margin: 0; line-height: 1.4;">Tu cuenta ha sido creada con éxito</p>
+                            </div>
+                            
+                            <!-- Información de la cuenta -->
+                            <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 15px 0; font-size: 16px; text-align: center;">🎉 ¡Bienvenido a TEVP!</h4>
+                                
+                                <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--tevp-azul-primario);">
+                                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                        <i class="fas fa-user-circle" style="font-size: 24px; color: var(--tevp-azul-primario); margin-right: 10px;"></i>
+                                        <div>
+                                            <div style="font-size: 14px; font-weight: 600; color: var(--tevp-azul-primario);">María González</div>
+                                            <div style="font-size: 11px; color: var(--tevp-texto-secundario);">Cliente registrado</div>
+                                        </div>
+                                    </div>
+                                    <div style="font-size: 10px; color: var(--tevp-azul-primario);">
+                                        📧 maria.gonzalez@email.com<br>
+                                        📱 +56 9 1234 5678
+                                    </div>
+                                </div>
+                                
+                                <!-- Próximos pasos -->
+                                <div style="margin-bottom: 15px;">
+                                    <h5 style="color: var(--tevp-azul-primario); margin: 0 0 10px 0; font-size: 13px;">🚀 Próximos pasos:</h5>
+                                    <div style="font-size: 11px; color: var(--tevp-texto-principal); line-height: 1.5;">
+                                        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                                            <i class="fas fa-check-circle" style="color: var(--tevp-verde-exito); margin-right: 8px; font-size: 10px;"></i>
+                                            <span>Verifica tu correo electrónico</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                                            <i class="fas fa-circle" style="color: var(--tevp-texto-claro); margin-right: 8px; font-size: 10px;"></i>
+                                            <span>Completa tu perfil</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                                            <i class="fas fa-circle" style="color: var(--tevp-texto-claro); margin-right: 8px; font-size: 10px;"></i>
+                                            <span>Explora profesionales disponibles</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center;">
+                                            <i class="fas fa-circle" style="color: var(--tevp-texto-claro); margin-right: 8px; font-size: 10px;"></i>
+                                            <span>Solicita tu primer servicio</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Verificación de email -->
+                                <div style="background: #fef3c7; padding: 12px; border-radius: 8px; border-left: 4px solid var(--tevp-naranja-accion); margin-bottom: 15px;">
+                                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                        <i class="fas fa-envelope" style="color: var(--tevp-naranja-oscuro); margin-right: 8px; font-size: 12px;"></i>
+                                        <span style="font-size: 11px; font-weight: 600; color: var(--tevp-naranja-oscuro);">Verifica tu correo</span>
+                                    </div>
+                                    <p style="font-size: 10px; color: var(--tevp-naranja-oscuro); margin: 0; line-height: 1.3;">
+                                        Hemos enviado un enlace de verificación a tu correo. Revisa tu bandeja de entrada y spam.
+                                    </p>
+                                </div>
+                                
+                                <!-- Botón principal -->
+                                <button style="background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-size: 14px; font-weight: 600; margin-bottom: 10px;">
+                                    🔑 Iniciar Sesión Ahora
+                                </button>
+                                
+                                <!-- Botón secundario -->
+                                <button style="background: none; border: 1px solid var(--tevp-verde-exito); color: var(--tevp-verde-exito); padding: 12px; border-radius: 8px; width: 100%; font-size: 12px; font-weight: 600;">
+                                    🔍 Explorar Profesionales
+                                </button>
+                            </div>
+                            
+                            <!-- Soporte -->
+                            <div style="text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px;">
+                                <p style="font-size: 10px; color: var(--tevp-texto-secundario); margin: 0 0 8px 0;">¿Necesitas ayuda?</p>
+                                <button style="background: none; border: none; color: var(--tevp-azul-primario); font-size: 11px; text-decoration: underline;">
+                                    💬 Contactar Soporte
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Perfil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="tevp-scripts-shared.js"></script>
+</body>
+</html>

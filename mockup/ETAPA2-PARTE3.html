@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEVP - ETAPA 2 PARTE 3: Cliente Logueado (Pantallas 2.15-2.22)</title>
+    <link rel="stylesheet" href="tevp-styles-shared.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-etapa">
+        <!-- Header de Etapa 2 Parte 3 -->
+        <div class="header-etapa">
+            <h1><i class="fas fa-user-plus"></i> ETAPA 2 PARTE 3: Cliente Logueado</h1>
+            <p>Búsqueda avanzada y reservas específicas (Pantallas 2.15-2.22)</p>
+            <div class="etapa-info">
+                <div class="info-item">
+                    <div class="info-number">8</div>
+                    <div class="info-label">Pantallas</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">🔍</div>
+                    <div class="info-label">Búsqueda</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">📅</div>
+                    <div class="info-label">Reservas</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de Mockups -->
+        <div class="mockups-grid">
+            <!-- Pantalla 2.15: Búsqueda de Servicio Específico -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">2.15</div>
+                    <div class="mockup-tipo">Búsqueda</div>
+                </div>
+                <h3 class="mockup-titulo">Búsqueda de Servicio Específico</h3>
+                <p class="mockup-descripcion">Motor de búsqueda avanzada con filtros detallados</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header con búsqueda -->
+                            <div style="background: var(--tevp-azul-primario); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">🔍 Búsqueda Avanzada</span>
+                                </div>
+                                <div style="background: white; border-radius: 8px; padding: 12px; display: flex; align-items: center;">
+                                    <i class="fas fa-search" style="color: var(--tevp-texto-claro); margin-right: 8px; font-size: 14px;"></i>
+                                    <input type="text" placeholder="¿Qué servicio necesitas?" style="border: none; outline: none; flex: 1; font-size: 12px; color: var(--tevp-texto-principal);" value="Electricista">
+                                    <i class="fas fa-microphone" style="color: var(--tevp-azul-primario); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Filtros rápidos -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <h4 style="color: var(--tevp-azul-primario); margin: 0 0 12px 0; font-size: 14px;">⚡ Filtros Rápidos</h4>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                                    <div style="background: var(--tevp-azul-primario); color: white; padding: 6px 12px; border-radius: 20px; font-size: 10px;">🏠 Electricidad</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px;">💧 Plomería</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px;">🧹 Limpieza</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px;">🌿 Jardinería</div>
+                                </div>
+                                
+                                <!-- Filtros detallados -->
+                                <div style="border-top: 1px solid #f1f5f9; padding-top: 12px;">
+                                    <!-- Ubicación -->
+                                    <div style="margin-bottom: 12px;">
+                                        <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">📍 Ubicación</label>
+                                        <select style="width: 100%; padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 11px;">
+                                            <option>Las Condes</option>
+                                            <option>Providencia</option>
+                                            <option>Santiago Centro</option>
+                                            <option>Ñuñoa</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Rango de precio -->
+                                    <div style="margin-bottom: 12px;">
+                                        <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">💰 Rango de Precio</label>
+                                        <div style="display: flex; gap: 8px;">
+                                            <input type="number" placeholder="Mínimo" style="flex: 1; padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 11px;" value="15000">
+                                            <span style="display: flex; align-items: center; color: var(--tevp-texto-claro);">-</span>
+                                            <input type="number" placeholder="Máximo" style="flex: 1; padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 11px;" value="50000">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Disponibilidad -->
+                                    <div style="margin-bottom: 12px;">
+                                        <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">📅 Disponibilidad</label>
+                                        <div style="display: flex; gap: 6px;">
+                                            <div style="background: var(--tevp-verde-exito); color: white; padding: 4px 8px; border-radius: 12px; font-size: 9px; font-weight: 600;">Hoy</div>
+                                            <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 4px 8px; border-radius: 12px; font-size: 9px;">Mañana</div>
+                                            <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 4px 8px; border-radius: 12px; font-size: 9px;">Esta semana</div>
+                                            <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 4px 8px; border-radius: 12px; font-size: 9px;">Fin de semana</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Calificación -->
+                                    <div style="margin-bottom: 12px;">
+                                        <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">⭐ Calificación mínima</label>
+                                        <div style="display: flex; gap: 4px;">
+                                            <i class="fas fa-star" style="color: #fbbf24; font-size: 16px;"></i>
+                                            <i class="fas fa-star" style="color: #fbbf24; font-size: 16px;"></i>
+                                            <i class="fas fa-star" style="color: #fbbf24; font-size: 16px;"></i>
+                                            <i class="fas fa-star" style="color: #fbbf24; font-size: 16px;"></i>
+                                            <i class="far fa-star" style="color: #e2e8f0; font-size: 16px;"></i>
+                                            <span style="font-size: 10px; color: var(--tevp-texto-secundario); margin-left: 4px;">4.0 o más</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Experiencia -->
+                                    <div>
+                                        <label style="font-size: 11px; color: var(--tevp-texto-secundario); margin-bottom: 4px; display: block;">🎯 Experiencia mínima</label>
+                                        <select style="width: 100%; padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 11px;">
+                                            <option>Cualquiera</option>
+                                            <option>1+ años</option>
+                                            <option>3+ años</option>
+                                            <option>5+ años</option>
+                                            <option>10+ años</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Resultados -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <h4 style="color: var(--tevp-azul-primario); margin: 0; font-size: 14px;">🔍 Resultados (24)</h4>
+                                    <select style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px 8px; font-size: 9px;">
+                                        <option>Más relevantes</option>
+                                        <option>Mejor calificados</option>
+                                        <option>Menor precio</option>
+                                        <option>Mayor precio</option>
+                                        <option>Más cercanos</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Profesional 1 -->
+                                <div style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
+                                    <div style="display: flex; align-items: start; margin-bottom: 8px;">
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px; font-size: 18px;">⚡</div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">Luis Morales</div>
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-verde-exito);">$25.000</div>
+                                            </div>
+                                            <div style="font-size: 10px; color: var(--tevp-texto-secundario); margin-bottom: 6px;">Electricista Certificado • 8 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 10px;"></i>
+                                                    <span style="font-size: 10px; color: var(--tevp-texto-principal);">4.8</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-secundario);">156 servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-exito);">📍 1.2 km</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                                <span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Instalaciones</span>
+                                                <span style="background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Reparaciones</span>
+                                                <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Urgencias</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 6px;">
+                                        <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 8px 12px; border-radius: 6px; flex: 1; font-size: 9px; font-weight: 600;">👁️ Ver Perfil</button>
+                                        <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 8px 12px; border-radius: 6px; flex: 1; font-size: 9px; font-weight: 600;">📅 Reservar</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Profesional 2 -->
+                                <div style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 12px;">
+                                    <div style="display: flex; align-items: start; margin-bottom: 8px;">
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--tevp-naranja-acento), #f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px; font-size: 18px;">⚡</div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">Carlos Pérez</div>
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-verde-exito);">$22.000</div>
+                                            </div>
+                                            <div style="font-size: 10px; color: var(--tevp-texto-secundario); margin-bottom: 6px;">Técnico Eléctrico • 5 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 10px;"></i>
+                                                    <span style="font-size: 10px; color: var(--tevp-texto-principal);">4.6</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-secundario);">89 servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-exito);">📍 2.1 km</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                                <span style="background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Reparaciones</span>
+                                                <span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Domicilio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 6px;">
+                                        <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 8px 12px; border-radius: 6px; flex: 1; font-size: 9px; font-weight: 600;">👁️ Ver Perfil</button>
+                                        <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 8px 12px; border-radius: 6px; flex: 1; font-size: 9px; font-weight: 600;">📅 Reservar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Buscar en mapa -->
+                            <button style="background: var(--tevp-naranja-acento); color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-size: 12px; font-weight: 600;">
+                                🗺️ Ver en Mapa
+                            </button>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user"></i>
+                                <span>Perfil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla 2.16: Lista de Profesionales Disponibles -->
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <div class="mockup-numero">2.16</div>
+                    <div class="mockup-tipo">Lista</div>
+                </div>
+                <h3 class="mockup-titulo">Profesionales Disponibles</h3>
+                <p class="mockup-descripcion">Lista optimizada de profesionales con disponibilidad inmediata</p>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-icons">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-content">
+                            <!-- Header -->
+                            <div style="background: var(--tevp-verde-exito); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                                    <span style="font-size: 16px; font-weight: 600;">✅ Disponibles Ahora</span>
+                                    <div style="margin-left: auto;">
+                                        <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; font-size: 10px;">12 online</span>
+                                    </div>
+                                </div>
+                                <p style="font-size: 11px; margin: 0; opacity: 0.9;">Profesionales listos para atenderte hoy</p>
+                            </div>
+                            
+                            <!-- Filtros de disponibilidad -->
+                            <div style="background: white; border-radius: 10px; padding: 12px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; gap: 8px; overflow-x: auto;">
+                                    <div style="background: var(--tevp-verde-exito); color: white; padding: 6px 12px; border-radius: 20px; font-size: 10px; white-space: nowrap;">🕐 Ahora (12)</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px; white-space: nowrap;">📅 Hoy (24)</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px; white-space: nowrap;">⏰ Mañana (18)</div>
+                                    <div style="background: #f8fafc; color: var(--tevp-texto-secundario); padding: 6px 12px; border-radius: 20px; font-size: 10px; white-space: nowrap;">📆 Esta semana (45)</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Lista de profesionales -->
+                            <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <!-- Profesional destacado -->
+                                <div style="border: 2px solid var(--tevp-verde-exito); border-radius: 12px; padding: 15px; margin-bottom: 15px; background: #f0fdf4; position: relative;">
+                                    <div style="position: absolute; top: -8px; right: 12px; background: var(--tevp-verde-exito); color: white; padding: 4px 8px; border-radius: 12px; font-size: 8px; font-weight: 600;">🔥 TOP PRO</div>
+                                    <div style="display: flex; align-items: start; margin-bottom: 10px;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--tevp-verde-exito), var(--tevp-verde-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-user" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 14px; font-weight: 600; color: var(--tevp-verde-oscuro);">Ana García ⭐</div>
+                                                <div style="text-align: right;">
+                                                    <div style="font-size: 12px; font-weight: 600; color: var(--tevp-verde-oscuro);">$18.000/h</div>
+                                                    <div style="background: #22c55e; color: white; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 600;">🟢 ONLINE</div>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 11px; color: var(--tevp-verde-oscuro); margin-bottom: 6px;">Limpieza Profesional • 12 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 11px;"></i>
+                                                    <span style="font-size: 11px; color: var(--tevp-verde-oscuro); font-weight: 600;">4.9</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-oscuro);">•</span>
+                                                <span style="font-size: 10px; color: var(--tevp-verde-oscuro);">320+ servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-oscuro);">•</span>
+                                                <span style="font-size: 10px; color: var(--tevp-verde-oscuro);">📍 800m</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 10px;">
+                                                <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 8px; font-size: 8px;">✓ Verificada</span>
+                                                <span style="background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Respuesta rápida</span>
+                                                <span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Disponible ahora</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button style="background: none; border: 1px solid var(--tevp-verde-exito); color: var(--tevp-verde-exito); padding: 8px 12px; border-radius: 6px; flex: 1; font-size: 10px; font-weight: 600;">💬 Chat</button>
+                                        <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 8px 12px; border-radius: 6px; flex: 2; font-size: 10px; font-weight: 600;">⚡ Reservar Ahora</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Otros profesionales -->
+                                <div style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                                    <div style="display: flex; align-items: start; margin-bottom: 8px;">
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--tevp-azul-primario), var(--tevp-azul-claro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-wrench" style="font-size: 18px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">Pedro Martínez</div>
+                                                <div style="text-align: right;">
+                                                    <div style="font-size: 11px; font-weight: 600; color: var(--tevp-verde-exito);">$35.000</div>
+                                                    <div style="background: #22c55e; color: white; padding: 2px 6px; border-radius: 8px; font-size: 7px;">🟢 DISPONIBLE</div>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 10px; color: var(--tevp-texto-secundario); margin-bottom: 6px;">Plomería General • 7 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 10px;"></i>
+                                                    <span style="font-size: 10px; color: var(--tevp-texto-principal);">4.7</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-secundario);">156 servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-exito);">📍 1.2 km</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                                <span style="background: #f0f9ff; color: #0369a1; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Disponible en 2h</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 6px;">
+                                        <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">👁️ Ver</button>
+                                        <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">📅 Reservar</button>
+                                    </div>
+                                </div>
+                                
+                                <div style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                                    <div style="display: flex; align-items: start; margin-bottom: 8px;">
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--tevp-naranja-acento), #f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-leaf" style="font-size: 18px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">María Silva</div>
+                                                <div style="text-align: right;">
+                                                    <div style="font-size: 11px; font-weight: 600; color: var(--tevp-verde-exito);">$28.000</div>
+                                                    <div style="background: #fbbf24; color: white; padding: 2px 6px; border-radius: 8px; font-size: 7px;">🟡 OCUPADA</div>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 10px; color: var(--tevp-texto-secundario); margin-bottom: 6px;">Jardinería y Paisajismo • 9 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 10px;"></i>
+                                                    <span style="font-size: 10px; color: var(--tevp-texto-principal);">4.8</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-secundario);">203 servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-exito);">📍 1.8 km</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                                <span style="background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Libre a las 15:00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 6px;">
+                                        <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">👁️ Ver</button>
+                                        <button style="background: var(--tevp-naranja-acento); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">⏰ Programar</button>
+                                    </div>
+                                </div>
+                                
+                                <div style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 12px;">
+                                    <div style="display: flex; align-items: start; margin-bottom: 8px;">
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 12px;">
+                                            <i class="fas fa-bolt" style="font-size: 18px;"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                                <div style="font-size: 12px; font-weight: 600; color: var(--tevp-texto-principal);">Juan López</div>
+                                                <div style="text-align: right;">
+                                                    <div style="font-size: 11px; font-weight: 600; color: var(--tevp-verde-exito);">$32.000</div>
+                                                    <div style="background: #22c55e; color: white; padding: 2px 6px; border-radius: 8px; font-size: 7px;">🟢 DISPONIBLE</div>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 10px; color: var(--tevp-texto-secundario); margin-bottom: 6px;">Electricista Industrial • 15 años exp.</div>
+                                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 2px;">
+                                                    <i class="fas fa-star" style="color: #fbbf24; font-size: 10px;"></i>
+                                                    <span style="font-size: 10px; color: var(--tevp-texto-principal);">4.9</span>
+                                                </div>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-secundario);">89 servicios</span>
+                                                <span style="font-size: 9px; color: var(--tevp-texto-claro);">•</span>
+                                                <span style="font-size: 9px; color: var(--tevp-verde-exito);">📍 2.5 km</span>
+                                            </div>
+                                            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+                                                <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 8px; font-size: 8px;">✓ Certificado</span>
+                                                <span style="background: #f0f9ff; color: #0369a1; padding: 2px 6px; border-radius: 8px; font-size: 8px;">Disponible ahora</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 6px;">
+                                        <button style="background: var(--tevp-azul-primario); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">👁️ Ver</button>
+                                        <button style="background: var(--tevp-verde-exito); color: white; border: none; padding: 6px 10px; border-radius: 4px; flex: 1; font-size: 9px; font-weight: 600;">📅 Reservar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Botón cargar más -->
+                            <button style="background: none; border: 1px dashed var(--tevp-azul-primario); color: var(--tevp-azul-primario); padding: 12px; border-radius: 8px; width: 100%; font-size: 11px; font-weight: 600;">
+                                ⬇️ Cargar Más Profesionales
+                            </button>
+                        </div>
+                        
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </div>
+                            <div class="nav-item active">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user"></i>
+                                <span>Perfil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continúo con las pantallas 2.17 a 2.22... -->
+
+        </div>
+    </div>
+
+    <script src="tevp-scripts-shared.js"></script>
+</body>
+</html>
